@@ -1,0 +1,488 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "about": "La maison",
+    "perfumes": "Parfums",
+    "scentFinder": "Trouver mon parfum",
+    "forHer": "Pour Femme",
+    "forHim": "Pour Homme",
+    "contact": "Contact",
+    "cart": "Panier",
+    "cartWithCount": "Panier, {count} article|Panier, {count} articles",
+    "openMenu": "Ouvrir le menu",
+    "closeMenu": "Fermer le menu",
+    "skipToContent": "Aller au contenu principal",
+    "language": "Langue"
+  },
+  "hero": {
+    "tagline": "L'Élégance pour Tous",
+    "statement": "Un parfum ne se décrit pas.\nIl se reconnaît.",
+    "cta": "Découvrir la collection",
+    "scroll": "Faites défiler",
+    "videoLabel": "Coffret et flacon Dar Safia, éclairés à la bougie",
+    "skipIntro": "Passer l'introduction"
+  },
+  "home": {
+    "eyebrow": "Maison de haute parfumerie · Algérie",
+    "tagline": "L'univers des fragrances d'exception et des plus grandes signatures olfactives. Sélectionnées une à une, livrées dans les 58 wilayas.",
+    "explore": "Explorer la collection",
+    "findYours": "Trouver votre parfum",
+    "stats": {
+      "creations": "Créations",
+      "houses": "Maisons",
+      "wilayas": "Wilayas livrées"
+    },
+    "houseEyebrow": "— La maison",
+    "houseTitle": "L'art de la haute parfumerie, à portée de main",
+    "houseBody": "Née d'une passion pour les sillages nobles, Dar Safia réunit les plus grandes créations de la parfumerie mondiale et des extraits d'une concentration magistrale. Chaque flacon est retenu selon des critères d'exigence : pureté des accords, tenue sur la peau, provenance authentique certifiée.",
+    "pillars": {
+      "authentic": {
+        "title": "Parfums 100 % originaux",
+        "body": "Authenticité garantie sur l'ensemble du catalogue, provenance certifiée."
+      },
+      "sillage": {
+        "title": "Sillage d'exception",
+        "body": "Des concentrations hautes, une présence qui tient sur la peau."
+      },
+      "concierge": {
+        "title": "Conciergerie WhatsApp",
+        "body": "Conseil personnalisé et commande directe, sept jours sur sept."
+      }
+    },
+    "selectionTitle": "La sélection",
+    "seeAll": "Tout voir →",
+    "quizBandEyebrow": "— Diagnostic olfactif",
+    "quizBandTitle": "Quatre questions pour trouver votre signature",
+    "quizBandCta": "Commencer"
+  },
+  "manifesto": {
+    "lines": [
+      "Plus qu'un parfum.",
+      "Une mémoire."
+    ],
+    "body": "Un sillage ne se choisit pas dans une vitrine. Il se reconnaît — au détour d'une pièce, sur un vêtement, des années plus tard. Dar Safia réunit les créations capables de cela : celles dont la trace survit à l'instant.",
+    "aside": "Chaque flacon est retenu sur trois exigences : la pureté des accords, la tenue sur la peau, et une provenance vérifiée."
+  },
+  "scent": {
+    "title": "Les matières qui reviennent",
+    "body": "Sur les {count} créations de la maison, quelques matières reparaissent plus que les autres. Elles dessinent, sans qu'on l'ait décidé, le goût de Dar Safia.",
+    "occurrences": "{count} créations",
+    "explore": "Explorer par famille"
+  },
+  "signature": {
+    "title": "Les signatures",
+    "intro": "Une à une.",
+    "discover": "Voir la fiche",
+    "of": "{current} sur {total}"
+  },
+  "figures": {
+    "title": "La maison en quelques chiffres",
+    "creations": "créations au catalogue",
+    "houses": "maisons représentées",
+    "wilayas": "wilayas livrées",
+    "note": "Chiffres du catalogue actuel."
+  },
+  "voices": {
+    "title": "Ce qu'en disent nos clients",
+    "verified": "Client vérifié"
+  },
+  "closing": {
+    "lines": [
+      "Votre signature",
+      "vous attend."
+    ],
+    "cta": "Découvrir la collection",
+    "secondary": "Ou laissez-nous vous guider"
+  },
+  "about": {
+    "eyebrow": "La maison",
+    "metaDescription": "Dar Safia ne vend pas des parfums, elle en retient. Le parti pris, les trois exigences de sélection et la conciergerie de la maison.",
+    "title": [
+      "Une maison,",
+      "pas un rayon."
+    ],
+    "lead": "Dar Safia ne vend pas des parfums : elle en retient. Chaque flacon du catalogue est passé par la même main, écarté ou gardé selon des critères qui ne varient pas.",
+    "sceneCaption": "Flacon de la maison, en rotation lente.",
+    "stanceTitle": "Le parti pris",
+    "stanceBody": "Il se crée chaque année plus de fragrances qu'une vie n'en peut porter. La plupart se ressemblent. Notre travail commence là : lire, sentir, comparer, et ne présenter que ce qui tient sur la durée — pas ce qui se vend le mieux la première semaine.",
+    "stanceAside": "Une sélection resserrée est un service, pas une contrainte : c'est du temps qu'on vous rend.",
+    "requirementsTitle": "Trois exigences, à chaque fois",
+    "requirements": [
+      {
+        "term": "La pureté des accords",
+        "detail": "Une composition qui se tient, sans note criarde ni raccourci de synthèse. Ce qu'on sent au premier vaporisateur doit encore avoir du sens une heure après."
+      },
+      {
+        "term": "La tenue sur la peau",
+        "detail": "Un sillage qui traverse la journée. Les concentrations basses et les eaux qui s'éteignent en deux heures ne passent pas la sélection."
+      },
+      {
+        "term": "Une provenance vérifiée",
+        "detail": "Des flacons authentiques, tracés de la maison d'origine jusqu'à vous. Aucun marché parallèle, aucune contrefaçon — c'est non négociable."
+      }
+    ],
+    "conciergeTitle": "Une voix au bout du fil",
+    "conciergeBody": "Le conseil se fait sur WhatsApp, avec une personne — pas un formulaire. On vous oriente vers ce qui vous ira, quitte à vous dire qu'un parfum n'est pas pour vous. La commande se règle à la livraison, dans les 58 wilayas.",
+    "conciergeCta": "Écrire à la conciergerie",
+    "closingTitle": [
+      "Le reste,",
+      "vous le reconnaîtrez."
+    ],
+    "closingCta": "Parcourir la collection",
+    "closingSecondary": "Ou laissez-nous vous guider"
+  },
+  "contact": {
+    "title": "Parlons de\nvotre parfum.",
+    "lead": "La conciergerie Dar Safia répond sur WhatsApp, sept jours sur sept — pour un conseil, une disponibilité ou une commande.",
+    "messageLabel": "Votre message",
+    "messagePlaceholder": "Bonjour Dar Safia, je cherche un parfum pour…",
+    "nameLabel": "Prénom",
+    "cityLabel": "Ville",
+    "send": "Envoyer sur WhatsApp",
+    "sendHint": "Votre message ouvre WhatsApp : rien n'est envoyé tant que vous ne l'avez pas relu.",
+    "unavailable": "La conciergerie est momentanément injoignable. Réessayez dans un moment.",
+    "phoneLabel": "Numéro WhatsApp",
+    "facts": {
+      "hours": "Réponse 7j/7",
+      "delivery": "Livraison dans les 58 wilayas",
+      "payment": "Paiement à la livraison"
+    },
+    "undecidedText": "Vous ne savez pas encore quoi choisir ?",
+    "undecidedLink": "Faites le diagnostic olfactif",
+    "signature": "— {name}, {city}",
+    "signatureNameOnly": "— {name}",
+    "signatureCityOnly": "— {city}",
+    "eyebrow": "Conciergerie",
+    "tabs": {
+      "personal": {
+        "label": "Écrire à la maison",
+        "hint": "Un conseil, une disponibilité, une commande"
+      },
+      "collab": {
+        "label": "Proposer une collaboration",
+        "hint": "Marques, boutiques, presse et créateurs"
+      }
+    },
+    "collab": {
+      "houseLabel": "Maison ou enseigne",
+      "roleLabel": "Votre rôle",
+      "cityLabel": "Ville",
+      "subjectLabel": "Objet de la proposition",
+      "subjects": [
+        "Distribution",
+        "Partenariat",
+        "Presse",
+        "Autre"
+      ],
+      "messageLabel": "Votre proposition",
+      "messagePlaceholder": "Bonjour Dar Safia, nous représentons…",
+      "send": "Envoyer la proposition",
+      "hint": "Votre proposition ouvre WhatsApp : rien n'est envoyé tant que vous ne l'avez pas relue.",
+      "intro": "Proposition de collaboration :",
+      "lineHouse": "Maison : {house}",
+      "lineRole": "Rôle : {role}",
+      "lineCity": "Ville : {city}",
+      "lineSubject": "Objet : {subject}"
+    },
+    "faqTitle": "Avant de nous écrire",
+    "faq": [
+      {
+        "q": "Comment passer commande ?",
+        "a": "Tout passe par la conciergerie WhatsApp. Le message se compose ici, dans votre navigateur ; il s'ouvre dans WhatsApp et n'est envoyé que lorsque vous l'avez relu."
+      },
+      {
+        "q": "Quand la conciergerie répond-elle ?",
+        "a": "Sept jours sur sept."
+      },
+      {
+        "q": "Livrez-vous dans toute l'Algérie ?",
+        "a": "Oui : les 58 wilayas sont desservies. La conciergerie confirme les modalités pour la vôtre au moment de la commande."
+      },
+      {
+        "q": "Comment se règle une commande ?",
+        "a": "À la livraison."
+      },
+      {
+        "q": "Les parfums sont-ils authentiques ?",
+        "a": "Chaque pièce du catalogue est sélectionnée par la maison, et son authenticité est garantie."
+      },
+      {
+        "q": "Je ne sais pas quoi choisir.",
+        "a": "Le diagnostic olfactif pose quatre questions et propose une signature. Aucune inscription."
+      }
+    ],
+    "faqFootnote": "Une question qui n'est pas là ? La conciergerie répond sur WhatsApp.",
+    "previewLabel": "Le message tel qu’il partira"
+  },
+  "catalog": {
+    "eyebrow": "Catalogue",
+    "title": "Tous les parfums",
+    "filterGender": "Genre",
+    "filterFamily": "Famille",
+    "all": "Tous",
+    "count": "{count} création|{count} créations",
+    "empty": "Aucun parfum ne correspond",
+    "emptyHint": "Essayez une autre famille olfactive.",
+    "emptyCta": "Voir toute la collection",
+    "filters": {
+      "openButton": "Filtres",
+      "close": "Fermer les filtres",
+      "clear": "Réinitialiser",
+      "gender": "Genre",
+      "family": "Famille olfactive",
+      "notes": "Notes",
+      "intensity": "Intensité",
+      "season": "Saison",
+      "mood": "Je recherche",
+      "familyOptions": {
+        "Floral": "Floral",
+        "Hespéridé / Citronné": "Hespéridé / Citronné",
+        "Fruité": "Fruité",
+        "Gourmand": "Gourmand",
+        "Aromatique": "Aromatique",
+        "Épicé": "Épicé",
+        "Boisé": "Boisé",
+        "Ambré": "Ambré",
+        "Aquatique": "Aquatique",
+        "Chypré": "Chypré",
+        "Musqué": "Musqué",
+        "Oriental": "Oriental"
+      },
+      "noteOptions": {
+        "Vanille": "Vanille",
+        "Rose": "Rose",
+        "Jasmin": "Jasmin",
+        "Fleur d’oranger": "Fleur d’oranger",
+        "Bergamote": "Bergamote",
+        "Citron": "Citron",
+        "Poire": "Poire",
+        "Pêche": "Pêche",
+        "Mangue": "Mangue",
+        "Musc": "Musc",
+        "Ambre": "Ambre",
+        "Santal": "Santal",
+        "Cèdre": "Cèdre",
+        "Patchouli": "Patchouli",
+        "Encens": "Encens",
+        "Tonka": "Tonka",
+        "Benjoin": "Benjoin",
+        "Iris": "Iris"
+      },
+      "seasonOptions": {
+        "Printemps": "Printemps",
+        "Été": "Été",
+        "Automne": "Automne",
+        "Hiver": "Hiver",
+        "Toute l’année": "Toute l’année"
+      },
+      "moodOptions": {
+        "Sucré": "Sucré",
+        "Fleuri": "Fleuri",
+        "Frais": "Frais",
+        "Épicé": "Épicé",
+        "Boisé": "Boisé",
+        "Frais & aquatique": "Frais & aquatique",
+        "Très puissant": "Très puissant",
+        "Séducteur": "Séducteur",
+        "Luxe / chic": "Luxe / chic"
+      }
+    }
+  },
+  "product": {
+    "breadcrumbHome": "Accueil",
+    "breadcrumbCatalog": "Parfums",
+    "inStock": "{count} en stock",
+    "onOrder": "Sur commande — délai confirmé par la conciergerie",
+    "order": "Commander sur WhatsApp",
+    "addToCart": "Ajouter au panier",
+    "orderUnavailable": "Commande momentanément indisponible.",
+    "metrics": {
+      "longevity": "Tenue",
+      "sillage": "Sillage",
+      "family": "Famille"
+    },
+    "pyramidTitle": "Pyramide olfactive",
+    "pyramid": {
+      "top": "Notes de tête",
+      "topCaption": "Première impression, les 15 premières minutes",
+      "heart": "Notes de cœur",
+      "heartCaption": "Signature du parfum, après évaporation de la tête",
+      "base": "Notes de fond",
+      "baseCaption": "Sillage et persistance, plusieurs heures"
+    },
+    "storyTitle": "L'histoire du flacon",
+    "relatedTitle": "Dans la même famille"
+  },
+  "cart": {
+    "title": "Panier",
+    "items": "{count} article|{count} articles",
+    "empty": "Votre panier est vide.",
+    "continue": "Continuer la découverte",
+    "remove": "Retirer",
+    "decrease": "Diminuer la quantité",
+    "increase": "Augmenter la quantité",
+    "quantityFor": "Quantité pour {name}",
+    "subtotal": "Sous-total",
+    "deliveryNote": "Livraison et disponibilité confirmées par la conciergerie.",
+    "checkout": "Commander sur WhatsApp",
+    "clear": "Vider le panier",
+    "close": "Fermer le panier",
+    "unavailable": "Commande momentanément indisponible.",
+    "orderIntro": "Je souhaite finaliser la commande suivante :",
+    "orderLine": "{name} ({brand}) — {volume} × {qty} : {total}",
+    "orderSubtotal": "SOUS-TOTAL : {subtotal}",
+    "orderOutro": "Merci de me confirmer la disponibilité et les modalités de livraison."
+  },
+  "scentFinder": {
+    "eyebrow": "Diagnostic olfactif",
+    "title": "Trouver votre parfum",
+    "intro": "Quatre questions, une recommandation. Aucune inscription.",
+    "stepLabel": "Étape {current} sur {total}",
+    "previous": "← Question précédente",
+    "loading": "Analyse de votre profil olfactif…",
+    "error": "Le diagnostic n'a pas abouti.",
+    "restart": "Recommencer",
+    "resultEyebrow": "Votre signature",
+    "compatibility": "{percent}% de compatibilité avec vos réponses",
+    "seeProduct": "Voir la fiche",
+    "order": "Commander sur WhatsApp",
+    "alsoLike": "Vous aimeriez aussi",
+    "redo": "Refaire le diagnostic",
+    "orderIntro": "J'ai réalisé le diagnostic olfactif. Le parfum recommandé est :",
+    "orderOutro": "Merci de me confirmer la disponibilité.",
+    "questions": {
+      "recipient": "Pour qui cherchez-vous ?",
+      "moment": "Quel moment voulez-vous habiller ?",
+      "family": "Vers quelle matière allez-vous instinctivement ?",
+      "intensity": "Quelle présence recherchez-vous ?"
+    },
+    "options": {
+      "femme": {
+        "label": "Pour elle",
+        "hint": "Signatures féminines"
+      },
+      "homme": {
+        "label": "Pour lui",
+        "hint": "Signatures masculines"
+      },
+      "unisexe": {
+        "label": "Sans distinction",
+        "hint": "Créations mixtes"
+      },
+      "cadeau": {
+        "label": "Un cadeau",
+        "hint": "Les valeurs sûres de la maison"
+      },
+      "jour": {
+        "label": "Le jour",
+        "hint": "Léger, lumineux, facile à porter"
+      },
+      "nuit": {
+        "label": "Le soir",
+        "hint": "Profond, enveloppant, magnétique"
+      },
+      "prestige": {
+        "label": "Les grandes occasions",
+        "hint": "Les pièces les plus rares"
+      },
+      "fraicheur": {
+        "label": "Un souffle de fraîcheur",
+        "hint": "Vif, net, aquatique"
+      },
+      "floral": {
+        "label": "Fleurs",
+        "hint": "Rose, jasmin, iris"
+      },
+      "woody": {
+        "label": "Bois",
+        "hint": "Cèdre, santal, vétiver"
+      },
+      "amber": {
+        "label": "Ambre",
+        "hint": "Vanille, benjoin, résines"
+      },
+      "fresh": {
+        "label": "Fraîcheur",
+        "hint": "Agrumes, notes marines"
+      },
+      "gourmand": {
+        "label": "Gourmandise",
+        "hint": "Caramel, cacao, fève tonka"
+      },
+      "spicy": {
+        "label": "Épices",
+        "hint": "Poivre, cardamome, cuir"
+      },
+      "subtil": {
+        "label": "Discrète",
+        "hint": "Une aura, pas une annonce"
+      },
+      "equilibre": {
+        "label": "Équilibrée",
+        "hint": "Présente sans dominer"
+      },
+      "intense": {
+        "label": "Affirmée",
+        "hint": "Un sillage qui ne passe pas inaperçu"
+      }
+    }
+  },
+  "footer": {
+    "blurb": "Maison de haute parfumerie. Créations niche et signatures d'exception, sélectionnées et livrées dans les 58 wilayas.",
+    "concierge": "Conciergerie WhatsApp",
+    "collection": "La collection",
+    "families": "Familles olfactives",
+    "allPerfumes": "Tous les parfums",
+    "forHer": "Pour elle",
+    "forHim": "Pour lui",
+    "findYours": "Trouver votre parfum",
+    "contact": "Contact",
+    "rights": "© {year} Dar Safia. Tous droits réservés.",
+    "guarantee": "Authenticité garantie · Paiement à la livraison"
+  },
+  "notFound": {
+    "eyebrow": "Erreur 404",
+    "title": "Ce flacon est introuvable",
+    "body": "La page que vous cherchez a peut-être changé d'adresse, ou n'a jamais existé.",
+    "seeCollection": "Voir la collection",
+    "backHome": "Retour à l'accueil"
+  },
+  "common": {
+    "authentic": "Authentique",
+    "brandName": "Dar Safia",
+    "orderGreeting": "Bonjour Maison Dar Safia ✨",
+    "orderProduct": "Parfum : {name} ({brand})",
+    "orderPrice": "Prix : {price}",
+    "orderVolume": "Format : {volume}",
+    "conciergeMessage": "Bonjour Maison Dar Safia ✨\n\nJe souhaite un conseil personnalisé pour choisir un parfum."
+  },
+  "phoneBanner": {
+    "placeholder": "Numéro WhatsApp fictif : les commandes n'aboutissent nulle part. À remplacer avant déploiement.",
+    "missing": "NEXT_PUBLIC_WHATSAPP_PHONE non défini : les commandes sont désactivées."
+  },
+  "gender": {
+    "femme": "Pour Femme",
+    "homme": "Pour Homme",
+    "unisexe": "Unisexe"
+  },
+  "family": {
+    "floral": "Floral",
+    "amber": "Ambré",
+    "woody": "Boisé",
+    "fresh": "Frais",
+    "gourmand": "Gourmand",
+    "spicy": "Épicé"
+  },
+  "sillage": {
+    "1": "Intime",
+    "2": "Discret",
+    "3": "Modéré",
+    "4": "Affirmé",
+    "5": "Puissant"
+  },
+  "units": {
+    "ml": "{n} ml",
+    "hours": "{n} h",
+    "set": "Coffret"
+  }
+}

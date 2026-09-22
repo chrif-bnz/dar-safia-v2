@@ -1,0 +1,676 @@
+@import "tailwindcss";
+
+/* ══════════════════════════════════════════════════════════════
+   DAR SAFIA — THÈME
+   Reflet de design-system/tokens.json. Tailwind 4 se configure en
+   CSS (@theme), il n'y a plus de tailwind.config.js.
+
+   Toute valeur ici vient des tokens : ne jamais écrire une couleur
+   ou une taille en dur dans un composant.
+   ══════════════════════════════════════════════════════════════ */
+@theme {
+  /* ── Couleurs de marque (extraites à l'identique de style.css) ── */
+  --color-noir: #1a120f;
+  --color-noir-2: #241915;
+  --color-noir-3: #2d1f1a;
+  --color-burgundy: #340b10;
+  --color-burgundy-2: #480f17;
+  --color-gold: #c89b3c;
+  --color-gold-light: #e4bd68;
+  --color-gold-dark: #8e651d;
+  --color-ivory: #f9f6f0;
+  --color-ivory-2: #ece4d5;
+  --color-smoke: rgba(249, 246, 240, 0.07);
+  --color-smoke-2: rgba(249, 246, 240, 0.12);
+
+  /* ── Polices ──
+     Les variables --font-cinzel-* viennent de next/font (layout.tsx), qui
+     auto-héberge les fichiers. La pile de repli reste explicite pour couvrir
+     l'intervalle avant chargement. */
+  --font-display: var(--font-cinzel-decorative), Georgia, serif;
+  --font-serif: var(--font-cinzel), Georgia, serif;
+  --font-body: var(--font-cormorant), Georgia, serif;
+  --font-ui: var(--font-montserrat), system-ui, sans-serif;
+
+  /* ── Échelle typographique (9 pas, cf. design-system/README.md) ── */
+  --text-3xs: 0.625rem;
+  --text-2xs: 0.6875rem;
+  --text-xs: 0.75rem;
+  --text-sm: 0.8125rem;
+  --text-base: 0.9375rem;
+  --text-md: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.3125rem;
+  --text-2xl: 1.5rem;
+
+  /* ── Titres fluides ── */
+  --text-display-sm: clamp(1.5rem, 3vw, 2rem);
+  --text-display-md: clamp(2rem, 5vw, 3rem);
+  --text-display-lg: clamp(2.5rem, 7vw, 4.5rem);
+
+  /* ── Interlettrage ── */
+  --tracking-label: 0.14em;
+  --tracking-eyebrow: 0.22em;
+
+  /* ── Rayons, ombres, mouvement ── */
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 24px;
+
+  --shadow-gold: 0 0 45px rgba(200, 155, 60, 0.25);
+  --shadow-dark: 0 25px 60px rgba(0, 0, 0, 0.6);
+
+  --ease-lux: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-soft: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* ── Points de rupture (4 paliers, contre 17 dans l'ancien CSS) ── */
+  --breakpoint-sm: 580px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1320px;
+
+  /* ── Mise en page ── */
+  --container-site: 1320px;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   UNIVERS OLFACTIFS
+   Une famille = une atmosphère. Appliqué via data-universe sur un
+   conteneur, jamais par correspondance de nom de parfum comme le
+   faisait getCategoryTheme() dans l'ancien main.js.
+   ══════════════════════════════════════════════════════════════ */
+[data-universe="floral"]  { --universe-accent: #e892a2; --universe-light: #f8bbd0; --universe-glow: rgba(232, 146, 162, 0.3); }
+[data-universe="amber"]   { --universe-accent: #e5a93c; --universe-light: #f5cb5c; --universe-glow: rgba(229, 169, 60, 0.3); }
+[data-universe="woody"]   { --universe-accent: #d4af37; --universe-light: #f3e5ab; --universe-glow: rgba(212, 175, 55, 0.25); }
+[data-universe="fresh"]   { --universe-accent: #00b4d8; --universe-light: #90e0ef; --universe-glow: rgba(0, 180, 216, 0.3); }
+[data-universe="gourmand"]{ --universe-accent: #e63946; --universe-light: #ff6b6b; --universe-glow: rgba(230, 57, 70, 0.3); }
+[data-universe="spicy"]   { --universe-accent: #2a9d8f; --universe-light: #52b788; --universe-glow: rgba(42, 157, 143, 0.3); }
+
+/* Défaut, si aucun univers n'est déclaré : l'or de la maison. */
+:root {
+  --universe-accent: var(--color-gold);
+  --universe-light: var(--color-gold-light);
+  --universe-glow: rgba(200, 155, 60, 0.25);
+}
+
+/* ══════════════════════════════════════════════════════════════
+   BASE
+   Dar Safia est un univers sombre assumé : pas de bascule clair /
+   sombre. Le fond et les couleurs sont donc peints explicitement.
+   ══════════════════════════════════════════════════════════════ */
+body {
+  background: var(--color-noir);
+  color: var(--color-ivory);
+  font-family: var(--font-ui);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Focus clavier visible — exigence d'accessibilité du projet. */
+:where(a, button, input, select, textarea, [tabindex]):focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   ENTRÉE DE PAGE — un seul mouvement, à l'ouverture
+   Niveau « motion d'expérience » : les blocs montent légèrement
+   depuis un état VISIBLE (pas opacity:0 en attente d'un observer).
+   Neutralisé par la règle prefers-reduced-motion plus haut.
+   ══════════════════════════════════════════════════════════════ */
+@keyframes ds-rise {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.ds-rise {
+  animation: ds-rise 0.7s var(--ease-lux) both;
+}
+/* Cadence : chaque enfant direct décalé de 90 ms. */
+.ds-rise-stagger > * {
+  animation: ds-rise 0.7s var(--ease-lux) both;
+}
+.ds-rise-stagger > *:nth-child(1) { animation-delay: 0ms; }
+.ds-rise-stagger > *:nth-child(2) { animation-delay: 90ms; }
+.ds-rise-stagger > *:nth-child(3) { animation-delay: 180ms; }
+.ds-rise-stagger > *:nth-child(4) { animation-delay: 270ms; }
+.ds-rise-stagger > *:nth-child(5) { animation-delay: 360ms; }
+
+@media (prefers-reduced-motion: reduce) {
+  /* État de repos immédiat : pas même un flash du keyframe. */
+  .ds-rise,
+  .ds-rise-stagger > * {
+    animation: none;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   ARABE / RTL
+   Les polices arabes sont chargées en permanence (next/font) ;
+   on ne les applique que lorsque dir=rtl, via [data-dir].
+   ══════════════════════════════════════════════════════════════ */
+:root[data-dir="rtl"] {
+  --font-display: var(--font-arabic-serif), "Noto Naskh Arabic", serif;
+  --font-serif: var(--font-arabic-serif), "Noto Naskh Arabic", serif;
+  --font-body: var(--font-arabic-serif), "Noto Naskh Arabic", serif;
+  --font-ui: var(--font-arabic-sans), "Cairo", system-ui, sans-serif;
+}
+
+/* L'arabe n'a pas de capitales : `uppercase` n'a aucun effet mais
+   `letter-spacing` sur un script cursif casse les ligatures. */
+[dir="rtl"] .uppercase,
+[dir="rtl"] [class*="tracking-"] {
+  letter-spacing: 0;
+}
+
+/* Les flèches « → » / « ← » codées en dur dans le texte suivent le
+   sens de lecture. */
+[dir="rtl"] .rtl-flip {
+  display: inline-block;
+  transform: scaleX(-1);
+}
+
+/* ══════════════════════════════════════════════════════════════
+   HERO — INDICATEUR DE DÉFILEMENT
+   Un trait qui descend lentement, en boucle. Un seul mouvement
+   ambiant sur toute la page : il indique quelque chose (« il y a
+   la suite en dessous »), il ne décore pas.
+   ══════════════════════════════════════════════════════════════ */
+@keyframes ds-scroll-rule {
+  0%   { transform: scaleY(0); transform-origin: top; }
+  45%  { transform: scaleY(1); transform-origin: top; }
+  55%  { transform: scaleY(1); transform-origin: bottom; }
+  100% { transform: scaleY(0); transform-origin: bottom; }
+}
+@keyframes ds-shine-y {
+  0%   { background-position: 0 -140%; }
+  100% { background-position: 0 240%; }
+}
+.ds-scroll-rule {
+  /* Or, avec un reflet qui glisse le long du trait plutôt qu'un ivoire plat. */
+  background-image: linear-gradient(
+    180deg,
+    var(--color-gold) 0%,
+    var(--color-gold) 35%,
+    var(--color-gold-light) 50%,
+    var(--color-gold) 65%,
+    var(--color-gold) 100%
+  );
+  background-size: 100% 260%;
+  animation:
+    ds-scroll-rule 2.8s cubic-bezier(0.65, 0, 0.35, 1) infinite,
+    ds-shine-y 2.6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ds-scroll-rule { animation: none; background-position: 0 0; }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   REFLET OR — liens et traits soulignés
+   Un léger passage de lumière sur l'or, en boucle lente : la
+   différence entre un aplat et un métal. Usage retenu (CTA du
+   hero) — pas un effet à poser sur chaque lien du site.
+   ══════════════════════════════════════════════════════════════ */
+@keyframes ds-shine-x {
+  0%   { background-position: -140% 0; }
+  100% { background-position: 240% 0; }
+}
+.ds-shine-x {
+  background-image: linear-gradient(
+    100deg,
+    var(--color-gold) 0%,
+    var(--color-gold) 40%,
+    var(--color-gold-light) 50%,
+    var(--color-gold) 60%,
+    var(--color-gold) 100%
+  );
+  background-size: 260% 100%;
+  animation: ds-shine-x 3.6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ds-shine-x { animation: none; }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   LUEUR DE TITRE — hero
+   Une respiration très légère derrière la typographie du hero,
+   plutôt qu'une lueur fixe : elle se remarque à peine, elle ne
+   s'impose pas. Amplitude volontairement basse.
+   ══════════════════════════════════════════════════════════════ */
+@keyframes ds-glow-breathe {
+  0%, 100% {
+    text-shadow: 0 0 16px rgba(228, 189, 104, 0.16), 0 0 2px rgba(228, 189, 104, 0.08);
+  }
+  50% {
+    text-shadow: 0 0 26px rgba(228, 189, 104, 0.26), 0 0 4px rgba(228, 189, 104, 0.12);
+  }
+}
+.ds-text-glow {
+  animation: ds-glow-breathe 5.5s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ds-text-glow {
+    animation: none;
+    text-shadow: 0 0 16px rgba(228, 189, 104, 0.16);
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   LIENS — soulignés vivants
+   Le trait sous un lien n'est pas un aplat : il pousse depuis le
+   bord d'attaque au survol / au focus, et un reflet le parcourt.
+   Sur le lien de la page courante (aria-current) il reste posé.
+   ══════════════════════════════════════════════════════════════ */
+@keyframes ds-underline-sheen {
+  0%   { background-position: 120% 0; }
+  100% { background-position: -60% 0; }
+}
+
+.ds-navlink {
+  position: relative;
+  display: inline-block;
+}
+.ds-navlink::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  bottom: -0.4em;
+  height: 1px;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.42s var(--ease-lux);
+  background-image: linear-gradient(
+    90deg,
+    var(--color-gold-dark) 0%,
+    var(--color-gold) 34%,
+    var(--color-gold-light) 50%,
+    var(--color-gold) 66%,
+    var(--color-gold-dark) 100%
+  );
+  background-size: 220% 100%;
+}
+[dir="rtl"] .ds-navlink::after {
+  transform-origin: right;
+}
+.ds-navlink:hover::after,
+.ds-navlink:focus-visible::after,
+.ds-navlink[aria-current="page"]::after {
+  transform: scaleX(1);
+  animation: ds-underline-sheen 2.6s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ds-navlink::after {
+    transition-duration: 0.01ms;
+  }
+  .ds-navlink:hover::after,
+  .ds-navlink:focus-visible::after,
+  .ds-navlink[aria-current="page"]::after {
+    animation: none;
+  }
+}
+
+/* Variante « filet toujours là » : pour les liens éditoriaux inline,
+   le trait est posé en permanence, discret, et s'éclaire au survol. */
+.ds-inklink {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  background-size: 100% 1px;
+  transition: color 0.3s var(--ease-lux), background-size 0.3s var(--ease-lux);
+  padding-bottom: 0.08em;
+}
+.ds-inklink:hover,
+.ds-inklink:focus-visible {
+  color: var(--color-gold);
+  background-size: 100% 2px;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   BARRE DE DÉFILEMENT
+   Fine, sombre, pouce or discret — elle appartient à l'univers.
+   ══════════════════════════════════════════════════════════════ */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-gold-dark) transparent;
+}
+::-webkit-scrollbar {
+  width: 11px;
+  height: 11px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(var(--color-gold-dark), var(--color-gold));
+  /* La bordure noire fait un pouce visuellement plus fin, avec une gouttière. */
+  border: 3px solid var(--color-noir);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(var(--color-gold), var(--color-gold-light));
+}
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   HERO — DEUX COMPOSITIONS, PAS UNE MISE À L'ÉCHELLE
+   ══════════════════════════════════════════════════════════════
+   Le plan est en 16/9 et sa composition est équilibrée : roses à
+   gauche, coffret et flacon au centre, bougie à droite, ruban en bas.
+   En `cover` sur une fenêtre haute, on en perd 40 % — donc les roses,
+   la bougie et le ruban. Ce qui reste n'est plus une composition.
+
+   On change donc de FORME selon le format de la fenêtre :
+
+   - Fenêtre large (≥ 3/2) : plein cadre. Le film occupe tout l'écran,
+     la typographie se pose dans la bande basse (la seule zone dont on
+     a mesuré qu'elle reste sombre sur tout le plan).
+
+   - Fenêtre haute (mobile, tablette portrait) : le film redevient une
+     PLAQUE en 16/9 posée en haut, dans son cadrage d'origine, et la
+     typographie descend sur le fond noir. Rien n'est rogné, et le
+     texte n'a plus à lutter contre l'image.
+   ══════════════════════════════════════════════════════════════ */
+
+.hero-film {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  min-height: 100svh;
+}
+
+.hero-film__plate {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
+
+.hero-film__plate video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-film__type {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  /* En mode plaque, la typographie occupe l'espace restant : on la centre
+     optiquement plutôt que de la coller en bas, ce qui laisserait un vide
+     qui se lit comme un défaut et non comme une respiration. */
+  justify-content: center;
+}
+
+/* Le dégradé n'a de sens que par-dessus l'image : en mode plaque, il
+   reste cantonné au bas du film. */
+.hero-film__scrim {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    to top,
+    rgba(16, 11, 9, 0.92) 0%,
+    rgba(16, 11, 9, 0.5) 30%,
+    rgba(16, 11, 9, 0) 62%
+  );
+}
+
+@media (min-aspect-ratio: 3 / 2) {
+  .hero-film {
+    display: block;
+    height: 100svh;
+    position: relative;
+  }
+  .hero-film__plate {
+    position: absolute;
+    inset: 0;
+    aspect-ratio: auto;
+  }
+  .hero-film__type {
+    position: absolute;
+    inset: 0;
+    /* Plein cadre : la typographie retourne dans la bande basse, la seule
+       dont la mesure garantit qu'elle reste sombre sur tout le plan. */
+    justify-content: flex-end;
+  }
+  .hero-film__scrim {
+    /* Plein cadre : le dégradé remonte un peu moins haut, le produit
+       ne doit pas être voilé. */
+    background: linear-gradient(
+      to top,
+      rgba(16, 11, 9, 0.9) 0%,
+      rgba(16, 11, 9, 0.45) 24%,
+      rgba(16, 11, 9, 0) 50%
+    );
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   EN-TÊTE — VOILE D'INTRO
+   Pendant le film d'ouverture (accueil, première visite), l'en-tête
+   n'est pas encore là. `visibility` en plus de l'opacité : sans elle,
+   la nav resterait dans l'ordre de tabulation alors qu'elle est
+   invisible. Aucune transition à l'aller — on ne voit pas l'en-tête
+   s'effacer, il n'a jamais été présent ; elle ne joue qu'au retour.
+   ══════════════════════════════════════════════════════════════ */
+/* Aucune transition d'opacité ni de transform ici : l'entrée de l'en-tête est
+   jouée par la timeline GSAP du hero. Une transition CSS sur les mêmes
+   propriétés se relancerait à chaque image que GSAP écrit, et les deux
+   mouvements se chevaucheraient en un glissement mou. */
+.ds-header {
+  transition:
+    background-color 0.5s var(--ease-lux),
+    border-color 0.5s var(--ease-lux),
+    backdrop-filter 0.5s var(--ease-lux);
+}
+:root[data-intro] .ds-header {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-14px);
+}
+
+/* ══════════════════════════════════════════════════════════════
+   HERO — ÉTAT DE DÉPART, AVANT GSAP
+   Le HTML serveur arrive dans son état FINAL. Entre sa peinture et le
+   chargement de GSAP, le titre s'affichait puis disparaissait avant de
+   s'animer, et le rideau recouvrait le film aux visites suivantes.
+
+   Tant que le mode d'ouverture est posé (script du <head>) et que le hero
+   n'est pas « armé » (GSAP a posé ses valeurs de départ), on tient chaque
+   élément dans son état de DÉPART. `visibility` et non `transform` : GSAP
+   lirait un transform CSS comme un décalage à conserver.
+
+   Sans JavaScript, ou sous mouvement réduit, rien de ceci ne s'applique —
+   sauf le rideau, qui n'a de sens que s'il va s'ouvrir.
+   ══════════════════════════════════════════════════════════════ */
+:root[data-intro] .hero-film:not([data-armed]) [data-hero-line],
+:root[data-intro] .hero-film:not([data-armed]) [data-hero-tail] {
+  visibility: hidden;
+}
+:root:not([data-intro="curtain"]) .hero-film:not([data-armed]) [data-curtain-left],
+:root:not([data-intro="curtain"]) .hero-film:not([data-armed]) [data-curtain-right],
+:root:not([data-intro="curtain"]) .hero-film:not([data-armed]) [data-counter] {
+  visibility: hidden;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   SURVOL — TROIS GESTES, PAS DIX
+   Le site manquait de réponse au survol. On ajoute donc un vocabulaire
+   COURT et réutilisable, plutôt qu'un effet inventé à chaque endroit :
+
+     .ds-btn        — bouton plein : un reflet traverse l'or.
+     .ds-btn-ghost  — bouton cerclé : le fond se remplit depuis le bord.
+     .ds-card       — carte : elle se soulève à peine, sa bordure s'allume.
+     .ds-text-lift  — texte : l'or monte dans la lettre.
+
+   Tout est neutralisé par la règle prefers-reduced-motion du haut de
+   fichier (transition-duration ramenée à 0,01 ms).
+   ══════════════════════════════════════════════════════════════ */
+.ds-btn {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.ds-btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    100deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.42) 50%,
+    transparent 80%
+  );
+  transform: translateX(-130%);
+  transition: transform 0.8s var(--ease-lux);
+}
+.ds-btn:hover::before,
+.ds-btn:focus-visible::before {
+  transform: translateX(130%);
+}
+/* En lecture droite-à-gauche le reflet part de l'autre bord. */
+[dir="rtl"] .ds-btn::before {
+  transform: translateX(130%);
+}
+[dir="rtl"] .ds-btn:hover::before,
+[dir="rtl"] .ds-btn:focus-visible::before {
+  transform: translateX(-130%);
+}
+
+.ds-btn-ghost {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.ds-btn-ghost::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--color-gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s var(--ease-lux);
+}
+[dir="rtl"] .ds-btn-ghost::before {
+  transform-origin: right;
+}
+.ds-btn-ghost:hover::before,
+.ds-btn-ghost:focus-visible::before {
+  transform: scaleX(1);
+}
+
+.ds-card {
+  transition:
+    transform 0.55s var(--ease-lux),
+    border-color 0.55s var(--ease-lux),
+    box-shadow 0.55s var(--ease-lux);
+}
+.ds-card:hover,
+.ds-card:focus-within {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 44px rgba(0, 0, 0, 0.45);
+}
+
+.ds-text-lift {
+  transition:
+    color 0.45s var(--ease-lux),
+    text-shadow 0.45s var(--ease-lux);
+}
+.ds-text-lift:hover,
+.ds-text-lift:focus-visible,
+.group:hover .ds-text-lift {
+  color: var(--color-gold-light);
+  text-shadow: 0 0 22px rgba(228, 189, 104, 0.32);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ds-card:hover,
+  .ds-card:focus-within {
+    transform: none;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   PANNEAU DÉPLIANT (FAQ)
+   `grid-template-rows: 0fr -> 1fr` anime une hauteur inconnue sans
+   la mesurer en JavaScript, donc sans lecture forcée du layout à
+   chaque image. L'enfant porte l'`overflow: hidden`.
+   ══════════════════════════════════════════════════════════════ */
+.ds-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.55s var(--ease-lux);
+}
+.ds-panel[data-open] {
+  grid-template-rows: 1fr;
+}
+.ds-panel > * {
+  overflow: hidden;
+  min-height: 0;
+}
+
+/* Le contenu d'un panneau déplié ne se contente pas d'apparaître : il se fait
+   net, légèrement après l'ouverture. C'est ce qui montre CE qui a changé. */
+.ds-panel > * > * {
+  opacity: 0;
+  filter: blur(6px);
+  transform: translateY(-4px);
+  transition:
+    opacity 0.45s var(--ease-soft),
+    filter 0.6s var(--ease-lux),
+    transform 0.6s var(--ease-lux);
+}
+.ds-panel[data-open] > * > * {
+  opacity: 1;
+  filter: blur(0);
+  transform: none;
+  transition-delay: 0.12s;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   LUMIÈRE D'AMBIANCE
+   Une seule nappe dorée qui dérive très lentement derrière un titre.
+   C'est l'unique mouvement non déclenché de la page : il ne doit pas
+   se voir bouger, seulement faire paraître la page habitée.
+   ══════════════════════════════════════════════════════════════ */
+@keyframes ds-ambient-drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.85;
+  }
+  50% {
+    transform: translate3d(6%, 4%, 0) scale(1.08);
+    opacity: 1;
+  }
+}
+.ds-ambient {
+  background:
+    radial-gradient(42% 48% at 38% 52%, rgba(200, 155, 60, 0.16) 0%, transparent 70%),
+    radial-gradient(30% 36% at 70% 40%, rgba(72, 15, 23, 0.35) 0%, transparent 72%);
+  filter: blur(8px);
+  animation: ds-ambient-drift 22s ease-in-out infinite;
+  will-change: transform;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ds-ambient {
+    animation: none;
+  }
+}
