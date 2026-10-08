@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation';
 
 import { OlfactoryPyramid } from '@/components/OlfactoryPyramid';
 import { ProductCard } from '@/components/ProductCard';
-import { AddToCartButton } from '@/components/cart/AddToCartButton';
+import { ProductOrderForm } from '@/components/ProductOrderForm';
 import { catalog, lowestPrice } from '@/lib/catalog';
 import {
   formatFamily,
@@ -136,7 +136,7 @@ export default async function ProductPage({
 
         <div className="mt-8 grid gap-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] lg:gap-16">
           {/* ── Visuel ── */}
-          <div>
+          <div className="lg:sticky lg:top-32 lg:self-start">
             <div
               className="overflow-hidden rounded-md border border-smoke-2 bg-noir-2"
               style={{ boxShadow: '0 24px 60px -24px var(--universe-glow)' }}
@@ -208,39 +208,25 @@ export default async function ProductPage({
               {product.description}
             </p>
 
-            <div className="mt-8 flex flex-wrap gap-3">
-              {orderUrl ? (
-                <a
-                  href={orderUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="ds-btn inline-flex items-center gap-2.5 rounded-sm bg-gold px-7 py-3.5 text-sm font-semibold tracking-(--tracking-label) text-noir uppercase transition-colors duration-200 hover:bg-gold-light"
-                >
-                  {p.order}
-                </a>
-              ) : (
-                <p className="rounded-sm border border-smoke-2 px-5 py-3.5 text-sm text-ivory/50">
-                  {p.orderUnavailable}
-                </p>
-              )}
-
-              <AddToCartButton
-                line={{
-                  productSlug: product.slug,
-                  variantId: variant.id,
-                  name: product.name,
-                  brandName: product.brand.name,
-                  imageUrl: image?.url ?? '',
-                  volumeMl: variant.volumeMl,
-                  unitPrice: price.amount,
-                  currency: 'DZD',
-                }}
-              />
-            </div>
+            <ProductOrderForm
+              product={product}
+              variant={variant}
+              priceAmount={price.amount}
+              image={image}
+              locale={locale}
+              dict={dict}
+              hasOrderUrl={!!orderUrl}
+            />
 
             <OlfactoryPyramid notes={product.notes} dict={dict} />
+          </div>
+        </div>
 
-            {product.story && (
+        {/* ── Histoire du flacon (hors conteneur sticky) ── */}
+        {product.story && (
+          <div className="grid gap-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] lg:gap-16">
+            <div className="hidden lg:block"></div>
+            <div>
               <section aria-labelledby="histoire" className="mt-14">
                 <h2 id="histoire" className="font-serif text-xl text-ivory">
                   {p.storyTitle}
@@ -249,9 +235,9 @@ export default async function ProductPage({
                   {product.story}
                 </p>
               </section>
-            )}
+            </div>
           </div>
-        </div>
+        )}
 
         {related.length > 0 && (
           <section aria-labelledby="similaires" className="mt-24">
