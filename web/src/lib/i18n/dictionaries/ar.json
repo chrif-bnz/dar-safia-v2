@@ -425,6 +425,13 @@
         "label": "جريء",
         "hint": "أثر يلفت الأنظار"
       }
+    },
+    "explanation": {
+      "base": "يبرز هذا العطر كأحد أفضل الخيارات بفضل",
+      "family": "نوتاته من عائلة {family}",
+      "moment": "طابعه المناسب لـ {moment}",
+      "intensity": "حضوره {intensity}",
+      "and": "و"
     }
   },
   "footer": {

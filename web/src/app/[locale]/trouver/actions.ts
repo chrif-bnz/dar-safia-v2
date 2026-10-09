@@ -19,6 +19,11 @@ export interface ScentResult {
   priceLabel: string;
   family: string;
   compatibility: number;
+  matchedCriteria: {
+    family: boolean;
+    moment: boolean;
+    intensity: boolean;
+  };
 }
 
 export interface ScentDiagnosis {
@@ -62,6 +67,7 @@ function toResult(
     ),
     family: product.family,
     compatibility: match.compatibility,
+    matchedCriteria: match.matchedCriteria,
   };
 }
 

@@ -64,6 +64,8 @@ export function ShopExperience({
           return { ...prev, season: toggleValue(prev.season, value as SeasonTag) };
         case 'mood':
           return { ...prev, mood: toggleValue(prev.mood, value as MoodTag) };
+        case 'query':
+          return { ...prev, query: value };
         default:
           return prev;
       }
