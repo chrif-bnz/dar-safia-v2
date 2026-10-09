@@ -26,6 +26,7 @@ repris ici.
 | `catalog-data.js` | Source du catalogue (45 parfums). `scripts/migrate-catalog.mjs` en dérive `web/src/data/` (gitignoré). |
 | `scripts/` | `migrate-catalog.mjs` (catalogue) et `optimize-images.mjs` (images responsives vers `web/public/img/`, gitignoré). Lancés par `prepare-assets` avant chaque `dev` / `build`. |
 | `perfumes/`, `branding images/`, `logo/` | Masters des images. Seule source à versionner ; les dérivés sont régénérés. |
+| `cms/` | Projet Strapi 5 (TypeScript, SQLite en local, PostgreSQL en cible). Schémas et endpoints à définir. Le site ne lui parle que par HTTP, derrière `web/src/lib/catalog/index.ts`. |
 | `design-system/` | Jetons (`tokens.json`) que reflète `web/src/app/globals.css`. |
 
 Ces deux dossiers sont **générés**, jamais édités à la main ni commités :
