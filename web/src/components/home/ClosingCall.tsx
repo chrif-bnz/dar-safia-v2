@@ -34,14 +34,14 @@ export function ClosingCall({
     <section
       ref={ref}
       aria-labelledby="cloture"
-      className="relative overflow-hidden border-t border-smoke-2 bg-noir px-6 py-32 md:px-12 md:py-44 lg:px-20"
+      className="relative overflow-hidden border-t border-gold/25 bg-burgundy px-6 py-32 md:px-12 md:py-44 lg:px-20"
     >
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            'radial-gradient(55% 45% at 50% 78%, rgba(200,155,60,0.12) 0%, transparent 70%)',
+            'radial-gradient(55% 45% at 50% 78%, rgba(184,134,43,0.12) 0%, transparent 70%)',
         }}
       />
 
@@ -76,7 +76,7 @@ export function ClosingCall({
 
           <Link
             href={localePath(locale, '/trouver')}
-            className="ds-navlink font-ui text-2xs tracking-[0.14em] text-ivory/45 uppercase transition-colors hover:text-gold"
+            className="ds-navlink font-ui text-2xs tracking-[0.14em] text-ivory/75 uppercase transition-colors hover:text-gold"
           >
             {c.secondary}
           </Link>

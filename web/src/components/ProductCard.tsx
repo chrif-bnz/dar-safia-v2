@@ -77,7 +77,7 @@ export function ProductCard({
           <span className="text-3xs font-semibold tracking-(--tracking-eyebrow) text-gold uppercase">
             {product.brand.name}
           </span>
-          <span className="text-3xs text-ivory/45">
+          <span className="text-3xs text-ivory/58">
             {formatVolume(variant.volumeMl, locale, dict)}
           </span>
         </div>
@@ -104,7 +104,7 @@ export function ProductCard({
           {/* Sur une grille à 2 colonnes (mobile), le prix et ce label ne
               tiennent plus côte à côte sans se chevaucher — la mention
               reste lisible ailleurs sur le site (pied de page, fiche). */}
-          <span className="hidden shrink-0 text-3xs tracking-(--tracking-label) text-ivory/35 uppercase sm:inline">
+          <span className="hidden shrink-0 text-3xs tracking-(--tracking-label) text-ivory/58 uppercase sm:inline">
             {dict.common.authentic}
           </span>
         </div>

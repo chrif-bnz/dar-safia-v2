@@ -36,12 +36,12 @@ export function SiteFooter({ locale, dict }: { locale: Locale; dict: Dictionary 
   ];
 
   return (
-    <footer className="border-t border-smoke-2 bg-noir-2">
+    <footer className="border-t border-gold/25 bg-burgundy">
       <div className="mx-auto max-w-(--container-site) px-5 py-14 md:px-8">
         <div className="grid gap-10 md:grid-cols-[minmax(0,2fr)_repeat(2,minmax(0,1fr))] md:gap-8">
           <div>
             <p className="font-display text-lg text-ivory">{dict.common.brandName}</p>
-            <p className="mt-3 max-w-xs font-body text-md leading-relaxed text-ivory/55">
+            <p className="mt-3 max-w-xs font-body text-md leading-relaxed text-ivory/72">
               {dict.footer.blurb}
             </p>
             <span className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-2.5">
@@ -57,13 +57,13 @@ export function SiteFooter({ locale, dict }: { locale: Locale; dict: Dictionary 
               )}
               <Link
                 href={localePath(locale, '/la-maison')}
-                className="ds-navlink text-2xs tracking-(--tracking-label) text-ivory/60 uppercase transition-colors hover:text-gold"
+                className="ds-navlink text-2xs tracking-(--tracking-label) text-ivory/75 uppercase transition-colors hover:text-gold"
               >
                 {dict.nav.about}
               </Link>
               <Link
                 href={localePath(locale, '/contact')}
-                className="ds-navlink text-2xs tracking-(--tracking-label) text-ivory/60 uppercase transition-colors hover:text-gold"
+                className="ds-navlink text-2xs tracking-(--tracking-label) text-ivory/75 uppercase transition-colors hover:text-gold"
               >
                 {dict.footer.contact}
               </Link>
@@ -72,7 +72,7 @@ export function SiteFooter({ locale, dict }: { locale: Locale; dict: Dictionary 
 
           {columns.map((column) => (
             <nav key={column.title} aria-label={column.title}>
-              <h2 className="text-3xs tracking-(--tracking-label) text-ivory/40 uppercase">
+              <h2 className="text-3xs tracking-(--tracking-label) text-ivory/75 uppercase">
                 {column.title}
               </h2>
               <ul className="mt-4 flex flex-col gap-2.5">
@@ -80,7 +80,7 @@ export function SiteFooter({ locale, dict }: { locale: Locale; dict: Dictionary 
                   <li key={link.href}>
                     <Link
                       href={localePath(locale, link.href)}
-                      className="ds-navlink text-md text-ivory/65 transition-colors hover:text-gold"
+                      className="ds-navlink text-md text-ivory/75 transition-colors hover:text-gold"
                     >
                       {link.label}
                     </Link>
@@ -92,10 +92,10 @@ export function SiteFooter({ locale, dict }: { locale: Locale; dict: Dictionary 
         </div>
 
         <div className="mt-12 flex flex-wrap items-center justify-between gap-3 border-t border-smoke-2 pt-6">
-          <p className="text-3xs text-ivory/40">
+          <p className="text-3xs text-ivory/60">
             {interpolate(dict.footer.rights, { year: new Date().getFullYear() })}
           </p>
-          <p className="text-3xs text-ivory/40">{dict.footer.guarantee}</p>
+          <p className="text-3xs text-ivory/60">{dict.footer.guarantee}</p>
         </div>
       </div>
     </footer>

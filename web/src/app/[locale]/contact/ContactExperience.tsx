@@ -65,7 +65,7 @@ function Field({
 }) {
   return (
     <div className="group">
-      <label htmlFor={id} className="block font-body text-md text-ivory/45">
+      <label htmlFor={id} className="block font-body text-md text-ivory/58">
         {label}
       </label>
       <div className="relative">
@@ -321,7 +321,7 @@ export function ContactExperience({
             })}
           </ul>
 
-          <p data-fade className="mt-6 max-w-[40ch] font-body text-md leading-relaxed text-ivory/40">
+          <p data-fade className="mt-6 max-w-[40ch] font-body text-md leading-relaxed text-ivory/58">
             {c.faqFootnote}
           </p>
         </section>
@@ -351,10 +351,10 @@ export function ContactExperience({
                     onClick={() => setTab(key)}
                     className="group flex flex-col gap-1.5 pb-5 text-start"
                   >
-                    <span className="font-body text-[clamp(1.2rem,1.8vw,1.5rem)] leading-tight text-ivory/40 transition-colors duration-500 group-hover:text-ivory/75 group-aria-selected:text-ivory">
+                    <span className="font-body text-[clamp(1.2rem,1.8vw,1.5rem)] leading-tight text-ivory/58 transition-colors duration-500 group-hover:text-ivory/75 group-aria-selected:text-ivory">
                       {label}
                     </span>
-                    <span className="font-body text-md leading-snug text-ivory/30 transition-colors duration-500 group-aria-selected:text-gold-light/70">
+                    <span className="font-body text-md leading-snug text-ivory/58 transition-colors duration-500 group-aria-selected:text-gold-light/70">
                       {hint}
                     </span>
                   </button>
@@ -393,7 +393,7 @@ export function ContactExperience({
                         }}
                         rows={3}
                         placeholder={c.messagePlaceholder}
-                        className="block w-full resize-none bg-transparent font-body text-[1.25rem] leading-[1.6] text-ivory placeholder:text-ivory/30 focus:outline-none"
+                        className="block w-full resize-none bg-transparent font-body text-[1.25rem] leading-[1.6] text-ivory placeholder:text-ivory/58 focus:outline-none"
                       />
                       <div className="my-7 h-px bg-smoke-2" />
                       <div className="grid gap-6 sm:grid-cols-2">
@@ -442,7 +442,7 @@ export function ContactExperience({
                       {/* L'objet : des pastilles plutôt qu'un menu déroulant —
                           le choix se voit d'un coup d'œil, et il se touche. */}
                       <fieldset className="mt-8">
-                        <legend className="font-body text-md text-ivory/45">
+                        <legend className="font-body text-md text-ivory/58">
                           {c.collab.subjectLabel}
                         </legend>
                         <div className="mt-3 flex flex-wrap gap-2.5">
@@ -474,7 +474,7 @@ export function ContactExperience({
                         }}
                         rows={3}
                         placeholder={c.collab.messagePlaceholder}
-                        className="block w-full resize-none bg-transparent font-body text-[1.25rem] leading-[1.6] text-ivory placeholder:text-ivory/30 focus:outline-none"
+                        className="block w-full resize-none bg-transparent font-body text-[1.25rem] leading-[1.6] text-ivory placeholder:text-ivory/58 focus:outline-none"
                       />
                     </>
                   )}
@@ -484,7 +484,7 @@ export function ContactExperience({
                     Ce n'est pas une décoration : c'est la promesse « rien
                     n'est envoyé sans relecture » rendue visible. */}
                 <figure className="mt-10">
-                  <figcaption className="font-body text-md text-ivory/40">
+                  <figcaption className="font-body text-md text-ivory/58">
                     {c.previewLabel}
                   </figcaption>
                   <blockquote className="mt-4 border-s border-gold/45 ps-6 font-body text-[1.1rem] leading-[1.7] text-ivory/80">
@@ -493,7 +493,7 @@ export function ContactExperience({
                         <span
                           key={i}
                           className={`block whitespace-pre-line transition-colors duration-500 ${
-                            line.dim ? 'text-ivory/30 italic' : ''
+                            line.dim ? 'text-ivory/58 italic' : ''
                           }`}
                         >
                           {line.text}
@@ -509,16 +509,16 @@ export function ContactExperience({
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="ds-btn mt-10 flex w-full justify-center rounded-sm bg-gold px-8 py-4 font-ui text-2xs font-semibold tracking-(--tracking-label) whitespace-nowrap text-noir uppercase transition-colors hover:bg-gold-light sm:inline-flex sm:w-auto"
+                  className="ds-btn mt-10 flex w-full justify-center rounded-sm border border-gold bg-burgundy px-8 py-4 font-ui text-2xs font-semibold tracking-(--tracking-label) whitespace-nowrap text-ivory uppercase transition-colors hover:border-gold-light hover:bg-burgundy-2 sm:inline-flex sm:w-auto"
                 >
                   {sendLabel}
                 </a>
-                <p className="mt-3 max-w-md font-body text-md leading-relaxed text-ivory/40">
+                <p className="mt-3 max-w-md font-body text-md leading-relaxed text-ivory/58">
                   {sendHint}
                 </p>
 
                 {phoneDisplay && (
-                  <p className="mt-5 font-ui text-2xs tracking-[0.1em] text-ivory/40">
+                  <p className="mt-5 font-ui text-2xs tracking-[0.1em] text-ivory/58">
                     <span className="sr-only">{c.phoneLabel} : </span>
                     <span dir="ltr">{phoneDisplay}</span>
                   </p>

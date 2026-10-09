@@ -10,18 +10,32 @@
    ══════════════════════════════════════════════════════════════ */
 @theme {
   /* ── Couleurs de marque (extraites à l'identique de style.css) ── */
+  /* Palette officielle : bordeaux #3D0F14 (primaire), espresso #241915,
+     or antique #B8862B, ivoire chaud #F2EDE3. Tout le reste en dérive :
+       noir      = espresso assombri (fond de page, le plus profond)
+       noir-3    = espresso éclairci (surfaces surélevées)
+       burgundy-deep / -2 = bordeaux assombri / éclairci
+       gold-light = or éclairci : texte or sur fond sombre, survols
+       gold-dark  = or assombri : filets, pouces de défilement
+       ivory-2   = ivoire assombri : surfaces claires secondaires */
   --color-noir: #1a120f;
   --color-noir-2: #241915;
-  --color-noir-3: #2d1f1a;
-  --color-burgundy: #340b10;
-  --color-burgundy-2: #480f17;
-  --color-gold: #c89b3c;
-  --color-gold-light: #e4bd68;
-  --color-gold-dark: #8e651d;
-  --color-ivory: #f9f6f0;
-  --color-ivory-2: #ece4d5;
-  --color-smoke: rgba(249, 246, 240, 0.07);
-  --color-smoke-2: rgba(249, 246, 240, 0.12);
+  --color-noir-3: #2f221c;
+  --color-burgundy-deep: #2a090d;
+  --color-burgundy: #3d0f14;
+  --color-burgundy-2: #4f1a21;
+  --color-gold: #b8862b;
+  --color-gold-light: #d6ab5a;
+  --color-gold-dark: #85601d;
+  --color-ivory: #f2ede3;
+  --color-ivory-2: #e3dac8;
+  --color-smoke: rgba(242, 237, 227, 0.07);
+  --color-smoke-2: rgba(242, 237, 227, 0.12);
+
+  /* ── Rôles sémantiques (le statut garde sa couleur : jamais de marque) ── */
+  --color-success: #6fae7f;
+  --color-danger: #d9695f;
+  --color-warning: #d6a24a;
 
   /* ── Polices ──
      Les variables --font-cinzel-* viennent de next/font (layout.tsx), qui
@@ -57,7 +71,7 @@
   --radius-md: 12px;
   --radius-lg: 24px;
 
-  --shadow-gold: 0 0 45px rgba(200, 155, 60, 0.25);
+  --shadow-gold: 0 0 45px rgba(184, 134, 43, 0.25);
   --shadow-dark: 0 25px 60px rgba(0, 0, 0, 0.6);
 
   --ease-lux: cubic-bezier(0.16, 1, 0.3, 1);
@@ -90,7 +104,7 @@
 :root {
   --universe-accent: var(--color-gold);
   --universe-light: var(--color-gold-light);
-  --universe-glow: rgba(200, 155, 60, 0.25);
+  --universe-glow: rgba(184, 134, 43, 0.25);
 }
 
 /* ══════════════════════════════════════════════════════════════
@@ -252,10 +266,10 @@ body {
    ══════════════════════════════════════════════════════════════ */
 @keyframes ds-glow-breathe {
   0%, 100% {
-    text-shadow: 0 0 16px rgba(228, 189, 104, 0.16), 0 0 2px rgba(228, 189, 104, 0.08);
+    text-shadow: 0 0 16px rgba(214, 171, 90, 0.16), 0 0 2px rgba(214, 171, 90, 0.08);
   }
   50% {
-    text-shadow: 0 0 26px rgba(228, 189, 104, 0.26), 0 0 4px rgba(228, 189, 104, 0.12);
+    text-shadow: 0 0 26px rgba(214, 171, 90, 0.26), 0 0 4px rgba(214, 171, 90, 0.12);
   }
 }
 .ds-text-glow {
@@ -265,7 +279,7 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .ds-text-glow {
     animation: none;
-    text-shadow: 0 0 16px rgba(228, 189, 104, 0.16);
+    text-shadow: 0 0 16px rgba(214, 171, 90, 0.16);
   }
 }
 
@@ -597,7 +611,7 @@ body {
 .ds-text-lift:focus-visible,
 .group:hover .ds-text-lift {
   color: var(--color-gold-light);
-  text-shadow: 0 0 22px rgba(228, 189, 104, 0.32);
+  text-shadow: 0 0 22px rgba(214, 171, 90, 0.32);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -663,8 +677,8 @@ body {
 }
 .ds-ambient {
   background:
-    radial-gradient(42% 48% at 38% 52%, rgba(200, 155, 60, 0.16) 0%, transparent 70%),
-    radial-gradient(30% 36% at 70% 40%, rgba(72, 15, 23, 0.35) 0%, transparent 72%);
+    radial-gradient(42% 48% at 38% 52%, rgba(184, 134, 43, 0.16) 0%, transparent 70%),
+    radial-gradient(30% 36% at 70% 40%, rgba(79, 26, 33, 0.55) 0%, transparent 72%);
   filter: blur(8px);
   animation: ds-ambient-drift 22s ease-in-out infinite;
   will-change: transform;

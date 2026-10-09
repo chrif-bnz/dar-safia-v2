@@ -52,7 +52,7 @@ export function Manifesto({ dict }: { dict: Dictionary }) {
           </p>
           <p
             data-fade
-            className="max-w-xs font-ui text-2xs leading-[1.9] text-ivory/40 md:col-span-3 md:col-start-6 lg:col-start-6"
+            className="max-w-xs font-ui text-2xs leading-[1.9] text-ivory/58 md:col-span-3 md:col-start-6 lg:col-start-6"
           >
             {m.aside}
           </p>

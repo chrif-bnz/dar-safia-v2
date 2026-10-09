@@ -105,7 +105,7 @@ export function CartDrawer() {
                       {line.brandName}
                     </span>
                     <span className="truncate font-serif text-md text-ivory">{line.name}</span>
-                    <span className="text-2xs text-ivory/45">
+                    <span className="text-2xs text-ivory/58">
                       {formatVolume(line.volumeMl, locale, dict)}
                     </span>
 
@@ -122,7 +122,7 @@ export function CartDrawer() {
                       <button
                         type="button"
                         onClick={() => removeLine(line.productSlug, line.variantId)}
-                        className="text-2xs text-ivory/45 underline underline-offset-2 transition-colors hover:text-ivory"
+                        className="text-2xs text-ivory/58 underline underline-offset-2 transition-colors hover:text-ivory"
                       >
                         {dict.cart.remove}
                       </button>
@@ -145,14 +145,14 @@ export function CartDrawer() {
                   {formatPrice({ amount: subtotal, currency: 'DZD' }, locale)}
                 </span>
               </div>
-              <p className="mt-1.5 text-3xs text-ivory/40">{dict.cart.deliveryNote}</p>
+              <p className="mt-1.5 text-3xs text-ivory/58">{dict.cart.deliveryNote}</p>
 
               {checkoutUrl ? (
                 <a
                   href={checkoutUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="ds-btn mt-4 flex items-center justify-center rounded-sm bg-gold px-6 py-3.5 text-sm font-semibold tracking-(--tracking-label) text-noir uppercase transition-colors hover:bg-gold-light"
+                  className="ds-btn mt-4 flex items-center justify-center rounded-sm border border-gold bg-burgundy px-6 py-3.5 text-sm font-semibold tracking-(--tracking-label) text-ivory uppercase transition-colors hover:border-gold-light hover:bg-burgundy-2"
                 >
                   {dict.cart.checkout}
                 </a>
@@ -165,7 +165,7 @@ export function CartDrawer() {
               <button
                 type="button"
                 onClick={clear}
-                className="mt-3 w-full text-center text-2xs text-ivory/40 underline underline-offset-2 transition-colors hover:text-ivory/70"
+                className="mt-3 w-full text-center text-2xs text-ivory/58 underline underline-offset-2 transition-colors hover:text-ivory/70"
               >
                 {dict.cart.clear}
               </button>

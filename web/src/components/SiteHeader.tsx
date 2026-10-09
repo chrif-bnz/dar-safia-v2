@@ -152,7 +152,7 @@ export function SiteHeader({ locale, dict }: { locale: Locale; dict: Dictionary 
     <header
       ref={headerRef}
       data-lifted={solidHeader || undefined}
-      className="ds-header fixed inset-x-0 top-0 z-40 data-lifted:border-b data-lifted:border-smoke-2 data-lifted:bg-noir/88 data-lifted:backdrop-blur-md"
+      className="ds-header fixed inset-x-0 top-0 z-40 data-lifted:border-b data-lifted:border-smoke-2 data-lifted:bg-burgundy-deep/90 data-lifted:backdrop-blur-md"
     >
       <div className="mx-auto flex max-w-(--container-site) items-center gap-4 px-5 py-4 md:px-8">
         <Link

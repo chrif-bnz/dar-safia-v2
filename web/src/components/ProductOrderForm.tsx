@@ -126,7 +126,7 @@ export function ProductOrderForm({
 
   const inputClass = "w-full rounded-sm border border-smoke-2 bg-noir-2 px-4 py-3 text-sm text-ivory placeholder-ivory/30 outline-none transition-all duration-200 focus:border-gold focus:ring-1 focus:ring-gold/30 disabled:opacity-50 disabled:cursor-not-allowed";
   const labelClass = "mb-2 block text-3xs font-semibold tracking-(--tracking-label) text-ivory/60 uppercase";
-  const errorClass = "mt-1.5 text-xs text-red-400";
+  const errorClass = "mt-1.5 text-xs text-danger";
 
   return (
     <form onSubmit={handleSubmit} className="mt-12 border-t border-smoke-2 pt-10">
@@ -298,7 +298,7 @@ export function ProductOrderForm({
           <button
             type="submit"
             disabled={isSubmitting}
-            className="ds-btn inline-flex items-center gap-2.5 rounded-sm bg-gold px-7 py-3.5 text-sm font-semibold tracking-(--tracking-label) text-noir uppercase transition-colors duration-200 hover:bg-gold-light disabled:opacity-70"
+            className="ds-btn inline-flex items-center gap-2.5 rounded-sm border border-gold bg-burgundy px-7 py-3.5 text-sm font-semibold tracking-(--tracking-label) text-ivory uppercase transition-colors duration-200 hover:border-gold-light hover:bg-burgundy-2 disabled:opacity-70"
           >
             {dict.product?.order ?? 'COMMANDER SUR WHATSAPP'}
           </button>

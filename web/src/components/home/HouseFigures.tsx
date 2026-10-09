@@ -73,14 +73,14 @@ export function HouseFigures({
                   {nf.format(row.value)}
                 </span>
               </dd>
-              <dt className="mt-4 max-w-[16ch] font-ui text-2xs leading-[1.7] tracking-[0.08em] text-ivory/45">
+              <dt className="mt-4 max-w-[16ch] font-ui text-2xs leading-[1.7] tracking-[0.08em] text-ivory/58">
                 {row.label}
               </dt>
             </div>
           ))}
         </dl>
 
-        <p data-fade className="mt-14 font-ui text-3xs tracking-[0.06em] text-ivory/30">
+        <p data-fade className="mt-14 font-ui text-3xs tracking-[0.06em] text-ivory/58">
           {f.note}
         </p>
       </div>

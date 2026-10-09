@@ -114,7 +114,7 @@ export default async function ProductPage({
       />
 
       <div className="relative mx-auto max-w-(--container-site) px-5 pt-28 pb-10 md:px-8 md:pt-32 md:pb-14">
-        <nav aria-label="breadcrumb" className="text-2xs text-ivory/45">
+        <nav aria-label="breadcrumb" className="text-2xs text-ivory/58">
           <ol className="flex flex-wrap items-center gap-2">
             <li>
               <Link href={localePath(locale, '/')} className="ds-navlink hover:text-gold">
@@ -161,7 +161,7 @@ export default async function ProductPage({
             >
               {metrics.map(({ label, value }) => (
                 <div key={label} className="bg-noir-2 px-3 py-4 text-center">
-                  <dt className="text-3xs tracking-(--tracking-label) text-ivory/40 uppercase">
+                  <dt className="text-3xs tracking-(--tracking-label) text-ivory/58 uppercase">
                     {label}
                   </dt>
                   <dd className="mt-1.5 font-serif text-md text-[var(--universe-light)]">
@@ -182,7 +182,7 @@ export default async function ProductPage({
                 {formatGender(product.gender, dict)}
               </span>
               {product.concentration && (
-                <span className="text-3xs text-ivory/45">{product.concentration}</span>
+                <span className="text-3xs text-ivory/58">{product.concentration}</span>
               )}
             </div>
 

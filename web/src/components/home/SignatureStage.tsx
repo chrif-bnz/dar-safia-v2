@@ -213,7 +213,7 @@ export function SignatureStage({
             </div>
 
             <div className="flex items-center gap-5">
-              <span className="font-ui text-2xs tracking-[0.22em] text-ivory/45 tabular-nums">
+              <span className="font-ui text-2xs tracking-[0.22em] text-ivory/58 tabular-nums">
                 {interpolate(s.of, {
                   current: active + 1,
                   total: products.length,
@@ -262,7 +262,7 @@ function PanelBody({
 
       <p className="mt-5 font-body text-lg text-ivory/55">
         {formatFamily(product.family, dict)}
-        <span className="mx-3 text-ivory/25">·</span>
+        <span className="mx-3 text-ivory/58">·</span>
         {formatPrice({ amount: product.priceFrom, currency: 'DZD' }, locale)}
       </p>
 
