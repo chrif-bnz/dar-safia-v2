@@ -1,0 +1,136 @@
+{
+  "kind": "collectionType",
+  "collectionName": "products",
+  "info": {
+    "singularName": "product",
+    "pluralName": "products",
+    "displayName": "Parfum",
+    "description": "Un parfum du catalogue. Les noms de champs suivent web/src/lib/catalog/strapi-types.ts."
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "maxLength": 200
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "name",
+      "required": true
+    },
+    "brand": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::brand.brand",
+      "inversedBy": "products"
+    },
+    "description": {
+      "type": "text",
+      "required": true
+    },
+    "story": {
+      "type": "text"
+    },
+    "gender": {
+      "type": "enumeration",
+      "enum": [
+        "femme",
+        "homme",
+        "unisexe"
+      ],
+      "required": true,
+      "default": "unisexe"
+    },
+    "family": {
+      "type": "enumeration",
+      "enum": [
+        "floral",
+        "amber",
+        "woody",
+        "fresh",
+        "gourmand",
+        "spicy"
+      ],
+      "required": true
+    },
+    "secondaryFamilies": {
+      "type": "json"
+    },
+    "notes": {
+      "type": "component",
+      "repeatable": true,
+      "component": "catalog.product-note"
+    },
+    "variants": {
+      "type": "component",
+      "repeatable": true,
+      "component": "catalog.variant",
+      "required": true,
+      "min": 1
+    },
+    "images": {
+      "type": "media",
+      "multiple": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "video": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "videos"
+      ]
+    },
+    "concentration": {
+      "type": "string",
+      "maxLength": 80
+    },
+    "longevityHours": {
+      "type": "integer",
+      "min": 0
+    },
+    "sillage": {
+      "type": "integer",
+      "min": 1,
+      "max": 5
+    },
+    "seasons": {
+      "type": "json"
+    },
+    "occasions": {
+      "type": "json"
+    },
+    "badge": {
+      "type": "string",
+      "maxLength": 60
+    },
+    "featured": {
+      "type": "boolean",
+      "default": false
+    },
+    "newArrival": {
+      "type": "boolean",
+      "default": false
+    },
+    "bestseller": {
+      "type": "boolean",
+      "default": false
+    },
+    "collections": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::collection.collection",
+      "mappedBy": "products"
+    },
+    "seo": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.seo"
+    }
+  }
+}

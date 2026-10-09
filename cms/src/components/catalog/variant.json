@@ -1,0 +1,36 @@
+{
+  "collectionName": "components_catalog_variants",
+  "info": {
+    "displayName": "Format",
+    "icon": "database",
+    "description": "Un format vendu : contenance, prix, stock."
+  },
+  "options": {},
+  "attributes": {
+    "volumeMl": {
+      "type": "integer",
+      "required": true,
+      "min": 1
+    },
+    "price": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.money",
+      "required": true
+    },
+    "compareAtPrice": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.money"
+    },
+    "stock": {
+      "type": "integer",
+      "default": 0,
+      "min": 0
+    },
+    "sku": {
+      "type": "string",
+      "maxLength": 64
+    }
+  }
+}
