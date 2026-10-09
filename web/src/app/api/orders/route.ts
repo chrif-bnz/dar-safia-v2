@@ -1,21 +1,34 @@
 import { NextResponse, type NextRequest } from 'next/server';
 
-import { relayToStrapi } from '@/lib/forms/strapi-forms';
 import { guard } from '@/lib/forms/route-guard';
+import { relayToStrapi } from '@/lib/forms/strapi-forms';
 
 /**
  * POST /api/orders — enregistre une demande de commande dans Strapi.
- * La validation de fond (téléphone, lignes, prix) est faite par Strapi, qui
- * est la source de vérité ; ici on filtre l'abus (voir route-guard).
+ *
+ * Deux appelants : la fiche produit (avec les coordonnées du client, et qui
+ * attend la confirmation) et le panier (sans coordonnées, tire-et-oublie).
+ * La validation de fond (téléphone, lignes, prix) est faite par Strapi, source
+ * de vérité ; ici on filtre l'abus (voir route-guard) et on porte le jeton
+ * d'écriture côté serveur.
  */
 export async function POST(request: NextRequest) {
   const checked = await guard(request);
   if ('response' in checked) return checked.response;
 
-  const result = await relayToStrapi('orders', checked.body);
-  if (!result.ok) {
-    return NextResponse.json({ ok: false }, { status: result.status === 400 ? 400 : 502 });
+  const body = checked.body;
+  // La fiche produit n'envoie pas `source` : elle se reconnaît à ses coordonnées.
+  if (body.source !== 'product-form' && body.source !== 'cart') {
+    body.source = body.customer ? 'product-form' : 'cart';
   }
+
+  const result = await relayToStrapi('orders', body);
+  if (!result.ok) {
+    // 400 / 422 : la saisie est refusée ; le reste, c'est le serveur qui manque.
+    const status = result.status === 400 || result.status === 422 ? 400 : 502;
+    return NextResponse.json({ ok: false }, { status });
+  }
+
   const reference = (result.data as { data?: { reference?: unknown } }).data?.reference;
   return NextResponse.json(
     { ok: true, stored: true, reference: typeof reference === 'string' ? reference : null },

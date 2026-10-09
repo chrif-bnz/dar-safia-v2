@@ -5,8 +5,6 @@ import type { Media, Product, ProductVariant } from '@/lib/catalog';
 import type { Dictionary } from '@/lib/i18n/dictionaries';
 import type { Locale } from '@/lib/i18n/config';
 import { AddToCartButton } from '@/components/cart/AddToCartButton';
-import { recordOrder } from '@/lib/forms/client';
-import { orderMessage, whatsappUrl } from '@/lib/whatsapp';
 import wilayasData from '@/data/wilayas.json';
 
 interface ProductOrderFormProps {
@@ -41,6 +39,7 @@ export function ProductOrderForm({
 
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitSuccess, setSubmitSuccess] = useState(false);
 
   const selectedWilayaData = wilayasData.find((w) => w.id === formData.wilaya);
   const communes = selectedWilayaData ? selectedWilayaData.communes : [];
@@ -84,61 +83,43 @@ export function ProductOrderForm({
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (validate()) {
       setIsSubmitting(true);
       
-      const formDetails = {
-        Nom: formData.lastName,
-        Prénom: formData.firstName,
-        Téléphone: formData.phone,
-        Wilaya: selectedWilayaData?.name ?? '',
-        Commune: communes.find((c) => c.id === formData.commune)?.name ?? '',
-        'Mode de livraison': formData.deliveryMethod === 'main' ? 'Main à main' : 'Livraison par société',
-        ...(formData.deliveryMethod === 'societe' && {
-          'Société de livraison': formData.deliveryCompany || 'Non spécifiée',
-          'Adresse': formData.deliveryAddress,
-        }),
-      };
+      try {
+        const res = await fetch('/api/orders', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            locale,
+            customer: {
+              firstName: formData.firstName,
+              lastName: formData.lastName,
+              phone: formData.phone,
+              wilaya: selectedWilayaData?.name ?? '',
+              commune: communes.find((c) => c.id === formData.commune)?.name ?? '',
+              deliveryMethod: formData.deliveryMethod === 'societe' ? 'societe' : 'main',
+              deliveryCompany: formData.deliveryCompany || undefined,
+              deliveryAddress: formData.deliveryAddress || undefined,
+            },
+            items: [{ productSlug: product.slug, variantId: variant.id, quantity: 1 }],
+          }),
+        });
 
-      const customMessage = Object.entries(formDetails)
-        .map(([key, value]) => `${key} : ${value}`)
-        .join('\n');
+                if (!res.ok) {
+          setErrors((prev) => ({ ...prev, submit: dict.product.orderError }));
+          setIsSubmitting(false);
+          return;
+        }
 
-      const baseMsg = orderMessage(product, locale, dict);
-      const parts = baseMsg.split('\n\n');
-      
-      // Insert our details before the outro
-      let finalMsg = '';
-      if (parts.length >= 3) {
-        finalMsg = parts.slice(0, parts.length - 1).join('\n\n') + '\n\n' + customMessage + '\n\n' + parts[parts.length - 1];
-      } else {
-        finalMsg = baseMsg + '\n\n' + customMessage;
+        setIsSubmitting(false);
+        setSubmitSuccess(true);
+      } catch {
+        setErrors((prev) => ({ ...prev, submit: dict.product.orderServerError }));
+        setIsSubmitting(false);
       }
-
-      // Enregistrement dans Strapi (tire et oublie) : s'ajoute à WhatsApp, ne le remplace pas.
-      recordOrder({
-        source: 'product-form',
-        locale,
-        customer: {
-          firstName: formData.firstName,
-          lastName: formData.lastName,
-          phone: formData.phone,
-          wilaya: selectedWilayaData?.name ?? '',
-          commune: communes.find((c) => c.id === formData.commune)?.name ?? '',
-          deliveryMethod: formData.deliveryMethod === 'societe' ? 'societe' : 'main',
-          deliveryCompany: formData.deliveryCompany || undefined,
-          deliveryAddress: formData.deliveryAddress || undefined,
-        },
-        items: [{ productSlug: product.slug, variantId: variant.id, quantity: 1 }],
-      });
-
-      const url = whatsappUrl(finalMsg);
-      if (url) {
-        window.open(url, '_blank', 'noopener,noreferrer');
-      }
-      setIsSubmitting(false);
     }
   };
 
@@ -310,15 +291,21 @@ export function ProductOrderForm({
           </div>
         </div>
       </div>
+      
+      {errors.submit && <p className={errorClass}>{errors.submit}</p>}
 
       <div className="mt-10 flex flex-wrap gap-3">
-        {hasOrderUrl ? (
+        {submitSuccess ? (
+          <p className="rounded-sm border border-smoke-2 px-5 py-3.5 text-sm text-ivory/50">
+            {dict.product.orderConfirmed}
+          </p>
+        ) : hasOrderUrl ? (
           <button
             type="submit"
             disabled={isSubmitting}
             className="ds-btn inline-flex w-full items-center justify-center gap-2.5 rounded-sm border sm:w-auto border-gold bg-burgundy px-7 py-3.5 text-sm font-semibold tracking-(--tracking-label) text-ivory uppercase transition-colors duration-200 hover:border-gold-light hover:bg-burgundy-2 disabled:opacity-70"
           >
-            {dict.product?.order ?? 'COMMANDER SUR WHATSAPP'}
+            {dict.product.orderNow}
           </button>
         ) : (
           <p className="rounded-sm border border-smoke-2 px-5 py-3.5 text-sm text-ivory/50">

@@ -296,6 +296,10 @@
     "order": "اطلب عبر واتساب",
     "addToCart": "أضف إلى السلة",
     "orderUnavailable": "الطلب غير متاح مؤقتًا.",
+    "orderNow": "اطلب الآن",
+    "orderConfirmed": "تم تأكيد الطلب",
+    "orderError": "تعذّر تسجيل الطلب. تحقق من بياناتك وحاول مرة أخرى.",
+    "orderServerError": "الخادم غير متاح. حاول مرة أخرى بعد قليل.",
     "metrics": {
       "longevity": "الثبات",
       "sillage": "الأثر",
