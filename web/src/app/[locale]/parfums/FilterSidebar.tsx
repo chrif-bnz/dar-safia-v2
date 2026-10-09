@@ -167,12 +167,12 @@ export function FilterSidebar({
                 <ul className="flex flex-col gap-2.5 pb-4">
                   {category.options.map((option) => (
                     <li key={option.value}>
-                      <label className="flex items-center gap-2.5 font-body text-md text-ivory/75">
+                      <label className="flex min-h-10 items-center gap-3 font-body text-md text-ivory/75">
                         <input
                           type="checkbox"
                           checked={selected.includes(option.value)}
                           onChange={() => onToggle(category.key, option.value)}
-                          className="h-4 w-4 shrink-0 accent-gold"
+                          className="size-5 shrink-0 accent-gold"
                         />
                         {option.label}
                       </label>
@@ -199,7 +199,7 @@ export function FilterSidebar({
         <button
           type="button"
           onClick={() => setDrawerOpen(true)}
-          className="inline-flex items-center gap-2 rounded-sm border border-smoke-2 px-4 py-2.5 font-ui text-2xs tracking-(--tracking-label) text-ivory uppercase transition-colors hover:border-gold/50"
+          className="inline-flex min-h-11 items-center gap-2 rounded-sm border border-smoke-2 px-4 py-2.5 font-ui text-2xs tracking-(--tracking-label) text-ivory uppercase transition-colors hover:border-gold/50"
         >
           {f.openButton}
           {hasActiveFilters(filters) && (

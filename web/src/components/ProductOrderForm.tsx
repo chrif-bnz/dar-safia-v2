@@ -316,7 +316,7 @@ export function ProductOrderForm({
           <button
             type="submit"
             disabled={isSubmitting}
-            className="ds-btn inline-flex items-center gap-2.5 rounded-sm border border-gold bg-burgundy px-7 py-3.5 text-sm font-semibold tracking-(--tracking-label) text-ivory uppercase transition-colors duration-200 hover:border-gold-light hover:bg-burgundy-2 disabled:opacity-70"
+            className="ds-btn inline-flex w-full items-center justify-center gap-2.5 rounded-sm border sm:w-auto border-gold bg-burgundy px-7 py-3.5 text-sm font-semibold tracking-(--tracking-label) text-ivory uppercase transition-colors duration-200 hover:border-gold-light hover:bg-burgundy-2 disabled:opacity-70"
           >
             {dict.product?.order ?? 'COMMANDER SUR WHATSAPP'}
           </button>

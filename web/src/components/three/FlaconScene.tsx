@@ -1339,8 +1339,8 @@ export function FlaconScene({ className }: { className?: string }) {
       // décalage latéral), on recule, et on vise plus bas pour remonter le
       // flacon dans le tiers haut — le texte occupe la bande basse. Sans ça il
       // est rogné au pied et l'étiquette passe sous le titre.
-      const distBoost = wide ? 0 : 2.4;
-      const lookRise = wide ? 0 : -0.95;
+      const distBoost = wide ? 0 : 3.6;
+      const lookRise = wide ? 0 : -0.85;
 
       const keyBase = new THREE.Vector3(4.5, 7, 5);
       const rimBase = new THREE.Vector3(-3, 2.4, -3.5);
@@ -1424,7 +1424,7 @@ export function FlaconScene({ className }: { className?: string }) {
         // la caméra qui travaille, pas seulement l'objet.
         const k = sceneState;
         // Mobile : les plans serrés reculent davantage, le cadre étroit rognerait le flacon.
-        const dist = k.d + distBoost + (wide ? 0 : Math.max(0, 10 - k.d) * 0.7);
+        const dist = k.d + distBoost + (wide ? 0 : Math.max(0, 10 - k.d) * 0.7 + k.md);
         const fov = k.fov;
         camera.position.set(
           Math.sin(k.az) * dist + s.cpx * 0.55,

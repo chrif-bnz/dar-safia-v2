@@ -1,5 +1,6 @@
 'use client';
 
+import { ProductImage } from '@/components/ProductImage';
 import Link from 'next/link';
 import { useState, useTransition } from 'react';
 
@@ -182,13 +183,11 @@ function ScentResultView({
       <div className="mt-6 grid gap-8 sm:grid-cols-[minmax(0,3fr)_minmax(0,4fr)] sm:items-center">
         <div className="overflow-hidden rounded-md border border-smoke-2 bg-noir-2">
           {match.imageUrl && (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img
+            <ProductImage
               src={match.imageUrl}
               srcSet={match.imageSrcset ?? undefined}
               sizes="(max-width: 640px) 90vw, 320px"
               alt={`${match.name} — ${match.brandName}`}
-              decoding="async"
               className="aspect-4/5 w-full object-cover"
             />
           )}
@@ -242,14 +241,10 @@ function ScentResultView({
                   className="ds-card flex gap-3 rounded-md border border-smoke-2 bg-noir-2 p-3 hover:border-gold/50"
                 >
                   {alt.imageUrl && (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img
+                    <ProductImage
                       src={alt.imageUrl}
                       alt=""
-                      width={56}
-                      height={70}
                       loading="lazy"
-                      decoding="async"
                       className="h-[70px] w-14 shrink-0 rounded-xs object-cover"
                     />
                   )}

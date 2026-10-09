@@ -36,7 +36,7 @@ export function LocaleSwitcher({
       <select
         value={current}
         onChange={(event) => switchTo(event.target.value as Locale)}
-        className="cursor-pointer appearance-none rounded-xs bg-transparent py-1.5 ps-2 pe-6 text-2xs tracking-(--tracking-label) text-ivory/70 uppercase transition-colors hover:text-gold focus-visible:outline-2"
+        className="cursor-pointer appearance-none rounded-xs bg-transparent min-h-11 py-1.5 ps-2 pe-6 text-2xs tracking-(--tracking-label) text-ivory/70 uppercase transition-colors hover:text-gold focus-visible:outline-2"
       >
         {LOCALES.map((locale) => (
           <option key={locale} value={locale} className="bg-noir-2 text-ivory">

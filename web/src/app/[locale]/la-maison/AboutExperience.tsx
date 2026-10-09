@@ -95,8 +95,8 @@ function Chapter({
   );
 }
 
-const chapterTitle = 'font-body font-light text-ivory text-[clamp(1.9rem,4.4vw,3.2rem)] leading-[1.06] tracking-[-0.015em]';
-const chapterBody = 'font-body text-[clamp(1.02rem,1.5vw,1.3rem)] leading-[1.55] text-ivory/78';
+const chapterTitle = 'font-body font-light text-ivory text-[clamp(1.7rem,4.4vw,3.2rem)] leading-[1.06] tracking-[-0.015em]';
+const chapterBody = 'font-body text-[clamp(0.95rem,1.5vw,1.3rem)] leading-[1.5] text-ivory/78';
 
 export function AboutExperience({
   locale,
@@ -155,13 +155,13 @@ export function AboutExperience({
       {/* ── III · L'essence (deux premières exigences) ── */}
       <Chapter id="essence" index={3} side="start" stacked={reduced} hidden>
         <h2 className={chapterTitle}>{a.requirementsTitle}</h2>
-        <dl className="mt-7 space-y-6">
+        <dl className="mt-5 space-y-4 md:mt-7 md:space-y-6">
           {[pure, lasting].map((req) => (
             <div key={req.term} className="border-t border-gold/30 pt-4">
               <dt className="font-body text-[clamp(1.2rem,2vw,1.6rem)] leading-[1.2] text-ivory">
                 {req.term}
               </dt>
-              <dd className="mt-2 font-body text-[clamp(0.98rem,1.3vw,1.15rem)] leading-[1.5] text-ivory/70">
+              <dd className="mt-2 font-body text-[clamp(0.9rem,1.3vw,1.15rem)] leading-[1.45] text-ivory/75">
                 {req.detail}
               </dd>
             </div>
@@ -284,7 +284,7 @@ export function AboutExperience({
                 href={conciergeUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative mt-8 inline-flex pb-1.5 font-ui text-2xs tracking-[0.2em] text-ivory uppercase"
+                className="ds-tap group relative mt-8 inline-flex pb-1.5 font-ui text-2xs tracking-[0.2em] text-ivory uppercase"
               >
                 {a.conciergeCta}
                 <span

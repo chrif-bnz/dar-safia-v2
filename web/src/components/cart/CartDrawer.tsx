@@ -7,6 +7,7 @@ import { lineTotal, type CartLine } from '@/lib/cart/types';
 import type { Dictionary } from '@/lib/i18n/dictionary';
 import type { Locale } from '@/lib/i18n/config';
 import { formatPrice, formatVolume } from '@/lib/format';
+import { ProductImage } from '@/components/ProductImage';
 import { recordOrder } from '@/lib/forms/client';
 import { whatsappUrl } from '@/lib/whatsapp';
 
@@ -90,14 +91,10 @@ export function CartDrawer() {
             <ul className="flex-1 divide-y divide-smoke-2 overflow-y-auto">
               {lines.map((line) => (
                 <li key={`${line.productSlug}-${line.variantId}`} className="flex gap-3 p-4">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
+                  <ProductImage
                     src={line.imageUrl}
                     alt=""
-                    width={64}
-                    height={80}
                     loading="lazy"
-                    decoding="async"
                     className="h-20 w-16 shrink-0 rounded-xs object-cover"
                   />
 
@@ -208,7 +205,7 @@ function QuantityStepper({
         type="button"
         onClick={() => onStep(-1)}
         aria-label={decreaseLabel}
-        className="px-2.5 py-1 text-ivory/70 transition-colors hover:text-gold"
+        className="min-h-10 min-w-10 text-ivory/70 transition-colors hover:text-gold"
       >
         −
       </button>
@@ -219,7 +216,7 @@ function QuantityStepper({
         type="button"
         onClick={() => onStep(1)}
         aria-label={increaseLabel}
-        className="px-2.5 py-1 text-ivory/70 transition-colors hover:text-gold"
+        className="min-h-10 min-w-10 text-ivory/70 transition-colors hover:text-gold"
       >
         +
       </button>

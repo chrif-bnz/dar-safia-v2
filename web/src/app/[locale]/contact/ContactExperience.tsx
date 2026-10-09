@@ -76,7 +76,7 @@ function Field({
           autoComplete={autoComplete}
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          className="peer mt-1 block w-full border-b border-smoke-2 bg-transparent pb-1.5 font-body text-lg text-ivory transition-colors group-hover:border-gold/40 focus:outline-none focus-visible:outline-none"
+          className="peer mt-1 block min-h-11 w-full border-b border-smoke-2 bg-transparent pb-1.5 font-body text-lg text-ivory transition-colors group-hover:border-gold/40 focus:outline-none focus-visible:outline-none"
         />
         {/* Le filet d'encre pousse depuis le bord d'attaque au focus. Il
             REMPLACE le cadre de focus global — un rectangle autour d'un champ
