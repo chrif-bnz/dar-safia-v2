@@ -1,12 +1,5 @@
 import type { Metadata } from 'next';
-import {
-  Cairo,
-  Cinzel,
-  Cinzel_Decorative,
-  Cormorant_Garamond,
-  Montserrat,
-  Noto_Naskh_Arabic,
-} from 'next/font/google';
+import localFont from 'next/font/local';
 import { notFound } from 'next/navigation';
 
 import { PlaceholderPhoneBanner } from '@/components/PlaceholderPhoneBanner';
@@ -31,40 +24,74 @@ import '../globals.css';
  * Arabe : Noto Naskh Arabic (titres, équivalent serif) et Cairo (interface).
  * Les deux jeux sont toujours chargés ; le CSS choisit selon `dir`.
  */
-const cinzelDecorative = Cinzel_Decorative({
-  subsets: ['latin'],
-  weight: ['400', '700', '900'],
+const cinzelDecorative = localFont({
+  src: [
+    { path: '../../fonts/cinzel-decorative-400-normal.woff2', weight: '400', style: 'normal' },
+    { path: '../../fonts/cinzel-decorative-700-normal.woff2', weight: '700', style: 'normal' },
+    { path: '../../fonts/cinzel-decorative-900-normal.woff2', weight: '900', style: 'normal' }
+  ],
   variable: '--font-cinzel-decorative',
   display: 'swap',
 });
-const cinzel = Cinzel({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
+
+const cinzel = localFont({
+  src: [
+    { path: '../../fonts/cinzel-400-normal.woff2', weight: '400', style: 'normal' },
+    { path: '../../fonts/cinzel-500-normal.woff2', weight: '500', style: 'normal' },
+    { path: '../../fonts/cinzel-600-normal.woff2', weight: '600', style: 'normal' },
+    { path: '../../fonts/cinzel-700-normal.woff2', weight: '700', style: 'normal' }
+  ],
   variable: '--font-cinzel',
   display: 'swap',
 });
-const cormorant = Cormorant_Garamond({
-  subsets: ['latin'],
-  weight: ['300', '400', '500', '600'],
-  style: ['normal', 'italic'],
+
+const cormorant = localFont({
+  src: [
+    { path: '../../fonts/cormorant-garamond-300-normal.woff2', weight: '300', style: 'normal' },
+    { path: '../../fonts/cormorant-garamond-300-italic.woff2', weight: '300', style: 'italic' },
+    { path: '../../fonts/cormorant-garamond-400-normal.woff2', weight: '400', style: 'normal' },
+    { path: '../../fonts/cormorant-garamond-400-italic.woff2', weight: '400', style: 'italic' },
+    { path: '../../fonts/cormorant-garamond-500-normal.woff2', weight: '500', style: 'normal' },
+    { path: '../../fonts/cormorant-garamond-500-italic.woff2', weight: '500', style: 'italic' },
+    { path: '../../fonts/cormorant-garamond-600-normal.woff2', weight: '600', style: 'normal' },
+    { path: '../../fonts/cormorant-garamond-600-italic.woff2', weight: '600', style: 'italic' }
+  ],
   variable: '--font-cormorant',
   display: 'swap',
 });
-const montserrat = Montserrat({
-  subsets: ['latin'],
-  weight: ['200', '300', '400', '500', '600', '700'],
+
+const montserrat = localFont({
+  src: [
+    { path: '../../fonts/montserrat-200-normal.woff2', weight: '200', style: 'normal' },
+    { path: '../../fonts/montserrat-300-normal.woff2', weight: '300', style: 'normal' },
+    { path: '../../fonts/montserrat-400-normal.woff2', weight: '400', style: 'normal' },
+    { path: '../../fonts/montserrat-500-normal.woff2', weight: '500', style: 'normal' },
+    { path: '../../fonts/montserrat-600-normal.woff2', weight: '600', style: 'normal' },
+    { path: '../../fonts/montserrat-700-normal.woff2', weight: '700', style: 'normal' }
+  ],
   variable: '--font-montserrat',
   display: 'swap',
 });
-const notoNaskh = Noto_Naskh_Arabic({
-  subsets: ['arabic'],
-  weight: ['400', '500', '600', '700'],
+
+const notoNaskh = localFont({
+  src: [
+    { path: '../../fonts/noto-naskh-arabic-400-normal.woff2', weight: '400', style: 'normal' },
+    { path: '../../fonts/noto-naskh-arabic-500-normal.woff2', weight: '500', style: 'normal' },
+    { path: '../../fonts/noto-naskh-arabic-600-normal.woff2', weight: '600', style: 'normal' },
+    { path: '../../fonts/noto-naskh-arabic-700-normal.woff2', weight: '700', style: 'normal' }
+  ],
   variable: '--font-arabic-serif',
   display: 'swap',
 });
-const cairo = Cairo({
-  subsets: ['arabic'],
-  weight: ['300', '400', '500', '600', '700'],
+
+const cairo = localFont({
+  src: [
+    { path: '../../fonts/cairo-300-normal.woff2', weight: '300', style: 'normal' },
+    { path: '../../fonts/cairo-400-normal.woff2', weight: '400', style: 'normal' },
+    { path: '../../fonts/cairo-500-normal.woff2', weight: '500', style: 'normal' },
+    { path: '../../fonts/cairo-600-normal.woff2', weight: '600', style: 'normal' },
+    { path: '../../fonts/cairo-700-normal.woff2', weight: '700', style: 'normal' }
+  ],
   variable: '--font-arabic-sans',
   display: 'swap',
 });
