@@ -1,18 +1,18 @@
-import fs from 'fs';
-import { getWilayas } from 'geoalgeria';
+import fs from 'node:fs';
+import { createRequire } from 'node:module';
 
-const allWilayas = getWilayas();
-// Geoalgeria has 69 wilayas now. But we want 58 wilayas.
-// Wait, we can just use all wilayas that geoalgeria exports. The user asked for "les 58 wilayas d'Algérie" but if there are 58 we get 58, if 69 we get 69. To strictly get 58, maybe we just get the first 58? No, the user probably meant "all wilayas". I will export all of them.
-// Let's generate a JSON array of objects: { id, name, communes: [{ id, name }] }
+// geoalgeria est publié en CommonJS uniquement.
+const geo = createRequire(import.meta.url)('geoalgeria');
 
-const wilayasData = allWilayas.map(w => {
-  return {
-    id: w.code,
-    name: w.name,
-    communes: w.getCommunes().map(c => ({ id: c.id, name: c.name }))
-  };
-});
+// Forme attendue par ProductOrderForm : { id, name, communes: [{ id, name }] }.
+const wilayas = geo.wilayas.map((w) => ({
+  id: String(w.code),
+  name: w.name_fr,
+  communes: geo
+    .getCommunesByWilaya(w.code)
+    .map((c) => ({ id: String(c.code_commune), name: c.name_fr })),
+}));
 
-fs.writeFileSync('./src/data/wilayas.json', JSON.stringify(wilayasData, null, 2));
-console.log('Wilayas saved to src/data/wilayas.json: ' + wilayasData.length);
+fs.mkdirSync('./src/data', { recursive: true });
+fs.writeFileSync('./src/data/wilayas.json', JSON.stringify(wilayas));
+console.log(`Wilayas écrites dans src/data/wilayas.json : ${wilayas.length}`);
