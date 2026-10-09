@@ -7,6 +7,8 @@ import type * as Three from 'three';
 
 import { usePrefersReducedMotion } from '@/components/motion/usePrefersReducedMotion';
 
+import { CHAPTERS, sampleTimeline, type SceneState } from './about-timeline';
+
 /**
  * ══════════════════════════════════════════════════════════════
  *   LE FLACON — SCÈNE 3D
@@ -34,10 +36,14 @@ import { usePrefersReducedMotion } from '@/components/motion/usePrefersReducedMo
  * profondeur. Tout ce second plan est opaque et peint — rien n'alourdit la
  * passe de réfraction.
  *
- * Au défilement, la CAMÉRA passe entre trois cadrages et le flacon entre trois
- * POSES choisies (ScrollTrigger `scrub`, donc calé sur Lenis) : jamais de
- * rotation libre, qui finirait par montrer le dos du flacon. Le canvas est
- * tenu par un parent collant, sinon la course se terminerait hors écran.
+ * Au défilement, UNE timeline maîtresse GSAP (ScrollTrigger `scrub`, donc calée
+ * sur Lenis) pilote cinq chapitres — arrivée, flacon, essence, gros plan,
+ * produit : caméra (orbite, dolly, champ), pose du flacon, lumières et blocs de
+ * texte HTML (`[data-chapter]`) sortent du même `t`. Les plans-clés vivent dans
+ * `about-timeline.ts`. Le flacon fait UN tour complet, la caméra contre-tourne :
+ * le dos est traversé en quelques instants, l'étiquette revient toujours. Le
+ * canvas est tenu par un parent collant, sinon la course se terminerait hors
+ * écran.
  *
  * Le pointeur ne fait pas que déplacer la caméra : il promène une lampe sur le
  * verre, fait glisser les filets de contre-jour réfractés et incline
@@ -115,25 +121,6 @@ function liquidRadiusAt(y: number): number {
   return 0;
 }
 
-/**
- * Cadrages successifs, parcourus au défilement. Le flacon mesure ~4 unités
- * bouchon compris : à f=34° il faut reculer d'environ 9 pour le tenir en entier
- * avec de l'air au-dessus. Trop près, on décapite le bouchon.
- */
-const SHOTS = [
-  { pos: [0.7, 2.1, 11.5], look: [0, 1.72, 0], fov: 32 },
-  { pos: [-2.4, 2.9, 12.1], look: [0, 1.62, 0], fov: 30 },
-  { pos: [-0.8, 3.9, 13.8], look: [0, 1.4, 0], fov: 29 },
-];
-
-/**
- * Angle du flacon à chaque cadrage. Le défilement ne « fait plus tourner »
- * l'objet en continu : il le mène d'une pose CHOISIE à la suivante — étiquette
- * de face, puis trois quarts, puis profil. Une rotation libre finit toujours
- * par montrer le dos du flacon, ce qu'aucun photographe ne ferait.
- */
-const YAW = [0, -0.62, -1.34];
-
 /** Hauteur du socle. Le flacon reste posé à y = 0 ; le sol descend d'autant. */
 const PLINTH_H = 0.38;
 
@@ -157,7 +144,62 @@ export function FlaconScene({ className }: { className?: string }) {
       if (disposed || !mountRef.current) return;
       gsap.registerPlugin(ScrollTrigger);
 
-      // WebGL absent (vieux appareil, GPU bloqué) : la lueur CSS reste seule.
+      // Le repère de défilement n'est pas le canvas — qui est collant et donc
+      // immobile — mais la SECTION qui lui sert de piste. Mesurer un élément
+      // `sticky` donnerait une progression bloquée à zéro.
+      const track = (mount.closest('[data-scene-track]') as HTMLElement | null) ?? mount;
+
+      // ── Timeline maîtresse ──────────────────────────────────
+      // Un seul ScrollTrigger (`scrub: true` : Lenis lisse déjà la position,
+      // un second amortissement décrocherait la pose du défilement) pilote :
+      // l'état de scène échantillonné (caméra, flacon, lumières) ET l'entrée /
+      // la sortie des blocs de texte de chaque chapitre. Rien d'autre ne
+      // touche ces transformées. Le `gsap.context` rend les styles en ligne
+      // posés sur le texte à la destruction (Strict Mode compris).
+      const sceneState: SceneState = sampleTimeline(0);
+      const driver = { t: 0 };
+      const master = reduced ? null : gsap.context(() => {
+        const tl = gsap.timeline({
+          defaults: { ease: 'none' },
+          scrollTrigger: {
+            trigger: track,
+            start: 'top top',
+            end: 'bottom bottom',
+            scrub: true,
+            invalidateOnRefresh: true,
+          },
+        });
+        tl.to(
+          driver,
+          {
+            t: 1,
+            duration: 1,
+            onUpdate: () => sampleTimeline(driver.t, sceneState),
+          },
+          0
+        );
+        CHAPTERS.forEach((c, i) => {
+          const el = track.querySelector<HTMLElement>(`[data-chapter="${c.id}"]`);
+          if (!el) return;
+          if (i > 0) {
+            tl.fromTo(
+              el,
+              { autoAlpha: 0, y: 28 },
+              { autoAlpha: 1, y: 0, duration: 0.04, ease: 'power2.out' },
+              c.start
+            );
+          } else {
+            gsap.set(el, { autoAlpha: 1 });
+          }
+          if (i < CHAPTERS.length - 1) {
+            tl.to(el, { autoAlpha: 0, y: -22, duration: 0.035, ease: 'power2.in' }, c.end - 0.035);
+          }
+        });
+      }, track);
+      teardown = () => master?.revert();
+
+      // WebGL absent (vieux appareil, GPU bloqué) : la lueur CSS reste seule —
+      // et le texte des chapitres, piloté plus haut, continue de défiler.
       const probe = document.createElement('canvas');
       if (!probe.getContext('webgl2') && !probe.getContext('webgl')) return;
 
@@ -200,8 +242,8 @@ export function FlaconScene({ className }: { className?: string }) {
       mount.appendChild(canvas);
 
       const scene = new THREE.Scene();
-      const camera = new THREE.PerspectiveCamera(SHOTS[0].fov, width / height, 0.1, 60);
-      camera.position.set(...(SHOTS[0].pos as [number, number, number]));
+      const camera = new THREE.PerspectiveCamera(32, width / height, 0.1, 60);
+      camera.position.set(0, 2.1, 11.5);
 
       // ── Textures peintes au vol (aucun fichier à télécharger) ──
       const paintTexture = (
@@ -267,7 +309,7 @@ export function FlaconScene({ className }: { className?: string }) {
       panel(0.85, 16, new THREE.Color(7, 5.9, 4.2), [-5.5, 3, 5]); // filet gauche
       panel(0.5, 13, new THREE.Color(4.4, 3.7, 2.7), [6, 2, 3.5]); // filet droit
       panel(9, 7, new THREE.Color(0.5, 0.38, 0.24), [5, 8, 6]); // clé, tenue basse
-      panel(10, 7, new THREE.Color(0.1, 0.13, 0.26), [-7, 1.5, -6]); // contre-jour froid
+      panel(10, 7, new THREE.Color(0.1, 0.03, 0.036), [-7, 1.5, -6]); // contre-jour bordeaux
       panel(12, 6, new THREE.Color(0.2, 0.13, 0.07), [0, -5, 3]); // rebond chaud
 
       envParts.forEach((m) => envScene.add(m));
@@ -294,10 +336,10 @@ export function FlaconScene({ className }: { className?: string }) {
             // techniquement juste et visuellement éteint.
             map: radial(
               [
-                [0, 'rgb(62,43,28)'],
-                [0.28, 'rgb(46,31,21)'],
-                [0.6, 'rgb(22,15,12)'],
-                [1, 'rgb(11,8,7)'],
+                [0, 'rgb(84,34,32)'],
+                [0.28, 'rgb(61,22,24)'],
+                [0.6, 'rgb(31,14,15)'],
+                [1, 'rgb(13,8,8)'],
               ],
               512
             ),
@@ -530,7 +572,7 @@ export function FlaconScene({ className }: { className?: string }) {
       // ── Or : bague de col et bouchon taillé ─────────────────
       const goldMat = keep(
         new THREE.MeshPhysicalMaterial({
-          color: 0xc9a24c,
+          color: 0xbf9238,
           metalness: 1,
           roughness: 0.17,
           envMapIntensity: 1.6,
@@ -560,7 +602,7 @@ export function FlaconScene({ className }: { className?: string }) {
           // ne se voyait pas — le tube est déjà derrière deux épaisseurs qui
           // réfractent — mais il payait plein tarif dans la passe.
           new THREE.MeshStandardMaterial({
-            color: 0xd8d2c4,
+            color: 0x9c9382,
             metalness: 0.1,
             roughness: 0.42,
             side: THREE.DoubleSide,
@@ -591,7 +633,7 @@ export function FlaconScene({ className }: { className?: string }) {
       // moyennées arrondissent les pans et le bouchon redevient un cylindre.
       const goldFacet = keep(
         new THREE.MeshPhysicalMaterial({
-          color: 0xc9a24c,
+          color: 0xbf9238,
           metalness: 1,
           roughness: 0.14,
           envMapIntensity: 1.75,
@@ -630,56 +672,83 @@ export function FlaconScene({ className }: { className?: string }) {
       capSeam.position.y = 3.25;
       bottle.add(capSeam);
 
-      // ── Étiquette, dessinée au vol puis redessinée à l'arrivée des polices ──
+      // ── Étiquette : le monogramme DS de la maison, doré au vol ──
+      // Le vrai logo (logo/LOGO WEBP3, tracé noir sur transparence) est teinté
+      // à l'or par composition `source-in` : aucun redessin, aucune déformation.
+      // Le mot « DAR SAFIA » et la mention restent en texte net dessous. Le
+      // canvas est repeint à l'arrivée des polices ET du monogramme.
+      const LABEL_W = 1024;
+      const LABEL_H = 640;
+      const logoImg = new Image();
+      let logoReady = false;
       const drawLabel = (ctx: CanvasRenderingContext2D, w: number, h: number) => {
         ctx.clearRect(0, 0, w, h);
         ctx.textAlign = 'center';
-        ctx.fillStyle = '#e8c882';
-        ctx.font = `500 ${Math.round(h * 0.3)}px "Cinzel", Georgia, serif`;
-        ctx.fillText('DAR SAFIA', w / 2, h * 0.46);
-        ctx.strokeStyle = 'rgba(232,200,130,0.75)';
-        ctx.lineWidth = Math.max(1, h * 0.012);
-        ctx.beginPath();
-        ctx.moveTo(w * 0.33, h * 0.6);
-        ctx.lineTo(w * 0.67, h * 0.6);
-        ctx.stroke();
-        ctx.font = `400 ${Math.round(h * 0.115)}px "Montserrat", system-ui, sans-serif`;
-        ctx.fillStyle = 'rgba(232,200,130,0.82)';
-        ctx.letterSpacing = `${Math.round(h * 0.035)}px`;
-        ctx.fillText('EAU DE PARFUM', w / 2, h * 0.78);
+        const gold = '#e6c27a';
+        if (logoReady) {
+          const size = h * 0.64;
+          const tint = document.createElement('canvas');
+          tint.width = tint.height = Math.round(size);
+          const t = tint.getContext('2d');
+          if (t) {
+            t.drawImage(logoImg, 0, 0, tint.width, tint.height);
+            t.globalCompositeOperation = 'source-in';
+            t.fillStyle = gold;
+            t.fillRect(0, 0, tint.width, tint.height);
+            ctx.drawImage(tint, (w - size) / 2, h * 0.02, size, size);
+          }
+        }
+        ctx.fillStyle = gold;
+        ctx.font = `500 ${Math.round(h * 0.125)}px "Cinzel", Georgia, serif`;
+        ctx.letterSpacing = `${Math.round(h * 0.014)}px`;
+        ctx.fillText('DAR SAFIA', w / 2, h * 0.79);
+        ctx.font = `400 ${Math.round(h * 0.06)}px "Montserrat", system-ui, sans-serif`;
+        ctx.fillStyle = 'rgba(230,194,122,0.85)';
+        ctx.letterSpacing = `${Math.round(h * 0.022)}px`;
+        ctx.fillText('EAU DE PARFUM', w / 2, h * 0.92);
       };
 
       const labelCanvas = document.createElement('canvas');
-      labelCanvas.width = 1024;
-      labelCanvas.height = 512;
+      labelCanvas.width = LABEL_W;
+      labelCanvas.height = LABEL_H;
       const labelCtx = labelCanvas.getContext('2d');
-      if (labelCtx) drawLabel(labelCtx, 1024, 512);
+      if (labelCtx) drawLabel(labelCtx, LABEL_W, LABEL_H);
       const labelTex = keep(new THREE.CanvasTexture(labelCanvas));
       labelTex.colorSpace = THREE.SRGBColorSpace;
       labelTex.anisotropy = Math.min(8, renderer.capabilities.getMaxAnisotropy());
-      // Les polices de marque arrivent après le premier rendu : on repeint.
-      void document.fonts?.ready
-        .then(() => {
-          if (disposed || !labelCtx) return;
-          drawLabel(labelCtx, 1024, 512);
-          labelTex.needsUpdate = true;
-        })
-        .catch(() => {});
+      const repaintLabel = () => {
+        if (disposed || !labelCtx) return;
+        drawLabel(labelCtx, LABEL_W, LABEL_H);
+        labelTex.needsUpdate = true;
+      };
+      logoImg.onload = () => {
+        logoReady = true;
+        repaintLabel();
+      };
+      logoImg.src = '/img/logo/LOGO%20WEBP3.webp';
+      void document.fonts?.ready.then(repaintLabel).catch(() => {});
 
       // Arc centré sur +Z : dans CylinderGeometry, theta 0 pointe vers +Z.
+      // Peu métallique et légèrement émissif : un métal pur reflétait un décor
+      // sombre et l'étiquette s'éteignait. L'émission est pilotée par la
+      // timeline (`logo`) : elle monte au gros plan.
+      const labelMat = keep(
+        new THREE.MeshStandardMaterial({
+          map: labelTex,
+          transparent: true,
+          metalness: 0.3,
+          roughness: 0.38,
+          envMapIntensity: 1.1,
+          emissive: new THREE.Color(0xe6c27a),
+          emissiveMap: labelTex,
+          emissiveIntensity: 0.3,
+          side: THREE.DoubleSide,
+          depthWrite: false,
+        })
+      );
       const label = new THREE.Mesh(
-        keep(new THREE.CylinderGeometry(1.028, 1.021, 0.58, 48, 1, true, -0.62, 1.24)),
-        keep(
-          new THREE.MeshStandardMaterial({
-            map: labelTex,
-            transparent: true,
-            metalness: 0.75,
-            roughness: 0.32,
-            envMapIntensity: 1.1,
-            side: THREE.DoubleSide,
-            depthWrite: false,
-          })
-        )
+        keep(new THREE.CylinderGeometry(1.028, 1.021, 0.8, 48, 1, true, -0.62, 1.24)),
+        labelMat
       );
       label.position.y = 1.2;
       label.renderOrder = 2;
@@ -758,9 +827,9 @@ export function FlaconScene({ className }: { className?: string }) {
             // Presque un miroir : le sol renvoie les filets verticaux du
             // studio, et ces traînées suffisent à poser le flacon sur quelque
             // chose — sans payer une seconde passe de réflexion.
-            roughness: 0.12,
+            roughness: 0.3,
             metalness: 0.9,
-            envMapIntensity: 1.0,
+            envMapIntensity: 0.55,
           })
         )
       );
@@ -997,9 +1066,9 @@ export function FlaconScene({ className }: { className?: string }) {
       //    l'environnement seul ne donne pas. ─────────────────
       const key = new THREE.DirectionalLight(0xffd9a2, 1.45);
       key.position.set(4.5, 7, 5);
-      const fill = new THREE.DirectionalLight(0x7d8ec0, 0.5);
+      const fill = new THREE.DirectionalLight(0x9a6a68, 0.5); // bordeaux voilé, jamais bleu
       fill.position.set(-5, -1, 3);
-      const rim = new THREE.PointLight(0xc89b3c, 11, 26, 2);
+      const rim = new THREE.PointLight(0xb8862b, 11, 26, 2);
       rim.position.set(-3, 2.4, -3.5);
       scene.add(key, fill, rim);
 
@@ -1054,7 +1123,6 @@ export function FlaconScene({ className }: { className?: string }) {
 
       // ── État piloté par le défilement et le pointeur ────────
       const s = {
-        progress: 0,
         px: 0,
         py: 0,
         cpx: 0,
@@ -1079,20 +1147,6 @@ export function FlaconScene({ className }: { className?: string }) {
         pointerDirty: false,
       };
 
-      // Le repère de défilement n'est pas le canvas — qui est collant et donc
-      // immobile — mais la SECTION qui lui sert de piste. Mesurer un élément
-      // `sticky` donnerait une progression bloquée à zéro.
-      const track = (mount.closest('[data-scene-track]') as HTMLElement | null) ?? mount;
-
-      const st = ScrollTrigger.create({
-        trigger: track,
-        start: 'top top',
-        end: 'bottom bottom',
-        scrub: true,
-        onUpdate: (self) => {
-          s.progress = self.progress;
-        },
-      });
 
       const clamp = (v: number) => Math.max(-1, Math.min(1, v));
       const onPointer = (e: PointerEvent) => {
@@ -1202,45 +1256,25 @@ export function FlaconScene({ className }: { className?: string }) {
 
       // ── Boucle ──────────────────────────────────────────────
       const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
-      const camPos = new THREE.Vector3();
-      const camLook = new THREE.Vector3();
-      // Sur large écran, la cible glisse à l'opposé du texte : le flacon se
-      // pose d'un côté du cadre et rend l'autre colonne à la typographie. En
-      // arabe la colonne de texte passe à droite — sans ce miroir, le flacon
-      // se plantait exactement derrière le titre.
+      // Sur large écran, la cible glisse à l'opposé du texte (décalage porté
+      // par les plans-clés, en unités monde) : le flacon se pose d'un côté du
+      // cadre et rend l'autre colonne à la typographie. En arabe la colonne de
+      // texte passe à droite — on miroite, sinon le flacon se planterait
+      // exactement derrière le titre.
       const rtl = document.documentElement.dir === 'rtl';
-      const lookShift = wide ? (rtl ? 0.95 : -0.95) : 0;
-      // Sur mobile il n'y a pas de colonne libre : on recule, et on vise plus
-      // bas pour remonter le flacon dans le tiers haut. Sans ça il est rogné
-      // au pied et l'étiquette passe sous le titre.
+      const lookSign = wide ? (rtl ? -1 : 1) : 0;
+      // Sur mobile il n'y a pas de colonne libre : composition CENTRÉE (aucun
+      // décalage latéral), on recule, et on vise plus bas pour remonter le
+      // flacon dans le tiers haut — le texte occupe la bande basse. Sans ça il
+      // est rogné au pied et l'étiquette passe sous le titre.
       const distBoost = wide ? 0 : 2.4;
-      const lookRise = wide ? 0 : -0.6;
+      const lookRise = wide ? 0 : -0.95;
 
-      /** Angle du flacon au cadrage courant, écrit par `shotAt`. */
-      let shotYaw = 0;
-
-      /** Interpole les trois cadrages — et la pose du flacon — selon la progression. */
-      const shotAt = (p: number) => {
-        const f = Math.min(0.999, Math.max(0, p)) * (SHOTS.length - 1);
-        const i = Math.floor(f);
-        const t = f - i;
-        const a = SHOTS[i];
-        const b = SHOTS[Math.min(SHOTS.length - 1, i + 1)];
-        // Adoucissement : pas de cassure de vitesse au passage d'un cadrage.
-        const e = t * t * (3 - 2 * t);
-        camPos.set(
-          lerp(a.pos[0], b.pos[0], e),
-          lerp(a.pos[1], b.pos[1], e),
-          lerp(a.pos[2], b.pos[2], e) + distBoost
-        );
-        camLook.set(
-          lerp(a.look[0], b.look[0], e) + lookShift,
-          lerp(a.look[1], b.look[1], e) + lookRise,
-          lerp(a.look[2], b.look[2], e)
-        );
-        shotYaw = lerp(YAW[i], YAW[Math.min(YAW.length - 1, i + 1)], e);
-        return lerp(a.fov, b.fov, e);
-      };
+      const keyBase = new THREE.Vector3(4.5, 7, 5);
+      const rimBase = new THREE.Vector3(-3, 2.4, -3.5);
+      const keyCool = new THREE.Color(0xffd9a2);
+      const keyAmber = new THREE.Color(0xffb468);
+      const yAxis = new THREE.Vector3(0, 1, 0);
 
       // ── Gouverneur de qualité ──
       // La machine cible est inconnue : plutôt que de parier sur un palier
@@ -1313,19 +1347,36 @@ export function FlaconScene({ className }: { className?: string }) {
         s.cpx = lerp(s.cpx, s.px, kPointer);
         s.cpy = lerp(s.cpy, s.py, kPointer);
 
-        // ── Caméra : cadrage au défilement + parallaxe au pointeur ──
-        const fov = shotAt(s.progress);
+        // ── Caméra : plan-clé échantillonné + parallaxe au pointeur ──
+        // Elle ORBITE l'axe du flacon (azimut) et vise un point décalé : c'est
+        // la caméra qui travaille, pas seulement l'objet.
+        const k = sceneState;
+        // Mobile : les plans serrés reculent davantage, le cadre étroit rognerait le flacon.
+        const dist = k.d + distBoost + (wide ? 0 : Math.max(0, 10 - k.d) * 0.7);
+        const fov = k.fov;
         camera.position.set(
-          camPos.x + s.cpx * 0.55,
-          camPos.y - s.cpy * 0.32 + Math.sin(t * 0.34) * 0.045,
+          Math.sin(k.az) * dist + s.cpx * 0.55,
+          k.h - s.cpy * 0.32 + Math.sin(t * 0.34) * 0.045,
           // Le recul du dévoilement : la caméra arrive de loin et se pose.
-          camPos.z + (1 - intro) * 3.2
+          Math.cos(k.az) * dist + (1 - intro) * 3.2
         );
-        camera.lookAt(camLook.x + s.cpx * 0.14, camLook.y - s.cpy * 0.06, camLook.z);
+        camera.lookAt(
+          k.look[0] * lookSign + s.cpx * 0.14,
+          k.look[1] + (wide ? 0 : lookRise + Math.max(0, 1.7 - k.look[1]) * 0.9) - s.cpy * 0.06,
+          k.look[2]
+        );
         if (Math.abs(camera.fov - fov) > 0.001) {
           camera.fov = fov;
           camera.updateProjectionMatrix();
         }
+
+        // ── Lumières : elles suivent l'orbite et évoluent par chapitre ──
+        key.position.copy(keyBase).applyAxisAngle(yAxis, k.az * 0.7);
+        rim.position.copy(rimBase).applyAxisAngle(yAxis, k.az);
+        key.intensity = 1.45 * k.key;
+        rim.intensity = 11 * k.rim;
+        key.color.copy(keyCool).lerp(keyAmber, k.warm);
+        labelMat.emissiveIntensity = (0.12 + k.logo * 0.5) * (0.4 + 0.6 * intro);
 
         // ── Survol : un lancer de rayon par image au plus ──
         if (s.pointerDirty && !coarse) {
@@ -1366,7 +1417,7 @@ export function FlaconScene({ className }: { className?: string }) {
         // pointeur, lui, reste amorti : lui n'est pas lissé en amont.
         s.spin = lerp(s.spin, s.cpx * 0.26, kSlow);
         bottle.rotation.y =
-          shotYaw +
+          k.yaw +
           s.spin +
           s.dragYaw +
           (reduced ? 0 : Math.sin(t * 0.26) * 0.022) -
@@ -1439,7 +1490,7 @@ export function FlaconScene({ className }: { className?: string }) {
         if (bars[1]) bars[1].position.x = 1.3 - s.cpx * 0.45;
 
         // ── Montée en lumière du dévoilement ──
-        renderer.toneMappingExposure = 1.08 * (0.04 + 0.96 * intro);
+        renderer.toneMappingExposure = 1.08 * sceneState.exposure * (0.04 + 0.96 * intro);
         if (bloomPass) bloomPass.strength = 0.24 * intro;
 
         if (!reduced) {
@@ -1467,7 +1518,7 @@ export function FlaconScene({ className }: { className?: string }) {
       };
 
       const disposeAll = () => {
-        st.kill();
+        master?.revert();
         ro.disconnect();
         io.disconnect();
         gsap.killTweensOf(s);
@@ -1514,7 +1565,7 @@ export function FlaconScene({ className }: { className?: string }) {
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            'radial-gradient(42% 46% at 56% 48%, rgba(200,155,60,0.18) 0%, transparent 72%)',
+            'radial-gradient(42% 46% at 56% 48%, rgba(184,134,43,0.18) 0%, transparent 72%)',
         }}
       />
     </div>
