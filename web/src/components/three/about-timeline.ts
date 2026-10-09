@@ -65,8 +65,8 @@ export const KEYFRAMES: Keyframe[] = [
   { t: 0.36, az: -0.85, h: 3.0, d: 11.4, look: [2.3, 1.6, 0], fov: 29, yaw: -1.7, key: 1.2, rim: 1.5, warm: 0.2, logo: 0.35, exposure: 1.0, md: 1.4 },
 
   // ── III · L'essence : un tour complet, vu d'en haut, qui traverse le dos vite ──
-  { t: 0.42, az: -0.85, h: 3.8, d: 12.4, look: [1.4, 1.5, 0], fov: 29, yaw: -2.2, key: 1.1, rim: 1.2, warm: 0.45, logo: 0.3, exposure: 0.98, md: 3.2 },
-  { t: 0.5, az: -0.35, h: 4.5, d: 13.2, look: [-0.8, 1.4, 0], fov: 29, yaw: -3.9, key: 1.0, rim: 1.0, warm: 0.8, logo: 0.2, exposure: 0.95, md: 3.2 },
+  { t: 0.42, az: -0.85, h: 3.8, d: 12.4, look: [-1.9, 1.5, 0], fov: 29, yaw: -2.2, key: 1.1, rim: 1.2, warm: 0.45, logo: 0.3, exposure: 0.98, md: 3.2 },
+  { t: 0.5, az: -0.35, h: 4.5, d: 13.2, look: [-2.1, 1.4, 0], fov: 29, yaw: -3.9, key: 1.0, rim: 1.0, warm: 0.8, logo: 0.2, exposure: 0.95, md: 3.2 },
   { t: 0.58, az: 0.2, h: 3.7, d: 12.0, look: [-2.2, 1.4, 0], fov: 29, yaw: -5.6, key: 1.1, rim: 1.2, warm: 1.0, logo: 0.45, exposure: 0.98, md: 3.2 },
   { t: 0.64, az: 0.05, h: 2.7, d: 10.8, look: [-2.0, 1.55, 0], fov: 28, yaw: -TAU + 0.02, key: 1.15, rim: 1.2, warm: 0.9, logo: 0.7, exposure: 1.0, md: 3.2 },
 
@@ -76,8 +76,8 @@ export const KEYFRAMES: Keyframe[] = [
   { t: 0.86, az: -0.05, h: 2.5, d: 8.6, look: [0.4, 1.7, 0], fov: 27, yaw: -TAU - 0.12, key: 1.2, rim: 1.2, warm: 0.2, logo: 0.7, exposure: 1.0, md: 0 },
 
   // ── V · Le produit : de face, centré, lumière commerciale équilibrée ──
-  { t: 0.94, az: 0.0, h: 2.0, d: 12.4, look: [0, 1.05, 0], fov: 30, yaw: -TAU, key: 1.1, rim: 1.0, warm: 0.0, logo: 0.8, exposure: 1.0, md: 0 },
-  { t: 1.0, az: 0.0, h: 2.0, d: 12.1, look: [0, 1.05, 0], fov: 30, yaw: -TAU, key: 1.1, rim: 1.0, warm: 0.0, logo: 0.8, exposure: 1.0, md: 0 },
+  { t: 0.94, az: 0.0, h: 2.0, d: 13.6, look: [0, 0.8, 0], fov: 30, yaw: -TAU, key: 1.1, rim: 1.0, warm: 0.0, logo: 1.0, exposure: 1.08, md: 0 },
+  { t: 1.0, az: 0.0, h: 2.0, d: 13.3, look: [0, 0.8, 0], fov: 30, yaw: -TAU, key: 1.1, rim: 1.0, warm: 0.0, logo: 1.0, exposure: 1.08, md: 0 },
 ];
 
 /** Fenêtres des chapitres : l'entrée et la sortie de chaque bloc de texte. */
