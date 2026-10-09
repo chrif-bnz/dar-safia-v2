@@ -8,6 +8,7 @@ import type { Locale } from '@/lib/i18n/config';
 import type { Dictionary } from '@/lib/i18n/dictionary';
 import { interpolate } from '@/lib/i18n/dictionary';
 import { localePath } from '@/lib/i18n/routing';
+import { recordContact } from '@/lib/forms/client';
 import { whatsappUrl } from '@/lib/whatsapp';
 
 /**
@@ -507,6 +508,23 @@ export function ContactExperience({
 
                 <a
                   href={href}
+                  onClick={() => {
+                    const body = tab === 'personal' ? message : proposal;
+                    if (!body.trim()) return;
+                    recordContact(
+                      tab === 'personal'
+                        ? { kind: 'personal', locale, name, city, message: body }
+                        : {
+                            kind: 'collaboration',
+                            locale,
+                            house,
+                            role,
+                            city: collabCity,
+                            subject,
+                            message: body,
+                          }
+                    );
+                  }}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="ds-btn mt-10 flex w-full justify-center rounded-sm border border-gold bg-burgundy px-8 py-4 font-ui text-2xs font-semibold tracking-(--tracking-label) whitespace-nowrap text-ivory uppercase transition-colors hover:border-gold-light hover:bg-burgundy-2 sm:inline-flex sm:w-auto"

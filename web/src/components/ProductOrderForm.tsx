@@ -1,18 +1,19 @@
 'use client';
 
 import React, { useState } from 'react';
-import type { Product } from '@/lib/catalog';
+import type { Media, Product, ProductVariant } from '@/lib/catalog';
 import type { Dictionary } from '@/lib/i18n/dictionaries';
 import type { Locale } from '@/lib/i18n/config';
 import { AddToCartButton } from '@/components/cart/AddToCartButton';
+import { recordOrder } from '@/lib/forms/client';
 import { orderMessage, whatsappUrl } from '@/lib/whatsapp';
 import wilayasData from '@/data/wilayas.json';
 
 interface ProductOrderFormProps {
   product: Product;
-  variant: any;
+  variant: ProductVariant;
   priceAmount: number;
-  image: any;
+  image: Media | undefined;
   locale: Locale;
   dict: Dictionary;
   hasOrderUrl: boolean;
@@ -115,6 +116,23 @@ export function ProductOrderForm({
       } else {
         finalMsg = baseMsg + '\n\n' + customMessage;
       }
+
+      // Enregistrement dans Strapi (tire et oublie) : s'ajoute à WhatsApp, ne le remplace pas.
+      recordOrder({
+        source: 'product-form',
+        locale,
+        customer: {
+          firstName: formData.firstName,
+          lastName: formData.lastName,
+          phone: formData.phone,
+          wilaya: selectedWilayaData?.name ?? '',
+          commune: communes.find((c) => c.id === formData.commune)?.name ?? '',
+          deliveryMethod: formData.deliveryMethod === 'societe' ? 'societe' : 'main',
+          deliveryCompany: formData.deliveryCompany || undefined,
+          deliveryAddress: formData.deliveryAddress || undefined,
+        },
+        items: [{ productSlug: product.slug, variantId: variant.id, quantity: 1 }],
+      });
 
       const url = whatsappUrl(finalMsg);
       if (url) {

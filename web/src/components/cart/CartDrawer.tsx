@@ -7,6 +7,7 @@ import { lineTotal, type CartLine } from '@/lib/cart/types';
 import type { Dictionary } from '@/lib/i18n/dictionary';
 import type { Locale } from '@/lib/i18n/config';
 import { formatPrice, formatVolume } from '@/lib/format';
+import { recordOrder } from '@/lib/forms/client';
 import { whatsappUrl } from '@/lib/whatsapp';
 
 import { useCart } from './CartProvider';
@@ -150,6 +151,17 @@ export function CartDrawer() {
               {checkoutUrl ? (
                 <a
                   href={checkoutUrl}
+                  onClick={() =>
+                    recordOrder({
+                      source: 'cart',
+                      locale,
+                      items: lines.map((line) => ({
+                        productSlug: line.productSlug,
+                        variantId: line.variantId,
+                        quantity: line.quantity,
+                      })),
+                    })
+                  }
                   target="_blank"
                   rel="noopener noreferrer"
                   className="ds-btn mt-4 flex items-center justify-center rounded-sm border border-gold bg-burgundy px-6 py-3.5 text-sm font-semibold tracking-(--tracking-label) text-ivory uppercase transition-colors hover:border-gold-light hover:bg-burgundy-2"
