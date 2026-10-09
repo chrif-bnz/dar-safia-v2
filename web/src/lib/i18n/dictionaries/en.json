@@ -425,6 +425,13 @@
         "label": "Bold",
         "hint": "A sillage that turns heads"
       }
+    },
+    "explanation": {
+      "base": "This fragrance stands out among the best matches thanks to",
+      "family": "its {family} accords",
+      "moment": "its profile suited for {moment}",
+      "intensity": "its {intensity} character",
+      "and": "and"
     }
   },
   "footer": {

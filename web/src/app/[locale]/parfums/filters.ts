@@ -9,10 +9,11 @@ import type {
 
 import type { ShopProduct } from './shop-product';
 
-export type FilterCategory = 'gender' | 'family' | 'notes' | 'intensity' | 'season' | 'mood';
+export type FilterCategory = 'query' | 'gender' | 'family' | 'notes' | 'intensity' | 'season' | 'mood';
 
 /** Sélection courante par axe. Un axe vide = aucun filtre sur cet axe. */
 export interface ShopFilters {
+  query: string;
   gender: Gender[];
   family: OlfactoryFamilyTag[];
   notes: NoteTag[];
@@ -22,6 +23,7 @@ export interface ShopFilters {
 }
 
 export const EMPTY_FILTERS: ShopFilters = {
+  query: '',
   gender: [],
   family: [],
   notes: [],
@@ -31,7 +33,12 @@ export const EMPTY_FILTERS: ShopFilters = {
 };
 
 export function hasActiveFilters(filters: ShopFilters): boolean {
-  return Object.values(filters).some((values) => values.length > 0);
+  if (filters.query.trim().length > 0) return true;
+  return Object.values(filters).some((values) => Array.isArray(values) && values.length > 0);
+}
+
+function normalizeStr(str: string) {
+  return str.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 }
 
 /**
@@ -39,7 +46,14 @@ export function hasActiveFilters(filters: ShopFilters): boolean {
  * « Ambré » élargit, cocher Genre ET Famille restreint.
  */
 export function matchesFilters(product: ShopProduct, filters: ShopFilters): boolean {
-  const { gender, family, notes, intensity, season, mood } = filters;
+  const { query, gender, family, notes, intensity, season, mood } = filters;
+
+  if (query.trim().length > 0) {
+    const q = normalizeStr(query);
+    const n = normalizeStr(product.name);
+    const b = normalizeStr(product.brand.name);
+    if (!n.includes(q) && !b.includes(q)) return false;
+  }
 
   if (gender.length > 0 && !gender.includes(product.gender)) return false;
   if (family.length > 0 && !family.some((f) => product.olfactoryFamilies.includes(f))) {

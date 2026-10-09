@@ -425,6 +425,13 @@
         "label": "Affirmée",
         "hint": "Un sillage qui ne passe pas inaperçu"
       }
+    },
+    "explanation": {
+      "base": "Ce parfum ressort parmi les meilleures correspondances grâce à",
+      "family": "ses accords de la famille {family}",
+      "moment": "son profil adapté pour {moment}",
+      "intensity": "son caractère {intensity}",
+      "and": "et"
     }
   },
   "footer": {
