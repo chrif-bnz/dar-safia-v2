@@ -60,7 +60,7 @@ export function ScentWorld({
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            'radial-gradient(60% 50% at 72% 18%, rgba(200,155,60,0.11) 0%, transparent 70%)',
+            'radial-gradient(60% 50% at 72% 18%, rgba(184,134,43,0.11) 0%, transparent 70%)',
         }}
       />
 

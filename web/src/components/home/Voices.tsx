@@ -52,7 +52,7 @@ export function Voices({ dict }: { dict: Dictionary }) {
               <blockquote className="font-body text-[clamp(1.3rem,2vw,1.7rem)] leading-[1.5] text-ivory/85">
                 {t.quote}
               </blockquote>
-              <figcaption className="mt-6 flex items-center gap-3 font-ui text-2xs tracking-[0.14em] text-ivory/45 uppercase">
+              <figcaption className="mt-6 flex items-center gap-3 font-ui text-2xs tracking-[0.14em] text-ivory/58 uppercase">
                 <span className="text-gold">{t.name}</span>
                 <span aria-hidden="true" className="h-px w-6 bg-smoke-2" />
                 <span>{t.city}</span>

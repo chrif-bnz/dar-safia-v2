@@ -26,7 +26,7 @@ type Phase =
   | { name: 'error' };
 
 const primaryButton =
-  'ds-btn rounded-sm bg-gold px-6 py-3 text-2xs font-semibold tracking-(--tracking-label) text-noir uppercase transition-colors hover:bg-gold-light';
+  'ds-btn rounded-sm border border-gold bg-burgundy px-6 py-3 text-2xs font-semibold tracking-(--tracking-label) text-ivory uppercase transition-colors hover:border-gold-light hover:bg-burgundy-2';
 const secondaryButton =
   'ds-btn-ghost mt-2 inline-block rounded-sm border border-smoke-2 px-6 py-3 text-2xs font-semibold tracking-(--tracking-label) text-ivory/75 uppercase transition-colors hover:border-gold hover:text-noir';
 
@@ -134,7 +134,7 @@ export function ScentFinder() {
         <button
           type="button"
           onClick={() => setPhase({ name: 'question', step: phase.step - 1 })}
-          className="ds-navlink mt-6 text-2xs tracking-(--tracking-label) text-ivory/45 uppercase transition-colors hover:text-ivory"
+          className="ds-navlink mt-6 text-2xs tracking-(--tracking-label) text-ivory/58 uppercase transition-colors hover:text-ivory"
         >
           {sf.previous}
         </button>
@@ -260,7 +260,7 @@ function ScentResultView({
                     <span className="mt-0.5 block truncate font-serif text-md text-ivory">
                       {alt.name}
                     </span>
-                    <span className="mt-1 block text-2xs text-ivory/45 tabular-nums">
+                    <span className="mt-1 block text-2xs text-ivory/58 tabular-nums">
                       {alt.priceLabel} · {alt.compatibility}%
                     </span>
                   </div>
@@ -274,7 +274,7 @@ function ScentResultView({
       <button
         type="button"
         onClick={onRestart}
-        className="ds-navlink mt-10 inline-block text-2xs tracking-(--tracking-label) text-ivory/45 uppercase transition-colors hover:text-ivory"
+        className="ds-navlink mt-10 inline-block text-2xs tracking-(--tracking-label) text-ivory/58 uppercase transition-colors hover:text-ivory"
       >
         {sf.redo}
       </button>

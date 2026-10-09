@@ -41,7 +41,7 @@ export function OlfactoryPyramid({
                 <span className="text-3xs font-semibold tracking-(--tracking-eyebrow) text-[var(--universe-light)] uppercase">
                   {label}
                 </span>
-                <span className="mt-1 block text-2xs text-ivory/40">{caption}</span>
+                <span className="mt-1 block text-2xs text-ivory/58">{caption}</span>
               </dt>
               <dd className="mt-3 flex flex-wrap gap-2">
                 {layerNotes.map(({ note }) => (

@@ -80,7 +80,7 @@ export function ShopExperience({
       />
 
       <div>
-        <p className="mt-6 text-2xs text-ivory/45 lg:mt-0" aria-live="polite">
+        <p className="mt-6 text-2xs text-ivory/58 lg:mt-0" aria-live="polite">
           {pluralize(c.count, filtered.length)}
         </p>
 
