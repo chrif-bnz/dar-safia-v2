@@ -14,7 +14,8 @@
     "upgrade": "npx @strapi/upgrade latest",
     "upgrade:dry": "npx @strapi/upgrade latest --dry",
     "seed": "node scripts/seed-catalog.js",
-    "tokens:create": "node scripts/create-api-tokens.js"
+    "tokens:create": "node scripts/create-api-tokens.js",
+    "seed:products": "node scripts/seed-products.mjs"
   },
   "dependencies": {
     "@strapi/database": "5.57.0",

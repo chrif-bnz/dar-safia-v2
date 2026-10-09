@@ -296,6 +296,10 @@
     "order": "Commander sur WhatsApp",
     "addToCart": "Ajouter au panier",
     "orderUnavailable": "Commande momentanément indisponible.",
+    "orderNow": "Commander",
+    "orderConfirmed": "Commande confirmée",
+    "orderError": "Impossible d'enregistrer la commande. Vérifiez vos informations et réessayez.",
+    "orderServerError": "Serveur indisponible. Réessayez dans un instant.",
     "metrics": {
       "longevity": "Tenue",
       "sillage": "Sillage",

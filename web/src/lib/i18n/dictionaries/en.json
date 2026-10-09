@@ -296,6 +296,10 @@
     "order": "Order on WhatsApp",
     "addToCart": "Add to cart",
     "orderUnavailable": "Ordering temporarily unavailable.",
+    "orderNow": "Order now",
+    "orderConfirmed": "Order confirmed",
+    "orderError": "We couldn't save your order. Check your details and try again.",
+    "orderServerError": "Server unavailable. Please try again shortly.",
     "metrics": {
       "longevity": "Longevity",
       "sillage": "Sillage",

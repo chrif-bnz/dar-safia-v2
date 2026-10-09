@@ -108,18 +108,16 @@ export function ProductOrderForm({
           }),
         });
 
-        const data = await res.json();
-
-        if (!res.ok) {
-          setErrors((prev) => ({ ...prev, submit: data.error || 'Erreur lors de la création de la commande.' }));
+                if (!res.ok) {
+          setErrors((prev) => ({ ...prev, submit: dict.product.orderError }));
           setIsSubmitting(false);
           return;
         }
 
         setIsSubmitting(false);
         setSubmitSuccess(true);
-      } catch (err) {
-        setErrors((prev) => ({ ...prev, submit: 'Serveur indisponible.' }));
+      } catch {
+        setErrors((prev) => ({ ...prev, submit: dict.product.orderServerError }));
         setIsSubmitting(false);
       }
     }
@@ -299,7 +297,7 @@ export function ProductOrderForm({
       <div className="mt-10 flex flex-wrap gap-3">
         {submitSuccess ? (
           <p className="rounded-sm border border-smoke-2 px-5 py-3.5 text-sm text-ivory/50">
-            Commande confirmée
+            {dict.product.orderConfirmed}
           </p>
         ) : hasOrderUrl ? (
           <button
@@ -307,7 +305,7 @@ export function ProductOrderForm({
             disabled={isSubmitting}
             className="ds-btn inline-flex w-full items-center justify-center gap-2.5 rounded-sm border sm:w-auto border-gold bg-burgundy px-7 py-3.5 text-sm font-semibold tracking-(--tracking-label) text-ivory uppercase transition-colors duration-200 hover:border-gold-light hover:bg-burgundy-2 disabled:opacity-70"
           >
-            Order now
+            {dict.product.orderNow}
           </button>
         ) : (
           <p className="rounded-sm border border-smoke-2 px-5 py-3.5 text-sm text-ivory/50">
