@@ -1,5 +1,7 @@
 import Link from 'next/link';
 
+import { ProductImage } from '@/components/ProductImage';
+
 import type { Product } from '@/lib/catalog';
 import { formatFamily, formatGender, formatPrice, formatVolume } from '@/lib/format';
 import type { Locale } from '@/lib/i18n/config';
@@ -49,14 +51,12 @@ export function ProductCard({
     >
       <div className="relative aspect-4/5 overflow-hidden bg-noir-3">
         {image && (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
+          <ProductImage
             src={image.url}
             srcSet={image.srcset ?? undefined}
             sizes="(max-width: 580px) 88vw, (max-width: 1024px) 44vw, 300px"
             alt={image.alt}
             loading="lazy"
-            decoding="async"
             className="h-full w-full object-cover transition-transform duration-700 ease-(--ease-lux) group-hover:scale-105"
           />
         )}
@@ -77,7 +77,7 @@ export function ProductCard({
           <span className="text-3xs font-semibold tracking-(--tracking-eyebrow) text-gold uppercase">
             {product.brand.name}
           </span>
-          <span className="text-3xs text-ivory/58">
+          <span className="shrink-0 text-3xs whitespace-nowrap text-ivory/58">
             {formatVolume(variant.volumeMl, locale, dict)}
           </span>
         </div>

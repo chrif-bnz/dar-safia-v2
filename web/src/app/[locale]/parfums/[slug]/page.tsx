@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 
 import { OlfactoryPyramid } from '@/components/OlfactoryPyramid';
 import { ProductCard } from '@/components/ProductCard';
+import { ProductImage } from '@/components/ProductImage';
 import { ProductOrderForm } from '@/components/ProductOrderForm';
 import { catalog, lowestPrice } from '@/lib/catalog';
 import {
@@ -142,14 +143,12 @@ export default async function ProductPage({
               style={{ boxShadow: '0 24px 60px -24px var(--universe-glow)' }}
             >
               {image && (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
+                <ProductImage
                   src={image.url}
                   srcSet={image.srcset ?? undefined}
                   sizes="(max-width: 1024px) 92vw, 520px"
                   alt={image.alt}
                   fetchPriority="high"
-                  decoding="async"
                   className="aspect-4/5 w-full object-cover"
                 />
               )}

@@ -154,10 +154,10 @@ export function SiteHeader({ locale, dict }: { locale: Locale; dict: Dictionary 
       data-lifted={solidHeader || undefined}
       className="ds-header fixed inset-x-0 top-0 z-40 data-lifted:border-b data-lifted:border-smoke-2 data-lifted:bg-burgundy-deep/90 data-lifted:backdrop-blur-md"
     >
-      <div className="mx-auto flex max-w-(--container-site) items-center gap-4 px-5 py-4 md:px-8">
+      <div className="mx-auto flex max-w-(--container-site) items-center gap-4 px-5 py-3 md:px-8">
         <Link
           href={home}
-          className="shrink-0 font-serif text-lg whitespace-nowrap tracking-[0.08em] text-ivory transition-colors hover:text-gold"
+          className="ds-tap shrink-0 font-serif text-lg whitespace-nowrap tracking-[0.08em] text-ivory transition-colors hover:text-gold"
         >
           {dict.common.brandName}
         </Link>
@@ -188,7 +188,7 @@ export function SiteHeader({ locale, dict }: { locale: Locale; dict: Dictionary 
             aria-expanded={menuOpen}
             aria-controls="menu-principal"
             aria-label={menuOpen ? dict.nav.closeMenu : dict.nav.openMenu}
-            className="rounded-xs p-2 text-ivory/80 transition-colors hover:text-gold lg:hidden"
+            className="flex size-11 items-center justify-center rounded-xs text-ivory/80 transition-colors hover:text-gold lg:hidden"
           >
             {/* Deux traits qui se croisent : le geste dit ce qu'il fait. */}
             <span aria-hidden="true" className="relative block h-3.5 w-5">

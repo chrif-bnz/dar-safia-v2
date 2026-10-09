@@ -47,7 +47,7 @@
   --font-ui: var(--font-montserrat), system-ui, sans-serif;
 
   /* ── Échelle typographique (9 pas, cf. design-system/README.md) ── */
-  --text-3xs: 0.625rem;
+  --text-3xs: 0.6875rem;
   --text-2xs: 0.6875rem;
   --text-xs: 0.75rem;
   --text-sm: 0.8125rem;
@@ -336,6 +336,20 @@ body {
   .ds-navlink[aria-current="page"]::after {
     animation: none;
   }
+}
+
+/* Zone tactile : sur écran tactile, le lien garde son aspect mais sa surface
+   de toucher monte à ~44 px (WCAG 2.5.8), sans bouger la mise en page. */
+@media (pointer: coarse) {
+  .ds-navlink::before,
+  .ds-tap::before {
+    content: "";
+    position: absolute;
+    inset: -0.9rem -0.4rem;
+  }
+}
+.ds-tap {
+  position: relative;
 }
 
 /* Variante « filet toujours là » : pour les liens éditoriaux inline,
@@ -687,4 +701,11 @@ body {
   .ds-ambient {
     animation: none;
   }
+}
+
+/* Cases à cocher et boutons radio natifs : la teinte de la marque plutôt que
+   le bleu / blanc du navigateur. */
+input[type="checkbox"],
+input[type="radio"] {
+  accent-color: var(--color-gold);
 }

@@ -1,5 +1,6 @@
 'use client';
 
+import { ProductImage } from '@/components/ProductImage';
 import Link from 'next/link';
 import { useEffect, useRef, useState, useSyncExternalStore } from 'react';
 
@@ -166,14 +167,13 @@ export function SignatureStage({
               style={{ opacity: i === active ? 1 : 0 }}
             >
               {product.image && (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
+                <ProductImage
+                  fallback="none"
                   src={product.image.url}
                   srcSet={product.image.srcset ?? undefined}
                   sizes="100vw"
                   alt=""
                   loading="lazy"
-                  decoding="async"
                   className="absolute inset-0 h-full w-full object-cover opacity-[0.13]"
                 />
               )}
@@ -268,7 +268,7 @@ function PanelBody({
 
       <Link
         href={localePath(locale, `/parfums/${product.slug}`)}
-        className="group relative mt-8 inline-flex pb-1 font-ui text-2xs tracking-[0.2em] text-ivory/85 uppercase transition-colors hover:text-[var(--universe-light)]"
+        className="ds-tap group relative mt-8 inline-flex pb-1 font-ui text-2xs tracking-[0.2em] text-ivory/85 uppercase transition-colors hover:text-[var(--universe-light)]"
       >
         {s.discover}
         <span

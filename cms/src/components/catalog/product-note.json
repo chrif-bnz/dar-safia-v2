@@ -1,0 +1,30 @@
+{
+  "collectionName": "components_catalog_product_notes",
+  "info": {
+    "displayName": "Note du parfum",
+    "icon": "leaf",
+    "description": "Une note dans la pyramide olfactive."
+  },
+  "options": {},
+  "attributes": {
+    "layer": {
+      "type": "enumeration",
+      "enum": [
+        "top",
+        "heart",
+        "base"
+      ],
+      "required": true
+    },
+    "position": {
+      "type": "integer",
+      "default": 0,
+      "min": 0
+    },
+    "note": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::fragrance-note.fragrance-note"
+    }
+  }
+}

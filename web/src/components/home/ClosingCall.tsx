@@ -65,7 +65,7 @@ export function ClosingCall({
         >
           <Link
             href={localePath(locale, '/parfums')}
-            className="group relative inline-flex pb-1.5 font-ui text-2xs tracking-[0.22em] text-ivory uppercase"
+            className="ds-tap group relative inline-flex pb-1.5 font-ui text-2xs tracking-[0.22em] text-ivory uppercase"
           >
             {c.cta}
             <span

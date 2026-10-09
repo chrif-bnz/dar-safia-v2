@@ -23,7 +23,7 @@ export function CartButton() {
           ? plural(dict.nav.cartWithCount, count)
           : dict.nav.cart
       }
-      className="relative rounded-xs p-2 text-ivory/75 transition-colors hover:text-gold"
+      className="relative flex size-11 items-center justify-center rounded-xs text-ivory/75 transition-colors hover:text-gold"
     >
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden="true">
         <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />

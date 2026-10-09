@@ -108,7 +108,7 @@ export function ScentWorld({
         <div data-fade className="mt-16">
           <Link
             href={localePath(locale, '/parfums')}
-            className="group relative inline-flex pb-1 font-ui text-2xs tracking-[0.2em] text-ivory/80 uppercase transition-colors hover:text-gold"
+            className="ds-tap group relative inline-flex pb-1 font-ui text-2xs tracking-[0.2em] text-ivory/80 uppercase transition-colors hover:text-gold"
           >
             {s.explore}
             <span

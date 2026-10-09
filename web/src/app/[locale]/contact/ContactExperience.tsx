@@ -8,6 +8,7 @@ import type { Locale } from '@/lib/i18n/config';
 import type { Dictionary } from '@/lib/i18n/dictionary';
 import { interpolate } from '@/lib/i18n/dictionary';
 import { localePath } from '@/lib/i18n/routing';
+import { recordContact } from '@/lib/forms/client';
 import { whatsappUrl } from '@/lib/whatsapp';
 
 /**
@@ -75,7 +76,7 @@ function Field({
           autoComplete={autoComplete}
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          className="peer mt-1 block w-full border-b border-smoke-2 bg-transparent pb-1.5 font-body text-lg text-ivory transition-colors group-hover:border-gold/40 focus:outline-none focus-visible:outline-none"
+          className="peer mt-1 block min-h-11 w-full border-b border-smoke-2 bg-transparent pb-1.5 font-body text-lg text-ivory transition-colors group-hover:border-gold/40 focus:outline-none focus-visible:outline-none"
         />
         {/* Le filet d'encre pousse depuis le bord d'attaque au focus. Il
             REMPLACE le cadre de focus global — un rectangle autour d'un champ
@@ -507,6 +508,23 @@ export function ContactExperience({
 
                 <a
                   href={href}
+                  onClick={() => {
+                    const body = tab === 'personal' ? message : proposal;
+                    if (!body.trim()) return;
+                    recordContact(
+                      tab === 'personal'
+                        ? { kind: 'personal', locale, name, city, message: body }
+                        : {
+                            kind: 'collaboration',
+                            locale,
+                            house,
+                            role,
+                            city: collabCity,
+                            subject,
+                            message: body,
+                          }
+                    );
+                  }}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="ds-btn mt-10 flex w-full justify-center rounded-sm border border-gold bg-burgundy px-8 py-4 font-ui text-2xs font-semibold tracking-(--tracking-label) whitespace-nowrap text-ivory uppercase transition-colors hover:border-gold-light hover:bg-burgundy-2 sm:inline-flex sm:w-auto"

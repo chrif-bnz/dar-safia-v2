@@ -1,18 +1,19 @@
 'use client';
 
 import React, { useState } from 'react';
-import type { Product } from '@/lib/catalog';
+import type { Media, Product, ProductVariant } from '@/lib/catalog';
 import type { Dictionary } from '@/lib/i18n/dictionaries';
 import type { Locale } from '@/lib/i18n/config';
 import { AddToCartButton } from '@/components/cart/AddToCartButton';
+import { recordOrder } from '@/lib/forms/client';
 import { orderMessage, whatsappUrl } from '@/lib/whatsapp';
 import wilayasData from '@/data/wilayas.json';
 
 interface ProductOrderFormProps {
   product: Product;
-  variant: any;
+  variant: ProductVariant;
   priceAmount: number;
-  image: any;
+  image: Media | undefined;
   locale: Locale;
   dict: Dictionary;
   hasOrderUrl: boolean;
@@ -115,6 +116,23 @@ export function ProductOrderForm({
       } else {
         finalMsg = baseMsg + '\n\n' + customMessage;
       }
+
+      // Enregistrement dans Strapi (tire et oublie) : s'ajoute à WhatsApp, ne le remplace pas.
+      recordOrder({
+        source: 'product-form',
+        locale,
+        customer: {
+          firstName: formData.firstName,
+          lastName: formData.lastName,
+          phone: formData.phone,
+          wilaya: selectedWilayaData?.name ?? '',
+          commune: communes.find((c) => c.id === formData.commune)?.name ?? '',
+          deliveryMethod: formData.deliveryMethod === 'societe' ? 'societe' : 'main',
+          deliveryCompany: formData.deliveryCompany || undefined,
+          deliveryAddress: formData.deliveryAddress || undefined,
+        },
+        items: [{ productSlug: product.slug, variantId: variant.id, quantity: 1 }],
+      });
 
       const url = whatsappUrl(finalMsg);
       if (url) {
@@ -298,7 +316,7 @@ export function ProductOrderForm({
           <button
             type="submit"
             disabled={isSubmitting}
-            className="ds-btn inline-flex items-center gap-2.5 rounded-sm border border-gold bg-burgundy px-7 py-3.5 text-sm font-semibold tracking-(--tracking-label) text-ivory uppercase transition-colors duration-200 hover:border-gold-light hover:bg-burgundy-2 disabled:opacity-70"
+            className="ds-btn inline-flex w-full items-center justify-center gap-2.5 rounded-sm border sm:w-auto border-gold bg-burgundy px-7 py-3.5 text-sm font-semibold tracking-(--tracking-label) text-ivory uppercase transition-colors duration-200 hover:border-gold-light hover:bg-burgundy-2 disabled:opacity-70"
           >
             {dict.product?.order ?? 'COMMANDER SUR WHATSAPP'}
           </button>

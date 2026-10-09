@@ -49,33 +49,35 @@ export interface Keyframe {
   logo: number;
   /** Exposition relative. */
   exposure: number;
+  /** Recul supplémentaire de la caméra sur mobile (le cadre étroit, le texte plus haut). */
+  md: number;
 }
 
 const TAU = Math.PI * 2;
 
 export const KEYFRAMES: Keyframe[] = [
   // ── I · L'arrivée : étiquette de face, légère poussée de caméra ──
-  { t: 0.0, az: 0.0, h: 2.1, d: 11.5, look: [-0.95, 1.72, 0], fov: 32, yaw: 0.0, key: 1.0, rim: 1.0, warm: 0.0, logo: 0.5, exposure: 1.0 },
-  { t: 0.12, az: -0.06, h: 2.2, d: 10.6, look: [-0.95, 1.72, 0], fov: 31, yaw: -0.1, key: 1.05, rim: 1.0, warm: 0.0, logo: 0.6, exposure: 1.0 },
+  { t: 0.0, az: 0.0, h: 2.1, d: 11.5, look: [-0.95, 1.72, 0], fov: 32, yaw: 0.0, key: 1.0, rim: 1.0, warm: 0.0, logo: 0.5, exposure: 1.0, md: 0 },
+  { t: 0.12, az: -0.06, h: 2.2, d: 10.6, look: [-0.95, 1.72, 0], fov: 31, yaw: -0.1, key: 1.05, rim: 1.0, warm: 0.0, logo: 0.6, exposure: 1.0, md: 0 },
 
   // ── II · Le flacon : il passe à gauche, la caméra orbite, trois quarts → profil ──
-  { t: 0.24, az: -0.5, h: 2.8, d: 11.0, look: [1.2, 1.66, 0], fov: 30, yaw: -1.0, key: 1.15, rim: 1.25, warm: 0.1, logo: 0.5, exposure: 1.0 },
-  { t: 0.36, az: -0.85, h: 3.0, d: 11.4, look: [2.3, 1.6, 0], fov: 29, yaw: -1.7, key: 1.2, rim: 1.5, warm: 0.2, logo: 0.35, exposure: 1.0 },
+  { t: 0.24, az: -0.5, h: 2.8, d: 11.0, look: [1.2, 1.66, 0], fov: 30, yaw: -1.0, key: 1.15, rim: 1.25, warm: 0.1, logo: 0.5, exposure: 1.0, md: 1.4 },
+  { t: 0.36, az: -0.85, h: 3.0, d: 11.4, look: [2.3, 1.6, 0], fov: 29, yaw: -1.7, key: 1.2, rim: 1.5, warm: 0.2, logo: 0.35, exposure: 1.0, md: 1.4 },
 
   // ── III · L'essence : un tour complet, vu d'en haut, qui traverse le dos vite ──
-  { t: 0.42, az: -0.85, h: 3.8, d: 12.4, look: [1.4, 1.5, 0], fov: 29, yaw: -2.2, key: 1.1, rim: 1.2, warm: 0.45, logo: 0.3, exposure: 0.98 },
-  { t: 0.5, az: -0.35, h: 4.5, d: 13.2, look: [-0.8, 1.4, 0], fov: 29, yaw: -3.9, key: 1.0, rim: 1.0, warm: 0.8, logo: 0.2, exposure: 0.95 },
-  { t: 0.58, az: 0.2, h: 3.7, d: 12.0, look: [-2.2, 1.4, 0], fov: 29, yaw: -5.6, key: 1.1, rim: 1.2, warm: 1.0, logo: 0.45, exposure: 0.98 },
-  { t: 0.64, az: 0.05, h: 2.7, d: 10.8, look: [-2.0, 1.55, 0], fov: 28, yaw: -TAU + 0.02, key: 1.15, rim: 1.2, warm: 0.9, logo: 0.7, exposure: 1.0 },
+  { t: 0.42, az: -0.85, h: 3.8, d: 12.4, look: [1.4, 1.5, 0], fov: 29, yaw: -2.2, key: 1.1, rim: 1.2, warm: 0.45, logo: 0.3, exposure: 0.98, md: 3.2 },
+  { t: 0.5, az: -0.35, h: 4.5, d: 13.2, look: [-0.8, 1.4, 0], fov: 29, yaw: -3.9, key: 1.0, rim: 1.0, warm: 0.8, logo: 0.2, exposure: 0.95, md: 3.2 },
+  { t: 0.58, az: 0.2, h: 3.7, d: 12.0, look: [-2.2, 1.4, 0], fov: 29, yaw: -5.6, key: 1.1, rim: 1.2, warm: 1.0, logo: 0.45, exposure: 0.98, md: 3.2 },
+  { t: 0.64, az: 0.05, h: 2.7, d: 10.8, look: [-2.0, 1.55, 0], fov: 28, yaw: -TAU + 0.02, key: 1.15, rim: 1.2, warm: 0.9, logo: 0.7, exposure: 1.0, md: 3.2 },
 
   // ── IV · Le gros plan : dolly serrée, orbite, le monogramme s'allume ──
-  { t: 0.72, az: 0.22, h: 2.3, d: 7.8, look: [1.25, 1.5, 0], fov: 25, yaw: -TAU - 0.15, key: 1.3, rim: 1.4, warm: 0.6, logo: 1.0, exposure: 1.02 },
-  { t: 0.8, az: -0.28, h: 3.0, d: 7.4, look: [1.25, 2.05, 0], fov: 23, yaw: -TAU - 0.5, key: 1.35, rim: 1.6, warm: 0.4, logo: 0.85, exposure: 1.02 },
-  { t: 0.86, az: -0.05, h: 2.5, d: 8.6, look: [0.4, 1.7, 0], fov: 27, yaw: -TAU - 0.12, key: 1.2, rim: 1.2, warm: 0.2, logo: 0.7, exposure: 1.0 },
+  { t: 0.72, az: 0.22, h: 2.3, d: 7.8, look: [1.25, 1.5, 0], fov: 25, yaw: -TAU - 0.15, key: 1.3, rim: 1.4, warm: 0.6, logo: 1.0, exposure: 1.02, md: 0 },
+  { t: 0.8, az: -0.28, h: 3.0, d: 7.4, look: [1.25, 2.05, 0], fov: 23, yaw: -TAU - 0.5, key: 1.35, rim: 1.6, warm: 0.4, logo: 0.85, exposure: 1.02, md: 0 },
+  { t: 0.86, az: -0.05, h: 2.5, d: 8.6, look: [0.4, 1.7, 0], fov: 27, yaw: -TAU - 0.12, key: 1.2, rim: 1.2, warm: 0.2, logo: 0.7, exposure: 1.0, md: 0 },
 
   // ── V · Le produit : de face, centré, lumière commerciale équilibrée ──
-  { t: 0.94, az: 0.0, h: 2.0, d: 12.4, look: [0, 1.05, 0], fov: 30, yaw: -TAU, key: 1.1, rim: 1.0, warm: 0.0, logo: 0.8, exposure: 1.0 },
-  { t: 1.0, az: 0.0, h: 2.0, d: 12.1, look: [0, 1.05, 0], fov: 30, yaw: -TAU, key: 1.1, rim: 1.0, warm: 0.0, logo: 0.8, exposure: 1.0 },
+  { t: 0.94, az: 0.0, h: 2.0, d: 12.4, look: [0, 1.05, 0], fov: 30, yaw: -TAU, key: 1.1, rim: 1.0, warm: 0.0, logo: 0.8, exposure: 1.0, md: 0 },
+  { t: 1.0, az: 0.0, h: 2.0, d: 12.1, look: [0, 1.05, 0], fov: 30, yaw: -TAU, key: 1.1, rim: 1.0, warm: 0.0, logo: 0.8, exposure: 1.0, md: 0 },
 ];
 
 /** Fenêtres des chapitres : l'entrée et la sortie de chaque bloc de texte. */
@@ -90,7 +92,7 @@ export const CHAPTERS = [
 type Channel = Exclude<keyof Keyframe, 't' | 'look'>;
 
 const CHANNELS: Channel[] = [
-  'az', 'h', 'd', 'fov', 'yaw', 'key', 'rim', 'warm', 'logo', 'exposure',
+  'az', 'h', 'd', 'fov', 'yaw', 'key', 'rim', 'warm', 'logo', 'exposure', 'md',
 ];
 
 /** Tangentes monotones (Fritsch–Carlson) d'une série non uniforme. */
@@ -166,7 +168,7 @@ export function sampleTimeline(t: number, out?: SceneState): SceneState {
   const o: SceneState =
     out ??
     ({
-      az: 0, h: 0, d: 0, fov: 0, yaw: 0, key: 0, rim: 0, warm: 0, logo: 0, exposure: 0,
+      az: 0, h: 0, d: 0, fov: 0, yaw: 0, key: 0, rim: 0, warm: 0, logo: 0, exposure: 0, md: 0,
       look: [0, 0, 0],
     } satisfies SceneState);
   for (const c of CHANNELS) o[c] = hermite(SERIES[c], t);

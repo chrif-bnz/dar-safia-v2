@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 // `three` n'est chargé qu'à l'exécution (import dynamique) : le binding runtime
 // s'appelle THREE, celui-ci ne sert qu'aux annotations de type.
 import type * as Three from 'three';
@@ -127,6 +127,8 @@ const PLINTH_H = 0.38;
 export function FlaconScene({ className }: { className?: string }) {
   const mountRef = useRef<HTMLDivElement>(null);
   const reduced = usePrefersReducedMotion();
+  /** WebGL indisponible ou rendu en échec : on montre l'affiche statique. */
+  const [noGL, setNoGL] = useState(false);
 
   useEffect(() => {
     const mount = mountRef.current;
@@ -201,7 +203,10 @@ export function FlaconScene({ className }: { className?: string }) {
       // WebGL absent (vieux appareil, GPU bloqué) : la lueur CSS reste seule —
       // et le texte des chapitres, piloté plus haut, continue de défiler.
       const probe = document.createElement('canvas');
-      if (!probe.getContext('webgl2') && !probe.getContext('webgl')) return;
+      if (!probe.getContext('webgl2') && !probe.getContext('webgl')) {
+        setNoGL(true);
+        return;
+      }
 
       const coarse = window.matchMedia('(pointer: coarse)').matches;
       const wide = window.matchMedia('(min-width: 768px)').matches;
@@ -218,11 +223,18 @@ export function FlaconScene({ className }: { className?: string }) {
       };
 
       // ── Rendu ───────────────────────────────────────────────
-      const renderer = new THREE.WebGLRenderer({
-        antialias: !rich, // en mode riche, le composer multi-échantillonne
-        alpha: true,
-        powerPreference: 'high-performance',
-      });
+      let renderer: Three.WebGLRenderer;
+      try {
+        renderer = new THREE.WebGLRenderer({
+          antialias: !rich, // en mode riche, le composer multi-échantillonne
+          alpha: true,
+          powerPreference: 'high-performance',
+        });
+      } catch {
+        // Contexte refusé (GPU bloqué, trop de contextes ouverts).
+        setNoGL(true);
+        return;
+      }
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, rich ? 1.4 : 1.25));
       renderer.setSize(width, height);
       renderer.toneMapping = THREE.ACESFilmicToneMapping;
@@ -261,12 +273,25 @@ export function FlaconScene({ className }: { className?: string }) {
         return keep(t);
       };
 
-      const radial = (stops: [number, string][], size = 256) =>
+      const radial = (stops: [number, string][], size = 256, dither = false) =>
         paintTexture(size, size, (ctx, w) => {
           const g = ctx.createRadialGradient(w / 2, w / 2, 0, w / 2, w / 2, w / 2);
           stops.forEach(([o, c]) => g.addColorStop(o, c));
           ctx.fillStyle = g;
           ctx.fillRect(0, 0, w, w);
+          if (dither) {
+            // Un dégradé sombre en 8 bits se lit en bandes. Un bruit de ±2/255,
+            // sous le seuil du grain visible, les brise sans rien ajouter à l'œil.
+            const img = ctx.getImageData(0, 0, w, w);
+            const d = img.data;
+            for (let i = 0; i < d.length; i += 4) {
+              const n = (Math.random() - 0.5) * 1.6;
+              d[i] += n;
+              d[i + 1] += n;
+              d[i + 2] += n;
+            }
+            ctx.putImageData(img, 0, 0);
+          }
         });
 
       // ── Studio d'environnement ──────────────────────────────
@@ -311,6 +336,8 @@ export function FlaconScene({ className }: { className?: string }) {
       panel(9, 7, new THREE.Color(0.5, 0.38, 0.24), [5, 8, 6]); // clé, tenue basse
       panel(10, 7, new THREE.Color(0.1, 0.03, 0.036), [-7, 1.5, -6]); // contre-jour bordeaux
       panel(12, 6, new THREE.Color(0.2, 0.13, 0.07), [0, -5, 3]); // rebond chaud
+      panel(1.6, 9, new THREE.Color(2.6, 1.9, 1.15), [6.5, 2.5, 6.5]); // bande verticale hors axe : filet sur l'arête du verre et les pans du bouchon
+      panel(14, 2.6, new THREE.Color(1.7, 1.25, 0.8), [0, 6.5, 8]); // grande source douce, haut-face : bouchon et épaules
 
       envParts.forEach((m) => envScene.add(m));
       const envRT = keep(pmrem.fromScene(envScene, 0.02));
@@ -341,7 +368,8 @@ export function FlaconScene({ className }: { className?: string }) {
                 [0.6, 'rgb(31,14,15)'],
                 [1, 'rgb(13,8,8)'],
               ],
-              512
+              1024,
+              true
             ),
             depthWrite: false,
           })
@@ -450,8 +478,8 @@ export function FlaconScene({ className }: { className?: string }) {
             // Atténuation allongée : plus courte, le verre s'assombrissait au
             // point d'avaler le jus et le flacon retombait à une masse opaque.
             // C'est le LIQUIDE qui doit porter la couleur, pas la paroi.
-            attenuationColor: new THREE.Color(0xd4c7a6),
-            attenuationDistance: 4.2,
+            attenuationColor: new THREE.Color(0xf2ede3),
+            attenuationDistance: 14,
             // Pas de vernis par-dessus : le clearcoat ajoute une couche
             // miroir qui renvoie tout l'environnement et referme le verre en
             // blanc laiteux. Le cristal tire son éclat de la réfraction.
@@ -477,22 +505,34 @@ export function FlaconScene({ className }: { className?: string }) {
       // qu'aucun réglage de couleur ne le faisait apparaître. Opaque, il entre
       // dans l'image que le verre réfracte — et le verre le courbe, comme un
       // vrai flacon courbe ce qu'il contient.
+      const liquidTex = paintTexture(8, 256, (ctx, w, h) => {
+        const g = ctx.createLinearGradient(0, h, 0, 0); // bas du jus → surface
+        g.addColorStop(0, '#3a160a');
+        g.addColorStop(0.3, '#62290f');
+        g.addColorStop(0.7, '#8f4516');
+        g.addColorStop(1, '#a95a1d');
+        ctx.fillStyle = g;
+        ctx.fillRect(0, 0, w, h);
+      });
       const liquidPlane = new THREE.Plane(new THREE.Vector3(0, -1, 0), LIQUID_LEVEL);
       const liquid = new THREE.Mesh(
         lathe(LIQUID_PROFILE, rich ? 52 : 32),
         keep(
           new THREE.MeshPhysicalMaterial({
-            color: 0xa9561a,
+            // Teinte portée par un dégradé vertical (profondeur) : le jus est
+            // plus dense et sombre au fond, plus clair sous la surface où la
+            // lumière le traverse sur moins d'épaisseur. Cognac / cuivre, pas
+            // orange : il se range avec le bordeaux et l'or antique.
+            color: 0xffffff,
+            map: liquidTex,
             metalness: 0,
-            roughness: 0.2,
-            // Le vernis donne la brillance mouillée d'un liquide épais.
-            clearcoat: 1,
-            clearcoatRoughness: 0.05,
-            envMapIntensity: 1.1,
-            // La braise interne : c'est elle qui fait « rougeoyer » l'ambre au
-            // lieu d'en faire une masse brune.
-            emissive: new THREE.Color(0x6b2c05),
-            emissiveIntensity: 0.7,
+            roughness: 0.16,
+            clearcoat: 0.6,
+            clearcoatRoughness: 0.08,
+            envMapIntensity: 0.9,
+            // Une braise discrète seulement : le jus ne doit pas rayonner.
+            emissive: new THREE.Color(0x4a1d08),
+            emissiveIntensity: 0.28,
             // Double face : la coupe ouverte laisse voir la paroi intérieure,
             // qui doit être du jus et non un trou.
             side: THREE.DoubleSide,
@@ -511,9 +551,9 @@ export function FlaconScene({ className }: { className?: string }) {
         keep(
           // Opaque pour la même raison que le jus : le verre doit la réfracter.
           new THREE.MeshPhysicalMaterial({
-            color: 0xc9772c,
-            emissive: new THREE.Color(0x7a3a08),
-            emissiveIntensity: 0.75,
+            color: 0xa65a1e,
+            emissive: new THREE.Color(0x4a1d08),
+            emissiveIntensity: 0.3,
             roughness: 0.08,
             metalness: 0,
             clearcoat: 1,
@@ -524,6 +564,25 @@ export function FlaconScene({ className }: { className?: string }) {
         )
       );
       scene.add(surface);
+
+      // Ménisque : le jus remonte à peine le long de la paroi. Un fin anneau
+      // clair, suivi à la surface (même position / même normale), suffit à
+      // casser le disque plat et à accrocher une ligne de lumière.
+      const meniscus = new THREE.Mesh(
+        keep(new THREE.TorusGeometry(surfaceRadius * 1.0, 0.016, 8, rich ? 72 : 40)),
+        keep(
+          new THREE.MeshPhysicalMaterial({
+            color: 0xb8702a,
+            emissive: new THREE.Color(0x4a1d08),
+            emissiveIntensity: 0.25,
+            roughness: 0.06,
+            clearcoat: 1,
+            clearcoatRoughness: 0.03,
+            envMapIntensity: 1.5,
+          })
+        )
+      );
+      scene.add(meniscus);
 
       // Fines bulles qui montent dans le jus et s'éteignent à la surface (même
       // plan de coupe). Presque rien — c'est ce presque rien qui le rend vivant.
@@ -596,15 +655,15 @@ export function FlaconScene({ className }: { className?: string }) {
       // lire « vaporisateur » et non « carafe ». Réfracté par le verre et
       // tordu par le galbe, il travaille le volume de l'intérieur.
       const dipTube = new THREE.Mesh(
-        keep(new THREE.CylinderGeometry(0.034, 0.034, 2.94, 10, 1, true)),
+        keep(new THREE.CylinderGeometry(0.02, 0.02, 2.94, 8, 1, true)),
         keep(
           // Opaque, et c'est délibéré : un troisième matériau à transmission
           // ne se voyait pas — le tube est déjà derrière deux épaisseurs qui
           // réfractent — mais il payait plein tarif dans la passe.
           new THREE.MeshStandardMaterial({
-            color: 0x9c9382,
-            metalness: 0.1,
-            roughness: 0.42,
+            color: 0x4a3a28,
+            metalness: 0.4,
+            roughness: 0.5,
             side: THREE.DoubleSide,
           })
         )
@@ -633,10 +692,14 @@ export function FlaconScene({ className }: { className?: string }) {
       // moyennées arrondissent les pans et le bouchon redevient un cylindre.
       const goldFacet = keep(
         new THREE.MeshPhysicalMaterial({
-          color: 0xbf9238,
+          color: 0xd4a444,
           metalness: 1,
-          roughness: 0.14,
-          envMapIntensity: 1.75,
+          roughness: 0.3,
+          envMapIntensity: 2.4,
+          // Un pan de métal qui ne regarde rien de clair tombe au noir : un léger
+          // plancher chaud garde les facettes lisibles sans les faire briller.
+          emissive: new THREE.Color(0x3a2808),
+          emissiveIntensity: 0.55,
           flatShading: true,
         })
       );
@@ -677,8 +740,8 @@ export function FlaconScene({ className }: { className?: string }) {
       // à l'or par composition `source-in` : aucun redessin, aucune déformation.
       // Le mot « DAR SAFIA » et la mention restent en texte net dessous. Le
       // canvas est repeint à l'arrivée des polices ET du monogramme.
-      const LABEL_W = 1024;
-      const LABEL_H = 640;
+      const LABEL_W = rich ? 2048 : 1024;
+      const LABEL_H = rich ? 1280 : 640;
       const logoImg = new Image();
       let logoReady = false;
       const drawLabel = (ctx: CanvasRenderingContext2D, w: number, h: number) => {
@@ -787,18 +850,18 @@ export function FlaconScene({ className }: { className?: string }) {
       // le fond sans alourdir la passe de réfraction.
       const companionMat = keep(
         new THREE.MeshStandardMaterial({
-          color: 0x120d0b,
-          roughness: 0.14,
+          color: 0x1c1411,
+          roughness: 0.2,
           metalness: 0.72,
-          envMapIntensity: 1.35,
+          envMapIntensity: 1.7,
         })
       );
 
       (
         [
-          [-3.5, -5.4, 0.82, 0.5],
+          [-2.3, -5.2, 0.82, 0.5],
           [3.35, -6.3, 0.7, -0.9],
-          [-1.4, -8.1, 0.58, 1.4],
+          [2.6, -8.1, 0.58, 1.4],
         ] as [number, number, number, number][]
       )
         // Le plus lointain ne sert que la profondeur : on s'en passe sur le
@@ -827,9 +890,9 @@ export function FlaconScene({ className }: { className?: string }) {
             // Presque un miroir : le sol renvoie les filets verticaux du
             // studio, et ces traînées suffisent à poser le flacon sur quelque
             // chose — sans payer une seconde passe de réflexion.
-            roughness: 0.3,
+            roughness: 0.6,
             metalness: 0.9,
-            envMapIntensity: 0.55,
+            envMapIntensity: 0.75,
           })
         )
       );
@@ -886,7 +949,7 @@ export function FlaconScene({ className }: { className?: string }) {
         3.0,
         0.006,
         THREE.AdditiveBlending,
-        0.95
+        0.6
       );
 
       // ── Atmosphère : voile de brume et faisceau ─────────────
@@ -954,21 +1017,30 @@ export function FlaconScene({ className }: { className?: string }) {
       // sans rien derrière, le verre ne plie que du vide et retombe à plat.
       // Ces trois barres lumineuses sont là pour être tordues par le galbe —
       // c'est ce qui donne les traînées de lumière à l'intérieur du verre.
-      const barTex = paintTexture(32, 256, (ctx, w, h) => {
+      const barTex = paintTexture(64, 256, (ctx, w, h) => {
         const g = ctx.createLinearGradient(0, 0, 0, h);
         g.addColorStop(0, 'rgba(0,0,0,0)');
-        g.addColorStop(0.18, 'rgba(255,226,178,1)');
-        g.addColorStop(0.82, 'rgba(255,214,150,1)');
+        g.addColorStop(0.22, 'rgba(255,226,178,1)');
+        g.addColorStop(0.78, 'rgba(255,214,150,1)');
         g.addColorStop(1, 'rgba(0,0,0,0)');
         ctx.fillStyle = g;
+        ctx.fillRect(0, 0, w, h);
+        // Bords latéraux fondus : une bande de lumière, pas une carte rectangulaire.
+        ctx.globalCompositeOperation = 'destination-in';
+        const hg = ctx.createLinearGradient(0, 0, w, 0);
+        hg.addColorStop(0, 'rgba(0,0,0,0)');
+        hg.addColorStop(0.35, 'rgba(0,0,0,1)');
+        hg.addColorStop(0.65, 'rgba(0,0,0,1)');
+        hg.addColorStop(1, 'rgba(0,0,0,0)');
+        ctx.fillStyle = hg;
         ctx.fillRect(0, 0, w, h);
       });
       const bars: Three.Mesh[] = [];
       (
         [
           // Deux filets étroits reculés derrière les épaules.
-          [-1.45, 2.3, -3.4, 0.2, 5.4, 0.62],
-          [1.3, 2.1, -3.8, 0.15, 4.8, 0.48],
+          [-1.45, 2.3, -3.4, 0.5, 5.4, 0.36],
+          [1.3, 2.1, -3.8, 0.4, 4.8, 0.3],
           // Un contre-jour bas, discret, qui détache le jus du fond. Il était
           // très vif quand il devait forcer la lumière À TRAVERS un jus
           // transmissif ; le jus étant opaque, il n'est plus qu'un liseré.
@@ -1110,9 +1182,9 @@ export function FlaconScene({ className }: { className?: string }) {
         // résolution. L'économie la plus rentable de la scène.
         const bloom = new UnrealBloomPass(
           new THREE.Vector2(width * 0.5, height * 0.5),
-          0.24,
-          0.5,
-          0.9
+          0.14,
+          0.45,
+          1.0
         );
         c.addPass(bloom);
         bloomPass = bloom;
@@ -1267,8 +1339,8 @@ export function FlaconScene({ className }: { className?: string }) {
       // décalage latéral), on recule, et on vise plus bas pour remonter le
       // flacon dans le tiers haut — le texte occupe la bande basse. Sans ça il
       // est rogné au pied et l'étiquette passe sous le titre.
-      const distBoost = wide ? 0 : 2.4;
-      const lookRise = wide ? 0 : -0.95;
+      const distBoost = wide ? 0 : 3.6;
+      const lookRise = wide ? 0 : -0.85;
 
       const keyBase = new THREE.Vector3(4.5, 7, 5);
       const rimBase = new THREE.Vector3(-3, 2.4, -3.5);
@@ -1352,7 +1424,7 @@ export function FlaconScene({ className }: { className?: string }) {
         // la caméra qui travaille, pas seulement l'objet.
         const k = sceneState;
         // Mobile : les plans serrés reculent davantage, le cadre étroit rognerait le flacon.
-        const dist = k.d + distBoost + (wide ? 0 : Math.max(0, 10 - k.d) * 0.7);
+        const dist = k.d + distBoost + (wide ? 0 : Math.max(0, 10 - k.d) * 0.7 + k.md);
         const fov = k.fov;
         camera.position.set(
           Math.sin(k.az) * dist + s.cpx * 0.55,
@@ -1459,6 +1531,8 @@ export function FlaconScene({ className }: { className?: string }) {
         liquidPlane.setFromNormalAndCoplanarPoint(planeNormal, surfacePoint);
         surface.position.copy(surfacePoint);
         surface.quaternion.setFromUnitVectors(zAxis, surfaceUp);
+        meniscus.position.copy(surfacePoint);
+        meniscus.quaternion.copy(surface.quaternion);
 
         if (!reduced) {
           const bp = bubbles.geometry.attributes.position as Three.BufferAttribute;
@@ -1491,7 +1565,7 @@ export function FlaconScene({ className }: { className?: string }) {
 
         // ── Montée en lumière du dévoilement ──
         renderer.toneMappingExposure = 1.08 * sceneState.exposure * (0.04 + 0.96 * intro);
-        if (bloomPass) bloomPass.strength = 0.24 * intro;
+        if (bloomPass) bloomPass.strength = 0.14 * intro;
 
         if (!reduced) {
           const p = motes.geometry.attributes.position as Three.BufferAttribute;
@@ -1560,6 +1634,15 @@ export function FlaconScene({ className }: { className?: string }) {
 
   return (
     <div ref={mountRef} className={className} aria-hidden="true">
+      {/* Affiche statique : seulement si WebGL manque ou échoue. */}
+      {noGL && (
+        // eslint-disable-next-line @next/next/no-img-element -- décor de repli, une seule image
+        <img
+          src="/poster/maison-flacon.webp"
+          alt=""
+          className="absolute inset-0 h-full w-full object-cover object-[70%_50%]"
+        />
+      )}
       {/* Lueur dorée : ambiance de fond, et seule image si WebGL manque. */}
       <div
         className="pointer-events-none absolute inset-0"
