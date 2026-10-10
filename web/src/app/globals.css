@@ -1112,3 +1112,335 @@ html.has-custom-cursor [contenteditable] {
 @media (prefers-reduced-motion: reduce) {
   .ds-check { animation: none; stroke-dashoffset: 0; }
 }
+
+/* ══════════════════════════════════════════════════════════════
+   FILTRES BOUTIQUE (/parfums) — UX INTERACTIONS
+   ══════════════════════════════════════════════════════════════ */
+
+/* 1) Ligne d'option, accordéon, bouton : décalage de 6px vers la droite en 250ms */
+.ds-filter-hover-shift {
+  position: relative;
+  transition: transform 250ms cubic-bezier(0.22, 1, 0.36, 1),
+              color 250ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.ds-filter-accordion-btn {
+  position: relative;
+  transition: transform 250ms cubic-bezier(0.22, 1, 0.36, 1),
+              color 250ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* 2) Trait doré animé à gauche : scaleX 0 -> 1, origine gauche */
+.ds-filter-hover-shift::before,
+.ds-filter-accordion-btn::before {
+  content: '';
+  position: absolute;
+  inset-inline-start: -8px;
+  top: 50%;
+  width: 5px;
+  height: 2px;
+  background-color: var(--color-gold, #C9A24B);
+  transform: translateY(-50%) scaleX(0);
+  transform-origin: left center;
+  transition: transform 250ms cubic-bezier(0.22, 1, 0.36, 1),
+              opacity 200ms ease;
+  opacity: 0;
+  border-radius: 1px;
+  pointer-events: none;
+}
+
+[dir="rtl"] .ds-filter-hover-shift::before,
+[dir="rtl"] .ds-filter-accordion-btn::before {
+  transform-origin: right center;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  [dir="ltr"] .ds-filter-hover-shift:hover,
+  [dir="ltr"] .ds-filter-accordion-btn:hover {
+    transform: translateX(6px);
+    color: var(--color-gold, #C9A24B);
+  }
+
+  [dir="rtl"] .ds-filter-hover-shift:hover,
+  [dir="rtl"] .ds-filter-accordion-btn:hover {
+    transform: translateX(-6px);
+    color: var(--color-gold, #C9A24B);
+  }
+
+  .ds-filter-hover-shift:hover::before,
+  .ds-filter-accordion-btn:hover::before {
+    transform: translateY(-50%) scaleX(1);
+    opacity: 1;
+  }
+}
+
+/* 3) Cases à cocher raffinées */
+.ds-checkbox-box {
+  width: 1.2rem;
+  height: 1.2rem;
+  border-radius: 2px;
+  border: 1px solid var(--color-smoke-2, rgba(242, 237, 227, 0.15));
+  background-color: var(--color-noir-3, #2f221c);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: border-color 200ms cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 200ms ease;
+}
+
+.group:hover .ds-checkbox-box {
+  border-color: var(--color-gold, #C9A24B);
+}
+
+.ds-checkbox-fill {
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 1px;
+  background-color: var(--color-gold, #C9A24B);
+  opacity: 0;
+  transform: scale(0.8);
+  transition: opacity 250ms cubic-bezier(0.22, 1, 0.36, 1),
+              transform 250ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.ds-checkbox-input:checked + .ds-checkbox-box {
+  border-color: var(--color-gold, #C9A24B);
+}
+
+.ds-checkbox-input:checked + .ds-checkbox-box .ds-checkbox-fill {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* 4) Flèche d'accordéon : 180° en 300 ms */
+.ds-accordion-arrow {
+  display: inline-flex;
+  transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1),
+              color 250ms ease;
+}
+
+/* 5) Focus clavier visible */
+.ds-checkbox-input:focus-visible + .ds-checkbox-box,
+.ds-filter-accordion-btn:focus-visible,
+.ds-filter-hover-shift:focus-visible {
+  outline: 2px solid var(--color-gold, #C9A24B) !important;
+  outline-offset: 3px !important;
+  border-radius: 2px;
+}
+
+/* 6) Tactile (pointer: coarse) : pas de translation */
+@media (pointer: coarse) {
+  .ds-filter-hover-shift,
+  .ds-filter-accordion-btn {
+    transform: none !important;
+  }
+  .ds-filter-hover-shift::before,
+  .ds-filter-accordion-btn::before {
+    display: none !important;
+  }
+  .ds-filter-hover-shift:active,
+  .ds-filter-accordion-btn:active {
+    opacity: 0.8;
+  }
+}
+
+/* 7) prefers-reduced-motion pour les filtres */
+@media (prefers-reduced-motion: reduce) {
+  .ds-filter-hover-shift,
+  .ds-filter-accordion-btn {
+    transform: none !important;
+    transition: color 150ms ease !important;
+  }
+  .ds-filter-hover-shift::before,
+  .ds-filter-accordion-btn::before {
+    display: none !important;
+  }
+  .ds-accordion-arrow {
+    transition: none !important;
+  }
+  .ds-checkbox-fill {
+    transition: opacity 150ms ease !important;
+    transform: scale(1) !important;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   PAGE PRODUIT (/parfums/<slug>) — MOTION & DESIGN
+   ══════════════════════════════════════════════════════════════ */
+
+/* Révélation mot par mot du titre */
+@keyframes ds-word-up {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.ds-word-reveal {
+  display: inline-block;
+  animation: ds-word-up 700ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Révélation douce des textes (stagger 80ms, translateY 12px, 700ms) */
+@keyframes ds-text-stagger {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.ds-stagger-item {
+  animation: ds-text-stagger 700ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Révélation de blocs au défilement (translateY 24px, 700ms) */
+.ds-reveal-block {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 700ms cubic-bezier(0.16, 1, 0.3, 1),
+              transform 700ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ds-reveal-block.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Bouton principal : remplissage doré qui glisse de gauche à droite */
+.ds-btn-slide {
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.ds-btn-slide::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: var(--color-gold, #C9A24B);
+  transform: translateX(-100%);
+  transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
+  z-index: -1;
+}
+
+[dir="rtl"] .ds-btn-slide::before {
+  transform: translateX(100%);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .ds-btn-slide:hover::before {
+    transform: translateX(0);
+  }
+
+  .ds-btn-slide:hover {
+    color: var(--color-noir, #1a120f) !important;
+  }
+}
+
+/* Soulignement doré animé pour liens et fil d'Ariane */
+.ds-gold-underline {
+  position: relative;
+  display: inline-block;
+  transition: color 200ms ease;
+}
+
+.ds-gold-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  inset-inline-start: 0;
+  width: 100%;
+  height: 1px;
+  background-color: var(--color-gold, #C9A24B);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+[dir="rtl"] .ds-gold-underline::after {
+  transform-origin: right center;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .ds-gold-underline:hover {
+    color: var(--color-gold, #C9A24B);
+  }
+  .ds-gold-underline:hover::after {
+    transform: scaleX(1);
+  }
+}
+
+/* Chips de notes olfactives */
+.ds-note-chip {
+  transition: transform 200ms cubic-bezier(0.22, 1, 0.36, 1),
+              background-color 200ms ease,
+              border-color 200ms ease,
+              box-shadow 200ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .ds-note-chip:hover {
+    transform: translateY(-2px);
+    background-color: rgba(201, 162, 75, 0.12);
+    border-color: var(--color-gold, #C9A24B);
+    box-shadow: 0 4px 12px rgba(201, 162, 75, 0.15);
+  }
+}
+
+/* Case métrique Tenue / Sillage / Famille */
+.ds-metric-card {
+  transition: transform 250ms cubic-bezier(0.22, 1, 0.36, 1),
+              border-color 250ms ease,
+              box-shadow 250ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .ds-metric-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--color-gold, #C9A24B);
+    box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.5), 0 0 15px rgba(201, 162, 75, 0.15);
+  }
+}
+
+/* Animation d'apparition des chips de notes en séquence */
+@keyframes ds-chip-enter {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.ds-chip-animate {
+  animation: ds-chip-enter 500ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* prefers-reduced-motion pour la page produit */
+@media (prefers-reduced-motion: reduce) {
+  .ds-word-reveal,
+  .ds-stagger-item {
+    animation-duration: 150ms !important;
+    transform: none !important;
+  }
+  .ds-reveal-block {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: opacity 150ms ease !important;
+  }
+  .ds-note-chip:hover,
+  .ds-metric-card:hover {
+    transform: none !important;
+  }
+}

@@ -31,7 +31,7 @@ export function OlfactoryPyramid({
       </h2>
 
       <dl className="mt-6 flex flex-col gap-px overflow-hidden rounded-md border border-smoke-2 bg-smoke-2">
-        {layers.map(({ key, label, caption }) => {
+        {layers.map(({ key, label, caption }, layerIndex) => {
           const layerNotes = byLayer(key);
           if (layerNotes.length === 0) return null;
 
@@ -44,10 +44,13 @@ export function OlfactoryPyramid({
                 <span className="mt-1 block text-2xs text-ivory/58">{caption}</span>
               </dt>
               <dd className="mt-3 flex flex-wrap gap-2">
-                {layerNotes.map(({ note }) => (
+                {layerNotes.map(({ note }, noteIndex) => (
                   <span
                     key={note.slug}
-                    className="rounded-xs border border-smoke-2 bg-noir-3 px-2.5 py-1 font-body text-md text-ivory/85"
+                    className="ds-note-chip ds-chip-animate cursor-default rounded-xs border border-smoke-2 bg-noir-3 px-2.5 py-1 font-body text-md text-ivory/85"
+                    style={{
+                      animationDelay: `${layerIndex * 140 + noteIndex * 40}ms`,
+                    }}
                   >
                     {note.name}
                   </span>
@@ -60,3 +63,4 @@ export function OlfactoryPyramid({
     </section>
   );
 }
+
