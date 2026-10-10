@@ -49,6 +49,7 @@ export function HeroFilm({
   scrollLabel,
   videoLabel,
   skipLabel,
+  brand,
 }: {
   tagline: string;
   statement: string;
@@ -57,6 +58,7 @@ export function HeroFilm({
   scrollLabel: string;
   videoLabel: string;
   skipLabel: string;
+  brand: string;
 }) {
   const rootRef = useRef<HTMLElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -67,6 +69,17 @@ export function HeroFilm({
   // Permet de couper l'intro en cours (bouton « passer »).
   const [skipped, setSkipped] = useState(false);
   const introPlays = wantsIntro && !skipped;
+
+  // Source selon le gabarit : un téléphone n'a pas besoin du plan 720p. Posée
+  // ici (et non via <source media>, ignoré par la plupart des navigateurs
+  // pour <video>) AVANT le premier octet : un seul fichier est téléchargé.
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    const small = window.matchMedia('(max-width: 767px)').matches;
+    video.src = small ? '/video/hero-mobile.mp4' : '/video/hero.mp4';
+    void video.play().catch(() => {});
+  }, []);
 
   // Rebouclage sur le point de raccord plutôt que sur zéro.
   useEffect(() => {
@@ -139,7 +152,7 @@ export function HeroFilm({
             yPercent: 0,
           });
           gsap.set(
-            ['[data-curtain-left]', '[data-curtain-right]', '[data-counter]'],
+            ['[data-curtain-left]', '[data-curtain-right]', '[data-counter]', '[data-seam]'],
             { opacity: 0 }
           );
           return;
@@ -173,13 +186,34 @@ export function HeroFilm({
               },
               0
             )
+            // ── La séquence de marque ──
+            // Son ENTRÉE (le monogramme « écrit » de gauche à droite, le reflet
+            // doré, le nom qui se pose) est en CSS pur — voir `ds-mono-*` dans
+            // globals.css : elle se peint dès la première image, sans attendre
+            // que GSAP soit chargé (c'est ce qui fait le LCP de la page).
+            // GSAP ne reprend la main que pour la SORTIE, ci-dessous.
             // Un léger sursaut à l'arrivée du chiffre final — la seule
             // ponctuation du compteur, avant qu'il ne s'efface.
             .to(
-              '[data-counter] span:first-child',
-              { scale: 1.1, duration: 0.22, ease: 'power2.out', yoyo: true, repeat: 1 },
+              '[data-counter] [data-pct]',
+              { scale: 1.12, duration: 0.22, ease: 'power2.out', yoyo: true, repeat: 1 },
               COUNTER_DURATION - 0.22
             )
+            // La marque se retire en s'éloignant (légère échelle + flou), et
+            // une fine ligne de lumière s'allume à la couture des deux pans :
+            // c'est elle qu'on voit « ouvrir » avant que le rideau ne bouge.
+            .to(
+              '[data-monogram], [data-wordmark]',
+              { scale: 1.07, filter: 'blur(5px)', duration: 0.8, ease: 'power2.in' },
+              curtainStart - 0.8
+            )
+            .fromTo(
+              '[data-seam]',
+              { scaleY: 0, opacity: 1 },
+              { scaleY: 1, duration: 0.7, ease: 'power3.out' },
+              curtainStart - 0.55
+            )
+            .to('[data-seam]', { opacity: 0, duration: 0.9, ease: 'power2.in' }, curtainStart + 0.55)
             // Le compteur s'efface AVANT que le rideau ne bouge : deux gestes
             // qui se succèdent, pas deux qui se disputent l'attention. La
             // sortie n'est plus un simple fondu : un très léger retrait
@@ -219,6 +253,24 @@ export function HeroFilm({
               },
               curtainStart
             )
+            // Le film arrive en travelling avant : un peu trop près, un peu
+            // flou et assombri, il se pose en même temps que le rideau
+            // s'écarte — le regard est tiré vers l'intérieur du plan.
+            .fromTo(
+              '[data-film] video',
+              { scale: 1.16, filter: 'brightness(0.55) blur(5px)' },
+              {
+                scale: 1,
+                filter: 'brightness(1) blur(0px)',
+                duration: CURTAIN_DURATION + 1.4,
+                ease: LUXE_EASE_ID,
+              },
+              curtainStart + 0.1
+            )
+            // Le rideau couvre TOUT l'écran (sur mobile le film n'est qu'une
+            // plaque en haut de page) ; une fois ouvert, on le retire : plus
+            // de calque plein écran à composer pendant tout le défilement.
+            .set('[data-curtain-root]', { display: 'none' }, curtainStart + CURTAIN_DURATION + 0.1)
             // Puis on ne fait RIEN pendant `FILM_ALONE` : le plan reste seul
             // à l'écran. La typographie n'arrive qu'après ce silence, lentement
             // et avec un peu de volume (légère mise à l'échelle en plus du
@@ -332,12 +384,11 @@ export function HeroFilm({
           <video
             ref={videoRef}
             className="h-full w-full object-cover"
-            src="/video/hero.mp4"
             autoPlay
             muted
             loop={false}
             playsInline
-            preload="auto"
+            preload="metadata"
             aria-label={videoLabel}
             // Le plan s'ouvre sur le noir : un fond noir EST le bon poster.
             style={{ backgroundColor: 'var(--color-noir)' }}
@@ -348,7 +399,11 @@ export function HeroFilm({
         <div aria-hidden="true" className="hero-film__scrim" />
 
         {/* ── Rideau d'ouverture : deux pans + compteur ── */}
-        <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-10">
+        <div
+          aria-hidden="true"
+          data-curtain-root
+          className="pointer-events-none fixed inset-0 z-[70]"
+        >
           {/* Deux pans, deux teintes de la maison. Pas de filet au raccord :
               il passait en plein milieu du compteur, ce qui se lisait comme
               un accident. La rencontre des deux couleurs suffit.
@@ -386,21 +441,60 @@ export function HeroFilm({
             />
             <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-black/35 to-transparent" />
           </div>
+          {/* Fine ligne de lumière à la couture : elle s'allume juste avant
+              que les pans ne s'écartent. */}
+          <div
+            data-seam
+            className="absolute inset-y-0 start-1/2 w-px origin-center -translate-x-1/2 opacity-0 rtl:translate-x-1/2"
+            style={{
+              background:
+                'linear-gradient(to bottom, transparent, var(--color-gold-light) 18%, var(--color-gold-light) 82%, transparent)',
+              boxShadow: '0 0 26px 3px rgba(214,171,90,0.55)',
+            }}
+          />
           <div
             data-counter
-            className="absolute inset-0 flex flex-col items-center justify-center gap-5"
+            className="absolute inset-0 flex flex-col items-center justify-center"
           >
-            <span className="flex items-baseline gap-1 font-serif text-[clamp(2.2rem,5vw,3.4rem)] leading-none tracking-[0.12em] text-ivory tabular-nums">
-              <span ref={counterRef}>0</span>
-              <span className="text-[0.45em] text-gold-light/80">%</span>
+            {/* Le monogramme de la maison, en or : le logo réel sert de MASQUE à
+                un dégradé métallique (un reflet y circule pendant l'intro). */}
+            <div
+              data-monogram
+              role="presentation"
+              className="h-[clamp(10rem,30vw,19rem)] w-[clamp(10rem,30vw,19rem)]"
+              style={{
+                backgroundImage:
+                  'linear-gradient(110deg, #85601d 0%, #b8862b 30%, #f2e3b8 46%, #d6ab5a 54%, #b8862b 70%, #85601d 100%)',
+                backgroundSize: '260% 100%',
+                WebkitMaskImage: 'url(/img/logo/LOGO%20WEBP3.webp)',
+                maskImage: 'url(/img/logo/LOGO%20WEBP3.webp)',
+                WebkitMaskSize: 'contain',
+                maskSize: 'contain',
+                WebkitMaskRepeat: 'no-repeat',
+                maskRepeat: 'no-repeat',
+                WebkitMaskPosition: 'center',
+                maskPosition: 'center',
+              }}
+            />
+            <span
+              data-wordmark
+              className="mt-2 font-display text-[clamp(0.8rem,1.6vw,1.05rem)] tracking-[0.5em] text-ivory/85 uppercase"
+            >
+              {brand}
             </span>
-            {/* Le filet dit la même chose que le chiffre, en silence. */}
-            <span className="block h-px w-28 overflow-hidden bg-ivory/15">
-              <span
-                ref={progressRef}
-                className="block h-full w-full origin-left bg-gold"
-                style={{ transform: 'scaleX(0)' }}
-              />
+            {/* Le pourcentage et le filet disent la même chose, en silence. */}
+            <span className="mt-8 flex items-center gap-4 font-ui text-3xs tracking-[0.2em] text-gold-light/70 tabular-nums">
+              <span className="flex items-baseline gap-0.5">
+                <span ref={counterRef}>0</span>
+                <span data-pct className="text-[0.85em]">%</span>
+              </span>
+              <span className="block h-px w-24 overflow-hidden bg-ivory/15">
+                <span
+                  ref={progressRef}
+                  className="block h-full w-full origin-left bg-gold"
+                  style={{ transform: 'scaleX(0)' }}
+                />
+              </span>
             </span>
           </div>
         </div>

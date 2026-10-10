@@ -32,7 +32,7 @@ export function Voices({ dict }: { dict: Dictionary }) {
     <section
       ref={ref}
       aria-labelledby="temoignages"
-      className="border-t border-smoke-2 bg-noir px-6 py-24 md:px-12 md:py-32 lg:px-20"
+      className="border-t border-gold/20 bg-noir px-6 py-24 md:px-12 md:py-32 lg:px-20"
     >
       <div className="mx-auto max-w-(--container-site)">
         <h2 id="temoignages" className="font-body font-light text-ivory/60">
@@ -49,6 +49,12 @@ export function Voices({ dict }: { dict: Dictionary }) {
         <div className="mt-14 grid gap-x-12 gap-y-16 md:mt-20 md:grid-cols-2">
           {TESTIMONIALS.map((t) => (
             <figure key={`${t.name}-${t.city}`} data-fade className="flex flex-col">
+              <span
+                aria-hidden="true"
+                className="mb-2 block font-display text-6xl leading-none text-gold/45"
+              >
+                “
+              </span>
               <blockquote className="font-body text-[clamp(1.3rem,2vw,1.7rem)] leading-[1.5] text-ivory/85">
                 {t.quote}
               </blockquote>

@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useRef } from 'react';
+import { useRef, type CSSProperties } from 'react';
 
 import { useReveal } from '@/components/motion/useReveal';
 import type { Locale } from '@/lib/i18n/config';
@@ -34,7 +34,8 @@ export function ClosingCall({
     <section
       ref={ref}
       aria-labelledby="cloture"
-      className="relative overflow-hidden border-t border-gold/25 bg-burgundy px-6 py-32 md:px-12 md:py-44 lg:px-20"
+      style={{ '--seam-from': 'var(--color-noir)' } as CSSProperties}
+      className="ds-seam ds-grain relative overflow-hidden bg-burgundy px-6 py-32 md:px-12 md:py-44 lg:px-20"
     >
       <div
         aria-hidden="true"

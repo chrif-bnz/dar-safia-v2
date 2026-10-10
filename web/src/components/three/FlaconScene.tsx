@@ -547,12 +547,36 @@ export function FlaconScene({ className }: { className?: string }) {
       const LABEL_H = rich ? 1280 : 854;
       const logoImg = new Image();
       let logoReady = false;
-      const gold = '#f1dba5';
+      const gold = '#dcb36a';
+      // Étiquette fidèle à la vraie : papier bordeaux, double filet d'or, monogramme
+      // DS et la mention. Deux calques : le papier (mat, opaque) et la dorure
+      // (métallique, qui s'allume au gros plan).
+      const drawPaper = (ctx: CanvasRenderingContext2D, w: number, h: number) => {
+        ctx.fillStyle = '#3d0f14';
+        ctx.fillRect(0, 0, w, h);
+        // Grain du papier : très fin, pour ne pas lire un aplat numérique.
+        const img = ctx.getImageData(0, 0, w, h);
+        const d = img.data;
+        for (let i = 0; i < d.length; i += 4) {
+          const n = (Math.random() - 0.5) * 16;
+          d[i] += n;
+          d[i + 1] += n * 0.6;
+          d[i + 2] += n * 0.6;
+        }
+        ctx.putImageData(img, 0, 0);
+      };
       const drawFront = (ctx: CanvasRenderingContext2D, w: number, h: number) => {
         ctx.clearRect(0, 0, w, h);
         ctx.textAlign = 'center';
+        ctx.strokeStyle = gold;
+        ctx.lineWidth = Math.max(2, h * 0.004);
+        const m1 = w * 0.05;
+        ctx.strokeRect(m1, m1, w - 2 * m1, h - 2 * m1);
+        ctx.lineWidth = Math.max(1, h * 0.002);
+        const m2 = w * 0.075;
+        ctx.strokeRect(m2, m2, w - 2 * m2, h - 2 * m2);
         if (logoReady) {
-          const size = h * 0.6;
+          const size = Math.min(w * 0.78, h * 0.66);
           const tint = document.createElement('canvas');
           tint.width = tint.height = Math.round(size);
           const t = tint.getContext('2d');
@@ -561,23 +585,13 @@ export function FlaconScene({ className }: { className?: string }) {
             t.globalCompositeOperation = 'source-in';
             t.fillStyle = gold;
             t.fillRect(0, 0, tint.width, tint.height);
-            ctx.drawImage(tint, (w - size) / 2, h * 0.04, size, size);
+            ctx.drawImage(tint, (w - size) / 2, h * 0.1, size, size);
           }
         }
         ctx.fillStyle = gold;
-        ctx.font = `500 ${Math.round(h * 0.11)}px "Cinzel", Georgia, serif`;
-        ctx.letterSpacing = `${Math.round(h * 0.014)}px`;
-        ctx.fillText('DAR SAFIA', w / 2, h * 0.79);
-        ctx.strokeStyle = 'rgba(241,219,165,0.75)';
-        ctx.lineWidth = Math.max(1, h * 0.003);
-        ctx.beginPath();
-        ctx.moveTo(w * 0.36, h * 0.855);
-        ctx.lineTo(w * 0.64, h * 0.855);
-        ctx.stroke();
-        ctx.font = `400 ${Math.round(h * 0.048)}px "Montserrat", system-ui, sans-serif`;
-        ctx.fillStyle = 'rgba(241,219,165,0.9)';
-        ctx.letterSpacing = `${Math.round(h * 0.02)}px`;
-        ctx.fillText('EAU DE PARFUM', w / 2, h * 0.925);
+        ctx.font = `500 ${Math.round(h * 0.052)}px "Cinzel", Georgia, serif`;
+        ctx.letterSpacing = `${Math.round(h * 0.012)}px`;
+        ctx.fillText('EAU DE PARFUM', w / 2, h * 0.9);
       };
       const drawBack = (ctx: CanvasRenderingContext2D, w: number, h: number) => {
         ctx.clearRect(0, 0, w, h);
@@ -597,24 +611,33 @@ export function FlaconScene({ className }: { className?: string }) {
         ctx.letterSpacing = `${Math.round(h * 0.018)}px`;
         ctx.fillText('EAU DE PARFUM', w / 2, h * 0.7);
       };
-      const printTexture = (draw: (c: CanvasRenderingContext2D, w: number, h: number) => void) => {
+      const printTexture = (
+        draw: (c: CanvasRenderingContext2D, w: number, h: number) => void,
+        cw: number,
+        ch: number,
+        srgb = true
+      ) => {
         const c = document.createElement('canvas');
-        c.width = LABEL_W;
-        c.height = LABEL_H;
+        c.width = cw;
+        c.height = ch;
         const ctx = c.getContext('2d');
         const tex = keep(new THREE.CanvasTexture(c));
-        tex.colorSpace = THREE.SRGBColorSpace;
+        if (srgb) tex.colorSpace = THREE.SRGBColorSpace;
         tex.anisotropy = Math.min(8, renderer.capabilities.getMaxAnisotropy());
         const repaint = () => {
           if (disposed || !ctx) return;
-          draw(ctx, LABEL_W, LABEL_H);
+          draw(ctx, cw, ch);
           tex.needsUpdate = true;
         };
         repaint();
         return { tex, repaint };
       };
-      const front = printTexture(drawFront);
-      const back = printTexture(drawBack);
+      // Étiquette de face : portrait, comme la vraie. Le dos reste au format paysage.
+      const FRONT_W = rich ? 1024 : 768;
+      const FRONT_H = rich ? 1280 : 960;
+      const paper = printTexture(drawPaper, FRONT_W, FRONT_H);
+      const front = printTexture(drawFront, FRONT_W, FRONT_H);
+      const back = printTexture(drawBack, LABEL_W, LABEL_H);
       logoImg.onload = () => {
         logoReady = true;
         front.repaint();
@@ -649,8 +672,30 @@ export function FlaconScene({ className }: { className?: string }) {
       const backMat = printMat(back.tex);
       const PRINT_W = 1.2;
       const PRINT_H = (PRINT_W * LABEL_H) / LABEL_W;
-      const frontPrint = new THREE.Mesh(keep(new THREE.PlaneGeometry(PRINT_W, PRINT_H)), frontMat);
-      frontPrint.position.set(0, 1.22, D / 2 + 0.004);
+      // Papier : opaque et mat (il porte la couleur de la maison), un peu
+      // sous la dorure pour que les filets ne sortent pas du plan.
+      const LABEL_PLANE_W = 0.96;
+      const LABEL_PLANE_H = (LABEL_PLANE_W * FRONT_H) / FRONT_W;
+      const paperMesh = new THREE.Mesh(
+        keep(new THREE.PlaneGeometry(LABEL_PLANE_W, LABEL_PLANE_H)),
+        keep(
+          new THREE.MeshStandardMaterial({
+            map: paper.tex,
+            roughness: 0.78,
+            metalness: 0,
+            envMapIntensity: 0.35,
+            polygonOffset: true,
+            polygonOffsetFactor: -1,
+          })
+        )
+      );
+      paperMesh.position.set(0, 1.2, D / 2 + 0.004);
+      bottle.add(paperMesh);
+      const frontPrint = new THREE.Mesh(
+        keep(new THREE.PlaneGeometry(LABEL_PLANE_W, LABEL_PLANE_H)),
+        frontMat
+      );
+      frontPrint.position.set(0, 1.2, D / 2 + 0.007);
       frontPrint.renderOrder = 2;
       bottle.add(frontPrint);
       const backPrint = new THREE.Mesh(keep(new THREE.PlaneGeometry(PRINT_W * 0.7, PRINT_H * 0.7)), backMat);

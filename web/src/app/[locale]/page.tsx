@@ -47,6 +47,7 @@ export default async function HomePage({ params }: PageProps<'/[locale]'>) {
         scrollLabel={dict.hero.scroll}
         videoLabel={dict.hero.videoLabel}
         skipLabel={dict.hero.skipIntro}
+        brand={dict.common.brandName}
       />
 
       <Manifesto dict={dict} />
