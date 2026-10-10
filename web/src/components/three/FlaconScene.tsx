@@ -296,6 +296,37 @@ export function FlaconScene({ className }: { className?: string }) {
         r.addColorStop(1, 'rgba(61,15,20,0)');
         ctx.fillStyle = r;
         ctx.fillRect(0, 0, w, h);
+        // Cannelures : un mur de boiserie, pas un aplat. Des pilastres fins,
+        // chacun un dégradé (ombre → lueur → ombre), plus marqués au centre.
+        const ribW = w / 40;
+        for (let i = 0; i < 40; i++) {
+          const x = i * ribW;
+          const near = 1 - Math.abs(i - 19.5) / 20;
+          const rg = ctx.createLinearGradient(x, 0, x + ribW, 0);
+          rg.addColorStop(0, 'rgba(0,0,0,0.17)');
+          rg.addColorStop(0.5, `rgba(214,171,90,${0.025 + near * 0.035})`);
+          rg.addColorStop(1, 'rgba(0,0,0,0.17)');
+          ctx.fillStyle = rg;
+          ctx.fillRect(x, 0, ribW, h);
+        }
+        // Une niche en arc derrière le flacon : un trait d'or très bas.
+        ctx.strokeStyle = 'rgba(214,171,90,0.20)';
+        ctx.lineWidth = 2;
+        const ax = w * 0.5;
+        const ar = w * 0.17;
+        ctx.beginPath();
+        ctx.moveTo(ax - ar, h * 0.92);
+        ctx.lineTo(ax - ar, h * 0.34);
+        ctx.arc(ax, h * 0.34, ar, Math.PI, 0);
+        ctx.lineTo(ax + ar, h * 0.92);
+        ctx.stroke();
+        ctx.strokeStyle = 'rgba(214,171,90,0.10)';
+        ctx.beginPath();
+        ctx.moveTo(ax - ar - 14, h * 0.92);
+        ctx.lineTo(ax - ar - 14, h * 0.34);
+        ctx.arc(ax, h * 0.34, ar + 14, Math.PI, 0);
+        ctx.lineTo(ax + ar + 14, h * 0.92);
+        ctx.stroke();
         dither(ctx, w, h);
       });
       const wallMat = keep(new THREE.MeshBasicMaterial({ map: wallTex, depthWrite: false }));
@@ -550,6 +581,35 @@ export function FlaconScene({ className }: { className?: string }) {
       seam.position.y = BODY_H + COLLAR_H - 0.03;
       bottle.add(seam);
 
+      // ── Détails d'orfèvrerie ──
+      // Deux joncs polis sur la bague : le filet de lumière qui dit « métal
+      // tourné », et non « cylindre ». Une jupe sous le bouchon, qui épaule
+      // l'assemblage. Un tube plongeur dans le jus, comme sur un vrai vaporisateur.
+      const ringGeo = keep(new THREE.TorusGeometry(0.415, 0.012, 10, rich ? 64 : 36));
+      [BODY_H + 0.03, BODY_H + COLLAR_H - 0.075].forEach((y) => {
+        const ring = new THREE.Mesh(ringGeo, goldPolished);
+        ring.rotation.x = Math.PI / 2;
+        ring.position.y = y;
+        bottle.add(ring);
+      });
+      const skirt = new THREE.Mesh(slab(1.12, 0.78, 0.19, 0.06, 0.02, 3), goldPolished);
+      skirt.position.y = BODY_H + COLLAR_H - 0.07;
+      bottle.add(skirt);
+      const dip = new THREE.Mesh(
+        keep(new THREE.CylinderGeometry(0.016, 0.016, FILL_TOP - BASE + 0.1, 10)),
+        keep(
+          new THREE.MeshPhysicalMaterial({
+            color: 0xf3e2bd,
+            roughness: 0.12,
+            transparent: true,
+            opacity: 0.55,
+            envMapIntensity: 0.9,
+          })
+        )
+      );
+      dip.position.set(0.16, BASE + (FILL_TOP - BASE) / 2 + 0.05, 0.05);
+      bottle.add(dip);
+
       // ── Impression : le vrai monogramme DS, doré, sur la face plane ──
       const LABEL_W = rich ? 1536 : 1024;
       const LABEL_H = rich ? 1280 : 854;
@@ -600,6 +660,27 @@ export function FlaconScene({ className }: { className?: string }) {
         ctx.font = `500 ${Math.round(h * 0.052)}px "Cinzel", Georgia, serif`;
         ctx.letterSpacing = `${Math.round(h * 0.012)}px`;
         ctx.fillText('EAU DE PARFUM', w / 2, h * 0.9);
+        // Filets et losanges de part et d'autre de la mention : l'ornement des
+        // étiquettes d'apothicaire.
+        ctx.lineWidth = Math.max(1, h * 0.002);
+        [[0.14, 0.33], [0.67, 0.86]].forEach(([a, b]) => {
+          ctx.beginPath();
+          ctx.moveTo(w * a, h * 0.885);
+          ctx.lineTo(w * b, h * 0.885);
+          ctx.stroke();
+        });
+        [0.1, 0.9].forEach((x) => {
+          const cx = w * x;
+          const cy = h * 0.885;
+          const r = h * 0.011;
+          ctx.beginPath();
+          ctx.moveTo(cx, cy - r);
+          ctx.lineTo(cx + r, cy);
+          ctx.lineTo(cx, cy + r);
+          ctx.lineTo(cx - r, cy);
+          ctx.closePath();
+          ctx.fill();
+        });
       };
       const drawBack = (ctx: CanvasRenderingContext2D, w: number, h: number) => {
         ctx.clearRect(0, 0, w, h);
@@ -649,6 +730,7 @@ export function FlaconScene({ className }: { className?: string }) {
       logoImg.onload = () => {
         logoReady = true;
         front.repaint();
+        capTop.repaint();
       };
       logoImg.src = '/img/logo/LOGO%20WEBP3.webp';
       void document.fonts?.ready
@@ -712,6 +794,46 @@ export function FlaconScene({ className }: { className?: string }) {
       backPrint.renderOrder = 2;
       bottle.add(backPrint);
 
+      // Dessus du bouchon : une plaque gravée du monogramme, en or sombre. On ne
+      // la voit que depuis le haut (plans de la chorégraphie du chapitre III).
+      const drawCapTop = (ctx: CanvasRenderingContext2D, w: number, h: number) => {
+        ctx.fillStyle = '#6b4a17';
+        ctx.fillRect(0, 0, w, h);
+        ctx.strokeStyle = '#e2bd72';
+        ctx.lineWidth = Math.max(2, h * 0.018);
+        ctx.strokeRect(h * 0.06, h * 0.06, w - h * 0.12, h * 0.88);
+        if (logoReady) {
+          const size = h * 0.74;
+          const tint = document.createElement('canvas');
+          tint.width = tint.height = Math.round(size);
+          const t = tint.getContext('2d');
+          if (t) {
+            t.drawImage(logoImg, 0, 0, tint.width, tint.height);
+            t.globalCompositeOperation = 'source-in';
+            t.fillStyle = '#f0d594';
+            t.fillRect(0, 0, tint.width, tint.height);
+            ctx.drawImage(tint, (w - size) / 2, (h - size) / 2, size, size);
+          }
+        }
+      };
+      const capTop = printTexture(drawCapTop, 512, 320);
+      const capInlay = new THREE.Mesh(
+        keep(new THREE.PlaneGeometry(0.78, 0.49)),
+        keep(
+          new THREE.MeshStandardMaterial({
+            map: capTop.tex,
+            metalness: 0.85,
+            roughness: 0.38,
+            envMapIntensity: 1.1,
+            polygonOffset: true,
+            polygonOffsetFactor: -1,
+          })
+        )
+      );
+      capInlay.rotation.x = -Math.PI / 2;
+      capInlay.position.y = cap.position.y + CAP_H + 0.004;
+      bottle.add(capInlay);
+
       // ── Lumières directes ───────────────────────────────────
       // Elles ne font pas le verre (c'est l'environnement) : elles modèlent l'or,
       // le jus, la pierre. Clé large et chaude, contre-jour discret.
@@ -763,6 +885,76 @@ export function FlaconScene({ className }: { className?: string }) {
       const dust = new THREE.Points(dustGeo, dustMat);
       dust.frustumCulled = false;
       scene.add(dust);
+
+      // Bokeh : de grands disques de lumière hors champ, très bas, au fond de la
+      // pièce. Ils donnent la profondeur d'un objectif ouvert à f/1.4.
+      const bokehTex = paintTexture(128, 128, (ctx, w) => {
+        const g = ctx.createRadialGradient(w / 2, w / 2, 0, w / 2, w / 2, w / 2);
+        g.addColorStop(0, 'rgba(255,214,150,0.35)');
+        g.addColorStop(0.82, 'rgba(255,200,120,0.5)');
+        g.addColorStop(0.92, 'rgba(255,200,120,0.18)');
+        g.addColorStop(1, 'rgba(255,200,120,0)');
+        ctx.fillStyle = g;
+        ctx.fillRect(0, 0, w, w);
+      });
+      const BOKEH = rich ? 16 : 9;
+      const bokehBase = new Float32Array(BOKEH * 3);
+      const bokehPos = new Float32Array(BOKEH * 3);
+      const bokehPhase = new Float32Array(BOKEH);
+      for (let i = 0; i < BOKEH; i++) {
+        bokehBase[i * 3] = (Math.random() - 0.5) * 22;
+        bokehBase[i * 3 + 1] = Math.random() * 8 - 0.5;
+        bokehBase[i * 3 + 2] = -8 - Math.random() * 5;
+        bokehPhase[i] = Math.random() * Math.PI * 2;
+      }
+      const bokehGeo = keep(new THREE.BufferGeometry());
+      bokehGeo.setAttribute('position', new THREE.BufferAttribute(bokehPos, 3));
+      const bokehMat = keep(
+        new THREE.PointsMaterial({
+          map: bokehTex,
+          size: 1.9,
+          sizeAttenuation: true,
+          transparent: true,
+          opacity: 0,
+          depthWrite: false,
+          blending: THREE.AdditiveBlending,
+          color: 0xffc98a,
+        })
+      );
+      const bokeh = new THREE.Points(bokehGeo, bokehMat);
+      bokeh.frustumCulled = false;
+      scene.add(bokeh);
+
+      // Bulles dans le jus : quelques-unes, minuscules, qui montent très
+      // lentement et se perdent sous la surface. Dans le groupe du flacon,
+      // elles tournent avec lui.
+      const BUBBLES = rich ? 14 : 6;
+      const bubbleBase = new Float32Array(BUBBLES * 3);
+      const bubblePos = new Float32Array(BUBBLES * 3);
+      const bubblePhase = new Float32Array(BUBBLES);
+      for (let i = 0; i < BUBBLES; i++) {
+        bubbleBase[i * 3] = (Math.random() - 0.5) * (W - 2 * WALL - 0.3);
+        bubbleBase[i * 3 + 1] = BASE + 0.1 + Math.random() * (FILL_TOP - BASE - 0.2);
+        bubbleBase[i * 3 + 2] = (Math.random() - 0.5) * (D - 2 * WALL - 0.3);
+        bubblePhase[i] = Math.random();
+      }
+      const bubbleGeo = keep(new THREE.BufferGeometry());
+      bubbleGeo.setAttribute('position', new THREE.BufferAttribute(bubblePos, 3));
+      const bubbleMat = keep(
+        new THREE.PointsMaterial({
+          map: softSprite,
+          size: 0.045,
+          sizeAttenuation: true,
+          transparent: true,
+          opacity: 0.8,
+          depthWrite: false,
+          blending: THREE.AdditiveBlending,
+          color: 0xfff0d0,
+        })
+      );
+      const bubbles = new THREE.Points(bubbleGeo, bubbleMat);
+      bubbles.frustumCulled = false;
+      bottle.add(bubbles);
 
       const beamTex = paintTexture(128, 256, (ctx, w, h) => {
         const g = ctx.createLinearGradient(0, 0, w, 0);
@@ -1113,6 +1305,24 @@ export function FlaconScene({ className }: { className?: string }) {
         beams.forEach((b, i) => { b.rotation.y = k.az * (0.6 + i * 0.2); });
         caustic.material.opacity = (0.1 + k.logo * 0.12 + k.warm * 0.08) * intro;
         caustic.rotation.z = k.yaw * 0.12;
+
+        // ── Bokeh et bulles ──
+        for (let i = 0; i < BOKEH; i++) {
+          const ph = bokehPhase[i];
+          bokehPos[i * 3] = bokehBase[i * 3] + Math.sin(t * 0.05 + ph) * 0.8 - k.az * 3.2;
+          bokehPos[i * 3 + 1] = bokehBase[i * 3 + 1] + Math.sin(t * 0.07 + ph * 2) * 0.35;
+          bokehPos[i * 3 + 2] = bokehBase[i * 3 + 2];
+        }
+        bokehGeo.attributes.position.needsUpdate = true;
+        bokehMat.opacity = (0.05 + k.warm * 0.07) * intro * (0.8 + 0.2 * Math.sin(t * 0.3));
+        for (let i = 0; i < BUBBLES; i++) {
+          const rise = ((bubblePhase[i] + t * (0.012 + (i % 3) * 0.004)) % 1);
+          bubblePos[i * 3] = bubbleBase[i * 3] + Math.sin(t * 0.6 + i) * 0.03;
+          bubblePos[i * 3 + 1] = BASE + 0.1 + rise * (FILL_TOP - BASE - 0.2);
+          bubblePos[i * 3 + 2] = bubbleBase[i * 3 + 2];
+        }
+        bubbleGeo.attributes.position.needsUpdate = true;
+        bubbleMat.opacity = 0.75 * intro;
 
         // ── Survol : un lancer de rayon par image au plus ──
         if (s.pointerDirty && !coarse) {

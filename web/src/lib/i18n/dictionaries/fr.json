@@ -62,7 +62,12 @@
       "Une mémoire."
     ],
     "body": "Un sillage ne se choisit pas dans une vitrine. Il se reconnaît — au détour d'une pièce, sur un vêtement, des années plus tard. Dar Safia réunit les créations capables de cela : celles dont la trace survit à l'instant.",
-    "aside": "Chaque flacon est retenu sur trois exigences : la pureté des accords, la tenue sur la peau, et une provenance vérifiée."
+    "aside": "Chaque flacon est retenu sur trois exigences : la pureté des accords, la tenue sur la peau, et une provenance vérifiée.",
+    "pillars": [
+      "Pureté des accords",
+      "Tenue sur la peau",
+      "Provenance vérifiée"
+    ]
   },
   "scent": {
     "title": "Les matières qui reviennent",

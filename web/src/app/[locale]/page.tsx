@@ -51,7 +51,7 @@ export default async function HomePage({ params }: PageProps<'/[locale]'>) {
         brand={dict.common.brandName}
       />
 
-      <Manifesto dict={dict} />
+      <Manifesto dict={dict} houses={brands.map((b) => b.name)} />
 
       <TeaserFilm dict={dict} />
 

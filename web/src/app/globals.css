@@ -1033,3 +1033,36 @@ html.has-custom-cursor [contenteditable] {
 @media (prefers-reduced-motion: reduce) {
   .ds-loading-mark, .ds-loading-rule { animation: none; }
 }
+
+/* ══════════════════════════════════════════════════════════════
+   MANIFESTE — bandes de maisons
+   Deux pistes en sens contraire. Transform seul (aucun layout), la
+   piste contient deux copies de la liste : la boucle est sans couture.
+   Un contour doré sur la première, du plein sur la seconde : deux
+   voix, pas deux fois la même.
+   ══════════════════════════════════════════════════════════════ */
+.ds-marquee__mask {
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 9%, #000 91%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 9%, #000 91%, transparent);
+}
+.ds-marquee__track {
+  display: flex;
+  width: max-content;
+  animation: ds-marquee 70s linear infinite;
+  will-change: transform;
+}
+.ds-marquee__track--rev {
+  animation-direction: reverse;
+  animation-duration: 90s;
+}
+@keyframes ds-marquee {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(-50%, 0, 0); }
+}
+.ds-outline-text {
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(214, 171, 90, 0.55);
+}
+@media (prefers-reduced-motion: reduce) {
+  .ds-marquee__track { animation: none; }
+}
