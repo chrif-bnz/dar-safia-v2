@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "prepare-assets": "node ../scripts/optimize-images.mjs && node ../scripts/migrate-catalog.mjs && node fetch-wilayas.mjs",
+    "prepare-assets": "node --import ./resolve-from-web.mjs ../scripts/optimize-images.mjs && node ../scripts/migrate-catalog.mjs && node fetch-wilayas.mjs",
     "predev": "npm run prepare-assets",
     "dev": "next dev",
     "prebuild": "npm run prepare-assets",
@@ -25,6 +25,7 @@
     "three": "^0.180.0"
   },
   "devDependencies": {
+    "@netlify/plugin-nextjs": "^5.16.2",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^24.13.3",
     "@types/react": "^19",
@@ -34,6 +35,7 @@
     "eslint-config-next": "16.3.4",
     "geoalgeria": "^2.3.0",
     "jsdom": "^30.0.1",
+    "sharp": "^0.35.5",
     "tailwindcss": "^4",
     "typescript": "^5",
     "vitest": "^5.0.0"
