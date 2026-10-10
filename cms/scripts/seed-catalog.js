@@ -7,9 +7,10 @@
  * on peut donc relancer sans doublon ni écrasement des retouches faites dans
  * l'admin.
  *
- * Images : les fichiers sources des 45 parfums ne sont pas dans ce dépôt
- * (seuls quelques visuels génériques le sont). Une image absente est ignorée
- * et signalée ; ajoutez-les ensuite depuis l'admin (Content Manager → Parfum).
+ * Images : les photos sont lues dans perfumes/Photos site web/ (masters
+ * versionnés). Un parfum DÉJÀ présent mais sans image en reçoit au passage ;
+ * s'il en a déjà, rien n'est touché. Une image introuvable est signalée ;
+ * ajoutez-la depuis l'admin (Content Manager → Parfum).
  */
 const fs = require('node:fs');
 const path = require('node:path');
@@ -58,6 +59,7 @@ async function main() {
   let nBrand = 0;
   let nNote = 0;
   let nProduct = 0;
+  let nPatched = 0;
   let skippedImages = 0;
 
   for (const b of brands) {
@@ -84,7 +86,26 @@ async function main() {
     const [existing] = await app
       .documents('api::product.product')
       .findMany({ filters: { slug: p.slug }, limit: 1 });
-    if (existing) continue;
+    if (existing) {
+      // Reprise : un parfum importé avant l'arrivée des photos les reçoit ici.
+      const full = await app
+        .documents('api::product.product')
+        .findOne({ documentId: existing.documentId, populate: ['images'] });
+      if (!full?.images?.length) {
+        const ids = [];
+        for (const img of p.images ?? []) {
+          const id = await uploadImage(app, img, img.alt);
+          if (id) ids.push(id);
+        }
+        if (ids.length) {
+          await app
+            .documents('api::product.product')
+            .update({ documentId: existing.documentId, data: { images: ids }, status: 'published' });
+          nPatched++;
+        }
+      }
+      continue;
+    }
 
     const imageIds = [];
     for (const img of p.images ?? []) {
@@ -136,7 +157,8 @@ async function main() {
   }
 
   console.log(
-    `Importé : ${nBrand} marques, ${nNote} notes, ${nProduct} parfums. ` +
+    `Importé : ${nBrand} marques, ${nNote} notes, ${nProduct} parfums ` +
+      `(${nPatched} existants complétés en images). ` +
       `Images absentes (à ajouter dans l'admin) : ${skippedImages}.`
   );
   await app.destroy();

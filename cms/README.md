@@ -43,6 +43,32 @@ Les noms de champs de `product`, `brand`, `fragrance-note`, `collection` suivent
 
 ## À savoir
 
-- Les photos des 45 parfums ne sont pas dans le dépôt : le seed les ignore. Les ajouter depuis l'admin (Parfum → Images) ; le site les affichera.
+- Les photos des parfums sont versionnées dans `perfumes/Photos site web/` ; `npm run seed` les téléverse dans Strapi (médiathèque) et les rattache à chaque parfum. Relancer le seed complète les parfums déjà importés qui n'ont pas encore d'image. Une photo ajoutée ou remplacée dans l'admin (Parfum → Images) est servie par le site telle quelle.
 - SQLite en local ; PostgreSQL en production via `DATABASE_CLIENT=postgres` et les variables `DATABASE_*` (voir `.env.example`).
 - Après modification d'un schéma : `npx strapi ts:generate-types` et commiter `types/generated/`.
+
+## Brancher le site sur Strapi
+
+Vérifié : avec `CATALOG_SOURCE=strapi`, les 50 pages testées (accueil, liste en FR/EN/AR, diagnostic, 45 fiches) affichent exactement les mêmes textes, prix et notes qu'avec les données statiques ; les images viennent de `/uploads` de Strapi.
+
+Dans l'environnement du SITE (jamais commité) :
+
+```
+CATALOG_SOURCE=strapi
+STRAPI_URL=https://<votre-strapi>        # URL publique, sans « / » final
+STRAPI_API_TOKEN=<jeton lecture>         # npm run tokens:create
+STRAPI_FORMS_TOKEN=<jeton création>
+```
+
+Sans `CATALOG_SOURCE`, le site garde les données statiques : rien ne change tant que Strapi n'est pas hébergé et ces variables posées.
+
+## Mise en ligne de Strapi (à faire une fois)
+
+Le site déployé (Netlify) ne peut lire que PAR HTTP un Strapi accessible publiquement ; celui de `localhost` ne lui sert à rien.
+
+1. Héberger `cms/` (Render, Railway, VPS…) avec **PostgreSQL** (`DATABASE_CLIENT=postgres`, `DATABASE_*`) et de **vraies** valeurs pour `APP_KEYS`, `*_SALT`, `*_SECRET`, `ENCRYPTION_KEY` (le `.env` d'exemple porte « tobemodified »).
+2. Les images doivent survivre aux redéploiements : disque persistant monté sur `public/uploads`, ou fournisseur d'upload distant (Cloudinary, S3).
+3. Sur le serveur : `npm run build`, puis `npm run start`, créer le compte admin, `npm run seed`, `npm run tokens:create`.
+4. Poser les quatre variables ci-dessus dans Netlify, puis redéployer.
+
+Un changement fait dans l'admin n'apparaît sur le site qu'au prochain déploiement (les 155 pages sont générées au build) : ajouter un webhook Strapi → build hook Netlify pour le déclencher automatiquement.
