@@ -18,6 +18,7 @@ import {
 import { LOCALES, isLocale } from '@/lib/i18n/config';
 import { getDictionary, interpolate } from '@/lib/i18n/dictionaries';
 import { localePath } from '@/lib/i18n/routing';
+import { absoluteUrl, localeAlternates } from '@/lib/site';
 import { orderMessage, whatsappUrl } from '@/lib/whatsapp';
 
 /**
@@ -43,13 +44,16 @@ export async function generateMetadata({
   if (!product) return {};
 
   const image = product.images[0];
+  const path = `/parfums/${product.slug}`;
   return {
     title: product.seo?.title ?? `${product.name} — ${product.brand.name}`,
     description: product.seo?.description ?? product.description.slice(0, 155),
+    alternates: localeAlternates(isLocale(locale) ? locale : 'fr', path),
     openGraph: {
       title: `${product.name} — ${product.brand.name}`,
       description: product.description.slice(0, 155),
       type: 'website',
+      url: localePath(isLocale(locale) ? locale : 'fr', path),
       images: image ? [{ url: image.url, alt: image.alt }] : undefined,
     },
   };
@@ -86,7 +90,8 @@ export default async function ProductPage({
     name: product.name,
     brand: { '@type': 'Brand', name: product.brand.name },
     description: product.description,
-    image: image ? [image.url] : undefined,
+    image: image ? [absoluteUrl(image.url)] : undefined,
+    url: absoluteUrl(localePath(locale, `/parfums/${product.slug}`)),
     offers: {
       '@type': 'Offer',
       price: price.amount,

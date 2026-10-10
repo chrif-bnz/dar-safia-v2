@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 
 import { isLocale } from '@/lib/i18n/config';
 import { getDictionary } from '@/lib/i18n/dictionaries';
+import { localeAlternates } from '@/lib/site';
 
 import { ScentFinder } from './ScentFinder';
 
@@ -12,7 +13,11 @@ export async function generateMetadata({
   const { locale } = await params;
   if (!isLocale(locale)) return {};
   const dict = await getDictionary(locale);
-  return { title: dict.scentFinder.title, description: dict.scentFinder.intro };
+  return {
+    title: dict.scentFinder.title,
+    description: dict.scentFinder.intro,
+    alternates: localeAlternates(locale, '/trouver'),
+  };
 }
 
 /**

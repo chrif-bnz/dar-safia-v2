@@ -15,6 +15,7 @@ import { SmoothScroll } from '@/components/motion/SmoothScroll';
 import { DIRECTION, LOCALES, isLocale } from '@/lib/i18n/config';
 import { introGuardScript } from '@/lib/intro-guard';
 import { getDictionary } from '@/lib/i18n/dictionaries';
+import { OG_LOCALE, siteUrl } from '@/lib/site';
 
 import '../globals.css';
 
@@ -114,11 +115,17 @@ export async function generateMetadata({ params }: LayoutProps<'/[locale]'>): Pr
   const dict = await getDictionary(locale);
   const house = dict.home.eyebrow.split('·')[0].trim();
   return {
+    metadataBase: siteUrl(),
     title: {
       default: `${dict.common.brandName} — ${house}`,
       template: `%s | ${dict.common.brandName}`,
     },
     description: dict.home.tagline,
+    openGraph: {
+      siteName: dict.common.brandName,
+      locale: OG_LOCALE[locale],
+      type: 'website',
+    },
   };
 }
 

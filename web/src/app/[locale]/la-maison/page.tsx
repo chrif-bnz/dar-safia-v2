@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import { catalog } from '@/lib/catalog';
 import { LOCALES, isLocale } from '@/lib/i18n/config';
 import { getDictionary } from '@/lib/i18n/dictionaries';
+import { localeAlternates } from '@/lib/site';
 
 import { AboutExperience } from './AboutExperience';
 
@@ -25,7 +26,11 @@ export async function generateMetadata({
   const { locale } = await params;
   if (!isLocale(locale)) return {};
   const dict = await getDictionary(locale);
-  return { title: dict.nav.about, description: dict.about.metaDescription };
+  return {
+    title: dict.nav.about,
+    description: dict.about.metaDescription,
+    alternates: localeAlternates(locale, '/la-maison'),
+  };
 }
 
 export default async function AboutPage({
