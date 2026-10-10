@@ -1,11 +1,14 @@
 'use client';
 
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import type { Media, Product, ProductVariant } from '@/lib/catalog';
 import type { Dictionary } from '@/lib/i18n/dictionaries';
 import type { Locale } from '@/lib/i18n/config';
 import { AddToCartButton } from '@/components/cart/AddToCartButton';
 import wilayasData from '@/data/wilayas.json';
+import { localePath } from '@/lib/i18n/routing';
+import { saveOrderReceipt } from '@/lib/order-receipt';
 
 interface ProductOrderFormProps {
   product: Product;
@@ -37,6 +40,7 @@ export function ProductOrderForm({
     deliveryAddress: '',
   });
 
+  const router = useRouter();
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
@@ -109,14 +113,31 @@ export function ProductOrderForm({
           }),
         });
 
-                if (!res.ok) {
+        if (!res.ok) {
           setErrors((prev) => ({ ...prev, submit: dict.product.orderError }));
           setIsSubmitting(false);
           return;
         }
 
-        setIsSubmitting(false);
+        const payload = (await res.json().catch(() => null)) as { reference?: unknown } | null;
+        saveOrderReceipt({
+          firstName: formData.firstName.trim(),
+          productName: product.name,
+          brandName: product.brand.name,
+          imageUrl: image?.url ?? '',
+          imageSrcset: image?.srcset ?? null,
+          volumeMl: variant.volumeMl,
+          quantity: 1,
+          total: priceAmount,
+          currency: 'DZD',
+          wilaya: selectedWilayaData?.name ?? '',
+          commune: communes.find((c) => c.id === formData.commune)?.name ?? '',
+          deliveryMethod: formData.deliveryMethod === 'societe' ? 'societe' : 'main',
+          reference: typeof payload?.reference === 'string' ? payload.reference : null,
+        });
+
         setSubmitSuccess(true);
+        router.push(localePath(locale, '/merci'));
       } catch {
         setErrors((prev) => ({ ...prev, submit: dict.product.orderServerError }));
         setIsSubmitting(false);

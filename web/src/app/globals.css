@@ -1803,3 +1803,259 @@ html.has-custom-cursor [contenteditable] {
     transform: none !important;
   }
 }
+
+/* ══════════════════════════════════════════════════════════════
+   PAGE DE REMERCIEMENT (/merci)
+   Un seul geste : le sceau se trace, puis le reste se pose. Tout est
+   neutralisé par la règle prefers-reduced-motion du haut de fichier ;
+   l'état de repos est le rendu final (rien n'attend un observateur).
+   ══════════════════════════════════════════════════════════════ */
+.ds-thanks {
+  min-height: 100svh;
+  background:
+    radial-gradient(ellipse 80% 55% at 50% 0%, var(--color-burgundy) 0%, transparent 70%),
+    var(--color-noir);
+}
+.ds-thanks__glow {
+  position: absolute;
+  inset-inline: 0;
+  top: -10%;
+  height: 70%;
+  z-index: -1;
+  background: radial-gradient(ellipse at 50% 30%, rgba(184, 134, 43, 0.16), transparent 62%);
+  animation: ds-glow-breathe 7s ease-in-out infinite;
+}
+.ds-thanks__head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.ds-thanks__seal {
+  width: clamp(88px, 12vw, 116px);
+  height: auto;
+  fill: none;
+  stroke: var(--color-gold);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  overflow: visible;
+}
+.ds-thanks__ring,
+.ds-thanks__ring-inner,
+.ds-thanks__tick {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+}
+.ds-thanks__ring { stroke-width: 1.2; animation: ds-thanks-draw 1.4s var(--ease-lux) 0.1s both; }
+.ds-thanks__ring-inner { stroke-width: 0.6; stroke: var(--color-gold-dark); animation: ds-thanks-draw 1.4s var(--ease-lux) 0.35s both; }
+.ds-thanks__tick { stroke-width: 2.4; stroke: var(--color-gold-light); animation: ds-thanks-draw 0.8s var(--ease-lux) 1.05s both; }
+@keyframes ds-thanks-draw {
+  from { stroke-dashoffset: 1; }
+  to   { stroke-dashoffset: 0; }
+}
+
+.ds-thanks__eyebrow {
+  margin-top: 2rem;
+  font-family: var(--font-ui);
+  font-size: var(--text-3xs);
+  font-weight: 600;
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--color-gold);
+  animation: ds-rise 0.8s var(--ease-lux) 0.9s both;
+}
+.ds-thanks__title {
+  margin-top: 1rem;
+  font-family: var(--font-display);
+  font-size: var(--text-display-lg);
+  line-height: 1.05;
+  color: var(--color-ivory);
+  text-wrap: balance;
+  animation: ds-rise 0.9s var(--ease-lux) 1.05s both;
+}
+.ds-thanks__lead {
+  margin-top: 1.25rem;
+  max-width: 34rem;
+  font-family: var(--font-body);
+  font-size: var(--text-xl);
+  line-height: 1.5;
+  color: rgba(242, 237, 227, 0.78);
+  text-wrap: balance;
+  animation: ds-rise 0.9s var(--ease-lux) 1.2s both;
+}
+
+.ds-thanks__grid {
+  display: grid;
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+  margin-top: clamp(3rem, 6vw, 5rem);
+  max-width: 62rem;
+  margin-inline: auto;
+  animation: ds-rise 0.9s var(--ease-lux) 1.4s both;
+}
+@media (min-width: 900px) {
+  .ds-thanks__grid:has(.ds-thanks__card) { grid-template-columns: 1fr 1fr; align-items: start; }
+}
+.ds-thanks__card,
+.ds-thanks__steps {
+  border: 1px solid rgba(184, 134, 43, 0.28);
+  background: rgba(36, 25, 21, 0.55);
+  padding: clamp(1.5rem, 3vw, 2.25rem);
+}
+.ds-thanks__label {
+  font-family: var(--font-ui);
+  font-size: var(--text-3xs);
+  font-weight: 600;
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--color-gold);
+}
+
+.ds-thanks__product {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--color-smoke-2);
+}
+.ds-thanks__thumb {
+  flex: none;
+  width: 84px;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border: 1px solid var(--color-smoke-2);
+  background: var(--color-noir-2);
+}
+.ds-thanks__brand {
+  font-family: var(--font-ui);
+  font-size: var(--text-3xs);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--color-gold-light);
+}
+.ds-thanks__name {
+  margin-top: 0.35rem;
+  font-family: var(--font-serif);
+  font-size: var(--text-2xl);
+  line-height: 1.15;
+  color: var(--color-ivory);
+}
+.ds-thanks__meta {
+  margin-top: 0.35rem;
+  font-size: var(--text-sm);
+  color: rgba(242, 237, 227, 0.6);
+}
+
+.ds-thanks__rows > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding-block: 0.9rem;
+  border-bottom: 1px solid var(--color-smoke);
+}
+.ds-thanks__rows dt {
+  font-family: var(--font-ui);
+  font-size: var(--text-2xs);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: rgba(242, 237, 227, 0.6);
+}
+.ds-thanks__rows dd {
+  text-align: end;
+  font-size: var(--text-md);
+  color: var(--color-ivory);
+}
+.ds-thanks__sub {
+  display: block;
+  margin-top: 0.15rem;
+  font-size: var(--text-sm);
+  color: rgba(242, 237, 227, 0.6);
+}
+.ds-thanks__total dd {
+  font-family: var(--font-serif);
+  font-size: var(--text-2xl);
+  color: var(--color-gold-light);
+}
+.ds-thanks__ref {
+  font-family: var(--font-ui);
+  font-size: var(--text-sm);
+  letter-spacing: 0.08em;
+}
+
+.ds-thanks__steps ol { margin-top: 1.5rem; }
+.ds-thanks__steps li {
+  position: relative;
+  display: flex;
+  gap: 1.25rem;
+  padding-bottom: 1.75rem;
+}
+.ds-thanks__steps li:last-child { padding-bottom: 0; }
+.ds-thanks__steps li:not(:last-child)::before {
+  content: "";
+  position: absolute;
+  inset-inline-start: 1.1rem;
+  top: 2.4rem;
+  bottom: 0.35rem;
+  width: 1px;
+  background: linear-gradient(to bottom, var(--color-gold-dark), transparent);
+}
+.ds-thanks__n {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border: 1px solid var(--color-gold-dark);
+  border-radius: 999px;
+  font-family: var(--font-ui);
+  font-size: var(--text-3xs);
+  letter-spacing: 0.08em;
+  color: var(--color-gold-light);
+}
+.ds-thanks__steps li.is-done .ds-thanks__n {
+  background: var(--color-gold);
+  border-color: var(--color-gold);
+  color: var(--color-noir);
+}
+.ds-thanks__term {
+  font-family: var(--font-serif);
+  font-size: var(--text-xl);
+  color: var(--color-ivory);
+}
+.ds-thanks__detail {
+  margin-top: 0.3rem;
+  font-size: var(--text-base);
+  line-height: 1.55;
+  color: rgba(242, 237, 227, 0.7);
+}
+
+.ds-thanks__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem 1.25rem;
+  margin-top: clamp(2.5rem, 5vw, 4rem);
+  animation: ds-rise 0.9s var(--ease-lux) 1.6s both;
+}
+.ds-thanks__home {
+  padding-block: 0.75rem;
+  font-family: var(--font-ui);
+  font-size: var(--text-2xs);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: rgba(242, 237, 227, 0.7);
+}
+.ds-thanks__home:hover { color: var(--color-gold); }
+
+@media (prefers-reduced-motion: reduce) {
+  .ds-thanks__glow,
+  .ds-thanks__ring,
+  .ds-thanks__ring-inner,
+  .ds-thanks__tick,
+  .ds-thanks__eyebrow,
+  .ds-thanks__title,
+  .ds-thanks__lead,
+  .ds-thanks__grid,
+  .ds-thanks__actions { animation: none; }
+}

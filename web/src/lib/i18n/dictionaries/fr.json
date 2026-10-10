@@ -559,5 +559,37 @@
   },
   "loading": {
     "label": "Chargement"
+  },
+  "thanks": {
+    "metaTitle": "Merci",
+    "eyebrow": "Commande reçue",
+    "title": "Merci.",
+    "titleNamed": "Merci, {name}.",
+    "lead": "Votre demande est bien enregistrée. La conciergerie la prend en charge.",
+    "leadGeneric": "Si vous venez de passer commande, elle est bien enregistrée. La conciergerie la prend en charge.",
+    "reference": "Référence",
+    "summaryTitle": "Votre sélection",
+    "quantity": "Quantité",
+    "total": "Total",
+    "delivery": "Livraison",
+    "deliveredTo": "Livraison à {place}",
+    "stepsTitle": "La suite",
+    "steps": [
+      {
+        "term": "Demande reçue",
+        "detail": "Votre commande est enregistrée avec vos coordonnées."
+      },
+      {
+        "term": "Confirmation par la conciergerie",
+        "detail": "La disponibilité et la livraison vous sont confirmées par la conciergerie."
+      },
+      {
+        "term": "Règlement à la livraison",
+        "detail": "La commande se règle à la livraison, dans les 58 wilayas."
+      }
+    ],
+    "whatsapp": "Écrire à la conciergerie",
+    "continue": "Continuer la découverte",
+    "home": "Retour à l'accueil"
   }
 }
