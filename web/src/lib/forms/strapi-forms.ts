@@ -9,7 +9,7 @@
 const STRAPI_URL = process.env.STRAPI_URL ?? '';
 const TOKEN = process.env.STRAPI_FORMS_TOKEN ?? '';
 
-export const formsConfigured = STRAPI_URL !== '' && TOKEN !== '';
+export const formsConfigured = STRAPI_URL !== '';
 
 export type RelayResult =
   | { ok: true; data: unknown }
@@ -21,9 +21,13 @@ export async function relayToStrapi(
 ): Promise<RelayResult> {
   if (!formsConfigured) return { ok: false, status: 503 };
   try {
+    const headers: Record<string, string> = {
+      'Content-Type': 'application/json',
+      ...(TOKEN ? { Authorization: `Bearer ${TOKEN}` } : {}),
+    };
     const res = await fetch(`${STRAPI_URL.replace(/\/$/, '')}/api/${collection}`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${TOKEN}` },
+      headers,
       body: JSON.stringify({ data }),
       cache: 'no-store',
       signal: AbortSignal.timeout(8000),

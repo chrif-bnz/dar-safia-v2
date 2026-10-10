@@ -8,7 +8,7 @@ import type { Locale } from '@/lib/i18n/config';
 import type { Dictionary } from '@/lib/i18n/dictionary';
 import { interpolate } from '@/lib/i18n/dictionary';
 import { localePath } from '@/lib/i18n/routing';
-import { recordContact } from '@/lib/forms/client';
+import { recordContact, submitContact } from '@/lib/forms/client';
 import { whatsappUrl } from '@/lib/whatsapp';
 
 /**
@@ -53,12 +53,14 @@ function grow(el: HTMLTextAreaElement | null) {
 /** Champ sur filet — la même ligne partout, qui s'allume au focus. */
 function Field({
   id,
+  name,
   label,
   value,
   onChange,
   autoComplete,
 }: {
   id: string;
+  name?: string;
   label: string;
   value: string;
   onChange: (v: string) => void;
@@ -72,6 +74,7 @@ function Field({
       <div className="relative">
         <input
           id={id}
+          name={name || id}
           type="text"
           autoComplete={autoComplete}
           value={value}
@@ -120,6 +123,7 @@ export function ContactExperience({
   const [proposal, setProposal] = useState('');
 
   const [openFaq, setOpenFaq] = useState<number | null>(0);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
 
   const personalLines = useMemo<Line[]>(() => {
     const who =
@@ -217,8 +221,41 @@ export function ContactExperience({
     { key: 'collab', label: c.tabs.collab.label, hint: c.tabs.collab.hint },
   ];
 
-  const sendLabel = tab === 'personal' ? c.send : c.collab.send;
-  const sendHint = tab === 'personal' ? c.sendHint : c.collab.hint;
+  const sendLabel = tab === 'personal' ? c.send : c.sendCollab;
+  const sendHint = tab === 'personal' ? c.hint : c.hintCollab;
+
+  const handleSubmit = async () => {
+    if (submitStatus === 'loading') return;
+    const body = tab === 'personal' ? message : proposal;
+    if (!body.trim()) return;
+
+    setSubmitStatus('loading');
+    const result = await submitContact(
+      tab === 'personal'
+        ? {
+            kind: 'personal',
+            locale,
+            name: name.trim() || undefined,
+            city: city.trim() || undefined,
+            message: body.trim(),
+          }
+        : {
+            kind: 'collaboration',
+            locale,
+            house: house.trim() || undefined,
+            role: role.trim() || undefined,
+            city: collabCity.trim() || undefined,
+            subject,
+            message: body.trim(),
+          }
+    );
+
+    if (result.ok) {
+      setSubmitStatus('success');
+    } else {
+      setSubmitStatus('error');
+    }
+  };
 
   return (
     // La lumière d'ambiance reste DANS la largeur du conteneur : débordante
@@ -387,6 +424,7 @@ export function ContactExperience({
                       </label>
                       <textarea
                         id="contact-message"
+                        name="message"
                         value={message}
                         onChange={(e) => {
                           setMessage(e.target.value);
@@ -400,6 +438,7 @@ export function ContactExperience({
                       <div className="grid gap-6 sm:grid-cols-2">
                         <Field
                           id="contact-name"
+                          name="name"
                           label={c.nameLabel}
                           value={name}
                           onChange={setName}
@@ -407,6 +446,7 @@ export function ContactExperience({
                         />
                         <Field
                           id="contact-city"
+                          name="city"
                           label={c.cityLabel}
                           value={city}
                           onChange={setCity}
@@ -419,6 +459,7 @@ export function ContactExperience({
                       <div className="grid gap-6 sm:grid-cols-2">
                         <Field
                           id="collab-house"
+                          name="house"
                           label={c.collab.houseLabel}
                           value={house}
                           onChange={setHouse}
@@ -426,6 +467,7 @@ export function ContactExperience({
                         />
                         <Field
                           id="collab-role"
+                          name="role"
                           label={c.collab.roleLabel}
                           value={role}
                           onChange={setRole}
@@ -433,6 +475,7 @@ export function ContactExperience({
                         />
                         <Field
                           id="collab-city"
+                          name="city"
                           label={c.collab.cityLabel}
                           value={collabCity}
                           onChange={setCollabCity}
@@ -468,6 +511,7 @@ export function ContactExperience({
                       </label>
                       <textarea
                         id="collab-message"
+                        name="proposal"
                         value={proposal}
                         onChange={(e) => {
                           setProposal(e.target.value);
@@ -506,34 +550,50 @@ export function ContactExperience({
                   </blockquote>
                 </figure>
 
-                <a
-                  href={href}
-                  onClick={() => {
-                    const body = tab === 'personal' ? message : proposal;
-                    if (!body.trim()) return;
-                    recordContact(
-                      tab === 'personal'
-                        ? { kind: 'personal', locale, name, city, message: body }
-                        : {
-                            kind: 'collaboration',
-                            locale,
-                            house,
-                            role,
-                            city: collabCity,
-                            subject,
-                            message: body,
-                          }
-                    );
-                  }}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="ds-btn mt-10 flex w-full justify-center rounded-sm border border-gold bg-burgundy px-8 py-4 font-ui text-2xs font-semibold tracking-(--tracking-label) whitespace-nowrap text-ivory uppercase transition-colors hover:border-gold-light hover:bg-burgundy-2 sm:inline-flex sm:w-auto"
+                <button
+                  type="button"
+                  disabled={submitStatus === 'loading'}
+                  onClick={handleSubmit}
+                  className="ds-btn mt-10 flex w-full justify-center rounded-sm border border-gold bg-burgundy px-8 py-4 font-ui text-2xs font-semibold tracking-(--tracking-label) whitespace-nowrap text-ivory uppercase transition-colors hover:border-gold-light hover:bg-burgundy-2 sm:inline-flex sm:w-auto disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  {sendLabel}
-                </a>
-                <p className="mt-3 max-w-md font-body text-md leading-relaxed text-ivory/58">
-                  {sendHint}
-                </p>
+                  {submitStatus === 'loading' ? c.sending : sendLabel}
+                </button>
+
+                {submitStatus === 'idle' && (
+                  <p className="mt-3 max-w-md font-body text-md leading-relaxed text-ivory/58">
+                    {sendHint}
+                  </p>
+                )}
+
+                {submitStatus === 'loading' && (
+                  <p className="mt-3 max-w-md font-body text-md leading-relaxed text-gold-light/70">
+                    {c.sending}
+                  </p>
+                )}
+
+                {submitStatus === 'success' && (
+                  <p className="mt-3 max-w-md font-body text-md leading-relaxed text-gold-light">
+                    {c.successMessage}
+                  </p>
+                )}
+
+                {submitStatus === 'error' && (
+                  <div className="mt-3 max-w-md">
+                    <p className="font-body text-md leading-relaxed text-rose-300">
+                      {c.errorMessage}
+                    </p>
+                    {href && (
+                      <a
+                        href={href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="ds-btn-ghost mt-4 inline-flex items-center justify-center rounded-sm border border-gold/40 px-6 py-3 font-ui text-2xs font-semibold tracking-(--tracking-label) uppercase text-gold-light transition-colors hover:border-gold hover:text-ivory"
+                      >
+                        {c.fallbackWhatsApp}
+                      </a>
+                    )}
+                  </div>
+                )}
 
                 {phoneDisplay && (
                   <p className="mt-5 font-ui text-2xs tracking-[0.1em] text-ivory/58">
