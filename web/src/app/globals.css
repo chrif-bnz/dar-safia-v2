@@ -1495,3 +1495,311 @@ html.has-custom-cursor [contenteditable] {
     object-fit: cover;
   }
 }
+
+/* ══════════════════════════════════════════════════════════════
+   REDESIGN PYRAMIDE OLFACTIVE EN 3 NIVEAUX & FIL DORÉ
+   ══════════════════════════════════════════════════════════════ */
+.ds-pyramid-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+/* Fil doré vertical (axe central de la pyramide, 1px, opacité 30%) */
+.ds-pyramid-axis {
+  position: absolute;
+  top: 12px;
+  bottom: 12px;
+  left: 50%;
+  width: 1px;
+  background-color: var(--color-gold, #C9A24B);
+  opacity: 0.3;
+  transform: translateX(-50%) scaleY(0);
+  transform-origin: top center;
+  pointer-events: none;
+  z-index: 0;
+  will-change: transform;
+}
+
+[data-in-view="true"] .ds-pyramid-axis {
+  transform: translateX(-50%) scaleY(1);
+  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Tiers de la pyramide */
+.ds-pyramid-tier {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  margin-inline: auto;
+  border-radius: var(--radius-md, 12px);
+  border: 1px solid rgba(201, 162, 75, 0.25);
+  background-color: var(--color-noir-2, #241915);
+  padding: 1.25rem 1.5rem;
+  opacity: 0;
+  transform: translateY(16px);
+  will-change: transform, opacity;
+  transition:
+    opacity 700ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 700ms cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 300ms ease,
+    box-shadow 300ms ease;
+}
+
+/* Progression de largeur sur desktop : tête 60%, cœur 80%, fond 100% */
+@media (min-width: 1024px) {
+  .ds-pyramid-tier[data-layer="top"] {
+    width: 60%;
+  }
+  .ds-pyramid-tier[data-layer="heart"] {
+    width: 80%;
+  }
+  .ds-pyramid-tier[data-layer="base"] {
+    width: 100%;
+  }
+}
+
+/* Décalage d'apparition des niveaux de haut en bas (180ms) */
+[data-in-view="true"] .ds-pyramid-tier[data-layer="top"] {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0ms;
+}
+
+[data-in-view="true"] .ds-pyramid-tier[data-layer="heart"] {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 180ms;
+}
+
+[data-in-view="true"] .ds-pyramid-tier[data-layer="base"] {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 360ms;
+}
+
+/* Survol d'un niveau : bordure dorée et halo doux derrière */
+@media (hover: hover) and (pointer: fine) {
+  .ds-pyramid-tier:hover {
+    border-color: var(--color-gold, #C9A24B);
+    box-shadow: 0 0 25px rgba(201, 162, 75, 0.12);
+  }
+}
+
+/* Titres et sous-titres de niveau centrés */
+.ds-pyramid-tier-header {
+  text-align: center;
+  opacity: 0;
+  transform: translateY(8px);
+  will-change: transform, opacity;
+  transition:
+    opacity 600ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 600ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-in-view="true"] .ds-pyramid-tier[data-layer="top"] .ds-pyramid-tier-header {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 80ms;
+}
+
+[data-in-view="true"] .ds-pyramid-tier[data-layer="heart"] .ds-pyramid-tier-header {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 260ms;
+}
+
+[data-in-view="true"] .ds-pyramid-tier[data-layer="base"] .ds-pyramid-tier-header {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 440ms;
+}
+
+/* Grille de chips centrée */
+.ds-pyramid-chips {
+  margin-top: 0.875rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Chip de note olfactive */
+.ds-pyramid-chip {
+  cursor: default;
+  border-radius: var(--radius-xs, 4px);
+  border: 1px solid var(--color-smoke-2, rgba(242, 237, 227, 0.12));
+  background-color: var(--color-noir-3, #2f221c);
+  padding: 0.35rem 0.75rem;
+  font-family: var(--font-body);
+  font-size: var(--text-md, 1rem);
+  color: rgba(242, 237, 227, 0.85);
+  opacity: 0;
+  transform: scale(0.92);
+  will-change: transform, opacity;
+  transition:
+    opacity 500ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 500ms cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 250ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 250ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 250ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Entrée des chips : scale 0.92 -> 1 et fondu, décalage de 60ms */
+[data-in-view="true"] .ds-pyramid-chip {
+  opacity: 1;
+  transform: scale(1);
+  transition-delay: calc(var(--chip-base-delay, 0ms) + var(--chip-idx, 0) * 60ms);
+}
+
+/* Survol d'une chip (desktop) : translateY -3px, bordure dorée pleine, fond doré très léger, box-shadow */
+@media (hover: hover) and (pointer: fine) {
+  .ds-pyramid-chip:hover {
+    transform: translateY(-3px) !important;
+    border-color: var(--color-gold, #C9A24B);
+    background-color: rgba(201, 162, 75, 0.12);
+    box-shadow: 0 8px 20px rgba(201, 162, 75, 0.15);
+  }
+}
+
+/* Tactile : pas de translation au survol, état actif léger */
+@media (hover: none) {
+  .ds-pyramid-chip:active {
+    transform: scale(0.98);
+    background-color: rgba(201, 162, 75, 0.08);
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   BOUTONS « COMMANDER » ET « AJOUTER AU PANIER » CENTRÉS
+   ══════════════════════════════════════════════════════════════ */
+.ds-buy-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+}
+
+.ds-btn-buy {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-width: clamp(180px, 22vw, 240px);
+  padding: 14px clamp(28px, 3.2vw, 36px);
+  border-radius: var(--radius-sm, 6px);
+  font-family: var(--font-ui);
+  font-size: var(--text-sm, 0.8125rem);
+  font-weight: 600;
+  letter-spacing: var(--tracking-label, 0.14em);
+  text-transform: uppercase;
+  min-height: 48px;
+  position: relative;
+  overflow: hidden;
+  user-select: none;
+  transition:
+    transform 150ms ease,
+    background-color 250ms ease,
+    border-color 250ms ease,
+    box-shadow 250ms ease,
+    color 250ms ease;
+}
+
+/* Bouton « Commander » : plein bordeaux/doré de la marque */
+.ds-btn-buy-order {
+  background-color: var(--color-burgundy, #3D0F14);
+  border: 1px solid var(--color-gold, #C9A24B);
+  color: var(--color-ivory, #F2EDE3);
+}
+
+/* Reflet doré qui balaie de gauche à droite sur « Commander » (500ms) */
+.ds-btn-buy-order::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(201, 162, 75, 0.45),
+    transparent
+  );
+  transform: skewX(-20deg);
+  pointer-events: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .ds-btn-buy-order:hover::after {
+    left: 180%;
+    transition: left 500ms ease;
+  }
+}
+
+/* Bouton « Ajouter au panier » : en contour */
+.ds-btn-buy-cart {
+  background-color: transparent;
+  border: 1px solid var(--color-smoke-2, rgba(242, 237, 227, 0.12));
+  color: var(--color-ivory, #F2EDE3);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .ds-btn-buy-cart:hover {
+    background-color: rgba(201, 162, 75, 0.12);
+    border-color: var(--color-gold, #C9A24B);
+    color: var(--color-ivory, #F2EDE3);
+  }
+}
+
+/* Clic : scale 0.98 puis retour */
+.ds-btn-buy:active {
+  transform: scale(0.98);
+}
+
+/* Focus clavier : anneau doré net (:focus-visible) */
+.ds-btn-buy:focus-visible {
+  outline: 2px solid var(--color-gold, #C9A24B);
+  outline-offset: 3px;
+}
+
+/* Mobile (< 640px) : pleine largeur, empilés, centrés, gap 12px */
+@media (max-width: 639.98px) {
+  .ds-buy-actions {
+    flex-direction: column;
+    gap: 12px;
+  }
+  .ds-btn-buy {
+    width: 100%;
+    min-width: 100%;
+  }
+}
+
+/* Mode mouvement réduit */
+@media (prefers-reduced-motion: reduce) {
+  .ds-pyramid-axis {
+    transform: translateX(-50%) scaleY(1) !important;
+    transition: none !important;
+  }
+  .ds-pyramid-tier,
+  .ds-pyramid-tier-header,
+  .ds-pyramid-chip {
+    opacity: 1 !important;
+    transform: none !important;
+    transition-duration: 150ms !important;
+    transition-delay: 0ms !important;
+  }
+  .ds-pyramid-chip:hover {
+    transform: none !important;
+  }
+  .ds-btn-buy-order::after {
+    display: none !important;
+  }
+  .ds-btn-buy:active {
+    transform: none !important;
+  }
+}

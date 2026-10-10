@@ -295,26 +295,27 @@ export function ProductOrderForm({
       
       {errors.submit && <p className={errorClass}>{errors.submit}</p>}
 
-      <div className="mt-10 flex flex-wrap gap-3">
+      <div className="ds-buy-actions mt-10">
         {submitSuccess ? (
-          <p className="rounded-sm border border-smoke-2 px-5 py-3.5 text-sm text-ivory/50">
+          <p className="rounded-sm border border-smoke-2 px-5 py-3.5 text-sm text-ivory/50 text-center">
             {dict.product.orderConfirmed}
           </p>
         ) : hasOrderUrl ? (
           <button
             type="submit"
             disabled={isSubmitting}
-            className="ds-btn-slide inline-flex w-full sm:w-auto items-center justify-center gap-2.5 rounded-sm border border-gold bg-burgundy px-7 py-3.5 text-sm font-semibold tracking-(--tracking-label) text-ivory uppercase transition-colors duration-300 disabled:opacity-70"
+            className="ds-btn-buy ds-btn-buy-order disabled:opacity-70"
           >
             <span className="relative z-10">{dict.product.orderNow}</span>
           </button>
         ) : (
-          <p className="rounded-sm border border-smoke-2 px-5 py-3.5 text-sm text-ivory/50">
+          <p className="rounded-sm border border-smoke-2 px-5 py-3.5 text-sm text-ivory/50 text-center">
             {dict.product.orderUnavailable}
           </p>
         )}
 
         <AddToCartButton
+          className="ds-btn-buy ds-btn-buy-cart"
           line={{
             productSlug: product.slug,
             variantId: variant.id,
