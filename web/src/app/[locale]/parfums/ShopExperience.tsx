@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useMemo, useState, useSyncExternalStore } from 'react';
 
 import type {
   Gender,
@@ -13,6 +13,13 @@ import type {
 import type { Locale } from '@/lib/i18n/config';
 import type { Dictionary } from '@/lib/i18n/dictionary';
 import { pluralize } from '@/lib/i18n/dictionary';
+import {
+  getServerShuffleSeed,
+  getShuffleSeed,
+  reshuffle,
+  shuffleWithSeed,
+  subscribeShuffle,
+} from '@/lib/shuffle';
 
 import { FilterSidebar } from './FilterSidebar';
 import { EMPTY_FILTERS, matchesFilters, toggleValue, type FilterCategory } from './filters';
@@ -41,9 +48,18 @@ export function ShopExperience({
   const c = dict.catalog;
   const [filters, setFilters] = useState(EMPTY_FILTERS);
 
+  // Ordre d'affichage : liste d'origine au rendu serveur et à l'hydratation,
+  // puis mélangée au montage. On mélange la liste COMPLÈTE avant de filtrer :
+  // changer de filtre ne remélange donc rien.
+  const seed = useSyncExternalStore(subscribeShuffle, getShuffleSeed, getServerShuffleSeed);
+  const ordered = useMemo(
+    () => (seed === null ? products : shuffleWithSeed(products, seed)),
+    [products, seed]
+  );
+
   const filtered = useMemo(
-    () => products.filter((p) => matchesFilters(p, filters)),
-    [products, filters]
+    () => ordered.filter((p) => matchesFilters(p, filters)),
+    [ordered, filters]
   );
 
   function handleToggle(category: FilterCategory, value: string) {
@@ -82,13 +98,25 @@ export function ShopExperience({
       />
 
       <div>
-        <p className="mt-6 text-2xs text-ivory/58 lg:mt-0" aria-live="polite">
-          {pluralize(c.count, filtered.length)}
-        </p>
+        <div className="mt-6 flex items-center justify-between gap-4 lg:mt-0">
+          <p className="text-2xs text-ivory/58" aria-live="polite">
+            {pluralize(c.count, filtered.length)}
+          </p>
+          <button type="button" onClick={reshuffle} className="ds-shuffle" aria-label={c.shuffle}>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <path d="M16 3h5v5" />
+              <path d="M4 20 21 3" />
+              <path d="M21 16v5h-5" />
+              <path d="m15 15 6 6" />
+              <path d="m4 4 5 5" />
+            </svg>
+            <span>{c.shuffle}</span>
+          </button>
+        </div>
 
         {filtered.length > 0 ? (
           <div className="mt-6">
-            <PerfumeGrid products={filtered} locale={locale} dict={dict} />
+            <PerfumeGrid products={filtered} locale={locale} dict={dict} shuffleKey={seed} />
           </div>
         ) : (
           <div className="mt-10 rounded-md border border-smoke-2 bg-noir-2 px-6 py-14 text-center">

@@ -2239,3 +2239,59 @@ html.has-custom-cursor [contenteditable] {
 @media (prefers-reduced-motion: reduce) {
   .ds-figs__mark { animation: none; }
 }
+
+/* ══════════════════════════════════════════════════════════════
+   BOUTIQUE : cartes mélangées + bouton « Mélanger »
+   Transform et opacity seulement. L'inclinaison 3D (3° max) ne
+   s'applique qu'à la souris ; tactile et reduced-motion : aucune.
+   ══════════════════════════════════════════════════════════════ */
+.ds-shop-card {
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.5s var(--ease-lux);
+}
+.ds-shop-card > article { height: 100%; }
+.ds-shop-card__ring {
+  position: absolute;
+  inset: 0;
+  border: 1px solid var(--color-gold);
+  border-radius: var(--radius-md);
+  box-shadow: 0 0 28px rgba(184, 134, 43, 0.22);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.45s var(--ease-lux);
+}
+@media (hover: hover) and (pointer: fine) {
+  .ds-shop-card:hover {
+    transform: perspective(900px) translate3d(0, -6px, 0) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+    transition-duration: 0.18s;
+  }
+  .ds-shop-card:hover .ds-shop-card__ring { opacity: 1; }
+  /* La carte garde son propre léger soulèvement : on le neutralise ici. */
+  .ds-shop-card:hover > article { transform: none; }
+  .ds-shop-card:hover img { scale: 1.04; }
+}
+.ds-shop-card:focus-within .ds-shop-card__ring { opacity: 1; }
+
+.ds-shuffle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  min-height: 40px;
+  padding: 0 1rem;
+  border: 1px solid var(--color-smoke-2);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-ui);
+  font-size: var(--text-2xs);
+  font-weight: 600;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--color-ivory);
+  transition: transform 0.2s var(--ease-lux), border-color 0.3s var(--ease-lux), color 0.3s var(--ease-lux);
+}
+.ds-shuffle:hover { border-color: var(--color-gold); color: var(--color-gold-light); }
+.ds-shuffle:active { transform: scale(0.96); }
+
+@media (prefers-reduced-motion: reduce) {
+  .ds-shop-card:hover { transform: none; }
+}
