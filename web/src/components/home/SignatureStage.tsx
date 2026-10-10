@@ -17,19 +17,47 @@ import { localePath } from '@/lib/i18n/routing';
  *   LES SIGNATURES — LA SÉQUENCE
  * ══════════════════════════════════════════════════════════════
  *
- * Le seul moment « wow » de la page, et le seul endroit où l'on dépense de
- * l'audace. Pas une grille : une scène qui se fige pendant qu'on la traverse,
- * un parfum à la fois, et c'est la COULEUR de toute la scène qui bascule vers
- * l'univers olfactif de chaque flacon (data-universe -> tokens du thème).
- * Rien d'autre ne bouge : le reste de la page reste silencieux.
- *
- * L'image des familles est volontairement très en retrait — ce ne sont pas
- * des photos de flacons, seulement une matière de fond. La typographie et la
- * lumière portent la scène.
- *
- * Sous prefers-reduced-motion : pas d'épinglage, pas d'empilement. Une liste
- * éditoriale verticale, chaque signature à sa place, lisible immédiatement.
+ * Scène épinglée (sticky) présentant les parfums signatures un à un.
+ * - Moitié gauche (≤ 46%) : bloc texte ancré de manière stable sous « Les signatures ».
+ * - Moitié droite (≥ 50%) : photo du produit en object-contain, centrée verticalement,
+ *   avec fondu doux sur les bords gauche et droit via mask-image.
  */
+
+const PRODUCT_CONFIGS: Record<
+  string,
+  {
+    opacity?: number;
+    brightness?: number;
+    contrast?: number;
+    saturate?: number;
+    fadeEdge?: string;
+  }
+> = {
+  'burberry-my-burberry-eau-de-parfum': {
+    opacity: 0.72,
+    fadeEdge: 'var(--signature-fade-edge, 12%)',
+  },
+  'givenchy-gentleman-society-ambree': {
+    opacity: 0.72,
+    fadeEdge: 'var(--signature-fade-edge, 12%)',
+  },
+  'christian-dior-dior-sauvage-elixir-100ml': {
+    opacity: 0.72,
+    fadeEdge: 'var(--signature-fade-edge, 12%)',
+  },
+  'christian-dior-dior-sauvage-le-parfum': {
+    opacity: 0.72,
+    fadeEdge: 'var(--signature-fade-edge, 12%)',
+  },
+  'valentino-donna-born-in-roma': {
+    opacity: 0.72,
+    fadeEdge: 'var(--signature-fade-edge, 12%)',
+  },
+  'prada-paradoxe': {
+    opacity: 0.72,
+    fadeEdge: 'var(--signature-fade-edge, 12%)',
+  },
+};
 
 const noSubscribe = () => () => {};
 const readReduced = () =>
@@ -56,11 +84,6 @@ export function SignatureStage({
     const wrap = wrapRef.current;
     if (!wrap) return;
 
-    // `position: sticky` fait l'épinglage nativement. Pour la progression, on
-    // s'appuie sur ScrollTrigger — déjà chargé par le site (SmoothScroll,
-    // useReveal), et le seul à lire correctement la position quand Lenis pilote
-    // le défilement (il n'émet pas d'évènement `scroll` natif). On ne lui
-    // demande qu'un `onUpdate` : l'épinglage reste au CSS.
     let disposed = false;
     let teardown: (() => void) | null = null;
 
@@ -81,8 +104,6 @@ export function SignatureStage({
           setActive((prev) => (prev === i ? prev : i));
         },
       });
-      // Les polices web décalent la hauteur du hero au-dessus : on remesure une
-      // fois tout posé, sinon `end` reste calé sur une mise en page périmée.
       ScrollTrigger.refresh();
       teardown = () => st.kill();
     })();
@@ -155,56 +176,111 @@ export function SignatureStage({
       className="relative border-t border-smoke-2 bg-noir"
     >
       <div ref={wrapRef} style={{ height: `${products.length * 100}vh` }}>
-        <div className="sticky top-0 h-svh overflow-hidden">
-          {/* Couches d'univers empilées : une par famille, seule l'active
-              est visible. La couleur est la seule chose qui bascule. */}
-          {products.map((product, i) => (
-            <div
-              key={product.slug}
-              data-universe={product.family}
-              aria-hidden="true"
-              className="absolute inset-0 transition-opacity duration-[900ms] ease-(--ease-lux)"
-              style={{ opacity: i === active ? 1 : 0 }}
-            >
-              {product.image && (
-                <ProductImage
-                  fallback="none"
-                  src={product.image.url}
-                  srcSet={product.image.srcset ?? undefined}
-                  sizes="100vw"
-                  alt=""
-                  loading="lazy"
-                  className="absolute inset-0 h-full w-full object-cover opacity-[0.13]"
-                />
-              )}
-              <div
-                className="absolute inset-0"
-                style={{
-                  background:
-                    'radial-gradient(65% 55% at 50% 32%, var(--universe-glow) 0%, transparent 72%)',
-                }}
-              />
-              <div className="absolute inset-0 bg-noir/45" />
-            </div>
-          ))}
+        <div className="sticky top-0 h-svh min-h-[clamp(750px,100svh,980px)] overflow-hidden">
+          {/* Calques par slide : ambiance, photo nette fondue à droite, et halo d'univers */}
+          {products.map((product, i) => {
+            const config = PRODUCT_CONFIGS[product.slug] ?? {
+              opacity: 0.72,
+              fadeEdge: 'var(--signature-fade-edge, 12%)',
+            };
+            const isCurrent = i === active;
+            const transitionClass = isCurrent
+              ? 'opacity-100 transition-opacity duration-700 ease-(--ease-lux)'
+              : 'opacity-0 transition-opacity duration-500 ease-(--ease-lux)';
 
-          {/* Contenu. `data-universe` de l'actif : compteur, filet et lien
-              suivent la couleur de l'univers courant. */}
+            return (
+              <div
+                key={product.slug}
+                data-universe={product.family}
+                aria-hidden="true"
+                className={`absolute inset-0 pointer-events-none ${transitionClass}`}
+                style={{ opacity: isCurrent ? 1 : 0 }}
+              >
+                {/* 1. Calque d'ambiance flouté en fond */}
+                {product.image && (
+                  <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                    <div
+                      className="absolute inset-0 h-full w-full scale-115 opacity-20"
+                      style={{
+                        filter: 'blur(56px) brightness(0.32) saturate(1.2)',
+                      }}
+                    >
+                      <ProductImage
+                        fallback="none"
+                        src={product.image.url}
+                        srcSet={product.image.srcset ?? undefined}
+                        sizes="100vw"
+                        alt=""
+                        loading="lazy"
+                        className="h-full w-full object-cover"
+                      />
+                    </div>
+                    <div
+                      className="absolute inset-0"
+                      style={{
+                        background:
+                          'radial-gradient(65% 55% at 65% 42%, var(--universe-glow) 0%, transparent 72%)',
+                      }}
+                    />
+                    <div className="absolute inset-0 bg-noir/45" />
+                  </div>
+                )}
+
+                {/* 2. Photo du produit nette, À DROITE (réduite de 20%, fondu gauche et droite) */}
+                {product.image && (
+                  <div className="absolute inset-y-0 right-0 w-full lg:w-[50%] flex items-center justify-center lg:justify-end px-6 md:px-12 lg:px-20 pointer-events-none">
+                    <div
+                      className="relative w-[288px] h-[288px] sm:w-[374px] sm:h-[374px] md:w-[442px] md:h-[442px] lg:w-[500px] lg:h-[500px] max-h-[70vh] max-w-[85vw] flex items-center justify-center origin-center"
+                      style={{
+                        transformOrigin: 'center',
+                        WebkitMaskImage: `linear-gradient(to right, transparent 0%, #000 ${config.fadeEdge ?? 'var(--signature-fade-edge, 12%)'}, #000 calc(100% - ${config.fadeEdge ?? 'var(--signature-fade-edge, 12%)'}), transparent 100%)`,
+                        maskImage: `linear-gradient(to right, transparent 0%, #000 ${config.fadeEdge ?? 'var(--signature-fade-edge, 12%)'}, #000 calc(100% - ${config.fadeEdge ?? 'var(--signature-fade-edge, 12%)'}), transparent 100%)`,
+                        opacity: `var(--signature-img-opacity, ${config.opacity ?? 0.72})`,
+                        filter:
+                          config.brightness !== undefined && config.brightness !== 1
+                            ? `brightness(var(--signature-img-brightness, ${config.brightness})) contrast(${config.contrast ?? 1.05}) saturate(${config.saturate ?? 0.9})`
+                            : undefined,
+                      }}
+                    >
+                      <ProductImage
+                        fallback="none"
+                        src={product.image.url}
+                        srcSet={product.image.srcset ?? undefined}
+                        sizes="(max-width: 768px) 70vw, 500px"
+                        alt=""
+                        loading="lazy"
+                        className="h-full w-full object-contain select-none"
+                      />
+                    </div>
+                  </div>
+                )}
+
+                {/* 3. Dégradé sombre à gauche derrière le texte uniquement */}
+                <div
+                  className="absolute inset-y-0 left-0 w-full lg:w-[58%] pointer-events-none"
+                  style={{
+                    background:
+                      'linear-gradient(to right, rgba(26, 18, 15, 0.95) 0%, rgba(26, 18, 15, 0.82) 48%, rgba(26, 18, 15, 0.3) 78%, transparent 100%)',
+                  }}
+                />
+              </div>
+            );
+          })}
+
+          {/* Contenu textuel principal : z-10 opaque au-dessus des calques d'image */}
           <div
             data-universe={current.family}
-            className="relative mx-auto flex h-full max-w-(--container-site) flex-col justify-between px-6 py-16 md:px-12 md:py-20 lg:px-20"
+            className="relative z-10 mx-auto flex h-full max-w-(--container-site) flex-col justify-between px-6 py-16 md:px-12 md:py-20 lg:px-20"
           >
             {heading}
 
-            <div className="relative flex-1 py-10">
+            {/* Zone de contenu textuel des slides : ancrage stable sous « Les signatures » avec ≥ 32px */}
+            <div className="relative flex-1">
               {products.map((product, i) => (
                 <div
                   key={product.slug}
-                  // `inert` : les panneaux inactifs sortent de l'ordre de
-                  // tabulation ET de l'arbre d'accessibilité — un lien masqué
-                  // ne doit pas pouvoir recevoir le focus.
-                  inert={i !== active}
-                  className="absolute inset-0 flex flex-col justify-center transition-opacity duration-500 ease-(--ease-lux)"
+                  inert={i !== active ? true : undefined}
+                  className="absolute inset-0 flex flex-col justify-start pt-8 lg:pt-10 transition-opacity duration-500 ease-(--ease-lux)"
                   style={{ opacity: i === active ? 1 : 0 }}
                 >
                   <PanelBody product={product} locale={locale} dict={dict} />
@@ -249,21 +325,29 @@ function PanelBody({
 }) {
   const s = dict.signature;
   return (
-    <div className="max-w-3xl">
+    <div className="w-full max-w-xl lg:max-w-[46%]">
       <p className="font-ui text-2xs tracking-[0.24em] text-gold uppercase">
         {product.brand}
       </p>
 
-      <p className="mt-5 font-body font-light text-ivory">
-        <span className="block text-[clamp(2.3rem,6.4vw,5rem)] leading-[1.02] tracking-[-0.02em]">
+      <p className="mt-6 font-body font-light text-ivory">
+        <span className="block text-[clamp(2.3rem,6vw,4.8rem)] leading-[1.04] tracking-[-0.02em]">
           {product.name}
         </span>
       </p>
 
-      <p className="mt-5 font-body text-lg text-ivory/55">
-        {formatFamily(product.family, dict)}
+      <p className="mt-5 font-body text-lg text-ivory/65">
+        <span>{formatFamily(product.family, dict)}</span>
+        {product.notes && product.notes.length > 0 && (
+          <>
+            <span className="mx-3 text-ivory/58">·</span>
+            <span className="text-ivory/55">{product.notes.join(', ')}</span>
+          </>
+        )}
         <span className="mx-3 text-ivory/58">·</span>
-        {formatPrice({ amount: product.priceFrom, currency: 'DZD' }, locale)}
+        <span className="text-ivory/90 font-medium">
+          {formatPrice({ amount: product.priceFrom, currency: 'DZD' }, locale)}
+        </span>
       </p>
 
       <Link

@@ -21,8 +21,8 @@ import type { Dictionary } from '@/lib/i18n/dictionary';
  * officiel est trop lourd pour le dépôt). Pour le remplacer : déposer le
  * fichier dans `public/video/` et changer ces deux constantes.
  */
-const TEASER_SRC = '/video/hero.mp4';
-const TEASER_SRC_SMALL = '/video/hero-mobile.mp4';
+const TEASER_SRC = '/video/IMG_6694.MP4';
+const TEASER_SRC_SMALL = '/video/IMG_6694.MP4';
 const TEASER_POSTER = '/poster/teaser.webp';
 
 export function TeaserFilm({ dict }: { dict: Dictionary }) {
@@ -179,6 +179,7 @@ export function TeaserFilm({ dict }: { dict: Dictionary }) {
         >
           <video
             ref={videoRef}
+            src={TEASER_SRC}
             data-teaser-video
             className="h-full w-full object-cover will-change-transform"
             muted
