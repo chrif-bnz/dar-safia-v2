@@ -47,20 +47,44 @@ export function TeaserFilm({ dict }: { dict: Dictionary }) {
   const [playing, setPlaying] = useState(false);
   const [sound, setSound] = useState(false);
   const userPaused = useRef(false);
+  const inView = useRef(false);
 
   const play = useCallback(() => {
     void videoRef.current?.play().catch(() => {});
   }, []);
 
   // Source adaptée au gabarit (et à l'économie de données), posée avant le premier octet.
+  // La source n'est posée que lorsque la scène approche de l'écran : le teaser
+  // pèse 5 à 8 Mo et se trouve bien plus bas que le hero — jusque-là, seul le
+  // poster (image) est chargé.
   useEffect(() => {
     const v = videoRef.current;
-    if (!v) return;
+    const stage = stageRef.current;
+    if (!v || !stage) return;
     const conn = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection;
     const small = window.matchMedia('(max-width: 767px)').matches || conn?.saveData === true;
-    v.src = small ? TEASER_SRC_SMALL : TEASER_SRC;
-    v.load();
-  }, []);
+    const src = small ? TEASER_SRC_SMALL : TEASER_SRC;
+    const io = new IntersectionObserver(
+      ([e]) => {
+        if (!e.isIntersecting) return;
+        io.disconnect();
+        v.src = src;
+        v.load();
+        // La scène a pu devenir visible avant l'arrivée des données : le
+        // `play()` du second observateur serait alors resté sans effet.
+        v.addEventListener(
+          'canplay',
+          () => {
+            if (inView.current && !userPaused.current && !reduced) play();
+          },
+          { once: true }
+        );
+      },
+      { rootMargin: '900px 0px' }
+    );
+    io.observe(stage);
+    return () => io.disconnect();
+  }, [play, reduced]);
 
   // Il tourne tant que la scène est à l'écran (muet), sauf si le visiteur l'a arrêté.
   useEffect(() => {
@@ -69,6 +93,7 @@ export function TeaserFilm({ dict }: { dict: Dictionary }) {
     if (!v || !stage) return;
     const io = new IntersectionObserver(
       ([e]) => {
+        inView.current = e.isIntersecting;
         if (e.isIntersecting) {
           if (!userPaused.current && !reduced) play();
         } else {
