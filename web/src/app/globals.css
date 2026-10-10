@@ -1004,7 +1004,7 @@ html.has-custom-cursor [contenteditable] {
   inset: auto -20% -25% -20%;
   height: 80%;
   background: radial-gradient(50% 55% at 50% 100%, rgba(184, 134, 43, 0.2) 0%, transparent 70%);
-  animation: ds-glow-breathe 7s ease-in-out infinite;
+  animation: ds-ambient-breathe 7s ease-in-out infinite;
 }
 .hero-film__ambient i {
   position: absolute;
@@ -1024,7 +1024,7 @@ html.has-custom-cursor [contenteditable] {
   80%  { opacity: 0.25; }
   100% { transform: translate3d(calc((mod(var(--n), 4) - 1.5) * 18px), -62svh, 0); opacity: 0; }
 }
-@keyframes ds-glow-breathe {
+@keyframes ds-ambient-breathe {
   0%, 100% { opacity: 0.55; transform: scale(1); }
   50%      { opacity: 1; transform: scale(1.08); }
 }

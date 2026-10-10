@@ -157,7 +157,7 @@ export function SiteHeader({ locale, dict }: { locale: Locale; dict: Dictionary 
       <div className="mx-auto flex max-w-(--container-site) items-center gap-4 px-5 py-3 md:px-8">
         <Link
           href={home}
-          aria-label="Dar Safia, retour à l'accueil"
+          aria-label={`${dict.common.brandName} — ${dict.notFound.backHome}`}
           className="ds-tap flex shrink-0 items-center gap-3 font-serif text-lg whitespace-nowrap tracking-[0.08em] text-ivory transition-colors hover:text-gold"
         >
           <img
@@ -225,7 +225,7 @@ export function SiteHeader({ locale, dict }: { locale: Locale; dict: Dictionary 
         id="menu-principal"
         ref={panelRef}
         hidden={!menuOpen}
-        className="ds-menu-sheet relative h-[calc(100svh-4.25rem)] overflow-y-auto border-t border-gold/15 lg:hidden"
+        className="ds-menu-sheet relative h-[calc(100svh-5rem)] overflow-y-auto border-t border-gold/15 lg:hidden"
         data-lenis-prevent
       >
         <nav aria-label={dict.nav.perfumes} className="relative">
