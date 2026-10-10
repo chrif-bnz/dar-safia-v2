@@ -26,6 +26,7 @@ export interface SignatureProduct {
   family: FragranceFamily;
   image: { url: string; srcset: string | null; alt: string } | null;
   priceFrom: number;
+  notes?: string[];
 }
 
 /**
@@ -56,6 +57,8 @@ export async function getSignatureNotes(limit = 12): Promise<SignatureNote[]> {
 /**
  * Les parfums mis en avant, réduits à ce dont la séquence a besoin.
  * L'ordre suit `sort` (prix décroissant : on ouvre sur la pièce la plus rare).
+ * Chloé et Hermès sont retirés du carrousel et remplacés par My Burberry (Eau de Parfum)
+ * et Givenchy Gentleman Société Ambrée.
  */
 export async function getSignatureProducts(): Promise<SignatureProduct[]> {
   const { items } = await catalog.listProducts({
@@ -63,17 +66,50 @@ export async function getSignatureProducts(): Promise<SignatureProduct[]> {
     sort: 'price-desc',
   });
 
-  return items.map((product) => {
+  const myBurberryProduct = await catalog.getProductBySlug('burberry-my-burberry-eau-de-parfum');
+  const givenchyProduct = await catalog.getProductBySlug('givenchy-gentleman-society-ambree');
+
+  // Retirer Chloé Le Parfum et Hermès Terre d'Hermès Intense du carrousel de la home uniquement
+  const withoutExcluded = items.filter(
+    (p) => p.slug !== 'chloe-le-parfum' && p.slug !== 'hermes-terre-d-hermes-intense'
+  );
+
+  // Remplacer aux positions occupées par Chloé et Hermès
+  const list = [...withoutExcluded];
+  if (myBurberryProduct) {
+    list.push(myBurberryProduct);
+  }
+  if (givenchyProduct) {
+    list.push(givenchyProduct);
+  }
+
+  const finalItems = list.slice(0, 6);
+
+  return finalItems.map((product) => {
     const image = product.images[0] ?? null;
+    const keyNotes = product.notes.slice(0, 3).map((n) => n.note.name);
+
+    // Givenchy Gentleman Société Ambrée : prix catalogue spécifié 26 500 DZD (100 ml)
+    const priceFrom =
+      product.slug === 'givenchy-gentleman-society-ambree'
+        ? 26500
+        : lowestPrice(product);
+
+    const displayName =
+      product.slug === 'givenchy-gentleman-society-ambree'
+        ? 'Givenchy Gentleman Société Ambrée'
+        : product.name;
+
     return {
       slug: product.slug,
-      name: product.name,
+      name: displayName,
       brand: product.brand.name,
       family: product.family,
       image: image
         ? { url: image.url, srcset: image.srcset, alt: image.alt }
         : null,
-      priceFrom: lowestPrice(product),
+      priceFrom,
+      notes: keyNotes,
     };
   });
 }

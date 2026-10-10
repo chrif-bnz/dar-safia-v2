@@ -741,6 +741,16 @@ input[type="radio"] {
 }
 
 /* ══════════════════════════════════════════════════════════════
+   CARROUSEL DES SIGNATURES
+   ══════════════════════════════════════════════════════════════ */
+:root {
+  --signature-img-scale: 0.96;
+  --signature-fade-edge: 12%;
+  --signature-img-opacity: 0.72;
+  --signature-img-brightness: 1;
+}
+
+/* ══════════════════════════════════════════════════════════════
    DÉFILEMENT FLUIDE — règles Lenis
    Reprises de lenis.css : sans elles, `scroll-behavior: smooth` du
    navigateur se bat contre l'interpolation de Lenis, et un panneau

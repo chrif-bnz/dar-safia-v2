@@ -6,6 +6,7 @@ import type { NextConfig } from 'next';
 const here = path.dirname(fileURLToPath(import.meta.url));
 
 const nextConfig: NextConfig = {
+  allowedDevOrigins: ['192.168.1.7'],
   turbopack: {
     /**
      * Racine explicite. Le dépôt contient encore le site Vite à la racine avec
