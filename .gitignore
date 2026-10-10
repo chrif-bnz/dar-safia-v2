@@ -10,12 +10,14 @@ public/img/logo/*
 !public/img/logo/logo-dr/
 public/img/logo/logo-dr/*
 !public/img/logo/logo-dr/logo-navbar-monogramme.png
+!public/img/logo/logo-dr/monogramme-filigrane.png
 web/public/img/*
 !web/public/img/logo/
 web/public/img/logo/*
 !web/public/img/logo/logo-dr/
 web/public/img/logo/logo-dr/*
 !web/public/img/logo/logo-dr/logo-navbar-monogramme.png
+!web/public/img/logo/logo-dr/monogramme-filigrane.png
 
 # Catalogue migré — régénéré par `node scripts/migrate-catalog.mjs`
 # depuis catalog-data.js, qui reste la source. Ne pas versionner :
