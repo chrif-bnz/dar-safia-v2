@@ -229,7 +229,16 @@
       }
     ],
     "faqFootnote": "Une question qui n'est pas là ? La conciergerie répond sur WhatsApp.",
-    "previewLabel": "Le message tel qu’il partira"
+    "previewLabel": "Le message tel qu’il partira",
+    "optional": "facultatif",
+    "messageRequired": "Écrivez votre message pour l'envoyer.",
+    "successTitle": "Message reçu.",
+    "writeAnother": "Écrire un autre message",
+    "whatsappTitle": "Plutôt WhatsApp ?",
+    "whatsappBody": "Une réponse directe de la conciergerie, sept jours sur sept.",
+    "whatsappCta": "Ouvrir WhatsApp",
+    "faqToggleHint": "Les réponses aux questions les plus fréquentes.",
+    "charsLeft": "{count} caractères restants"
   },
   "catalog": {
     "eyebrow": "Catalogue",
@@ -302,7 +311,8 @@
         "Très puissant": "Très puissant",
         "Séducteur": "Séducteur",
         "Luxe / chic": "Luxe / chic"
-      }
+      },
+      "searchPlaceholder": "Rechercher…"
     }
   },
   "product": {
@@ -332,7 +342,31 @@
       "baseCaption": "Sillage et persistance, plusieurs heures"
     },
     "storyTitle": "L'histoire du flacon",
-    "relatedTitle": "Dans la même famille"
+    "relatedTitle": "Dans la même famille",
+    "form": {
+      "title": "Vos informations",
+      "lastName": "Nom",
+      "lastNamePlaceholder": "Votre nom",
+      "firstName": "Prénom",
+      "firstNamePlaceholder": "Votre prénom",
+      "phone": "Téléphone",
+      "wilaya": "Wilaya",
+      "selectWilaya": "Sélectionner une wilaya",
+      "commune": "Commune",
+      "selectCommune": "Sélectionner une commune",
+      "selectWilayaFirst": "Sélectionnez d'abord une wilaya",
+      "delivery": "Livraison",
+      "byHand": "Main à main",
+      "byCompany": "Livraison par société",
+      "company": "Société de livraison",
+      "optional": "Optionnel",
+      "selectCompany": "Sélectionner une société",
+      "address": "Adresse / lieu de livraison",
+      "addressPlaceholder": "Adresse, quartier, repère…",
+      "required": "Ce champ est obligatoire",
+      "phoneInvalid": "Numéro de téléphone invalide"
+    },
+    "breadcrumbLabel": "Fil d'Ariane"
   },
   "cart": {
     "title": "Panier",

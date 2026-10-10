@@ -125,7 +125,8 @@ export function FilterSidebar({
       <div className="mb-6 px-1">
         <input
           type="search"
-          placeholder="Rechercher..."
+          placeholder={f.searchPlaceholder}
+          aria-label={f.searchPlaceholder}
           value={filters.query}
           onChange={(e) => onToggle('query', e.target.value)}
           className="w-full rounded-sm border border-smoke-2 bg-noir-2 px-3 py-2 text-sm text-ivory placeholder:text-ivory/40 focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold"

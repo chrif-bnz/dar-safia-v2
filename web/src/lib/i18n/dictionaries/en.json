@@ -229,7 +229,16 @@
       }
     ],
     "faqFootnote": "A question that isn't here? The concierge replies on WhatsApp.",
-    "previewLabel": "Your message, as it will be sent"
+    "previewLabel": "Your message, as it will be sent",
+    "optional": "optional",
+    "messageRequired": "Write your message to send it.",
+    "successTitle": "Message received.",
+    "writeAnother": "Write another message",
+    "whatsappTitle": "Prefer WhatsApp?",
+    "whatsappBody": "A direct reply from the concierge, seven days a week.",
+    "whatsappCta": "Open WhatsApp",
+    "faqToggleHint": "Answers to the most common questions.",
+    "charsLeft": "{count} characters left"
   },
   "catalog": {
     "eyebrow": "Catalogue",
@@ -302,7 +311,8 @@
         "Très puissant": "Very powerful",
         "Séducteur": "Seductive",
         "Luxe / chic": "Luxe / chic"
-      }
+      },
+      "searchPlaceholder": "Search…"
     }
   },
   "product": {
@@ -332,7 +342,31 @@
       "baseCaption": "Sillage and persistence, several hours"
     },
     "storyTitle": "The story of the bottle",
-    "relatedTitle": "In the same family"
+    "relatedTitle": "In the same family",
+    "form": {
+      "title": "Your details",
+      "lastName": "Last name",
+      "lastNamePlaceholder": "Your last name",
+      "firstName": "First name",
+      "firstNamePlaceholder": "Your first name",
+      "phone": "Phone",
+      "wilaya": "Wilaya",
+      "selectWilaya": "Select a wilaya",
+      "commune": "Commune",
+      "selectCommune": "Select a commune",
+      "selectWilayaFirst": "Select a wilaya first",
+      "delivery": "Delivery",
+      "byHand": "Hand delivery",
+      "byCompany": "Delivery company",
+      "company": "Delivery company",
+      "optional": "Optional",
+      "selectCompany": "Select a company",
+      "address": "Delivery address",
+      "addressPlaceholder": "Address, neighbourhood, landmark…",
+      "required": "This field is required",
+      "phoneInvalid": "Invalid phone number"
+    },
+    "breadcrumbLabel": "Breadcrumb"
   },
   "cart": {
     "title": "Cart",

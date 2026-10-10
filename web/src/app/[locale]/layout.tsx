@@ -107,14 +107,20 @@ export function generateStaticParams() {
   return LOCALES.map((locale) => ({ locale }));
 }
 
-export const metadata: Metadata = {
-  title: {
-    default: 'Dar Safia — Maison de Haute Parfumerie',
-    template: '%s | Dar Safia',
-  },
-  description:
-    "Parfums niche et signatures d'exception, sélectionnés et livrés dans les 58 wilayas.",
-};
+/** Titre et description du site dans la langue de la page (et non toujours en français). */
+export async function generateMetadata({ params }: LayoutProps<'/[locale]'>): Promise<Metadata> {
+  const { locale } = await params;
+  if (!isLocale(locale)) return {};
+  const dict = await getDictionary(locale);
+  const house = dict.home.eyebrow.split('·')[0].trim();
+  return {
+    title: {
+      default: `${dict.common.brandName} — ${house}`,
+      template: `%s | ${dict.common.brandName}`,
+    },
+    description: dict.home.tagline,
+  };
+}
 
 export default async function RootLayout({
   children,

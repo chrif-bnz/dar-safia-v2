@@ -229,7 +229,16 @@
       }
     ],
     "faqFootnote": "سؤال غير موجود هنا؟ تردّ الخدمة على واتساب.",
-    "previewLabel": "رسالتك كما ستُرسَل"
+    "previewLabel": "رسالتك كما ستُرسَل",
+    "optional": "اختياري",
+    "messageRequired": "اكتب رسالتك لإرسالها.",
+    "successTitle": "وصلتنا رسالتك.",
+    "writeAnother": "اكتب رسالة أخرى",
+    "whatsappTitle": "تفضّل واتساب؟",
+    "whatsappBody": "ردّ مباشر من خدمة الكونسيرج، سبعة أيام في الأسبوع.",
+    "whatsappCta": "فتح واتساب",
+    "faqToggleHint": "إجابات عن أكثر الأسئلة شيوعًا.",
+    "charsLeft": "تبقّى {count} حرفًا"
   },
   "catalog": {
     "eyebrow": "الكتالوج",
@@ -302,7 +311,8 @@
         "Très puissant": "قوي جدًا",
         "Séducteur": "آسر",
         "Luxe / chic": "فخم وأنيق"
-      }
+      },
+      "searchPlaceholder": "ابحث…"
     }
   },
   "product": {
@@ -332,7 +342,31 @@
       "baseCaption": "الأثر والثبات، لعدة ساعات"
     },
     "storyTitle": "حكاية القارورة",
-    "relatedTitle": "من العائلة نفسها"
+    "relatedTitle": "من العائلة نفسها",
+    "form": {
+      "title": "بياناتك",
+      "lastName": "اللقب",
+      "lastNamePlaceholder": "لقبك",
+      "firstName": "الاسم",
+      "firstNamePlaceholder": "اسمك",
+      "phone": "الهاتف",
+      "wilaya": "الولاية",
+      "selectWilaya": "اختر الولاية",
+      "commune": "البلدية",
+      "selectCommune": "اختر البلدية",
+      "selectWilayaFirst": "اختر الولاية أولًا",
+      "delivery": "التوصيل",
+      "byHand": "التسليم باليد",
+      "byCompany": "التوصيل عبر شركة",
+      "company": "شركة التوصيل",
+      "optional": "اختياري",
+      "selectCompany": "اختر شركة",
+      "address": "عنوان التسليم",
+      "addressPlaceholder": "العنوان، الحي، معلَم قريب…",
+      "required": "هذا الحقل مطلوب",
+      "phoneInvalid": "رقم هاتف غير صالح"
+    },
+    "breadcrumbLabel": "مسار التنقّل"
   },
   "cart": {
     "title": "السلة",
@@ -359,7 +393,7 @@
     "title": "اعثر على عطرك",
     "intro": "أربعة أسئلة، توصية واحدة. دون تسجيل.",
     "stepLabel": "الخطوة {current} من {total}",
-    "previous": "→ السؤال السابق",
+    "previous": "السؤال السابق",
     "loading": "جارٍ تحليل ملمحك العطري…",
     "error": "لم يكتمل التشخيص.",
     "restart": "إعادة البدء",
@@ -495,11 +529,11 @@
   },
   "family": {
     "floral": "زهري",
-    "amber": "عنبري",
+    "amber": "كهرماني",
     "woody": "خشبي",
     "fresh": "منعش",
     "gourmand": "حلو",
-    "spicy": "حار"
+    "spicy": "بهاري"
   },
   "sillage": {
     "1": "حميم",

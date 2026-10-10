@@ -41,6 +41,7 @@ export function ProductOrderForm({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
 
+  const f = dict.product.form;
   const selectedWilayaData = wilayasData.find((w) => w.id === formData.wilaya);
   const communes = selectedWilayaData ? selectedWilayaData.communes : [];
 
@@ -62,14 +63,14 @@ export function ProductOrderForm({
 
   const validate = () => {
     const newErrors: Record<string, string> = {};
-    const reqMsg = 'Ce champ est obligatoire';
+    const reqMsg = f.required;
     
     if (!formData.firstName.trim()) newErrors.firstName = reqMsg;
     if (!formData.lastName.trim()) newErrors.lastName = reqMsg;
     if (!formData.phone.trim()) {
       newErrors.phone = reqMsg;
     } else if (!/^0[567][0-9]{8}$/.test(formData.phone.replace(/\s+/g, ''))) {
-      newErrors.phone = 'Numéro de téléphone invalide';
+      newErrors.phone = f.phoneInvalid;
     }
     if (!formData.wilaya) newErrors.wilaya = reqMsg;
     if (!formData.commune) newErrors.commune = reqMsg;
@@ -130,40 +131,40 @@ export function ProductOrderForm({
   return (
     <form onSubmit={handleSubmit} className="mt-12 border-t border-smoke-2 pt-10">
       <div className="mb-6">
-        <h3 className="text-sm font-semibold tracking-(--tracking-eyebrow) text-gold uppercase">Vos informations</h3>
+        <h3 className="text-sm font-semibold tracking-(--tracking-eyebrow) text-gold uppercase">{f.title}</h3>
       </div>
       
       <div className="grid gap-6 md:grid-cols-2">
         <div>
-          <label htmlFor="lastName" className={labelClass}>Nom</label>
+          <label htmlFor="lastName" className={labelClass}>{f.lastName}</label>
           <input
             type="text"
             id="lastName"
             name="lastName"
             value={formData.lastName}
             onChange={handleInputChange}
-            placeholder="Votre nom"
+            placeholder={f.lastNamePlaceholder}
             className={inputClass}
           />
           {errors.lastName && <p className={errorClass}>{errors.lastName}</p>}
         </div>
 
         <div>
-          <label htmlFor="firstName" className={labelClass}>Prénom</label>
+          <label htmlFor="firstName" className={labelClass}>{f.firstName}</label>
           <input
             type="text"
             id="firstName"
             name="firstName"
             value={formData.firstName}
             onChange={handleInputChange}
-            placeholder="Votre prénom"
+            placeholder={f.firstNamePlaceholder}
             className={inputClass}
           />
           {errors.firstName && <p className={errorClass}>{errors.firstName}</p>}
         </div>
 
         <div>
-          <label htmlFor="phone" className={labelClass}>Téléphone</label>
+          <label htmlFor="phone" className={labelClass}>{f.phone}</label>
           <input
             type="tel"
             id="phone"
@@ -178,7 +179,7 @@ export function ProductOrderForm({
         </div>
 
         <div>
-          <label htmlFor="wilaya" className={labelClass}>Wilaya</label>
+          <label htmlFor="wilaya" className={labelClass}>{f.wilaya}</label>
           <select
             id="wilaya"
             name="wilaya"
@@ -186,16 +187,16 @@ export function ProductOrderForm({
             onChange={handleInputChange}
             className={`${inputClass} appearance-none bg-[url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23ebd4a4%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%3E%3C%2Fpolyline%3E%3C%2Fsvg%3E')] bg-[length:1em] bg-[right_1rem_center] bg-no-repeat pr-10`}
           >
-            <option value="" disabled>Sélectionner une wilaya</option>
+            <option value="" disabled>{f.selectWilaya}</option>
             {wilayasData.map((w) => (
-              <option key={w.id} value={w.id}>{w.id} - {w.name}</option>
+              <option key={w.id} value={w.id}>{w.id} - {locale === 'ar' ? w.nameAr : w.name}</option>
             ))}
           </select>
           {errors.wilaya && <p className={errorClass}>{errors.wilaya}</p>}
         </div>
 
         <div className="md:col-span-2">
-          <label htmlFor="commune" className={labelClass}>Commune</label>
+          <label htmlFor="commune" className={labelClass}>{f.commune}</label>
           <select
             id="commune"
             name="commune"
@@ -205,10 +206,10 @@ export function ProductOrderForm({
             className={`${inputClass} appearance-none bg-[url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23ebd4a4%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%3E%3C%2Fpolyline%3E%3C%2Fsvg%3E')] bg-[length:1em] bg-[right_1rem_center] bg-no-repeat pr-10`}
           >
             <option value="" disabled>
-              {formData.wilaya ? 'Sélectionner une commune' : "Sélectionnez d'abord une wilaya"}
+              {formData.wilaya ? f.selectCommune : f.selectWilayaFirst}
             </option>
             {communes.map((c) => (
-              <option key={c.id} value={c.id}>{c.name}</option>
+              <option key={c.id} value={c.id}>{locale === 'ar' ? c.nameAr : c.name}</option>
             ))}
           </select>
           {errors.commune && <p className={errorClass}>{errors.commune}</p>}
@@ -216,7 +217,7 @@ export function ProductOrderForm({
       </div>
 
       <div className="mt-10 mb-6">
-        <h3 className="text-sm font-semibold tracking-(--tracking-eyebrow) text-gold uppercase">Livraison</h3>
+        <h3 className="text-sm font-semibold tracking-(--tracking-eyebrow) text-gold uppercase">{f.delivery}</h3>
       </div>
 
       <div className="grid gap-4 md:grid-cols-2">
@@ -230,7 +231,7 @@ export function ProductOrderForm({
             className="sr-only"
           />
           <div className="flex w-full items-center justify-between">
-            <span className="text-sm font-medium text-ivory">Main à main</span>
+            <span className="text-sm font-medium text-ivory">{f.byHand}</span>
             <div className={`flex h-4 w-4 items-center justify-center rounded-full border ${formData.deliveryMethod === 'main' ? 'border-gold' : 'border-smoke-2'}`}>
               {formData.deliveryMethod === 'main' && <div className="h-2 w-2 rounded-full bg-gold" />}
             </div>
@@ -247,7 +248,7 @@ export function ProductOrderForm({
             className="sr-only"
           />
           <div className="flex w-full items-center justify-between">
-            <span className="text-sm font-medium text-ivory">Livraison par société</span>
+            <span className="text-sm font-medium text-ivory">{f.byCompany}</span>
             <div className={`flex h-4 w-4 items-center justify-center rounded-full border ${formData.deliveryMethod === 'societe' ? 'border-gold' : 'border-smoke-2'}`}>
               {formData.deliveryMethod === 'societe' && <div className="h-2 w-2 rounded-full bg-gold" />}
             </div>
@@ -260,7 +261,7 @@ export function ProductOrderForm({
         <div className="overflow-hidden">
           <div className="grid gap-6">
             <div>
-              <label htmlFor="deliveryCompany" className={labelClass}>Société de livraison (Optionnel)</label>
+              <label htmlFor="deliveryCompany" className={labelClass}>{f.company} ({f.optional})</label>
               <select
                 id="deliveryCompany"
                 name="deliveryCompany"
@@ -268,7 +269,7 @@ export function ProductOrderForm({
                 onChange={handleInputChange}
                 className={`${inputClass} appearance-none bg-[url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23ebd4a4%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%3E%3C%2Fpolyline%3E%3C%2Fsvg%3E')] bg-[length:1em] bg-[right_1rem_center] bg-no-repeat pr-10`}
               >
-                <option value="">Sélectionner une société</option>
+                <option value="">{f.selectCompany}</option>
                 <option value="Yalidine">Yalidine Express</option>
                 <option value="ZR Express">ZR Express</option>
                 <option value="Maystro Delivery">Maystro Delivery</option>
@@ -276,13 +277,13 @@ export function ProductOrderForm({
             </div>
 
             <div>
-              <label htmlFor="deliveryAddress" className={labelClass}>Adresse / lieu de livraison</label>
+              <label htmlFor="deliveryAddress" className={labelClass}>{f.address}</label>
               <textarea
                 id="deliveryAddress"
                 name="deliveryAddress"
                 value={formData.deliveryAddress}
                 onChange={handleInputChange}
-                placeholder="Adresse, quartier, repère..."
+                placeholder={f.addressPlaceholder}
                 rows={3}
                 className={`${inputClass} resize-none`}
               />
@@ -309,7 +310,7 @@ export function ProductOrderForm({
           </button>
         ) : (
           <p className="rounded-sm border border-smoke-2 px-5 py-3.5 text-sm text-ivory/50">
-            {dict.product?.orderUnavailable ?? 'Commande indisponible'}
+            {dict.product.orderUnavailable}
           </p>
         )}
 
