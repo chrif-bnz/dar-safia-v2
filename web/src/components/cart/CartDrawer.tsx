@@ -88,7 +88,7 @@ export function CartDrawer() {
           </div>
         ) : (
           <>
-            <ul className="flex-1 divide-y divide-smoke-2 overflow-y-auto">
+            <ul data-lenis-prevent className="flex-1 divide-y divide-smoke-2 overflow-y-auto">
               {lines.map((line) => (
                 <li key={`${line.productSlug}-${line.variantId}`} className="flex gap-3 p-4">
                   <ProductImage

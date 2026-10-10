@@ -9,6 +9,7 @@ import { CartDrawer } from '@/components/cart/CartDrawer';
 import { CartProvider } from '@/components/cart/CartProvider';
 import { I18nProvider } from '@/components/i18n/I18nProvider';
 import { InlineScript } from '@/components/InlineScript';
+import { Cursor } from '@/components/motion/Cursor';
 import { SmoothScroll } from '@/components/motion/SmoothScroll';
 import { DIRECTION, LOCALES, isLocale } from '@/lib/i18n/config';
 import { introGuardScript } from '@/lib/intro-guard';
@@ -27,8 +28,7 @@ import '../globals.css';
 const cinzelDecorative = localFont({
   src: [
     { path: '../../fonts/cinzel-decorative-400-normal.woff2', weight: '400', style: 'normal' },
-    { path: '../../fonts/cinzel-decorative-700-normal.woff2', weight: '700', style: 'normal' },
-    { path: '../../fonts/cinzel-decorative-900-normal.woff2', weight: '900', style: 'normal' }
+    { path: '../../fonts/cinzel-decorative-700-normal.woff2', weight: '700', style: 'normal' }
   ],
   variable: '--font-cinzel-decorative',
   display: 'swap',
@@ -48,13 +48,10 @@ const cinzel = localFont({
 const cormorant = localFont({
   src: [
     { path: '../../fonts/cormorant-garamond-300-normal.woff2', weight: '300', style: 'normal' },
-    { path: '../../fonts/cormorant-garamond-300-italic.woff2', weight: '300', style: 'italic' },
     { path: '../../fonts/cormorant-garamond-400-normal.woff2', weight: '400', style: 'normal' },
     { path: '../../fonts/cormorant-garamond-400-italic.woff2', weight: '400', style: 'italic' },
     { path: '../../fonts/cormorant-garamond-500-normal.woff2', weight: '500', style: 'normal' },
-    { path: '../../fonts/cormorant-garamond-500-italic.woff2', weight: '500', style: 'italic' },
-    { path: '../../fonts/cormorant-garamond-600-normal.woff2', weight: '600', style: 'normal' },
-    { path: '../../fonts/cormorant-garamond-600-italic.woff2', weight: '600', style: 'italic' }
+    { path: '../../fonts/cormorant-garamond-600-normal.woff2', weight: '600', style: 'normal' }
   ],
   variable: '--font-cormorant',
   display: 'swap',
@@ -62,8 +59,6 @@ const cormorant = localFont({
 
 const montserrat = localFont({
   src: [
-    { path: '../../fonts/montserrat-200-normal.woff2', weight: '200', style: 'normal' },
-    { path: '../../fonts/montserrat-300-normal.woff2', weight: '300', style: 'normal' },
     { path: '../../fonts/montserrat-400-normal.woff2', weight: '400', style: 'normal' },
     { path: '../../fonts/montserrat-500-normal.woff2', weight: '500', style: 'normal' },
     { path: '../../fonts/montserrat-600-normal.woff2', weight: '600', style: 'normal' },
@@ -81,6 +76,7 @@ const notoNaskh = localFont({
     { path: '../../fonts/noto-naskh-arabic-700-normal.woff2', weight: '700', style: 'normal' }
   ],
   variable: '--font-arabic-serif',
+  preload: false, // arabe seulement : ne pèse pas sur les pages FR / EN
   display: 'swap',
 });
 
@@ -93,6 +89,7 @@ const cairo = localFont({
     { path: '../../fonts/cairo-700-normal.woff2', weight: '700', style: 'normal' }
   ],
   variable: '--font-arabic-sans',
+  preload: false, // arabe seulement : ne pèse pas sur les pages FR / EN
   display: 'swap',
 });
 
@@ -102,7 +99,7 @@ const FONT_VARS = [
   cormorant.variable,
   montserrat.variable,
   notoNaskh.variable,
-  cairo.variable,
+  cairo.variable
 ].join(' ');
 
 export function generateStaticParams() {
@@ -150,6 +147,7 @@ export default async function RootLayout({
               des composants serveur. */}
           <CartProvider>
             <SmoothScroll />
+            <Cursor />
             <SiteHeader locale={locale} dict={dict} />
             {children}
             <SiteFooter locale={locale} dict={dict} />
