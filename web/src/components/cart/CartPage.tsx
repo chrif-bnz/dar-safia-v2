@@ -252,7 +252,7 @@ export function CartPage({
                   <dt>{pluralize(c.items, count)}</dt>
                   <dd>{dzd(subtotal)}</dd>
                 </div>
-                <div>
+                <div className="ds-cartp__shiprow">
                   <dt>{c.shipping}</dt>
                   <dd className="ds-cartp__ship">{c.deliveryNote}</dd>
                 </div>

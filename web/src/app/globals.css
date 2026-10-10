@@ -2378,9 +2378,21 @@ html.has-custom-cursor [contenteditable] {
   gap: clamp(2rem, 4vw, 3.5rem);
   margin-top: clamp(2rem, 4vw, 3rem);
   align-items: start;
+  grid-template-columns: minmax(0, 1fr);
+  /* Mobile : liste, récapitulatif juste dessous, puis formulaire. */
+  grid-template-areas: "list" "summary" "form";
 }
+.ds-cartp__main { display: contents; }
+.ds-cartp__list { grid-area: list; }
+.ds-cartp__form { grid-area: form; }
+.ds-cartp__summary { grid-area: summary; }
 @media (min-width: 1024px) {
-  .ds-cartp__layout { grid-template-columns: minmax(0, 1fr) 380px; }
+  .ds-cartp__layout {
+    grid-template-columns: minmax(0, 1fr) 380px;
+    grid-template-rows: auto 1fr;
+    grid-template-areas: "list summary" "form summary";
+  }
+  .ds-cartp__summary { align-self: start; }
 }
 
 /* ── Liste ── */
@@ -2554,7 +2566,8 @@ html.has-custom-cursor [contenteditable] {
 }
 .ds-cartp__summary dt { color: rgba(242, 237, 227, 0.7); }
 .ds-cartp__summary dd { text-align: end; font-variant-numeric: tabular-nums; }
-.ds-cartp__ship { max-width: 18ch; font-size: var(--text-sm); color: rgba(242, 237, 227, 0.6); }
+.ds-cartp__summary dl > .ds-cartp__shiprow { flex-direction: column; gap: 0.4rem; }
+.ds-cartp__ship { text-align: start !important; font-size: var(--text-sm); line-height: 1.5; color: rgba(242, 237, 227, 0.6); }
 .ds-cartp__sumtotal { border-bottom: 0 !important; padding-top: 1.1rem !important; }
 .ds-cartp__sumtotal dt {
   font-family: var(--font-ui);
