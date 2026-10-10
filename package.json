@@ -10,7 +10,8 @@
     "build": "npm run build --prefix web",
     "start": "npm run start --prefix web",
     "lint": "npm run lint --prefix web",
-    "test": "npm test --prefix web"
+    "test": "npm test --prefix web",
+    "postinstall": "npm install --prefix web"
   },
   "devDependencies": {
     "sharp": "^0.35.4"
