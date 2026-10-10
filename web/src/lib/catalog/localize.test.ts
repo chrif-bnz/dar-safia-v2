@@ -96,7 +96,7 @@ describe('catalogue statique par langue', () => {
       loc.forEach((p, i) => {
         expect(p.description, `${locale}:${p.slug}`).not.toBe(fr[i].description);
         expect(p.story, `${locale}:${p.slug}`).not.toBe(fr[i].story);
-        p.notes.forEach((n, j) => {
+        p.notes.forEach((n) => {
           expect(n.note.name, `${locale}:${p.slug}:${n.note.slug}`).not.toBe('');
           if (locale === 'ar') expect(n.note.name).toMatch(/[؀-ۿ]/);
         });

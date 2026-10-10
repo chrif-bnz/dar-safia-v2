@@ -15,6 +15,7 @@ import {
   formatSillage,
   formatVolume,
 } from '@/lib/format';
+import { encodeAssetPath } from '@/lib/asset-url';
 import { LOCALES, isLocale } from '@/lib/i18n/config';
 import { getDictionary, interpolate } from '@/lib/i18n/dictionaries';
 import { localePath } from '@/lib/i18n/routing';
@@ -54,7 +55,7 @@ export async function generateMetadata({
       description: product.description.slice(0, 155),
       type: 'website',
       url: localePath(isLocale(locale) ? locale : 'fr', path),
-      images: image ? [{ url: image.url, alt: image.alt }] : undefined,
+      images: image ? [{ url: encodeAssetPath(image.url), alt: image.alt }] : undefined,
     },
   };
 }
@@ -90,7 +91,7 @@ export default async function ProductPage({
     name: product.name,
     brand: { '@type': 'Brand', name: product.brand.name },
     description: product.description,
-    image: image ? [absoluteUrl(image.url)] : undefined,
+    image: image ? [absoluteUrl(encodeAssetPath(image.url))] : undefined,
     url: absoluteUrl(localePath(locale, `/parfums/${product.slug}`)),
     offers: {
       '@type': 'Offer',
