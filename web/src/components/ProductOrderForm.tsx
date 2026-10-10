@@ -124,7 +124,7 @@ export function ProductOrderForm({
     }
   };
 
-  const inputClass = "w-full rounded-sm border border-smoke-2 bg-noir-2 px-4 py-3 text-sm text-ivory placeholder-ivory/30 outline-none transition-all duration-200 focus:border-gold focus:ring-1 focus:ring-gold/30 disabled:opacity-50 disabled:cursor-not-allowed";
+  const inputClass = "w-full rounded-sm border border-smoke-2 bg-noir-2 px-4 py-3 text-sm text-ivory placeholder-ivory/30 outline-none transition-[border-color,box-shadow] duration-200 focus:border-gold focus:ring-2 focus:ring-gold/30 disabled:opacity-50 disabled:cursor-not-allowed";
   const labelClass = "mb-2 block text-3xs font-semibold tracking-(--tracking-label) text-ivory/60 uppercase";
   const errorClass = "mt-1.5 text-xs text-danger";
 
@@ -189,7 +189,7 @@ export function ProductOrderForm({
           >
             <option value="" disabled>{f.selectWilaya}</option>
             {wilayasData.map((w) => (
-              <option key={w.id} value={w.id}>{w.id} - {locale === 'ar' ? w.nameAr : w.name}</option>
+              <option key={w.id} value={w.id}>{w.id} - {w.name}</option>
             ))}
           </select>
           {errors.wilaya && <p className={errorClass}>{errors.wilaya}</p>}
@@ -209,7 +209,7 @@ export function ProductOrderForm({
               {formData.wilaya ? f.selectCommune : f.selectWilayaFirst}
             </option>
             {communes.map((c) => (
-              <option key={c.id} value={c.id}>{locale === 'ar' ? c.nameAr : c.name}</option>
+              <option key={c.id} value={c.id}>{c.name}</option>
             ))}
           </select>
           {errors.commune && <p className={errorClass}>{errors.commune}</p>}
@@ -221,7 +221,7 @@ export function ProductOrderForm({
       </div>
 
       <div className="grid gap-4 md:grid-cols-2">
-        <label className={`relative flex cursor-pointer rounded-sm border p-4 transition-all duration-200 hover:border-gold/50 ${formData.deliveryMethod === 'main' ? 'border-gold bg-gold/5' : 'border-smoke-2 bg-noir-2'}`}>
+        <label className={`relative flex cursor-pointer rounded-sm border p-4 transition-all duration-200 hover:border-gold/60 ${formData.deliveryMethod === 'main' ? 'border-gold bg-gold/5 shadow-[0_0_15px_rgba(201,162,75,0.08)]' : 'border-smoke-2 bg-noir-2'}`}>
           <input
             type="radio"
             name="deliveryMethod"
@@ -232,13 +232,13 @@ export function ProductOrderForm({
           />
           <div className="flex w-full items-center justify-between">
             <span className="text-sm font-medium text-ivory">{f.byHand}</span>
-            <div className={`flex h-4 w-4 items-center justify-center rounded-full border ${formData.deliveryMethod === 'main' ? 'border-gold' : 'border-smoke-2'}`}>
+            <div className={`flex h-4 w-4 items-center justify-center rounded-full border transition-colors duration-200 ${formData.deliveryMethod === 'main' ? 'border-gold' : 'border-smoke-2'}`}>
               {formData.deliveryMethod === 'main' && <div className="h-2 w-2 rounded-full bg-gold" />}
             </div>
           </div>
         </label>
 
-        <label className={`relative flex cursor-pointer rounded-sm border p-4 transition-all duration-200 hover:border-gold/50 ${formData.deliveryMethod === 'societe' ? 'border-gold bg-gold/5' : 'border-smoke-2 bg-noir-2'}`}>
+        <label className={`relative flex cursor-pointer rounded-sm border p-4 transition-all duration-200 hover:border-gold/60 ${formData.deliveryMethod === 'societe' ? 'border-gold bg-gold/5 shadow-[0_0_15px_rgba(201,162,75,0.08)]' : 'border-smoke-2 bg-noir-2'}`}>
           <input
             type="radio"
             name="deliveryMethod"
@@ -249,7 +249,7 @@ export function ProductOrderForm({
           />
           <div className="flex w-full items-center justify-between">
             <span className="text-sm font-medium text-ivory">{f.byCompany}</span>
-            <div className={`flex h-4 w-4 items-center justify-center rounded-full border ${formData.deliveryMethod === 'societe' ? 'border-gold' : 'border-smoke-2'}`}>
+            <div className={`flex h-4 w-4 items-center justify-center rounded-full border transition-colors duration-200 ${formData.deliveryMethod === 'societe' ? 'border-gold' : 'border-smoke-2'}`}>
               {formData.deliveryMethod === 'societe' && <div className="h-2 w-2 rounded-full bg-gold" />}
             </div>
           </div>
@@ -295,26 +295,27 @@ export function ProductOrderForm({
       
       {errors.submit && <p className={errorClass}>{errors.submit}</p>}
 
-      <div className="mt-10 flex flex-wrap gap-3">
+      <div className="ds-buy-actions mt-10">
         {submitSuccess ? (
-          <p className="rounded-sm border border-smoke-2 px-5 py-3.5 text-sm text-ivory/50">
+          <p className="rounded-sm border border-smoke-2 px-5 py-3.5 text-sm text-ivory/50 text-center">
             {dict.product.orderConfirmed}
           </p>
         ) : hasOrderUrl ? (
           <button
             type="submit"
             disabled={isSubmitting}
-            className="ds-btn inline-flex w-full items-center justify-center gap-2.5 rounded-sm border sm:w-auto border-gold bg-burgundy px-7 py-3.5 text-sm font-semibold tracking-(--tracking-label) text-ivory uppercase transition-colors duration-200 hover:border-gold-light hover:bg-burgundy-2 disabled:opacity-70"
+            className="ds-btn-buy ds-btn-buy-order disabled:opacity-70"
           >
-            {dict.product.orderNow}
+            <span className="relative z-10">{dict.product.orderNow}</span>
           </button>
         ) : (
-          <p className="rounded-sm border border-smoke-2 px-5 py-3.5 text-sm text-ivory/50">
+          <p className="rounded-sm border border-smoke-2 px-5 py-3.5 text-sm text-ivory/50 text-center">
             {dict.product.orderUnavailable}
           </p>
         )}
 
         <AddToCartButton
+          className="ds-btn-buy ds-btn-buy-cart"
           line={{
             productSlug: product.slug,
             variantId: variant.id,

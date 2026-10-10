@@ -148,7 +148,7 @@ export default async function RootLayout({
             c'est le seul moment où l'en-tête peut être voilé sans flash. */}
         <InlineScript html={introGuardScript} />
       </head>
-      <body className="min-h-screen antialiased overflow-x-clip">
+      <body className="min-h-screen antialiased overflow-x-clip" suppressHydrationWarning>
         <a
           href="#contenu"
           className="sr-only focus:not-sr-only focus:absolute focus:top-0 focus:z-50 focus:bg-gold focus:px-5 focus:py-3 focus:text-sm focus:font-semibold focus:text-noir focus:start-0"

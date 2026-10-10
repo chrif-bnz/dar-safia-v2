@@ -136,7 +136,7 @@ export function FilterSidebar({
         <button
           type="button"
           onClick={onClear}
-          className="ds-navlink self-start pb-4 font-ui text-2xs tracking-(--tracking-label) text-gold uppercase transition-colors hover:text-gold-light"
+          className="ds-filter-hover-shift ds-navlink self-start pb-4 font-ui text-2xs tracking-(--tracking-label) text-gold uppercase transition-colors hover:text-gold-light"
         >
           {f.clear}
         </button>
@@ -150,7 +150,7 @@ export function FilterSidebar({
               type="button"
               onClick={() => toggleCategory(category.key)}
               aria-expanded={isOpen}
-              className="flex w-full items-center justify-between py-3.5 text-start font-ui text-2xs tracking-(--tracking-label) text-ivory uppercase"
+              className="ds-filter-accordion-btn flex w-full items-center justify-between py-3.5 text-start font-ui text-2xs tracking-(--tracking-label) text-ivory uppercase"
             >
               <span className="flex items-center gap-2">
                 {category.legend}
@@ -162,7 +162,7 @@ export function FilterSidebar({
               </span>
               <span
                 aria-hidden="true"
-                className="text-ivory/50 transition-transform duration-300 ease-(--ease-lux)"
+                className="ds-accordion-arrow text-ivory/50"
                 style={{ transform: isOpen ? 'rotate(180deg)' : undefined }}
               >
                 ⌄
@@ -177,14 +177,19 @@ export function FilterSidebar({
                 <ul className="flex flex-col gap-2.5 pb-4">
                   {category.options.map((option) => (
                     <li key={option.value}>
-                      <label className="flex min-h-10 items-center gap-3 font-body text-md text-ivory/75">
+                      <label className="ds-filter-hover-shift group flex min-h-10 cursor-pointer items-center gap-3 font-body text-md text-ivory/75">
                         <input
                           type="checkbox"
                           checked={selected.includes(option.value)}
                           onChange={() => onToggle(category.key, option.value)}
-                          className="size-5 shrink-0 accent-gold"
+                          className="ds-checkbox-input sr-only"
                         />
-                        {option.label}
+                        <span className="ds-checkbox-box" aria-hidden="true">
+                          <span className="ds-checkbox-fill" />
+                        </span>
+                        <span className="transition-colors duration-250 group-hover:text-gold">
+                          {option.label}
+                        </span>
                       </label>
                     </li>
                   ))}

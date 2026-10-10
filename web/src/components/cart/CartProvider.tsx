@@ -4,6 +4,7 @@ import {
   createContext,
   useCallback,
   useContext,
+  useEffect,
   useMemo,
   useState,
   useSyncExternalStore,
@@ -51,13 +52,11 @@ export function CartProvider({ children }: { children: ReactNode }) {
     store.getServerSnapshot
   );
 
-  // Même mécanisme pour savoir si l'on est hydraté : renvoie false au rendu
-  // serveur, true côté client, sans setState dans un effet.
-  const hydrated = useSyncExternalStore(
-    store.subscribe,
-    () => true,
-    () => false
-  );
+  const [hydrated, setHydrated] = useState(false);
+
+  useEffect(() => {
+    setHydrated(true);
+  }, []);
 
   const [isOpen, setIsOpen] = useState(false);
 

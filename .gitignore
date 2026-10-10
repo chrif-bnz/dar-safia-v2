@@ -20,7 +20,8 @@ web/public/img/logo/logo-dr/*
 # Catalogue migré — régénéré par `node scripts/migrate-catalog.mjs`
 # depuis catalog-data.js, qui reste la source. Ne pas versionner :
 # éditer le JSON généré serait perdu au prochain lancement.
-web/src/data/
+web/src/data/*
+!web/src/data/translations.json
 
 # Environnement — ne jamais commiter de valeurs réelles
 .env
