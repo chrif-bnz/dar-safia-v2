@@ -28,3 +28,19 @@ export function recordOrder(order: OrderRequest): void {
 export function recordContact(message: ContactRequest): void {
   send('/api/contact', message);
 }
+
+export async function submitContact(
+  message: ContactRequest
+): Promise<{ ok: boolean; status?: number }> {
+  try {
+    const res = await fetch('/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(message),
+    });
+    return { ok: res.ok, status: res.status };
+  } catch {
+    return { ok: false, status: 500 };
+  }
+}
+
