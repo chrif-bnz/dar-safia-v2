@@ -387,7 +387,15 @@
     "orderIntro": "أرغب في إتمام الطلب التالي:",
     "orderLine": "{name} ({brand}) — {volume} × {qty} : {total}",
     "orderSubtotal": "المجموع الفرعي: {subtotal}",
-    "orderOutro": "يرجى تأكيد التوفّر وشروط التوصيل."
+    "orderOutro": "يرجى تأكيد التوفّر وشروط التوصيل.",
+    "yourCart": "سلتك",
+    "unitPrice": "سعر الوحدة",
+    "total": "المجموع",
+    "continueShopping": "متابعة التسوق",
+    "emptyCta": "اكتشف العطور",
+    "emptyLead": "ستظهر هنا العطور التي تضيفها.",
+    "summary": "الملخّص",
+    "shipping": "التوصيل"
   },
   "scentFinder": {
     "eyebrow": "تشخيص عطري",

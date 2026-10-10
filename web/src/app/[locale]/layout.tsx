@@ -5,7 +5,6 @@ import { notFound } from 'next/navigation';
 import { PlaceholderPhoneBanner } from '@/components/PlaceholderPhoneBanner';
 import { SiteFooter } from '@/components/SiteFooter';
 import { SiteHeader } from '@/components/SiteHeader';
-import { CartDrawer } from '@/components/cart/CartDrawer';
 import { CartProvider } from '@/components/cart/CartProvider';
 import { I18nProvider } from '@/components/i18n/I18nProvider';
 import { InlineScript } from '@/components/InlineScript';
@@ -166,7 +165,6 @@ export default async function RootLayout({
             <SiteHeader locale={locale} dict={dict} />
             {children}
             <SiteFooter locale={locale} dict={dict} />
-            <CartDrawer />
             <PlaceholderPhoneBanner dict={dict} />
           </CartProvider>
         </I18nProvider>

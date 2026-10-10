@@ -387,7 +387,15 @@
     "orderIntro": "I would like to finalise the following order:",
     "orderLine": "{name} ({brand}) — {volume} × {qty} : {total}",
     "orderSubtotal": "SUBTOTAL: {subtotal}",
-    "orderOutro": "Please confirm availability and delivery terms."
+    "orderOutro": "Please confirm availability and delivery terms.",
+    "yourCart": "Your cart",
+    "unitPrice": "Unit price",
+    "total": "Total",
+    "continueShopping": "Continue shopping",
+    "emptyCta": "Discover the perfumes",
+    "emptyLead": "Perfumes you add will appear here.",
+    "summary": "Summary",
+    "shipping": "Delivery"
   },
   "scentFinder": {
     "eyebrow": "Scent diagnosis",

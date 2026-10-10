@@ -4,7 +4,6 @@ import {
   createContext,
   useCallback,
   useContext,
-  useEffect,
   useMemo,
   useState,
   useSyncExternalStore,
@@ -45,6 +44,8 @@ interface CartContextValue {
 
 const CartContext = createContext<CartContextValue | null>(null);
 
+const subscribeNever = () => () => {};
+
 export function CartProvider({ children }: { children: ReactNode }) {
   const lines = useSyncExternalStore(
     store.subscribe,
@@ -52,11 +53,13 @@ export function CartProvider({ children }: { children: ReactNode }) {
     store.getServerSnapshot
   );
 
-  const [hydrated, setHydrated] = useState(false);
-
-  useEffect(() => {
-    setHydrated(true);
-  }, []);
+  // false au rendu serveur et à l'hydratation, true ensuite : sans setState
+  // dans un effet (le magasin externe fournit les deux instantanés).
+  const hydrated = useSyncExternalStore(
+    subscribeNever,
+    () => true,
+    () => false
+  );
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -66,7 +69,6 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const addLine = useCallback(
     (line: Omit<CartLine, 'quantity'>, quantity = 1) => {
       store.addLine(line, quantity);
-      setIsOpen(true);
     },
     []
   );

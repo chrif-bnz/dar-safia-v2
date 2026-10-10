@@ -66,6 +66,24 @@ export function OrderThanks({ locale, dict }: { locale: Locale; dict: Dictionary
                 {t.summaryTitle}
               </h2>
 
+              {receipt.lines && receipt.lines.length > 1 ? (
+                <ul className="ds-thanks__lines">
+                  {receipt.lines.map((line, i) => (
+                    <li key={`${line.name}-${i}`}>
+                      <span className="ds-thanks__linename">
+                        <span className="ds-thanks__brand">{line.brandName}</span>
+                        <span>{line.name}</span>
+                      </span>
+                      <span className="ds-thanks__lineqty">
+                        × {line.quantity}
+                        <span className="ds-thanks__sub">
+                          {formatPrice({ amount: line.total, currency: 'DZD' }, locale)}
+                        </span>
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
               <div className="ds-thanks__product">
                 {receipt.imageUrl && (
                   <div className="ds-thanks__thumb">
@@ -88,6 +106,7 @@ export function OrderThanks({ locale, dict }: { locale: Locale; dict: Dictionary
                   )}
                 </div>
               </div>
+              )}
 
               <dl className="ds-thanks__rows">
                 <div>

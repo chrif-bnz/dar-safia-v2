@@ -387,7 +387,15 @@
     "orderIntro": "Je souhaite finaliser la commande suivante :",
     "orderLine": "{name} ({brand}) — {volume} × {qty} : {total}",
     "orderSubtotal": "SOUS-TOTAL : {subtotal}",
-    "orderOutro": "Merci de me confirmer la disponibilité et les modalités de livraison."
+    "orderOutro": "Merci de me confirmer la disponibilité et les modalités de livraison.",
+    "yourCart": "Votre panier",
+    "unitPrice": "Prix unitaire",
+    "total": "Total",
+    "continueShopping": "Continuer mes achats",
+    "emptyCta": "Découvrir les parfums",
+    "emptyLead": "Les parfums que vous ajouterez apparaîtront ici.",
+    "summary": "Récapitulatif",
+    "shipping": "Livraison"
   },
   "scentFinder": {
     "eyebrow": "Diagnostic olfactif",

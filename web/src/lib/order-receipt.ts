@@ -11,6 +11,13 @@
 
 const KEY = 'darsafia.order';
 
+export interface OrderReceiptLine {
+  name: string;
+  brandName: string;
+  quantity: number;
+  total: number;
+}
+
 export interface OrderReceipt {
   firstName: string;
   productName: string;
@@ -25,6 +32,8 @@ export interface OrderReceipt {
   commune: string;
   deliveryMethod: 'main' | 'societe';
   reference: string | null;
+  /** Présent quand la commande vient du panier (plusieurs lignes). */
+  lines?: OrderReceiptLine[];
 }
 
 export function saveOrderReceipt(receipt: OrderReceipt): void {
@@ -58,7 +67,23 @@ export function parseOrderReceipt(raw: string | null): OrderReceipt | null {
     ) {
       return null;
     }
+    const lines = Array.isArray(r.lines)
+      ? r.lines.flatMap((entry): OrderReceiptLine[] => {
+          if (!entry || typeof entry !== 'object') return [];
+          const e = entry as Record<string, unknown>;
+          if (
+            typeof e.name !== 'string' ||
+            typeof e.brandName !== 'string' ||
+            typeof e.quantity !== 'number' ||
+            typeof e.total !== 'number'
+          ) {
+            return [];
+          }
+          return [{ name: e.name, brandName: e.brandName, quantity: e.quantity, total: e.total }];
+        })
+      : [];
     return {
+      lines: lines.length > 0 ? lines : undefined,
       firstName: typeof r.firstName === 'string' ? r.firstName : '',
       productName: r.productName,
       brandName: r.brandName,
