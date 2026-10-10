@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "prepare-assets": "node ../scripts/migrate-catalog.mjs && node fetch-wilayas.mjs && node ../scripts/optimize-images.mjs",
+    "prepare-assets": "node ../scripts/optimize-images.mjs && node ../scripts/migrate-catalog.mjs && node fetch-wilayas.mjs",
     "predev": "npm run prepare-assets",
     "dev": "next dev",
     "prebuild": "npm run prepare-assets",

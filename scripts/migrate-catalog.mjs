@@ -13,6 +13,7 @@
  * Sortie    : web/src/data/products.json  +  brands.json  +  notes.json
  */
 
+import { existsSync } from 'node:fs';
 import { mkdir, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -58,6 +59,42 @@ function uniqueSlug(base, taken) {
   while (taken.has(slug)) slug = `${base}-${n++}`;
   taken.add(slug);
   return slug;
+}
+
+/**
+ * Résout l'image d'un parfum vers des fichiers qui EXISTENT dans web/public.
+ * Ce script s'exécute APRÈS `optimize-images.mjs` (voir `prepare-assets`).
+ *
+ * - photo imbriquée (`Photos site web/…`) : le pipeline écrit `<chemin>-400.webp`
+ *   et `<chemin>-800.webp` ; on ne garde que les largeurs réellement présentes ;
+ * - visuel générique (`/img/perfumes/rose.webp`) : le fichier lui-même.
+ *
+ * Aucun fichier trouvé : `null`. La fiche n'a alors PAS d'image (le site
+ * montre la plaque de la maison) au lieu de demander une URL qui répondrait 404.
+ */
+const PUBLIC = path.join(ROOT, 'web', 'public');
+const PHOTOS_URL = '/img/perfumes/Photos site web/';
+const PHOTO_WIDTHS = [400, 800];
+let missingPhotos = 0;
+
+function resolveImage(url) {
+  if (url.startsWith(PHOTOS_URL)) {
+    const widths = PHOTO_WIDTHS.filter(w => existsSync(path.join(PUBLIC, `${url}-${w}.webp`)));
+    if (widths.length === 0) {
+      missingPhotos++;
+      return null;
+    }
+    const best = widths[widths.length - 1];
+    return {
+      url: `${url}-${best}.webp`,
+      srcset: widths.map(w => `${url}-${w}.webp ${w}w`).join(', ')
+    };
+  }
+  if (!existsSync(path.join(PUBLIC, url))) {
+    missingPhotos++;
+    return null;
+  }
+  return { url, srcset: buildSrcset(url) };
 }
 
 function buildSrcset(url) {
@@ -185,11 +222,10 @@ function migrate() {
         stock: 0
       }],
 
-      images: [{
-        url: old.img,
-        srcset: buildSrcset(old.img),
-        alt: `${old.name} — ${old.brand}`
-      }],
+      images: (() => {
+        const image = resolveImage(old.img);
+        return image ? [{ ...image, alt: `${old.name} — ${old.brand}` }] : [];
+      })(),
 
       concentration: old.concentration,
       longevityHours: parseLongevityHours(old.longevity),
@@ -247,5 +283,9 @@ if (noVolume.length) {
 }
 console.log('\n  À revoir manuellement dans le CMS (déduit, non factuel) :');
 console.log('  - stock : mis à 0 partout, le catalogue d\'origine ne le portait pas');
+if (missingPhotos > 0) {
+  console.log(`  - photos : ${missingPhotos} parfum(s) SANS photo trouvée (fichiers absents) — la fiche affiche la plaque de la maison`);
+  console.log('    Déposez les photos dans perfumes/Photos site web/ puis relancez `npm run prepare-assets`.');
+}
 console.log('  - seasons / occasions : déduits des notes et de la concentration');
 console.log('  - rating : volontairement absent, les avis du site sont fictifs');

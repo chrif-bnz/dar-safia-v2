@@ -27,9 +27,16 @@ async function ensure(app, uid, slug, data) {
 }
 
 async function uploadImage(app, wireImage, alt) {
-  const rel = decodeURI(wireImage.url).replace(/^\/img\/perfumes\//, '');
-  const file = path.join(MASTERS, rel);
-  if (!fs.existsSync(file)) return null;
+  // L'URL du site pointe un dérivé (`<photo>.jpg-800.webp`) ; le master est la
+  // photo d'origine, dans perfumes/ ou, à défaut, dans web/public/img/perfumes/.
+  const rel = decodeURI(wireImage.url)
+    .replace(/^\/img\/perfumes\//, '')
+    .replace(/-\d+\.webp$/, '');
+  const file = [
+    path.join(MASTERS, rel),
+    path.resolve(__dirname, '../../web/public/img/perfumes', rel),
+  ].find((f) => fs.existsSync(f));
+  if (!file) return null;
   const stat = fs.statSync(file);
   const ext = path.extname(file).toLowerCase();
   const mime = ext === '.png' ? 'image/png' : ext === '.webp' ? 'image/webp' : 'image/jpeg';

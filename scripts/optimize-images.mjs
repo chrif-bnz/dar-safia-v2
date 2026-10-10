@@ -20,6 +20,7 @@ import { existsSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import sharp from 'sharp';
+import { perfumeCatalog } from '../catalog-data.js';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const OUT = path.join(ROOT, 'public', 'img');
@@ -153,7 +154,79 @@ async function copyDir(from, to) {
   }
 }
 
-run().catch(err => {
-  console.error('\n✗ Échec de l\'optimisation des images :', err.message);
-  process.exit(1);
-});
+/**
+ * ══════════════════════════════════════════════════════════════
+ *   PHOTOS PRODUIT — dossier « Photos site web »
+ * ══════════════════════════════════════════════════════════════
+ *
+ * Le catalogue référence ses photos par un chemin IMBRIQUÉ
+ * (`/img/perfumes/Photos site web/<dossier>/<fichier>.png`). Le job `perfumes`
+ * plus haut ne lit que le premier niveau de `perfumes/` : il ne produisait donc
+ * jamais ces fichiers, et toute fiche demandait des images inexistantes (404).
+ *
+ * Ici, pour chaque photo RÉFÉRENCÉE par le catalogue, on cherche le master dans
+ * l'un des deux emplacements possibles, puis on écrit
+ * `<chemin>-400.webp` et `<chemin>-800.webp` à côté du chemin public — les
+ * noms que `migrate-catalog.mjs` met dans le srcset. Une photo introuvable est
+ * simplement ignorée (signalée) : la fiche affichera la plaque de la maison.
+ *
+ * Emplacements des masters, dans l'ordre :
+ *   1. perfumes/Photos site web/        (convention du dépôt : masters à la racine)
+ *   2. web/public/img/perfumes/Photos site web/   (là où les photos ont été déposées)
+ *
+ * Un dérivé déjà à jour (plus récent que son master) n'est pas recalculé.
+ */
+const PHOTOS_URL = '/img/perfumes/Photos site web/';
+const PHOTO_ROOTS = [
+  path.join(ROOT, 'perfumes', 'Photos site web'),
+  path.join(ROOT, 'web', 'public', 'img', 'perfumes', 'Photos site web')
+];
+const PHOTO_WIDTHS = [400, 800];
+
+async function runPhotos() {
+  const wanted = [...new Set(perfumeCatalog.map(p => p.img).filter(u => u?.startsWith(PHOTOS_URL)))];
+  if (wanted.length === 0) return;
+
+  const publicDir = path.join(ROOT, 'web', 'public');
+  let made = 0;
+  let fresh = 0;
+  const missing = [];
+
+  console.log(`\nphotos produit — ${wanted.length} référencée(s)`);
+  for (const url of wanted) {
+    const rel = url.slice(PHOTOS_URL.length);
+    const master = PHOTO_ROOTS.map(r => path.join(r, rel)).find(f => existsSync(f));
+    if (!master) {
+      missing.push(rel);
+      continue;
+    }
+    const masterTime = (await stat(master)).mtimeMs;
+    const meta = await sharp(master).metadata();
+
+    for (const width of PHOTO_WIDTHS) {
+      if (meta.width && width > meta.width && width !== PHOTO_WIDTHS[0]) continue;
+      const out = path.join(publicDir, `${url}-${width}.webp`);
+      if (existsSync(out) && (await stat(out)).mtimeMs >= masterTime) {
+        fresh++;
+        continue;
+      }
+      await mkdir(path.dirname(out), { recursive: true });
+      await sharp(master).resize({ width, withoutEnlargement: true }).webp(WEBP).toFile(out);
+      made++;
+    }
+  }
+  console.log(`  ${made} dérivé(s) écrit(s), ${fresh} déjà à jour`);
+  if (missing.length) {
+    console.warn(`  ! ${missing.length} photo(s) introuvable(s) — ces fiches afficheront la plaque de la maison :`);
+    for (const m of missing.slice(0, 5)) console.warn(`      ${m}`);
+    if (missing.length > 5) console.warn(`      … et ${missing.length - 5} autre(s)`);
+    console.warn('    Déposez les photos dans perfumes/Photos site web/ (puis relancez).');
+  }
+}
+
+run()
+  .then(runPhotos)
+  .catch(err => {
+    console.error('\n✗ Échec de l\'optimisation des images :', err.message);
+    process.exit(1);
+  });

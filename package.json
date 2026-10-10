@@ -5,7 +5,7 @@
   "description": "Dar Safia — maison de haute parfumerie. Application Next.js et chaîne d'actifs.",
   "type": "module",
   "scripts": {
-    "prepare-assets": "node scripts/migrate-catalog.mjs && node scripts/optimize-images.mjs",
+    "prepare-assets": "node scripts/optimize-images.mjs && node scripts/migrate-catalog.mjs",
     "dev": "npm run dev --prefix web",
     "build": "npm run build --prefix web",
     "start": "npm run start --prefix web",

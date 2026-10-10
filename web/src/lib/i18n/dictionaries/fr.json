@@ -84,7 +84,11 @@
   },
   "voices": {
     "title": "Ce qu'en disent nos clients",
-    "verified": "Client vérifié"
+    "verified": "Client vérifié",
+    "prev": "Témoignage précédent",
+    "next": "Témoignage suivant",
+    "goTo": "Témoignage {n} sur {total}",
+    "region": "Témoignages de clients"
   },
   "closing": {
     "lines": [
