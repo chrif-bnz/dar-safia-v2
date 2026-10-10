@@ -1444,3 +1444,54 @@ html.has-custom-cursor [contenteditable] {
     transform: none !important;
   }
 }
+
+/* ══════════════════════════════════════════════════════════════
+   FICHE PRODUIT — CENTRAGE DE L'IMAGE EN SCROLLANT
+   ══════════════════════════════════════════════════════════════ */
+:root {
+  --header-height: 88px;
+}
+
+.ds-product-sticky-col {
+  width: 100%;
+}
+
+@media (max-width: 1023.98px) {
+  .ds-product-sticky-col {
+    position: static;
+    height: auto;
+  }
+  .ds-product-photo-card {
+    max-height: 70dvh;
+    margin-inline: auto;
+  }
+  .ds-product-photo-img {
+    max-height: 70dvh;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+}
+
+@media (min-width: 1024px) {
+  .ds-product-sticky-col {
+    position: sticky;
+    top: calc(var(--header-height, 88px) + 24px);
+    align-self: start;
+    height: calc(100dvh - var(--header-height, 88px) - 48px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .ds-product-photo-card {
+    max-height: calc(100dvh - var(--header-height, 88px) - 170px);
+    width: 100%;
+  }
+  .ds-product-photo-img {
+    max-height: calc(100dvh - var(--header-height, 88px) - 170px);
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+}

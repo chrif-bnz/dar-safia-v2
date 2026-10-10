@@ -140,50 +140,52 @@ export default async function ProductPage({
 
         <div className="mt-8 grid gap-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] lg:gap-16">
           {/* ── Visuel ── */}
-          <div className="lg:sticky lg:top-32 lg:self-start">
-            <div
-              className="group/photo relative overflow-hidden rounded-md border border-smoke-2 bg-noir-2 transition-[border-color,box-shadow] duration-500 hover:border-gold/50"
-              style={{ boxShadow: '0 24px 60px -24px var(--universe-glow)' }}
-            >
-              {/* Halo doré doux en arrière-plan au survol */}
+          <div className="ds-product-sticky-col">
+            <div className="w-full">
               <div
-                aria-hidden="true"
-                className="pointer-events-none absolute -inset-4 rounded-xl bg-gold/15 opacity-0 blur-2xl transition-opacity duration-500 group-hover/photo:opacity-100"
-              />
-              {image && (
-                <div className="overflow-hidden">
-                  <ProductImage
-                    src={image.url}
-                    srcSet={image.srcset ?? undefined}
-                    sizes="(max-width: 1024px) 92vw, 520px"
-                    alt={image.alt}
-                    fetchPriority="high"
-                    className="aspect-4/5 w-full object-cover transition-transform duration-700 ease-(--ease-lux) group-hover/photo:scale-[1.03]"
-                  />
-                </div>
-              )}
-            </div>
-
-            <ScrollReveal delay={120}>
-              <dl
-                className="mt-4 grid gap-2.5"
-                style={{ gridTemplateColumns: `repeat(${metrics.length}, minmax(0, 1fr))` }}
+                className="ds-product-photo-card group/photo relative overflow-hidden rounded-md border border-smoke-2 bg-noir-2 transition-[border-color,box-shadow] duration-500 hover:border-gold/50"
+                style={{ boxShadow: '0 24px 60px -24px var(--universe-glow)' }}
               >
-                {metrics.map(({ label, value }) => (
-                  <div
-                    key={label}
-                    className="ds-metric-card cursor-default rounded-md border border-smoke-2 bg-noir-2 px-3 py-4 text-center"
-                  >
-                    <dt className="text-3xs tracking-(--tracking-label) text-ivory/58 uppercase">
-                      {label}
-                    </dt>
-                    <dd className="mt-1.5 font-serif text-md text-[var(--universe-light)]">
-                      {value}
-                    </dd>
+                {/* Halo doré doux en arrière-plan au survol */}
+                <div
+                  aria-hidden="true"
+                  className="pointer-events-none absolute -inset-4 rounded-xl bg-gold/15 opacity-0 blur-2xl transition-opacity duration-500 group-hover/photo:opacity-100"
+                />
+                {image && (
+                  <div className="overflow-hidden">
+                    <ProductImage
+                      src={image.url}
+                      srcSet={image.srcset ?? undefined}
+                      sizes="(max-width: 1024px) 92vw, 520px"
+                      alt={image.alt}
+                      fetchPriority="high"
+                      className="ds-product-photo-img aspect-4/5 w-full object-cover transition-transform duration-700 ease-(--ease-lux) group-hover/photo:scale-[1.03]"
+                    />
                   </div>
-                ))}
-              </dl>
-            </ScrollReveal>
+                )}
+              </div>
+
+              <ScrollReveal delay={120}>
+                <dl
+                  className="mt-4 grid gap-2.5"
+                  style={{ gridTemplateColumns: `repeat(${metrics.length}, minmax(0, 1fr))` }}
+                >
+                  {metrics.map(({ label, value }) => (
+                    <div
+                      key={label}
+                      className="ds-metric-card cursor-default rounded-md border border-smoke-2 bg-noir-2 px-3 py-4 text-center"
+                    >
+                      <dt className="text-3xs tracking-(--tracking-label) text-ivory/58 uppercase">
+                        {label}
+                      </dt>
+                      <dd className="mt-1.5 font-serif text-md text-[var(--universe-light)]">
+                        {value}
+                      </dd>
+                    </div>
+                  ))}
+                </dl>
+              </ScrollReveal>
+            </div>
           </div>
 
           {/* ── Informations ── */}
