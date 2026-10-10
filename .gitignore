@@ -4,8 +4,18 @@ node_modules/
 
 # Images dérivées — régénérées par `npm run prepare-assets` depuis les masters
 # (branding images/, perfumes/, logo/). Ne pas versionner.
-public/img/
-web/public/img/
+public/img/*
+!public/img/logo/
+public/img/logo/*
+!public/img/logo/logo-dr/
+public/img/logo/logo-dr/*
+!public/img/logo/logo-dr/logo-navbar-monogramme.png
+web/public/img/*
+!web/public/img/logo/
+web/public/img/logo/*
+!web/public/img/logo/logo-dr/
+web/public/img/logo/logo-dr/*
+!web/public/img/logo/logo-dr/logo-navbar-monogramme.png
 
 # Catalogue migré — régénéré par `node scripts/migrate-catalog.mjs`
 # depuis catalog-data.js, qui reste la source. Ne pas versionner :

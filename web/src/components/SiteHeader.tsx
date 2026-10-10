@@ -157,9 +157,22 @@ export function SiteHeader({ locale, dict }: { locale: Locale; dict: Dictionary 
       <div className="mx-auto flex max-w-(--container-site) items-center gap-4 px-5 py-3 md:px-8">
         <Link
           href={home}
-          className="ds-tap shrink-0 font-serif text-lg whitespace-nowrap tracking-[0.08em] text-ivory transition-colors hover:text-gold"
+          aria-label="Dar Safia, retour à l'accueil"
+          className="ds-tap flex shrink-0 items-center gap-3 font-serif text-lg whitespace-nowrap tracking-[0.08em] text-ivory transition-colors hover:text-gold"
         >
-          {dict.common.brandName}
+          <img
+            src="/img/logo/logo-dr/logo-navbar-monogramme.png"
+            alt=""
+            width={1377}
+            height={1142}
+            className="ds-navbar-logo shrink-0"
+            style={{
+              height: 'var(--logo-navbar-height, 56px)',
+              width: 'auto',
+              display: 'block',
+            }}
+          />
+          <span>{dict.common.brandName}</span>
         </Link>
 
         <nav aria-label={dict.nav.perfumes} className="ms-auto hidden lg:block">

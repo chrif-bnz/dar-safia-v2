@@ -718,6 +718,29 @@ input[type="radio"] {
 }
 
 /* ══════════════════════════════════════════════════════════════
+   LOGO NAVBAR (MONOGRAMME)
+   ══════════════════════════════════════════════════════════════ */
+:root {
+  --logo-navbar-height: 56px;
+}
+@media (max-width: 1023px) {
+  :root {
+    --logo-navbar-height: 40px;
+  }
+}
+@media (max-width: 767px) {
+  :root {
+    --logo-navbar-height: 32px;
+  }
+}
+
+.ds-navbar-logo {
+  height: var(--logo-navbar-height, 56px);
+  width: auto;
+  display: block;
+}
+
+/* ══════════════════════════════════════════════════════════════
    DÉFILEMENT FLUIDE — règles Lenis
    Reprises de lenis.css : sans elles, `scroll-behavior: smooth` du
    navigateur se bat contre l'interpolation de Lenis, et un panneau
