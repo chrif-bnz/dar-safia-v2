@@ -85,7 +85,7 @@ export async function diagnoseScent(
   if (!parsed) return null;
   const safeLocale: Locale = isLocale(locale) ? locale : 'fr';
 
-  const { items } = await catalog.listProducts();
+  const { items } = await catalog.listProducts({ locale: safeLocale });
   const ranked = rankScentMatches(items, parsed);
   if (ranked.length === 0) return null;
 

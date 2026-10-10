@@ -10,6 +10,7 @@
  */
 
 import { catalog, lowestPrice, type FragranceFamily } from '@/lib/catalog';
+import type { Locale } from '@/lib/i18n/config';
 
 /** Une matière et le nombre de créations qui la portent. */
 export interface SignatureNote {
@@ -32,8 +33,8 @@ export interface SignatureProduct {
  * Les matières qui reviennent le plus souvent dans la pyramide des parfums.
  * Une note n'est comptée qu'une fois par parfum, quel que soit son étage.
  */
-export async function getSignatureNotes(limit = 12): Promise<SignatureNote[]> {
-  const { items } = await catalog.listProducts();
+export async function getSignatureNotes(limit = 12, locale?: Locale): Promise<SignatureNote[]> {
+  const { items } = await catalog.listProducts({ locale });
 
   const freq = new Map<string, { name: string; count: number }>();
   for (const product of items) {
@@ -49,7 +50,7 @@ export async function getSignatureNotes(limit = 12): Promise<SignatureNote[]> {
 
   return [...freq.entries()]
     .map(([slug, { name, count }]) => ({ slug, name, count }))
-    .sort((a, b) => b.count - a.count || a.name.localeCompare(b.name, 'fr'))
+    .sort((a, b) => b.count - a.count || a.name.localeCompare(b.name, locale ?? 'fr'))
     .slice(0, limit);
 }
 
@@ -57,8 +58,9 @@ export async function getSignatureNotes(limit = 12): Promise<SignatureNote[]> {
  * Les parfums mis en avant, réduits à ce dont la séquence a besoin.
  * L'ordre suit `sort` (prix décroissant : on ouvre sur la pièce la plus rare).
  */
-export async function getSignatureProducts(): Promise<SignatureProduct[]> {
+export async function getSignatureProducts(locale?: Locale): Promise<SignatureProduct[]> {
   const { items } = await catalog.listProducts({
+    locale,
     featured: true,
     sort: 'price-desc',
   });

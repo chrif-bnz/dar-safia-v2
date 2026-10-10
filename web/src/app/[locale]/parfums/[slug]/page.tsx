@@ -25,8 +25,8 @@ import { orderMessage, whatsappUrl } from '@/lib/whatsapp';
  * indexable — l'ancien site rendait la fiche en JavaScript depuis un fragment
  * d'URL, invisible au crawl.
  *
- * NB : le CONTENU du parfum (nom, description, notes) reste en français ; sa
- * traduction relèvera de l'i18n Strapi. Seule l'interface est multilingue.
+ * Le contenu du parfum (description, récit, badge, notes) suit la langue de la
+ * page ; un champ non traduit retombe sur le français (voir lib/catalog/localize).
  */
 export async function generateStaticParams() {
   const { items } = await catalog.listProducts();
@@ -38,8 +38,8 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: PageProps<'/[locale]/parfums/[slug]'>): Promise<Metadata> {
-  const { slug } = await params;
-  const product = await catalog.getProductBySlug(slug);
+  const { locale, slug } = await params;
+  const product = await catalog.getProductBySlug(slug, isLocale(locale) ? locale : undefined);
   if (!product) return {};
 
   const image = product.images[0];
@@ -63,11 +63,11 @@ export default async function ProductPage({
 
   const [dict, product] = await Promise.all([
     getDictionary(locale),
-    catalog.getProductBySlug(slug),
+    catalog.getProductBySlug(slug, locale),
   ]);
   if (!product) notFound();
 
-  const related = await catalog.getRelatedProducts(slug, 4);
+  const related = await catalog.getRelatedProducts(slug, 4, locale);
   const p = dict.product;
   const image = product.images[0];
   const variant = product.variants[0];
@@ -115,7 +115,7 @@ export default async function ProductPage({
       />
 
       <div className="relative mx-auto max-w-(--container-site) px-5 pt-28 pb-10 md:px-8 md:pt-32 md:pb-14">
-        <nav aria-label="breadcrumb" className="text-2xs text-ivory/58">
+        <nav aria-label={p.breadcrumbLabel} className="text-2xs text-ivory/58">
           <ol className="flex flex-wrap items-center gap-2">
             <li>
               <Link href={localePath(locale, '/')} className="ds-navlink hover:text-gold">

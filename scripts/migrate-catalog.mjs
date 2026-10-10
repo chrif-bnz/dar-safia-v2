@@ -14,7 +14,7 @@
  */
 
 import { existsSync } from 'node:fs';
-import { mkdir, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { perfumeCatalog } from '../catalog-data.js';
@@ -271,6 +271,30 @@ await writeFile(path.join(OUT, 'products.json'), JSON.stringify(products, null, 
 await writeFile(path.join(OUT, 'brands.json'), JSON.stringify(brands, null, 2) + '\n', 'utf8');
 await writeFile(path.join(OUT, 'notes.json'), JSON.stringify(notes, null, 2) + '\n', 'utf8');
 
+// ── Traductions ────────────────────────────────────────────────
+// Source versionnée : scripts/catalog-translations.json (EN / AR). Le français
+// reste dans catalog-data.js. On ne copie que ce qui correspond à un parfum ou
+// une note existants, et on signale ce qui manque : un champ absent retombe sur
+// le français côté site.
+const raw = JSON.parse(await readFile(path.join(ROOT, 'scripts', 'catalog-translations.json'), 'utf8'));
+const translations = {};
+const translationGaps = [];
+for (const lang of ['en', 'ar']) {
+  const src = raw[lang] ?? { products: {}, notes: {} };
+  translations[lang] = { products: {}, notes: {} };
+  for (const p of products) {
+    const t = src.products?.[p.slug];
+    if (!t) { translationGaps.push(`${lang}:${p.slug}`); continue; }
+    translations[lang].products[p.slug] = t;
+  }
+  for (const n of notes) {
+    const name = src.notes?.[n.slug];
+    if (!name) { translationGaps.push(`${lang}:note:${n.slug}`); continue; }
+    translations[lang].notes[n.slug] = name;
+  }
+}
+await writeFile(path.join(OUT, 'translations.json'), JSON.stringify(translations) + '\n', 'utf8');
+
 // ── Rapport ────────────────────────────────────────────────────
 
 const noVolume = products.filter(p => p.variants[0].volumeMl === null);
@@ -286,6 +310,11 @@ console.log('  - stock : mis à 0 partout, le catalogue d\'origine ne le portait
 if (missingPhotos > 0) {
   console.log(`  - photos : ${missingPhotos} parfum(s) SANS photo trouvée (fichiers absents) — la fiche affiche la plaque de la maison`);
   console.log('    Déposez les photos dans perfumes/Photos site web/ puis relancez `npm run prepare-assets`.');
+}
+if (translationGaps.length) {
+  console.log(`  - traductions : ${translationGaps.length} entrée(s) sans traduction (repli sur le français) : ${translationGaps.slice(0, 6).join(', ')}…`);
+} else {
+  console.log('  - traductions EN/AR : complètes (assistées, à faire relire par un natif)');
 }
 console.log('  - seasons / occasions : déduits des notes et de la concentration');
 console.log('  - rating : volontairement absent, les avis du site sont fictifs');

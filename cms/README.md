@@ -33,6 +33,23 @@ Composants : `shared.money`, `shared.seo`, `catalog.variant` (format vendu), `ca
 
 Les noms de champs de `product`, `brand`, `fragrance-note`, `collection` suivent `web/src/lib/catalog/strapi-types.ts` : les modifier impose de modifier le mapper du site.
 
+## Langues (FR / EN / AR)
+
+Le contenu existe en trois langues. Le **français est la langue par défaut** (contenu source) ; l'anglais et l'arabe sont des *localisations* des mêmes entrées (plugin i18n de Strapi 5).
+
+| Type | Traduit (par langue) | Commun aux trois langues |
+|---|---|---|
+| Parfum | description, récit, badge, format (concentration), SEO | nom, slug, marque, prix et formats, photos, notes, famille, genre… |
+| Note olfactive | nom, description | slug, image |
+| Marque | description | nom, slug, pays, logo |
+| Collection | nom, description, SEO | slug, média, parfums |
+
+Un prix modifié dans l'admin vaut donc pour les trois langues. `npm run seed` crée les locales `fr` / `en` / `ar`, fixe `fr` par défaut et ajoute les versions EN / AR de tout le catalogue (relançable : une langue déjà présente n'est pas écrasée). Sur une base neuve, `STRAPI_PLUGIN_I18N_INIT_LOCALE_CODE=fr` (voir `.env.example`) fixe le français dès le premier démarrage.
+
+Côté site, `?locale=en|ar` est ajouté aux appels ; un champ non traduit (ou une langue absente) **retombe sur le français** : une fiche n'est jamais vide.
+
+⚠️ Les traductions EN / AR livrées (`scripts/catalog-translations.json`) sont **assistées et non relues** : à faire valider par un locuteur natif, surtout l'arabe et les textes éditoriaux. On les corrige ensuite dans l'admin (Content Manager → choisir la langue en haut à droite).
+
 ## Règles de sécurité
 
 - Rien n'est public. Deux jetons à droits minimaux (voir `scripts/create-api-tokens.js`) : lecture du catalogue ; création de commandes et de messages.

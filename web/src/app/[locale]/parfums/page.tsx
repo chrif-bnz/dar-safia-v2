@@ -34,7 +34,7 @@ export default async function CatalogPage({ params }: PageProps<'/[locale]/parfu
   const { locale } = await params;
   if (!isLocale(locale)) notFound();
 
-  const [dict, { items }] = await Promise.all([getDictionary(locale), catalog.listProducts()]);
+  const [dict, { items }] = await Promise.all([getDictionary(locale), catalog.listProducts({ locale })]);
   const c = dict.catalog;
   const products = items.map(toShopProduct);
 

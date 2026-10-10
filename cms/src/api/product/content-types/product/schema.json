@@ -10,30 +10,59 @@
   "options": {
     "draftAndPublish": true
   },
-  "pluginOptions": {},
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
   "attributes": {
     "name": {
       "type": "string",
       "required": true,
-      "maxLength": 200
+      "maxLength": 200,
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
     },
     "slug": {
       "type": "uid",
       "targetField": "name",
-      "required": true
+      "required": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
     },
     "brand": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::brand.brand",
-      "inversedBy": "products"
+      "inversedBy": "products",
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
     },
     "description": {
       "type": "text",
-      "required": true
+      "required": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "story": {
-      "type": "text"
+      "type": "text",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "gender": {
       "type": "enumeration",
@@ -43,7 +72,12 @@
         "unisexe"
       ],
       "required": true,
-      "default": "unisexe"
+      "default": "unisexe",
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
     },
     "family": {
       "type": "enumeration",
@@ -55,82 +89,167 @@
         "gourmand",
         "spicy"
       ],
-      "required": true
+      "required": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
     },
     "secondaryFamilies": {
-      "type": "json"
+      "type": "json",
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
     },
     "notes": {
       "type": "component",
       "repeatable": true,
-      "component": "catalog.product-note"
+      "component": "catalog.product-note",
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
     },
     "variants": {
       "type": "component",
       "repeatable": true,
       "component": "catalog.variant",
       "required": true,
-      "min": 1
+      "min": 1,
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
     },
     "images": {
       "type": "media",
       "multiple": true,
       "allowedTypes": [
         "images"
-      ]
+      ],
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
     },
     "video": {
       "type": "media",
       "multiple": false,
       "allowedTypes": [
         "videos"
-      ]
+      ],
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
     },
     "concentration": {
       "type": "string",
-      "maxLength": 80
+      "maxLength": 80,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "longevityHours": {
       "type": "integer",
-      "min": 0
+      "min": 0,
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
     },
     "sillage": {
       "type": "integer",
       "min": 1,
-      "max": 5
+      "max": 5,
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
     },
     "seasons": {
-      "type": "json"
+      "type": "json",
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
     },
     "occasions": {
-      "type": "json"
+      "type": "json",
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
     },
     "badge": {
       "type": "string",
-      "maxLength": 60
+      "maxLength": 60,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "featured": {
       "type": "boolean",
-      "default": false
+      "default": false,
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
     },
     "newArrival": {
       "type": "boolean",
-      "default": false
+      "default": false,
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
     },
     "bestseller": {
       "type": "boolean",
-      "default": false
+      "default": false,
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
     },
     "collections": {
       "type": "relation",
       "relation": "manyToMany",
       "target": "api::collection.collection",
-      "mappedBy": "products"
+      "mappedBy": "products",
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
     },
     "seo": {
       "type": "component",
       "repeatable": false,
-      "component": "shared.seo"
+      "component": "shared.seo",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     }
   }
 }

@@ -32,8 +32,8 @@ export default async function HomePage({ params }: PageProps<'/[locale]'>) {
 
   const [dict, notes, signatures, allProducts, brands] = await Promise.all([
     getDictionary(locale),
-    getSignatureNotes(11),
-    getSignatureProducts(),
+    getSignatureNotes(11, locale),
+    getSignatureProducts(locale),
     catalog.listProducts(),
     catalog.listBrands(),
   ]);
