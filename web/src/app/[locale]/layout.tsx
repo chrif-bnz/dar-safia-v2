@@ -10,6 +10,7 @@ import { CartProvider } from '@/components/cart/CartProvider';
 import { I18nProvider } from '@/components/i18n/I18nProvider';
 import { InlineScript } from '@/components/InlineScript';
 import { Cursor } from '@/components/motion/Cursor';
+import { RouteProgress } from '@/components/motion/RouteProgress';
 import { SmoothScroll } from '@/components/motion/SmoothScroll';
 import { DIRECTION, LOCALES, isLocale } from '@/lib/i18n/config';
 import { introGuardScript } from '@/lib/intro-guard';
@@ -148,6 +149,7 @@ export default async function RootLayout({
           <CartProvider>
             <SmoothScroll />
             <Cursor />
+            <RouteProgress />
             <SiteHeader locale={locale} dict={dict} />
             {children}
             <SiteFooter locale={locale} dict={dict} />

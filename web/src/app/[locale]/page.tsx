@@ -6,6 +6,7 @@ import { HouseFigures } from '@/components/home/HouseFigures';
 import { Manifesto } from '@/components/home/Manifesto';
 import { ScentWorld } from '@/components/home/ScentWorld';
 import { SignatureStage } from '@/components/home/SignatureStage';
+import { TeaserFilm } from '@/components/home/TeaserFilm';
 import { Voices } from '@/components/home/Voices';
 import { catalog } from '@/lib/catalog';
 import { getSignatureNotes, getSignatureProducts } from '@/lib/home/signatures';
@@ -44,13 +45,15 @@ export default async function HomePage({ params }: PageProps<'/[locale]'>) {
         statement={dict.hero.statement}
         cta={dict.hero.cta}
         ctaHref={localePath(locale, '/parfums')}
-        scrollLabel={dict.hero.scroll}
+        scrollLabel={dict.hero.scrollHint}
         videoLabel={dict.hero.videoLabel}
         skipLabel={dict.hero.skipIntro}
         brand={dict.common.brandName}
       />
 
       <Manifesto dict={dict} />
+
+      <TeaserFilm dict={dict} />
 
       <ScentWorld
         notes={notes}

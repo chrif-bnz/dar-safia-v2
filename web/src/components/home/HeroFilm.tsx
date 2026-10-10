@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, type CSSProperties } from 'react';
 
 import {
   announceIntroDone,
@@ -86,6 +86,10 @@ export function HeroFilm({
     const video = videoRef.current;
     if (!video) return;
     const onEnded = () => {
+      // Portrait / mobile : le plan se pose sur sa dernière image. Un plan qui
+      // recommence en boucle, sur un petit écran, se lit comme « la page est
+      // bloquée » — il masque qu'il faut défiler.
+      if (window.matchMedia('(max-aspect-ratio: 3/2)').matches) return;
       video.currentTime = LOOP_POINT;
       // L'onglet a pu passer en arrière-plan entre-temps : `play()` est alors
       // rejeté par le navigateur (économie d'énergie) — rejet attendu, pas
@@ -160,9 +164,12 @@ export function HeroFilm({
 
         // ── Ouverture ──
         const open = gsap.timeline({ defaults: { ease: 'power3.out' } });
+        // Sur téléphone la séquence est resserrée : six secondes de rideau
+        // devant un écran tactile, c'est une attente, pas une mise en scène.
+        const sp = window.matchMedia('(max-width: 767px)').matches ? 0.72 : 1;
 
         if (introPlays) {
-          const curtainStart = COUNTER_DURATION + COUNTER_HOLD;
+          const curtainStart = (COUNTER_DURATION + COUNTER_HOLD) * sp;
           const counter = { value: 0 };
           open
             // Le compteur tourne pendant que le film, déjà lancé, charge
@@ -173,7 +180,7 @@ export function HeroFilm({
               counter,
               {
                 value: 100,
-                duration: COUNTER_DURATION,
+                duration: COUNTER_DURATION * sp,
                 ease: LUXE_EASE_ID,
                 onUpdate: () => {
                   if (counterRef.current) {
@@ -197,7 +204,7 @@ export function HeroFilm({
             .to(
               '[data-counter] [data-pct]',
               { scale: 1.12, duration: 0.22, ease: 'power2.out', yoyo: true, repeat: 1 },
-              COUNTER_DURATION - 0.22
+              COUNTER_DURATION * sp - 0.22
             )
             // La marque se retire en s'éloignant (légère échelle + flou), et
             // une fine ligne de lumière s'allume à la couture des deux pans :
@@ -278,9 +285,17 @@ export function HeroFilm({
             // simple fondu.
             .fromTo(
               '[data-hero-line]',
-              { yPercent: 108 },
-              { yPercent: 0, duration: 2.1, stagger: 0.16, ease: LUXE_EASE_ID },
-              TYPE_START
+              { yPercent: 108, rotate: 3.5, filter: 'blur(10px)', transformOrigin: '0% 100%' },
+              {
+                yPercent: 0,
+                rotate: 0,
+                filter: 'blur(0px)',
+                duration: 2.1 * sp,
+                stagger: 0.16,
+                ease: LUXE_EASE_ID,
+                clearProps: 'filter,transform',
+              },
+              TYPE_START * sp
             )
             .fromTo(
               '[data-hero-tail]',
@@ -293,9 +308,9 @@ export function HeroFilm({
                 stagger: 0.18,
                 ease: LUXE_EASE_ID,
               },
-              TAIL_START
+              TAIL_START * sp
             )
-            .call(() => revealNav(NAV_IN.curtain, LUXE_EASE_ID), [], TAIL_START);
+            .call(() => revealNav(NAV_IN.curtain, LUXE_EASE_ID), [], TAIL_START * sp);
         } else {
           gsap.set(
             ['[data-curtain-left]', '[data-curtain-right]', '[data-counter]'],
@@ -304,8 +319,8 @@ export function HeroFilm({
           open
             .fromTo(
               '[data-hero-line]',
-              { yPercent: 108 },
-              { yPercent: 0, duration: 1.1, stagger: 0.1 }
+              { yPercent: 108, rotate: 3, filter: 'blur(8px)', transformOrigin: '0% 100%' },
+              { yPercent: 0, rotate: 0, filter: 'blur(0px)', duration: 1.2, stagger: 0.1, clearProps: 'filter,transform' }
             )
             .fromTo(
               '[data-hero-tail]',
@@ -501,7 +516,17 @@ export function HeroFilm({
       </div>
 
       {/* ── Typographie ── */}
-      <div data-hero-type className="hero-film__type px-6 pb-16 md:px-12 md:pb-20 lg:px-20">
+      <div data-hero-type className="hero-film__type px-6 pb-24 md:px-12 md:pb-20 lg:px-20">
+        {/* Ambiance, portrait seulement : une lueur qui dérive et quelques
+            poussières d'or. Le film n'occupe qu'une plaque en haut ; sans
+            cela, le tiers bas était un aplat noir qui ne disait pas « la suite
+            est dessous ». */}
+        <div aria-hidden="true" className="hero-film__ambient">
+          <span className="hero-film__glow" />
+          {Array.from({ length: 14 }, (_, i) => (
+            <i key={i} style={{ '--n': i } as CSSProperties} />
+          ))}
+        </div>
         <div className="max-w-[42rem] pt-8">
           <p data-hero-tail className="font-serif text-sm text-gold-light/90 italic">
             {tagline}
@@ -541,11 +566,11 @@ export function HeroFilm({
             haut, en plein sur le coffret. */}
         <div
           data-hero-tail
-          className="pointer-events-none absolute inset-x-0 bottom-4 hidden justify-center md:flex"
+          className="pointer-events-none absolute inset-x-0 bottom-5 flex justify-center"
         >
-          <span className="flex items-center gap-3 font-ui text-3xs tracking-[0.28em] text-gold-light/60 uppercase">
+          <span className="flex flex-col items-center gap-3 font-ui text-3xs tracking-[0.28em] text-gold-light/80 uppercase md:flex-row md:text-gold-light/60">
             {scrollLabel}
-            <span aria-hidden="true" className="ds-scroll-rule h-8 w-px" />
+            <span aria-hidden="true" className="ds-scroll-rule h-10 w-px md:h-8" />
           </span>
         </div>
       </div>

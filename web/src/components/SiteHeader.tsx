@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState, type CSSProperties } from 'react';
 
 import type { Locale } from '@/lib/i18n/config';
 import type { Dictionary } from '@/lib/i18n/dictionary';
@@ -152,7 +152,7 @@ export function SiteHeader({ locale, dict }: { locale: Locale; dict: Dictionary 
     <header
       ref={headerRef}
       data-lifted={solidHeader || undefined}
-      className="ds-header fixed inset-x-0 top-0 z-40 data-lifted:border-b data-lifted:border-smoke-2 data-lifted:bg-burgundy-deep/90 data-lifted:backdrop-blur-md"
+      className="ds-header fixed inset-x-0 top-0 z-40 data-lifted:border-b data-lifted:border-gold/15 data-lifted:bg-noir/72 data-lifted:backdrop-blur-xl data-lifted:backdrop-saturate-150"
     >
       <div className="mx-auto flex max-w-(--container-site) items-center gap-4 px-5 py-3 md:px-8">
         <Link
@@ -205,22 +205,32 @@ export function SiteHeader({ locale, dict }: { locale: Locale; dict: Dictionary 
         </div>
       </div>
 
-      {/* ── Menu mobile ── */}
+      {/* ── Menu mobile ──
+          Une feuille chaude (espresso → noir), pas un aplat bordeaux : les liens
+          entrent l'un après l'autre, une lueur or tient le bas. */}
       <div
         id="menu-principal"
         ref={panelRef}
         hidden={!menuOpen}
-        className="border-t border-smoke-2 bg-noir/97 backdrop-blur-md lg:hidden"
+        className="ds-menu-sheet relative h-[calc(100svh-4.25rem)] overflow-y-auto border-t border-gold/15 lg:hidden"
+        data-lenis-prevent
       >
-        <nav aria-label={dict.nav.perfumes}>
-          <ul className="flex flex-col px-5 py-4 md:px-8">
-            {nav.map(({ href, label }) => (
-              <li key={href} className="border-b border-smoke-2 last:border-b-0">
+        <nav aria-label={dict.nav.perfumes} className="relative">
+          <ul className="flex flex-col px-6 pt-6 pb-24">
+            {nav.map(({ href, label }, i) => (
+              <li
+                key={href}
+                style={{ '--i': i } as CSSProperties}
+                className="ds-menu-item border-b border-gold/12 last:border-b-0"
+              >
                 <Link
                   href={href}
                   aria-current={isActive(href) ? 'page' : undefined}
-                  className="block py-4 font-body text-2xl text-ivory transition-colors hover:text-gold aria-[current=page]:text-gold"
+                  className="flex items-baseline gap-4 py-5 font-body text-3xl font-light text-ivory transition-colors hover:text-gold-light aria-[current=page]:text-gold-light"
                 >
+                  <span aria-hidden="true" className="font-ui text-3xs tracking-[0.2em] text-gold/70 tabular-nums">
+                    0{i + 1}
+                  </span>
                   {label}
                 </Link>
               </li>

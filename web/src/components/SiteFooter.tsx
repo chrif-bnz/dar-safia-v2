@@ -36,7 +36,7 @@ export function SiteFooter({ locale, dict }: { locale: Locale; dict: Dictionary 
   ];
 
   return (
-    <footer className="border-t border-gold/25 bg-burgundy-deep">
+    <footer className="border-t border-gold/20 bg-noir-2">
       <div className="mx-auto max-w-(--container-site) px-5 py-14 md:px-8">
         <div className="grid gap-10 md:grid-cols-[minmax(0,2fr)_repeat(2,minmax(0,1fr))] md:gap-8">
           <div>

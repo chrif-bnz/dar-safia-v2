@@ -20,7 +20,8 @@
     "cta": "Découvrir la collection",
     "scroll": "Faites défiler",
     "videoLabel": "Coffret et flacon Dar Safia, éclairés à la bougie",
-    "skipIntro": "Passer l'introduction"
+    "skipIntro": "Passer l'introduction",
+    "scrollHint": "Faites défiler pour entrer"
   },
   "home": {
     "eyebrow": "Maison de haute parfumerie · Algérie",
@@ -499,5 +500,18 @@
     "ml": "{n} ml",
     "hours": "{n} h",
     "set": "Coffret"
+  },
+  "teaser": {
+    "eyebrow": "Le teaser",
+    "title": "Entrez dans la maison.",
+    "body": "Quelques secondes de lumière, de verre et de silence — avant le premier flacon.",
+    "play": "Lancer le teaser",
+    "pause": "Mettre en pause",
+    "soundOn": "Activer le son",
+    "soundOff": "Couper le son",
+    "label": "Teaser Dar Safia"
+  },
+  "loading": {
+    "label": "Chargement"
   }
 }

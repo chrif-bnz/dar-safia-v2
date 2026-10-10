@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from 'react';
 // s'appelle THREE, celui-ci ne sert qu'aux annotations de type.
 import type * as Three from 'three';
 
+import { LoadingMark } from '@/components/LoadingMark';
 import { usePrefersReducedMotion } from '@/components/motion/usePrefersReducedMotion';
 
 import { CHAPTERS, sampleTimeline, type SceneState } from './about-timeline';
@@ -67,6 +68,8 @@ export function FlaconScene({ className }: { className?: string }) {
   const reduced = usePrefersReducedMotion();
   /** WebGL indisponible ou rendu en échec : on montre l'affiche statique. */
   const [noGL, setNoGL] = useState(false);
+  /** Faux jusqu'à la première image rendue : le temps de compiler les shaders, on montre le monogramme. */
+  const [ready, setReady] = useState(false);
 
   useEffect(() => {
     const mount = mountRef.current;
@@ -103,7 +106,12 @@ export function FlaconScene({ className }: { className?: string }) {
                 trigger: track,
                 start: 'top top',
                 end: 'bottom bottom',
-                scrub: true,
+                // Lissage GSAP PAR-DESSUS Lenis : la scène rattrape la position de
+                // défilement en ~1,2 s au lieu de la suivre image par image, ce
+                // qui efface les à-coups d'une molette crantée ou d'un fling
+                // tactile. Le texte des chapitres suit la même piste, donc reste
+                // synchrone avec le flacon.
+                scrub: 1.2,
                 invalidateOnRefresh: true,
               },
             });
@@ -715,6 +723,117 @@ export function FlaconScene({ className }: { className?: string }) {
       fill.position.set(-5, 0.5, 4);
       scene.add(key, rim, fill);
 
+
+      // ── Atmosphère : poussière, faisceaux, caustique ────────
+      // Ce qui fait croire à un volume d'air et de lumière, pas à un objet
+      // posé dans le vide. Tout est additif, sans écriture de profondeur,
+      // et monte avec le dévoilement.
+      const softSprite = paintTexture(64, 64, (ctx, w) => {
+        const g = ctx.createRadialGradient(w / 2, w / 2, 0, w / 2, w / 2, w / 2);
+        g.addColorStop(0, 'rgba(255,236,200,1)');
+        g.addColorStop(0.35, 'rgba(255,214,150,0.45)');
+        g.addColorStop(1, 'rgba(255,200,120,0)');
+        ctx.fillStyle = g;
+        ctx.fillRect(0, 0, w, w);
+      });
+      const DUST = rich ? 170 : 64;
+      const dustBase = new Float32Array(DUST * 3);
+      const dustPhase = new Float32Array(DUST);
+      const dustPos = new Float32Array(DUST * 3);
+      for (let i = 0; i < DUST; i++) {
+        dustBase[i * 3] = (Math.random() - 0.5) * 11;
+        dustBase[i * 3 + 1] = Math.random() * 6.5 - 0.3;
+        dustBase[i * 3 + 2] = (Math.random() - 0.5) * 8 - 1;
+        dustPhase[i] = Math.random() * Math.PI * 2;
+      }
+      const dustGeo = keep(new THREE.BufferGeometry());
+      dustGeo.setAttribute('position', new THREE.BufferAttribute(dustPos, 3));
+      const dustMat = keep(
+        new THREE.PointsMaterial({
+          map: softSprite,
+          size: rich ? 0.1 : 0.13,
+          sizeAttenuation: true,
+          transparent: true,
+          opacity: 0,
+          depthWrite: false,
+          blending: THREE.AdditiveBlending,
+          color: 0xffd9a0,
+        })
+      );
+      const dust = new THREE.Points(dustGeo, dustMat);
+      dust.frustumCulled = false;
+      scene.add(dust);
+
+      const beamTex = paintTexture(128, 256, (ctx, w, h) => {
+        const g = ctx.createLinearGradient(0, 0, w, 0);
+        g.addColorStop(0, 'rgba(255,214,150,0)');
+        g.addColorStop(0.5, 'rgba(255,214,150,1)');
+        g.addColorStop(1, 'rgba(255,214,150,0)');
+        ctx.fillStyle = g;
+        ctx.fillRect(0, 0, w, h);
+        ctx.globalCompositeOperation = 'destination-in';
+        const v = ctx.createLinearGradient(0, 0, 0, h);
+        v.addColorStop(0, 'rgba(0,0,0,1)');
+        v.addColorStop(0.7, 'rgba(0,0,0,0.35)');
+        v.addColorStop(1, 'rgba(0,0,0,0)');
+        ctx.fillStyle = v;
+        ctx.fillRect(0, 0, w, h);
+      });
+      const makeBeam = (x: number, z: number, rz: number, w: number) => {
+        const m = new THREE.Mesh(
+          keep(new THREE.PlaneGeometry(w, 11)),
+          keep(
+            new THREE.MeshBasicMaterial({
+              map: beamTex,
+              transparent: true,
+              opacity: 0,
+              depthWrite: false,
+              blending: THREE.AdditiveBlending,
+              side: THREE.DoubleSide,
+            })
+          )
+        );
+        m.position.set(x, 4.2, z);
+        m.rotation.z = rz;
+        scene.add(m);
+        return m;
+      };
+      const beams = [makeBeam(3.4, -3.2, 0.42, 2.6), makeBeam(5.2, -4.6, 0.55, 1.5)];
+
+      const causticTex = paintTexture(256, 256, (ctx, w) => {
+        const g = ctx.createRadialGradient(w / 2, w / 2, 0, w / 2, w / 2, w / 2);
+        g.addColorStop(0, 'rgba(255,190,110,0.9)');
+        g.addColorStop(0.45, 'rgba(255,160,70,0.28)');
+        g.addColorStop(1, 'rgba(255,140,50,0)');
+        ctx.fillStyle = g;
+        ctx.fillRect(0, 0, w, w);
+        ctx.globalCompositeOperation = 'lighter';
+        ctx.strokeStyle = 'rgba(255,225,170,0.35)';
+        ctx.lineWidth = 2;
+        for (let i = 0; i < 7; i++) {
+          ctx.beginPath();
+          const y = w * (0.3 + i * 0.07);
+          ctx.moveTo(w * 0.25, y);
+          ctx.bezierCurveTo(w * 0.4, y - 18, w * 0.6, y + 18, w * 0.75, y);
+          ctx.stroke();
+        }
+      });
+      const caustic = new THREE.Mesh(
+        keep(new THREE.PlaneGeometry(3.6, 3.6)),
+        keep(
+          new THREE.MeshBasicMaterial({
+            map: causticTex,
+            transparent: true,
+            opacity: 0,
+            depthWrite: false,
+            blending: THREE.AdditiveBlending,
+          })
+        )
+      );
+      caustic.rotation.x = -Math.PI / 2;
+      caustic.position.set(-0.9, 0.008, -0.7);
+      scene.add(caustic);
+
       // ── Post-traitement (palier riche) ──────────────────────
       let composer: { render: () => void; setSize: (w: number, h: number) => void } | null = null;
       let bloomPass: { strength: number; setSize: (w: number, h: number) => void } | null = null;
@@ -908,6 +1027,7 @@ export function FlaconScene({ className }: { className?: string }) {
       let sampledTime = 0;
       let governed = false;
 
+      let readyFlag = false;
       let last = 0;
       const draw = (time: number) => {
         const t = reduced ? 0 : time * 0.001;
@@ -978,6 +1098,22 @@ export function FlaconScene({ className }: { className?: string }) {
         frontMat.emissiveIntensity = (0.1 + k.logo * 0.45) * (0.4 + 0.6 * intro);
         backMat.emissiveIntensity = 0.18;
 
+        // ── Atmosphère : la poussière dérive, les faisceaux respirent ──
+        for (let i = 0; i < DUST; i++) {
+          const ph = dustPhase[i];
+          dustPos[i * 3] = dustBase[i * 3] + Math.sin(t * 0.13 + ph) * 0.45;
+          dustPos[i * 3 + 1] = ((dustBase[i * 3 + 1] + t * (0.05 + (ph % 1) * 0.06) + 0.3) % 6.8) - 0.3;
+          dustPos[i * 3 + 2] = dustBase[i * 3 + 2] + Math.cos(t * 0.11 + ph) * 0.4;
+        }
+        dustGeo.attributes.position.needsUpdate = true;
+        dust.rotation.y = k.az * 0.35;
+        dustMat.opacity = (0.35 + k.warm * 0.3) * intro;
+        beams[0].material.opacity = (0.035 + k.warm * 0.05) * k.key * intro * (0.85 + 0.15 * Math.sin(t * 0.4));
+        beams[1].material.opacity = (0.02 + k.warm * 0.035) * k.rim * intro * (0.85 + 0.15 * Math.sin(t * 0.31 + 1.7));
+        beams.forEach((b, i) => { b.rotation.y = k.az * (0.6 + i * 0.2); });
+        caustic.material.opacity = (0.1 + k.logo * 0.12 + k.warm * 0.08) * intro;
+        caustic.rotation.z = k.yaw * 0.12;
+
         // ── Survol : un lancer de rayon par image au plus ──
         if (s.pointerDirty && !coarse) {
           s.pointerDirty = false;
@@ -1017,11 +1153,15 @@ export function FlaconScene({ className }: { className?: string }) {
 
         // ── Image : exposition qui monte avec le dévoilement ──
         renderer.toneMappingExposure = 0.92 * k.exposure * (0.05 + 0.95 * intro);
-        if (bloomPass) bloomPass.strength = 0.07 * intro;
+        if (bloomPass) bloomPass.strength = 0.095 * intro;
         if (gradeUniforms) gradeUniforms.time.value = reduced ? 0 : (time * 0.001) % 100;
 
         if (composer) composer.render();
         else renderer.render(scene, camera);
+        if (!readyFlag) {
+          readyFlag = true;
+          setReady(true);
+        }
       };
 
       const disposeAll = () => {
@@ -1075,6 +1215,14 @@ export function FlaconScene({ className }: { className?: string }) {
           alt=""
           className="absolute inset-0 h-full w-full object-cover object-[70%_50%]"
         />
+      )}
+      {/* Chargement : le temps de compiler les shaders, le monogramme respire. */}
+      {!noGL && (
+        <div
+          className={`pointer-events-none absolute inset-0 z-10 flex items-center justify-center bg-noir transition-opacity duration-1000 ease-out ${ready ? 'opacity-0' : 'opacity-100'}`}
+        >
+          <LoadingMark compact />
+        </div>
       )}
       {/* Vignette : un assombrissement des bords, qui rend la scène photographique. */}
       <div

@@ -20,7 +20,8 @@
     "cta": "Discover the collection",
     "scroll": "Scroll",
     "videoLabel": "Dar Safia coffret and bottle, lit by candlelight",
-    "skipIntro": "Skip the introduction"
+    "skipIntro": "Skip the introduction",
+    "scrollHint": "Scroll to enter"
   },
   "home": {
     "eyebrow": "Fine perfumery house · Algeria",
@@ -499,5 +500,18 @@
     "ml": "{n} ml",
     "hours": "{n} h",
     "set": "Set"
+  },
+  "teaser": {
+    "eyebrow": "The teaser",
+    "title": "Step into the house.",
+    "body": "A few seconds of light, glass and silence — before the first bottle.",
+    "play": "Play the teaser",
+    "pause": "Pause",
+    "soundOn": "Turn sound on",
+    "soundOff": "Turn sound off",
+    "label": "Dar Safia teaser"
+  },
+  "loading": {
+    "label": "Loading"
   }
 }
