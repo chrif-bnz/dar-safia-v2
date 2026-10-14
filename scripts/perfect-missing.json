@@ -1,0 +1,82 @@
+[
+  {
+    "perfume": {
+      "lineNum": 52,
+      "section": "FEMME",
+      "gender": "femme",
+      "original": "Paco Rabanne Olympéa Flora Eau de Parfum Intense 80 ml — 23 000 DA",
+      "namePart": "Paco Rabanne Olympéa Flora Eau de Parfum Intense 80 ml",
+      "price": 23000,
+      "volumeMl": 80,
+      "volumeRaw": "80 ml",
+      "volumeEstimated": false,
+      "brand": "Paco Rabanne",
+      "concentration": "Eau de Parfum Intense",
+      "mergedCount": 1,
+      "allVariantsListed": [
+        "80ml (23000 DA)"
+      ]
+    },
+    "reason": "Aucun visuel correspondant dans les dossiers autorisés"
+  },
+  {
+    "perfume": {
+      "lineNum": 91,
+      "section": "HOMME",
+      "gender": "homme",
+      "original": "Valentino Uomo Born in Roma Intense 100 ml — 27 800 DA",
+      "namePart": "Valentino Uomo Born in Roma Intense 100 ml",
+      "price": 27800,
+      "volumeMl": 100,
+      "volumeRaw": "100 ml",
+      "volumeEstimated": false,
+      "brand": "Valentino",
+      "concentration": "Eau de Parfum",
+      "mergedCount": 1,
+      "allVariantsListed": [
+        "100ml (27800 DA)"
+      ]
+    },
+    "reason": "Aucun visuel correspondant dans les dossiers autorisés"
+  },
+  {
+    "perfume": {
+      "lineNum": 229,
+      "section": "NICHE",
+      "gender": "unisexe",
+      "original": "Louboutin Hiristan — 45 000 DA",
+      "namePart": "Louboutin Hiristan",
+      "price": 45000,
+      "volumeMl": 100,
+      "volumeRaw": "100 ml",
+      "volumeEstimated": true,
+      "brand": "Christian Louboutin",
+      "concentration": "Eau de Parfum",
+      "mergedCount": 1,
+      "allVariantsListed": [
+        "100ml (45000 DA)"
+      ]
+    },
+    "reason": "Aucun visuel correspondant dans les dossiers autorisés"
+  },
+  {
+    "perfume": {
+      "lineNum": 243,
+      "section": "NICHE",
+      "gender": "unisexe",
+      "original": "Xerjoff Casamorati 1888 Italica Eau de Parfum 100 ml — 50 000 DA",
+      "namePart": "Xerjoff Casamorati 1888 Italica Eau de Parfum 100 ml",
+      "price": 50000,
+      "volumeMl": 100,
+      "volumeRaw": "100 ml",
+      "volumeEstimated": false,
+      "brand": "Xerjoff",
+      "concentration": "Eau de Parfum",
+      "mergedCount": 1,
+      "allVariantsListed": [
+        "100ml (50000 DA)"
+      ]
+    },
+    "reason": "Aucun visuel correspondant dans les dossiers autorisés"
+  }
+]

@@ -274,6 +274,126 @@
     "description": "The seduction weapon of creatures of the night. Warm cinnamon, Virginia red cedar and bewitching blond tobacco compose an incandescent aura.",
     "story": "Created for the man of the night who lives intensely and turns every evening into a memorable celebration.",
     "concentration": "Eau de Parfum"
+   },
+   "elie-saab-le-parfum": {
+    "badge": "Iconic",
+    "description": "A dazzling tribute to Mediterranean radiance and haute couture elegance. Solar orange blossom blooms alongside sumptuous jasmine, enveloped in irresistible rose honey and noble cedar.",
+    "story": "Crafted by master perfumer Francis Kurkdjian to capture the divine glow of an embroidered gown under radiant sunshine.",
+    "concentration": "Eau de Parfum"
+   },
+   "gucci-bloom-ambrosia-di-fiori": {
+    "badge": "Floral Elixir",
+    "description": "Inspired by the divine ambrosia of ancient Greek myth. A lush floral banquet where velvety natural tuberose is enriched by rare Damask rose and noble Tuscan orris.",
+    "story": "Created by Alberto Morillas in a striking deep burgundy lacquered bottle expressing intense passion.",
+    "concentration": "Eau de Parfum"
+   },
+   "hermes-jour-d-hermes-absolu": {
+    "badge": "Solar Glow",
+    "description": "Pure, radiant femininity expressed entirely through flowers. A sumptuous bouquet where velvety gardenia and sambac jasmine unfold under apricot blossom kisses.",
+    "story": "Signed by Jean-Claude Ellena for Hermès, capturing the crisp morning light of a new dawn.",
+    "concentration": "Eau de Parfum"
+   },
+   "gucci-bloom-eau-de-toilette": {
+    "badge": "Floral Freshness",
+    "description": "A luminous, airy interpretation of the iconic Bloom garden. Sparkling neroli uplifts white tuberose and radiant jasmine for an uplifting breeze of petals.",
+    "story": "A tribute to effortless spontaneity in a soft pink flacon embellished with Gucci’s signature toile pattern.",
+    "concentration": "Eau de Toilette"
+   },
+   "burberry-my-burberry-black-parfum": {
+    "badge": "Mystic Allure",
+    "description": "The intoxicating mood of a London garden amidst a summer storm. Sun-drenched jasmine intertwines with sweet peach nectar and candied rose over a rich amber patchouli base.",
+    "story": "Created by Christopher Bailey and Francis Kurkdjian, echoing the timeless allure of the black heritage trench coat against bare skin.",
+    "concentration": "Parfum"
+   },
+   "paco-rabanne-rabanne-fame-intense": {
+    "badge": "Incandescent",
+    "description": "The dazzling aura of a Paris icon elevated to glowing heights. Radiant solar jasmine melts into rich opulent incense and creamy sandalwood of unmatched presence.",
+    "story": "The legendary Fame bottle dressed in liquid gold couture to mirror uncompromising luxury and charisma.",
+    "concentration": "Eau de Parfum Intense"
+   },
+   "burberry-my-burberry-black-eau-de-parfum": {
+    "badge": "Dark Elegance",
+    "description": "A deeply sensual amber veil of intoxicating warmth. Shimmering jasmine blossoms blend with candied peach on a rich bed of dark patchouli and velvety vanilla.",
+    "story": "The deep amber glass bottle is hand-tied with a black gabardine ribbon woven in England.",
+    "concentration": "Eau de Parfum"
+   },
+   "givenchy-irresistible-rose-velvet": {
+    "badge": "Velvet Softness",
+    "description": "The most sensual and powdery facet of Irrésistible. Velvety rose wrapped in tender white musk and powdery iris, softly warmed by delicate sandalwood.",
+    "story": "A prismatic flacon enveloped in powdery nude pink lacquer, mirroring the tender stroke of petals upon skin.",
+    "concentration": "Eau de Parfum"
+   },
+   "chloe-rose-tangerine": {
+    "badge": "Fruity Radiance",
+    "description": "The iconic Chloé rose reinvented with an unexpected splash of fruity sunshine. Sparkling tangerine essence brings energetic vitality to classic rose over clean cedarwood.",
+    "story": "Created by Sidonie Lancesseur and Michel Almairac, celebrating effortless freedom and modern femininity.",
+    "concentration": "Eau de Toilette"
+   },
+   "elie-saab-girl-of-now": {
+    "badge": "Gourmand Allure",
+    "description": "An utterly delicious floral gourmand addiction. Roasted pistachio and succulent pear pave the way for an intoxicating heart of orange blossom and almond milk wrapped in tonka bean.",
+    "story": "Inspired by the electric joy and bold spirit of modern women capturing the present moment.",
+    "concentration": "Eau de Parfum"
+   },
+   "montblanc-signature": {
+    "badge": "Luminous Signature",
+    "description": "A timeless expression of pure grace and feminine contrast. Sparkling clementine contrasts against ethereal white vanilla and pristine musks.",
+    "story": "The faceted opalescent bottle pays tribute to the historic Montblanc inkwell, honoring the timeless power of words.",
+    "concentration": "Eau de Parfum"
+   },
+   "giorgio-armani-si-passione": {
+    "badge": "Fiery Passion",
+    "description": "The ultimate declaration of feminine passion: saying yes to life with conviction. Signature blackcurrant nectar and crisp pear ignite with pink pepper and rose de mai over warm vanilla.",
+    "story": "The iconic bottle painted in vibrant red lacquer from within stands for confidence, courage and seduction.",
+    "concentration": "Eau de Parfum"
+   },
+   "dolce-gabbana-q-parfum": {
+    "badge": "Royal Crown",
+    "description": "The majestic aura of a contemporary queen. Succulent candied cherry meets sparkling Sicilian lemon and seductive jasmine over an opulent amber-woody base.",
+    "story": "Crowned with an ornate royal cap of gold and cherry hues, the bottle embodies supreme grace and authority.",
+    "concentration": "Parfum"
+   },
+   "hugo-boss-the-scent-private-accord": {
+    "badge": "Cocoa Seduction",
+    "description": "A sensual secret chapter of intimate seduction. Bright mandarin and luscious osmanthus blossom yield to the hypnotic magnetism of roasted dark cocoa and tonka bean.",
+    "story": "Designed by Louise Turner, the amber-hued bottle hints at the thrill of a whispered encounter.",
+    "concentration": "Eau de Parfum"
+   },
+   "mugler-alien": {
+    "badge": "Monumental Legend",
+    "description": "A sacred extraterrestrial talisman crafted to reveal inner radiance. Solar sambac jasmine radiates immense warmth before bonding with mystical cashmeran wood and white amber.",
+    "story": "Cut like an amethyst gem by Dominique Ropion and Laurent Bruyère, an enduring beacon of celestial magnetism.",
+    "concentration": "Eau de Parfum"
+   },
+   "jean-paul-gaultier-scandal-intense": {
+    "badge": "Provocative Audacity",
+    "description": "Parisian audacity pushed to the extreme. Daring jasmine surrenders to the addictive thrill of warm salted caramel and sensual black vanilla.",
+    "story": "An eye-catching bottle featuring upturned legs in gleaming scarlet, defying every high-society convention.",
+    "concentration": "Eau de Parfum"
+   },
+   "versace-crystal-noir": {
+    "badge": "Black Diamond",
+    "description": "The ultimate dark glamour of Italian couture. Warm cardamom and ginger elevate a creamy gardenia and coconut heart over velvety amber and sandalwood.",
+    "story": "Crafted by Antoine Lie, adorned with an oversized garnet gemstone cap cut like an exquisite emerald diamond.",
+    "concentration": "Eau de Parfum"
+   },
+   "givenchy-irresistible-nectar": {
+    "badge": "Solar Nectar",
+    "description": "A joyously vibrant burst of pure magnetism. Succulent ripe pear unites with radiant Turkish essential rose over silky blond cedarwood and delicate powdery musks.",
+    "story": "The signature prismatic flacon shines in a warm golden gradient catching the magic of summer sunsets.",
+    "concentration": "Eau de Parfum"
+   },
+   "dolce-gabbana-q-intense": {
+    "badge": "Magnetic Queen",
+    "description": "Regal intensity at its absolute peak. Voluptuous dark cherry ignites alongside velvety heliotrope before settling into deep golden amber of hypnotic magnetism.",
+    "story": "The regal bottle is crowned with gold and ruby accents, symbolizing supreme feminine power.",
+    "concentration": "Eau de Parfum Intense"
+   },
+   "cerruti-1881-pour-femme": {
+    "badge": "Natural Grace",
+    "description": "The timeless purity of classic Italian elegance. Delicate flax flower harmonizes with powdery mimosa and iris over a tender woody base of sandalwood and cedar.",
+    "story": "Created by Claire Cain in 1995 in a frosted pebble-shaped flacon mirroring the gentle drape of fine Cerruti fabrics.",
+    "concentration": "Eau de Toilette"
    }
   },
   "notes": {
@@ -804,6 +924,126 @@
     "description": "سلاح الإغراء لمخلوقات الليل. قرفة دافئة وأرز فرجينيا الأحمر وتبغ أشقر ساحر تؤلّف هالة متوهجة.",
     "story": "ابتُكر لرجل الليل الذي يعيش بشدّة ويحوّل كل أمسية إلى احتفال لا يُنسى.",
     "concentration": "ماء عطر"
+   },
+   "elie-saab-le-parfum": {
+    "badge": "أيقوني",
+    "description": "قصيدة ساحرة تحتفي بالنور والأناقة الراقية. تتفتح زهر البرتقال المشرقة بجانب الياسمين الفاخر مع لمسات عسل الورد وخشب الأرز النبيل.",
+    "story": "ابتكره خبير العطور فرانسيس كوركدجيان ليجسد بريق فساتين الهوت كوتور تحت شمس المشرق الدافئة.",
+    "concentration": "ماء عطر"
+   },
+   "gucci-bloom-ambrosia-di-fiori": {
+    "badge": "إكسير زهري",
+    "description": "مستوحى من رحيق الآلهة في الأساطير الإغريقية القديمة. وليمة زهرية غنية تمزج مسك الروم الطبيعي مع الورد الدمشقي وجذور السوسن التوسكاني الفاخر.",
+    "story": "تحفة من توقيع ألبرتو موريلاس في قارورة حمراء داكنة تعكس فيض العاطفة وسحر الطبيعة الخالدة.",
+    "concentration": "ماء عطر"
+   },
+   "hermes-jour-d-hermes-absolu": {
+    "badge": "إشراقة شمسية",
+    "description": "تعبير متناهي الأنوثة ينبض بزهور نقية ومتألقة. باقة باذخة من الغاردينيا وياسمين السامباك متوجة بلمسات زهر المشمش المخملي.",
+    "story": "إبداع مميز للخبير جان كلود إلينا لصالح هيرميس، يجسد ولادة يوم مشرق جديد بنفحات نورانية ساحرة.",
+    "concentration": "ماء عطر"
+   },
+   "gucci-bloom-eau-de-toilette": {
+    "badge": "انتعاش زهري",
+    "description": "نسخة مشرقة ورقيقة من حديقة بلوم الأيقونية. نفحات النيرولي النضرة تضيء قلب مسك الروم والياسمين لنفحة ربيعية منعشة.",
+    "story": "احتفال بالعفوية والرقة الأنثوية في قارورة وردية ناعمة مزينة بنقوش غوتشي النباتية الشهيرة.",
+    "concentration": "ماء تواليت"
+   },
+   "burberry-my-burberry-black-parfum": {
+    "badge": "جاذبية غامضة",
+    "description": "أجواء حديقة لندنية بعد عاصفة صيفية ساحرة. يمتزج ياسمين الشمس مع رحيق الخوخ اللذيذ والورد المحلى وقاعدة فاخرة من الباتشولي والعنبر.",
+    "story": "من ابتكار كريستوفر بيلي وفرانسيس كوركدجيان، مستوحى من معطف باربري الأسود الأيقوني.",
+    "concentration": "عطر مركز"
+   },
+   "paco-rabanne-rabanne-fame-intense": {
+    "badge": "متوهجة",
+    "description": "هالة من السحر الباريسي بأعلى درجات التوهج. يمتزج الياسمين المشمس مع البخور الأنيق وخشب الصندل الكريمي لحضور طاغ لا يُنسى.",
+    "story": "قارورة فيم الأيقونية تتألق بزي ذهبي براق احتفاءً بالأنوثة الجريئة والجاذبية المطلقة.",
+    "concentration": "ماء عطر مكثف"
+   },
+   "burberry-my-burberry-black-eau-de-parfum": {
+    "badge": "أناقة داكنة",
+    "description": "لمسة عنبرية ساحرة بفيض من الدفء والغموض. بتلات الياسمين تتمايل مع حلاوة الخوخ المركز على سرير من الباتشولي الداكن والفانيليا المخملية.",
+    "story": "قارورة بلون العنبر الداكن مزينة برباط من قماش الغاباردين الأسود المنسوج في بريطانيا.",
+    "concentration": "ماء عطر"
+   },
+   "givenchy-irresistible-rose-velvet": {
+    "badge": "نعومة مخملية",
+    "description": "الجانب الأكثر رقة ومخملية من عطر إيريزيستبل. وردة ناعمة محاطة بالسوسن البودري والمسك الأبيض مع دفء خشب الصندل العذب.",
+    "story": "قارورة منشورية مطلية بلون وردي ناعم تجسد ملمس الحرير وبتلات الورد على البشرة.",
+    "concentration": "ماء عطر"
+   },
+   "chloe-rose-tangerine": {
+    "badge": "إشراقة فاكهية",
+    "description": "وردة كلوي الأيقونية بحلة جديدة تنبض بالشمس والحيوية. خلاصة اليوسفي الإيطالي تمنح الوردة الكلاسيكية انتعاشاً مبهجاً مع لمسات الأرز الصافية.",
+    "story": "من توقيع سيدوني لانسيسور وميشيل ألميراك، يجسد حرية وأناقة امرأة كلوي العفوية.",
+    "concentration": "ماء تواليت"
+   },
+   "elie-saab-girl-of-now": {
+    "badge": "جاذبية لذيذة",
+    "description": "عطر زهري شهي يأسر الحواس. الفستق المحمص مع الكمثرى العصيرية يمهدان لقلب غني بحليب اللوز وزهر البرتقال وحبوب التونكا الفاخرة.",
+    "story": "مستوحى من طاقة وشغف النساء الواثقات اللواتي يتركن بصمة من البهجة في كل مكان.",
+    "concentration": "ماء عطر"
+   },
+   "montblanc-signature": {
+    "badge": "بصمة مضيئة",
+    "description": "أناقة خالدة تجمع النقاء والرقة. تمتزج المندرين المنعشة مع نعومة الفانيليا البيضاء والمسك الصافي لجاذبية ملائكية هادئة.",
+    "story": "قارورة منحوتة تشبه محبرة حبر مون بلان الشهيرة تخليداً لقوة الكلمات وسحر الكتابة.",
+    "concentration": "ماء عطر"
+   },
+   "giorgio-armani-si-passione": {
+    "badge": "شغف متقد",
+    "description": "تجسيد حقيقي للشغف والجرأة الأنثوية المطلقة. يلتقي رحيق الكشمش الأسود مع الكمثرى المقرمشة وبتلات الورد الجوري والفانيليا المركزة.",
+    "story": "اللون الأحمر الداخلي المبدع في القارورة يرمز إلى القوة والثقة والجاذبية التي لا تقاوم.",
+    "concentration": "ماء عطر"
+   },
+   "dolce-gabbana-q-parfum": {
+    "badge": "تاج ملكي",
+    "description": "هيبة ملكية معاصرة تنضح بالسحر. حبات الكرز المحلى اللذيذة تلتقي بليمون صقلية والياسمين الساحر على قاعدة عنبرية خشبية فاخرة.",
+    "story": "يتوج القارورة تاج ملكي باللونين الذهبي والكرزي تعبيراً عن القوة والجاذبية الملكية.",
+    "concentration": "عطر مركز"
+   },
+   "hugo-boss-the-scent-private-accord": {
+    "badge": "سحر الكاكاو",
+    "description": "فصل حميمي من فصول الجاذبية والإغراء. يمتزج المندرين المشرق وزهر الأوسمانثوس مع نفحات الكاكاو المحمص الدافئة وحبوب التونكا الآسرة.",
+    "story": "من إبداع لويز تيرنر، تعكس القارورة العنبرية سحر اللحظات الحميمية التي لا تنسى.",
+    "concentration": "ماء عطر"
+   },
+   "mugler-alien": {
+    "badge": "أسطورة خالدة",
+    "description": "تعويذة مقدسة من عالم آخر تشع بالنور والسحر. ياسمين السامباك الشمسي يفيض بالدفء ليلتقي مع خشب الكشميران الروحي والعنبر الأبيض النادر.",
+    "story": "منحوت كجوهرة من حجر الجمشت على يد دومينيك روبيون ولوران برويير، رمز للقوة والجمال الأبدي.",
+    "concentration": "ماء عطر"
+   },
+   "jean-paul-gaultier-scandal-intense": {
+    "badge": "جرأة وفخامة",
+    "description": "قمة الجرأة والإثارة الباريسية. زهر الياسمين الجريء يذوب في حلاوة الكراميل المملح الدافئ والفانيليا السوداء الجذابة.",
+    "story": "قارورة استثنائية بتصميم جريء باللون القرمزي تكسر كل القواعد المعتادة بأسلوب مفعم بالثقة.",
+    "concentration": "ماء عطر"
+   },
+   "versace-crystal-noir": {
+    "badge": "الماسة السوداء",
+    "description": "جوهر الفخامة الإيطالية وسحر الغموض الجذاب. تمتزج بهارات الهيل والزنجبيل مع الغاردينيا الكريمية وجوز الهند والعنبر الداكن.",
+    "story": "من توقيع أنطوان لي، يتوج القارورة غطاء ضخم كجوهرة العقيق الأسود المنحوتة بعناية فائقة.",
+    "concentration": "ماء عطر"
+   },
+   "givenchy-irresistible-nectar": {
+    "badge": "رحيق الشمس",
+    "description": "إشراقة عطرية مليئة بالبهجة والجاذبية. تلتقي الكمثرى العصيرية مع الوردة التركية الفاخرة وخشب الأرز الحريري والمسك البودري.",
+    "story": "قارورة منشورية تتدرج بلون ذهبي دافئ يلتقط أنوار الغروب الصيفي الرائع.",
+    "concentration": "ماء عطر"
+   },
+   "dolce-gabbana-q-intense": {
+    "badge": "ملكة ساحرة",
+    "description": "قمة الفخامة الملكية والجاذبية الغامضة. تتألق حبات الكرز الأسود مع زهر الهليوتروب المخملي والعنبر الذهبي العميق في توليفة آسرة.",
+    "story": "يتوج القارورة تاج ذهبي مرصع بألوان الياقوت يرمز إلى الهيبة والسلطة الأنثوية.",
+    "concentration": "ماء عطر مكثف"
+   },
+   "cerruti-1881-pour-femme": {
+    "badge": "أناقة طبيعية",
+    "description": "نقاء كلاسيكي خالد من عالم العطور الإيطالية الراقية. زهر الكتان الناعم يمتزج مع الميموزا والسوسن البودري على قاعدة خشبية دافئة.",
+    "story": "ابتكرته كلير كين عام 1995 في قارورة مستديرة من الزجاج المصنفر تعكس انسيابية أقمشة شيروتي الفاخرة.",
+    "concentration": "ماء تواليت"
    }
   },
   "notes": {
