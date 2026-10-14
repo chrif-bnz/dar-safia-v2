@@ -96,10 +96,10 @@
     "concentration": "Eau de Parfum"
    },
    "christian-dior-dior-j-adore-intense": {
-    "badge": "Haute Parfumerie",
-    "description": "The liquid gold of the House of Dior. A masterful floral bouquet of orange blossom, Grasse jasmine and centifolia rose absolutes.",
-    "story": "Dior's perfumery masterpiece, composed as an ode to majestic femininity.",
-    "concentration": "Eau de Parfum Intense"
+    "badge": "Imperial Allure",
+    "description": "An infinite floral symphony of breathtaking power and sensuality. Intoxicating Grasse tuberose marries lush sambac jasmine and centifolia rose over creamy precious sandalwood.",
+    "story": "Dior’s definitive icon captured in an intense parfum concentration designed to leave an unforgettable trail.",
+    "concentration": "Parfum"
    },
    "jean-paul-gaultier-divine-couture": {
     "badge": "Divine Couture",
@@ -514,6 +514,120 @@
     "description": "The thrill of the forbidden at its deepest, most compelling concentration. Dazzling white flowers—orange blossom and tuberose—dive into dark, smoky patchouli and vetiver.",
     "story": "The legendary fragrance crafted for Audrey Hepburn in 1957, reimagined by master perfumers as an ode to radical freedom.",
     "concentration": "Parfum"
+   },
+   "marc-jacobs-daisy": {
+    "badge": "Poetic Freedom",
+    "description": "An enchanting ode to youthful romance and sunlit meadows. Juicy wild strawberries and fresh violet leaves unfold into radiant gardenia petals over silky white woods.",
+    "story": "Mastercrafted by Alberto Morillas, topped with playful retro vinyl daisy blooms blooming from a golden cap.",
+    "concentration": "Eau de Toilette"
+   },
+   "narciso-rodriguez-for-her-eau-de-parfum": {
+    "badge": "Sensual Icon",
+    "description": "The supreme standard of intimate seduction and understated magnetism. Gentle rose and velvety peach pulp illuminate an iconic core of pure Egyptian musk.",
+    "story": "Conceived by Christine Nagel and Francis Kurkdjian in a sleek bottle painted pale pink from within to keep its secrets.",
+    "concentration": "Eau de Parfum"
+   },
+   "givenchy-l-interdit-eau-de-parfum-125ml": {
+    "badge": "Prestige Collector",
+    "description": "The luminous white-and-black icon in a grand 125ml edition. A dazzling bouquet of orange blossom and tuberose crosses paths with earthy patchouli and smoky vetiver.",
+    "story": "A generous collector flacon cinched by a black grosgrain ribbon bearing Givenchy’s silver 4G emblem.",
+    "concentration": "Eau de Parfum"
+   },
+   "chloe-love-story": {
+    "badge": "Parisian Romance",
+    "description": "The pure romance of lovers pledging devotion on the Pont des Arts bridge. Radiant orange blossom and neroli blend with sweet stephanotis jasmine over refined cedarwood.",
+    "story": "Composed by Anne Flipo, shaped like a golden padlock with pleated glass and an airy hand-tied silk ribbon.",
+    "concentration": "Eau de Parfum"
+   },
+   "christian-dior-dior-j-adore-l-or": {
+    "badge": "Solar Quintessence",
+    "description": "The pure liquid gold of J’adore captured at its absolute zenith. Francis Kurkdjian purifies iconic floral absolutes into an opulent concentration of solar orange blossom and centifolia rose.",
+    "story": "The legendary amphora is embraced by organic ripples of melted liquid gold, evoking precious haute couture jewellery.",
+    "concentration": "Essence de Parfum"
+   },
+   "narciso-rodriguez-poudree": {
+    "badge": "Sublime Powder",
+    "description": "A velvet powdery caress that gently suspends time. An intoxicating powdery musk heart is veiled in white jasmine and Bulgarian rose over deep vetiver and dark cedar.",
+    "story": "Crafted by Aurélien Guichard in a signature nude-beige lacquered glass cube radiating bare-skin sensuality.",
+    "concentration": "Eau de Parfum"
+   },
+   "lancome-idole-travel-exclusive": {
+    "badge": "Travel Exclusive",
+    "description": "For women who dare to dream and conquer horizons. Radiant contemporary rose fuses with pristine water jasmine and modern white chypre in a travel-ready duo.",
+    "story": "The world’s slimmest architectural flacon, an engineering marvel paired with its sleek travel spray.",
+    "concentration": "Eau de Parfum"
+   },
+   "givenchy-ange-ou-demon-le-secret": {
+    "badge": "Luminous Mystery",
+    "description": "A captivating game of contrasts between angelic innocence and fatal seduction. Crisp iced green tea and tart cranberries illuminate white peony and blonde woods.",
+    "story": "Sculpted like an intricate crystal chandelier pendant, refracting light with secret brilliance.",
+    "concentration": "Eau de Parfum"
+   },
+   "christian-dior-miss-dior-parfum": {
+    "badge": "Eternal Couture",
+    "description": "The spirit of youth and joyful freedom reimagined by Francis Kurkdjian. Sparkling mandarin and wild strawberries illuminate starry jasmine over noble ambery woods.",
+    "story": "The iconic houndstooth engraved flacon is dressed in a couture jacquard fabric bow woven on historic looms.",
+    "concentration": "Parfum"
+   },
+   "giorgio-armani-si-intense": {
+    "badge": "Passionate Statement",
+    "description": "An uncompromising statement of feminine courage and passion. Signature dark cassis nectar mingles with velvety Damask rose and smoky black tea over rich Bourbon vanilla.",
+    "story": "Embellished with the golden Sì emblem embossed directly into the glass like a precious rechargeable jewel.",
+    "concentration": "Eau de Parfum Intense"
+   },
+   "hugo-boss-hugo-woman": {
+    "badge": "Urban Freshness",
+    "description": "Spontaneous, energising freshness for the independent modern woman. Crisp green apple and water melon meet transparent jasmine and aquatic water lily over sandalwood.",
+    "story": "Created by Ursula Wandel, encased in a minimalist circular flask tied with a signature red fabric strap.",
+    "concentration": "Eau de Toilette"
+   },
+   "narciso-rodriguez-for-her-pure-musc": {
+    "badge": "Pure Musc Essence",
+    "description": "Musk elevated to its most pristine, hypnotic form. A burst of white petals highlights Narciso’s signature musk heart, warmed by enveloping cashmeran and amber.",
+    "story": "Mastered by Sonia Constant in a monochromatic architectural bottle of stark white and black.",
+    "concentration": "Eau de Parfum"
+   },
+   "dolce-gabbana-k-parfum": {
+    "badge": "Royal Sovereign",
+    "description": "The aura of a modern king who carves his own destiny. Fiery pimento and blood orange ignite with creamy fig milk over regal cedarwood and earthy patchouli.",
+    "story": "Crowned with an artisanal cap of burnished gold set with royal blue lapis-lazuli stones.",
+    "concentration": "Parfum"
+   },
+   "dolce-gabbana-k-intense": {
+    "badge": "Royal Intensity",
+    "description": "The darkest, most magnetic leather facet of K. Deep leather accords and saffron unite with juniper berries and velvety fig milk over smoky woods.",
+    "story": "Deep midnight-blue elixir crowned with a silver cap embellished with cobalt accents.",
+    "concentration": "Eau de Parfum Intense"
+   },
+   "dolce-gabbana-intenso": {
+    "badge": "Raw Instinct",
+    "description": "The raw magnetism of pure masculine instinct. A pioneering Moepel wood accord blends with aromatic basil, fresh aquatic notes and blond tobacco over cypress.",
+    "story": "A curved flacon in warm tobacco-brown glass celebrating timeless virile sophistication.",
+    "concentration": "Eau de Parfum"
+   },
+   "dolce-gabbana-the-one-le-parfum": {
+    "badge": "Absolute Charisma",
+    "description": "The absolute pinnacle of masculine allure. Crisp grapefruit and aromatic cardamom yield to a warm ginger heart before settling into rich tobacco and golden amber.",
+    "story": "A weighty geometric bottle draped in pitch black lacquer with a gleaming dark cap.",
+    "concentration": "Parfum"
+   },
+   "dolce-gabbana-devotion-pour-homme": {
+    "badge": "Passionate Devotion",
+    "description": "A radiant Italian declaration of love and loyalty. Candied Sicilian lemon dances with solar orange blossom, roasted coffee and warm Bourbon vanilla.",
+    "story": "Adorned with the emblematic Sacred Heart in antiqued metal, a timeless symbol of unconditional passion.",
+    "concentration": "Eau de Parfum"
+   },
+   "dolce-gabbana-devotion-pour-homme-parfum": {
+    "badge": "Intense Sacred Heart",
+    "description": "The richest, most opulent expression of Devotion for him. An overdose of candied citrus and dark vanilla embraces deep golden amber and noble cedar.",
+    "story": "The golden Sacred Heart shines boldly upon heavy glass containing liquid amber gold.",
+    "concentration": "Parfum"
+   },
+   "azzaro-the-most-wanted-eau-de-parfum-intense": {
+    "badge": "Weapon of Seduction",
+    "description": "The ultimate secret weapon for the daring player who takes all risks. Fiery Guatemalan cardamom melts into decadent gooey toffee over glowing amber woods.",
+    "story": "Azzaro’s signature cylinder gun barrel coated in sleek matte black for uncompromising impact.",
+    "concentration": "Eau de Parfum Intense"
    }
   },
   "notes": {
@@ -866,10 +980,10 @@
     "concentration": "ماء عطر"
    },
    "christian-dior-dior-j-adore-intense": {
-    "badge": "عطور راقية",
-    "description": "الذهب السائل لدار ديور. باقة زهرية متقنة من مطلق زهر البرتقال وياسمين غراس وورد سنتيفوليا.",
-    "story": "تحفة ديور العطرية، مؤلَّفة كنشيد للأنوثة المهيبة.",
-    "concentration": "ماء عطر مكثّف"
+    "badge": "سحر إمبراطوري",
+    "description": "سيمفونية زهرية ساحرة بفيض من القوة والجاذبية. يذوب مسك الروم النادر في غمار الياسمين والورد الجوري مع لمسات خشب الصندل الدافئة.",
+    "story": "أيقونة ديور الخالدة في تركيز بارفان مكثف يمنح ثباتاً أسطورياً وحضوراً يأسر القلوب.",
+    "concentration": "عطر مركز"
    },
    "jean-paul-gaultier-divine-couture": {
     "badge": "أزياء إلهية",
@@ -1284,6 +1398,120 @@
     "description": "جاذبية العطر المحرم في أعلى درجات التركيز والغموض. زهور بيضاء متألقة من مسك الروم وزهر البرتقال تغوص في أعماق الباتشولي ونجيل الهند الداكن.",
     "story": "العطر الأسطوري الذي ابتكر في الأصل لأودري هيبورن عام 1957، أعيد ابتكاره ليكون نشيداً للحرية والجرأة.",
     "concentration": "عطر مركز"
+   },
+   "marc-jacobs-daisy": {
+    "badge": "حرية شاعرية",
+    "description": "أنشودة ساحرة مفعمة بالبهجة وروح الشباب المنطلقة. الفراولة البرية وأوراق البنفسج تلتقي ببتلات الغاردينيا والياسمين فوق قاعدة خشبية ناعمة.",
+    "story": "من إبداع ألبرتو موريلاس، يتوج القارورة تاج مرح من أزهار الأقحوان البيضاء ذات القلوب الذهبية.",
+    "concentration": "ماء تواليت"
+   },
+   "narciso-rodriguez-for-her-eau-de-parfum": {
+    "badge": "أيقونة الجاذبية",
+    "description": "الرمز الخالد للإغراء الهادئ والأنوثة الآسرة. الورد المخملي ورحيق الخوخ يلتفان حول قلب المسك الأسطوري مع لمسات الباتشولي والعنبر.",
+    "story": "من ابتكار كريستين ناجل وفرانسيس كوركدجيان، بقارورة مطلية بلون وردي ناعم من الداخل لحفظ سر جاذبيتها.",
+    "concentration": "ماء عطر"
+   },
+   "givenchy-l-interdit-eau-de-parfum-125ml": {
+    "badge": "إصدار فاخر كبير",
+    "description": "الأيقونة الخالدة باللونين الأبيض والأسود في حجم استثنائي كبير 125 مل. زهور بيضاء متألقة تلتقي بعتمة الباتشولي الإندونيسي ونجيل الهند الراقي.",
+    "story": "حجم فاخر مزين برباط قماشي أسود يحمل شارة جيفنشي الفضية ذات الأحرف الأربعة.",
+    "concentration": "ماء عطر"
+   },
+   "chloe-love-story": {
+    "badge": "رومانسية باريسية",
+    "description": "العاطفة الجياشة لقصة حب خالدة على جسر الفنون الباريسي. زهر البرتقال والنيرولي المشرق يمتزجان بياسمين ستيفانوتيس وخشب الأرز النقي.",
+    "story": "من توقيع آن فليبو، قارورة بتصميم قفل الحب الذهبي بزجاج مكسر ورباط أنيق من الحرير.",
+    "concentration": "ماء عطر"
+   },
+   "christian-dior-dior-j-adore-l-or": {
+    "badge": "جوهر الذهب الخالص",
+    "description": "الذهب السائل لعطور جادور بأرقى درجات النقاوة والفخامة. يعيد فرانسيس كوركدجيان صياغة الزهور الأيقونية في إكسير باذخ من زهر البرتقال والورد الجوري والياسمين.",
+    "story": "قارورة الأمفورا الأسطورية تتزين بطوق من الذهب المنصهر المنساب كقطعة مجوهرات راقية لا مثيل لها.",
+    "concentration": "خلاصة عطر"
+   },
+   "narciso-rodriguez-poudree": {
+    "badge": "بودرة ساحرة",
+    "description": "لمسة بودرية مخملية تأسر الحواس بالسكينة والرقة. يلتف قلب المسك البودري بالياسمين الأبيض والورد البلغاري وأخشاب الأرز ونجيل الهند العميق.",
+    "story": "من توقيع أوريليان غيشار في مكعب زجاجي بلون بيج نيود ناعم يعكس دفء ونقاء البشرة الطبيعية.",
+    "concentration": "ماء عطر"
+   },
+   "lancome-idole-travel-exclusive": {
+    "badge": "إصدار السفر الحصري",
+    "description": "عطر الرائدات اللواتي يرسمن أحلامهن بشغف. وردة نضرة تتألق مع ياسمين الماء والمسك الأبيض المعاصر في مجموعة مميزة ترافقك أينما ذهبتِ.",
+    "story": "القارورة الأكثر نحافة في العالم، معجزة هندسية مصحوبة ببخاخ سفر حصري يلائم حقيبتك.",
+    "concentration": "ماء عطر"
+   },
+   "givenchy-ange-ou-demon-le-secret": {
+    "badge": "غموض مشرق",
+    "description": "لعبة إغواء ساحرة تجمع بين البراءة الملائكية والجاذبية الغامضة. الشاي الأخضر المنعش والتوت البري مع الفاوانيا البيضاء وأخشاب البتولا الناعمة.",
+    "story": "منحوت كقطعة كريستال ماسية من ثريا كلاسيكية تعكس أضواء الأسرار الدفينة.",
+    "concentration": "ماء عطر"
+   },
+   "christian-dior-miss-dior-parfum": {
+    "badge": "كوتور أزلي",
+    "description": "عطر الشباب والحرية المتجددة بإبداع فرانسيس كوركدجيان. المندرين المشرق والفراولة البرية يضيئان زهر الياسمين الفواح مع الأخشاب العنبرية الفاخرة.",
+    "story": "تتألق القارورة المنقوشة برسمة الهاوندستوث الأيقونية مع عقدة قماشية منسوجة بأسلوب الهوت كوتور الرفيع.",
+    "concentration": "عطر مركز"
+   },
+   "giorgio-armani-si-intense": {
+    "badge": "شغف مطلق",
+    "description": "إعلان جريء عن قوة الأنوثة وعمق المشاعر. يمتزج رحيق الكشمش الأسود المركز مع الورد الدمشقي والشاي الأسود ونفحات الفانيليا والباتشولي العميقة.",
+    "story": "تزدان القارورة بشعار سي الذهبي البارز كجوهرة ثمينة قابلة لإعادة التعبئة.",
+    "concentration": "ماء عطر مكثف"
+   },
+   "hugo-boss-hugo-woman": {
+    "badge": "انتعاش عصري",
+    "description": "انتعاش نضر وعفوي للمرأة العصرية الواثقة. يلتقي التفاح الأخضر المقرمش والبطيخ المائي مع الياسمين وزنبق الماء على قاعدة من خشب الصندل.",
+    "story": "ابتكار أورسولا فانديل، في قارورة دائرية نقية مزينة بحزام قماشي أحمر أيقوني.",
+    "concentration": "ماء تواليت"
+   },
+   "narciso-rodriguez-for-her-pure-musc": {
+    "badge": "نقاء المسك الخالص",
+    "description": "نقاء المسك في أسمى درجات الرقي والجاذبية. باقة من الزهور البيضاء تضيء قلب المسك الشهير مع دفء الكشميران والعنبر الأبيض الحريري.",
+    "story": "من إبداع سونيا كونستان، في قارورة تجمع بين تباين الأبيض الناصع والأسود الأنيق لتعكس ازدواجية الأنوثة.",
+    "concentration": "ماء عطر"
+   },
+   "dolce-gabbana-k-parfum": {
+    "badge": "هيبة ملكية رجالية",
+    "description": "هيبة الرجل العصري الذي يصنع مجده بيده. يلتقي البرتقال الدموي والفلفل الإيطالي الحار مع حليب التين وخشب الأرز الملكي والباتشولي.",
+    "story": "يتوج القارورة تاج ملكي من الذهب العتيق مرصع بأحجار اللازورد الزرقاء الملكية.",
+    "concentration": "عطر مركز"
+   },
+   "dolce-gabbana-k-intense": {
+    "badge": "كثافة ملكية",
+    "description": "الوجه الأكثر جاذبية وعمقا لعطر كينغ بنفحات جلدية فاخرة. الزعفران النادر وتوت العرعر مع حليب التين وخشب الأرز والعنبر الدخاني.",
+    "story": "سائل بلون أزرق داكن متوج بتاج فضي فاخر بلمسات زرقاء كحيلة.",
+    "concentration": "ماء عطر مكثف"
+   },
+   "dolce-gabbana-intenso": {
+    "badge": "قوة أصيلة",
+    "description": "جاذبية ذكورية أصيلة تنبض بالثقة. نغمات خشب الموبيل الإفريقي النادر مع الريحان المنعش والتبغ الأشقر وأشجار السرو وخشب الصندل.",
+    "story": "قارورة أنيقة بلون التبغ البني تعكس الفخامة الذكورية الهادئة.",
+    "concentration": "ماء عطر"
+   },
+   "dolce-gabbana-the-one-le-parfum": {
+    "badge": "كاريزما مطلقة",
+    "description": "قمة الجاذبية والرجولة الفاتنة. يلتقي الجريب فروت والهيل مع الزنجبيل الدافئ وزهر البرتقال على قاعدة باذخة من التبغ الفاخر والعنبر الذهبي.",
+    "story": "قارورة هندسية ثقيلة بلون أسود داكن تعكس كاريزما الرجل الذي لا يُقاوم.",
+    "concentration": "عطر مركز"
+   },
+   "dolce-gabbana-devotion-pour-homme": {
+    "badge": "إخلاص وشغف",
+    "description": "إعلان حب رجالي دافئ بنكهة إيطالية أصيلة. الليمون الإيطالي المحلى يتناغم مع زهر البرتقال والقهوة الدافئة والفانيليا وخشب الأرز.",
+    "story": "تزدان القارورة برمز القلب المقدس المنحوت رمزاً للوفاء والشغف الحقيقي.",
+    "concentration": "ماء عطر"
+   },
+   "dolce-gabbana-devotion-pour-homme-parfum": {
+    "badge": "القلب المقدس المركز",
+    "description": "النسخة الأغنى والأكثر تركيزاً من عطر ديفوشن للرجال. جرعة مكثفة من الليمون المحلى والفانيليا السوداء مع العنبر العميق وأخشاب الأرز النبيلة.",
+    "story": "يبرز شعار القلب المقدس الذهبي على زجاج ثقيل يفيض بالسحر والجاذبية.",
+    "concentration": "عطر مركز"
+   },
+   "azzaro-the-most-wanted-eau-de-parfum-intense": {
+    "badge": "سلاح الجاذبية",
+    "description": "السلاح السري للرجل الجريء الذي يلعب ليفوز دائماً. الهيل الغواتيمالي الحار يذوب في حلاوة الكراميل التوفي الشهي مع الأخشاب العنبرية المتوهجة.",
+    "story": "أسطوانة أزارو الأيقونية بطلاء أسود مطفأ يجسد الأناقة والجاذبية القاتلة.",
+    "concentration": "ماء عطر مكثف"
    }
   },
   "notes": {
