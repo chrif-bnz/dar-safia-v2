@@ -748,6 +748,126 @@
     "description": "A sensual encounter between smouldering woods and dark roasted cocoa. Fiery black pepper elevates refined powdery iris over rich sandalwood and patchouli.",
     "story": "Encased in rich espresso wood-brown glass wrapped in an ebony tuxedo collar.",
     "concentration": "Eau de Parfum"
+   },
+   "givenchy-gentleman-reserve-privee": {
+    "badge": "Private Reserve",
+    "description": "Supreme gentlemanly refinement inspired by the world of single-malt whisky. Rare whisky absolute meets aristocratic powdery iris and warm chestnut over deep cedar.",
+    "story": "Crafted in collaboration with a Scottish Highland distillery, encased in deep amber-gradient glass reminiscent of aged spirits.",
+    "concentration": "Eau de Parfum"
+   },
+   "givenchy-gentleman-society-200ml": {
+    "badge": "Society Colossal",
+    "description": "The exclusive circle of extraordinary men in a generous 200ml presentation. Aromatic sage and cardamom meet wild French narcissus and a quartet of noble vetivers.",
+    "story": "A towering obsidian lacquer monolith crested with Givenchy’s polished silver 4G shield.",
+    "concentration": "Eau de Parfum"
+   },
+   "givenchy-gentleman-reserve-privee-200ml": {
+    "badge": "Imperial Reserve XXL",
+    "description": "The crowning achievement of refined masculine luxury in a colossal 200ml format. Malted barley and whisky accord blend with Tuscan iris concrete and amber woods.",
+    "story": "A massive two-hundred millilitre decanter glowing in deep cognac hues, crafted for connoisseurs of timeless distinction.",
+    "concentration": "Eau de Parfum"
+   },
+   "giorgio-armani-emporio-armani-stronger-with-you-absolutely": {
+    "badge": "Absolute Passion",
+    "description": "Love captured in its most powerful, unconditional intensity. Refined rum accord and bergamot meet aromatic French lavender, glazed chestnut and Madagascan vanilla.",
+    "story": "Finished with a smoked liquor-gradient base expressing the burning power of unbreakable bonds.",
+    "concentration": "Eau de Parfum"
+   },
+   "giorgio-armani-emporio-armani-stronger-with-you-intensely": {
+    "badge": "Fiery Intensity",
+    "description": "The cult fragrance of irresistible masculine gourmand attraction. Fiery pink pepper and juniper ignite with decadent cinnamon toffee over sueded vanilla.",
+    "story": "Interlocking metal rings beneath the cap celebrate two souls drawn together by magnetic passion.",
+    "concentration": "Eau de Parfum"
+   },
+   "giorgio-armani-emporio-armani-stronger-with-you-parfum": {
+    "badge": "Virile Quintessence",
+    "description": "The richest, most luxurious concentration of the Stronger With You collection. Aromatic lavender mingles with signature chestnut over dark leather and warm benzoin.",
+    "story": "Dense golden-amber nectar preserved within substantial glass crowned with black interlocking rings.",
+    "concentration": "Parfum"
+   },
+   "gucci-oud-intense": {
+    "badge": "Mystic Oud",
+    "description": "An opulent journey into the hidden courtyards of Eastern palaces. Golden saffron and juicy pear usher in Bulgarian rose before catching fire in natural oud and leather.",
+    "story": "Massive ink-black glass adorned with Gucci’s iconic equestrian horsebit emblem finished in brushed gold.",
+    "concentration": "Eau de Parfum"
+   },
+   "yves-saint-laurent-y-le-parfum": {
+    "badge": "Conquering Force",
+    "description": "The definitive expression of modern drive, vision and self-accomplishment. Crisp green apple and bright aldehydes clash with dark French lavender and rich black cedarwood.",
+    "story": "A pitch-black monolith sliced by the audacious metallic Y emblem in gleaming raven black.",
+    "concentration": "Le Parfum"
+   },
+   "carolina-herrera-chic-for-men": {
+    "badge": "Bohemian Chic",
+    "description": "Effortless creative sophistication for the artistic gentleman. Fresh water melon and bright cardamom meet warm cinnamon and cedar over tonka bean.",
+    "story": "Crafted by Carlos Benaïm and Rosendo Mateu for the spontaneous visionary who lives life with creative passion.",
+    "concentration": "Eau de Toilette"
+   },
+   "givenchy-gentleman-society-extreme": {
+    "badge": "Iced Coffee Edge",
+    "description": "The Gentleman Society code pushed to thrilling nocturnal extremes. Frosted peppermint and clary sage awaken an addictive iced coffee note and wild narcissus over dark vetiver.",
+    "story": "A jet-black flacon elevated by a satin black 4G monogram badge for extreme presence.",
+    "concentration": "Eau de Parfum"
+   },
+   "jean-paul-gaultier-le-beau-in-blue": {
+    "badge": "Sensual Lagoon",
+    "description": "A torrid dive into the crystal turquoise waters of an untamed paradise island. Fresh water mint and bergamot meet sultry coconut wood and warm tonka bean.",
+    "story": "Gaultier’s iconic muscular silhouette tinted in azure lagoon blue, dressed in a golden vine leaf.",
+    "concentration": "Eau de Parfum"
+   },
+   "jean-paul-gaultier-le-beau-paradise-garden": {
+    "badge": "Garden of Eden",
+    "description": "Gaultier’s lush garden of wonders where every sweet desire is indulged. Salty coconut water and crisp green fig mingle with zesty ginger over sandalwood.",
+    "story": "Created by Quentin Bisch, sculpted in emerald green glass embroidered with a couture vine leaf of wildflowers.",
+    "concentration": "Eau de Parfum"
+   },
+   "jean-paul-gaultier-le-beau-narcisse": {
+    "badge": "Floral Allure",
+    "description": "A hypnotic floral temptation plucked from a hidden jungle glade. Opulent wild narcissus meets sparkling bergamot and frosted coconut over amber woods.",
+    "story": "A collector masculine silhouette reflecting bright botanical undertones that transcend convention.",
+    "concentration": "Eau de Parfum"
+   },
+   "jean-paul-gaultier-le-male-elixir": {
+    "badge": "Gilded Ember",
+    "description": "The iconic sailor transformed into a smouldering ember of sheer magnetism. Aromatic lavender ignites with raw golden honey, blond tobacco and dark vanilla.",
+    "story": "Composed by Quentin Bisch, encasing the iconic torso in solid gold ribs glowing with coppery sailor stripes.",
+    "concentration": "Parfum"
+   },
+   "jean-paul-gaultier-le-male-le-parfum": {
+    "badge": "Sovereign Captain",
+    "description": "The commanding poise of a captain taking total charge of the helm. Noble black cardamom leads powdery iris and lavender into decadent dark vanilla.",
+    "story": "Dressed in a commanding officer’s tuxedo jacket of matte black banded with gleaming gold stripes.",
+    "concentration": "Eau de Parfum Intense"
+   },
+   "jean-paul-gaultier-scandal-pour-homme-intense": {
+    "badge": "Ring Champion",
+    "description": "The heavyweight boxing champion steps forward for an instant knockout blow. Aromatic clary sage strikes decadent browned caramel and tonka over dark vetiver.",
+    "story": "An imposing collector presentation crowned with a heavyweight champion gold crown.",
+    "concentration": "Eau de Parfum"
+   },
+   "jean-paul-gaultier-scandal-absolu-pour-homme": {
+    "badge": "Absolu Scandal XXL",
+    "description": "Scandalous luxury unleashed in a magnificent 150ml format. Honeyed mirabelle plum and roasted chestnut wrap around royal sandalwood and warm amber.",
+    "story": "Coated entirely in blinding mirror-gold lacquer and topped with an ornate royal golden crown.",
+    "concentration": "Parfum Concentré"
+   },
+   "jean-paul-gaultier-le-beau-flowers-edition": {
+    "badge": "Tropical Blossom",
+    "description": "An explosion of solar botanical vitality in Gaultier’s lush tropical paradise. Sun-drenched jungle petals join crisp bergamot and tender coconut tonka.",
+    "story": "The masculine silhouette comes alive with embroidered couture tropical wildflowers in full bloom.",
+    "concentration": "Eau de Parfum"
+   },
+   "jean-paul-gaultier-scandal-pour-homme-edt-150ml": {
+    "badge": "Champion XXL Format",
+    "description": "The energetic woody-oriental kick of Scandal in an oversized 150ml rechargeable trophy flask. Stimulating clary sage and mandarin electrify salted caramel and vetiver.",
+    "story": "A massive gold-crowned decanter engineered to be endlessly refilled across countless victories.",
+    "concentration": "Eau de Toilette"
+   },
+   "burberry-hero-eau-de-toilette-150ml": {
+    "badge": "Modern Hero XXL",
+    "description": "The heroic quest for freedom in a generous 150ml format. Radiant bergamot and black pepper ascend through fresh juniper into three magnificent cedarwoods.",
+    "story": "Composed by Aurélien Guichard, sculptured to resemble the stylized hoof of a galloping stallion.",
+    "concentration": "Eau de Toilette"
    }
   },
   "notes": {
@@ -1752,6 +1872,126 @@
     "description": "لقاء حميمي يجمع بين الأخشاب الدافئة وحبوب الكاكاو المحمصة. الفلفل الأسود والكزبرة مع السوسن البودري وخشب الصندل الكريمي والباتشولي.",
     "story": "قارورة أنيقة بلون البن البني الداكن مزينة بطوق أسود يعكس الدفء والأناقة الرجالية.",
     "concentration": "ماء عطر"
+   },
+   "givenchy-gentleman-reserve-privee": {
+    "badge": "المحمية الخاصة",
+    "description": "قمة الأناقة الأرستقراطية المستوحاة من عالم المعتقات الفاخرة. خلاصة البلوط المعتق تلتقي بالسوسن البودري الفاخر والكستناء الدافئة وخشب الأرز النبيل.",
+    "story": "ابتكار استثنائي بالتعاون مع أرقى دور التعتيق، في قارورة بتدرج عنبري دافئ يحاكي المشروبات النادرة.",
+    "concentration": "ماء عطر"
+   },
+   "givenchy-gentleman-society-200ml": {
+    "badge": "مجتمع النخبة حجم عملاق",
+    "description": "عطر النخبة الرجالية في قارورة عملاقة فاخرة بحجم 200 مل. الميرمية العطرية والهيل مع النرجس البري النادر وتوليفة رباعية من نجيل الهند الفاخر.",
+    "story": "صرح أسود لامع يتوسطه شعار جيفنشي الفضي اللامع ليعكس الهيبة والانتماء لأرقى المجتمعات.",
+    "concentration": "ماء عطر"
+   },
+   "givenchy-gentleman-reserve-privee-200ml": {
+    "badge": "المحمية الإمبراطورية 200 مل",
+    "description": "ذروة الفخامة الرجالية الراقية في حجم عملاق استثنائي 200 مل. يتحد الشعير المعتق مع السوسن التوسكاني الفاخر والكستناء والأخشاب العنبرية المهيبة.",
+    "story": "قارورة استثنائية بحجم مائتي ملليلتر تتدرج بألوان الكونياك الدافئة لعشاق التميز الفريد.",
+    "concentration": "ماء عطر"
+   },
+   "giorgio-armani-emporio-armani-stronger-with-you-absolutely": {
+    "badge": "شغف مطلق",
+    "description": "العاطفة الجياشة بأعلى درجات الاشتعال والعمق. نفحات النكتار الفاخر والبرغموت تلتقي باللافندر الفرنسي والكستناء المكرملة وفانيليا مدغشقر.",
+    "story": "تتدرج القارورة بطلاء دخاني عند القاعدة يعبر عن القوة المتقدة للحب الذي لا ينكسر.",
+    "concentration": "ماء عطر"
+   },
+   "giorgio-armani-emporio-armani-stronger-with-you-intensely": {
+    "badge": "كثافة متقدة",
+    "description": "العطر الأيقوني للإغواء الذكوري الشهي والدافئ. الفلفل الوردي وتوت العرعر يشتعلان مع كراميل التوفي والقرفة والفانيليا والجلد المخملي.",
+    "story": "تلتف حلقتان معدنيتان أسفل الغطاء تعبيراً عن روحين اتحدتا برابط لا ينفصم.",
+    "concentration": "ماء عطر"
+   },
+   "giorgio-armani-emporio-armani-stronger-with-you-parfum": {
+    "badge": "جوهر الرجولة",
+    "description": "التركيز الأغنى والأفخم من مجموعة سترونغر ويذ يو. يمتزج اللافندر النقي مع الكستناء المميزة والجلد الأسود الفاخر وراتنج البنزوين العطري.",
+    "story": "سائل عنبري كثيف في زجاج ثقيل يتوجه غطاء أسود بالحلقات المتشابكة الأيقونية.",
+    "concentration": "عطر مركز"
+   },
+   "gucci-oud-intense": {
+    "badge": "عود ملكي مهيب",
+    "description": "رحلة أسطورية إلى قصور الشرق الباذخة. يلتقي الزعفران الذهبي والكمثرى مع الورد البلغاري الفاخر وخشب العود الطبيعي والجلد الدخاني.",
+    "story": "قارورة سوداء حالكة مزينة بحلية لجام الحصان الأيقونية لدار غوتشي بالذهب الخالص.",
+    "concentration": "ماء عطر"
+   },
+   "yves-saint-laurent-y-le-parfum": {
+    "badge": "قوة قاهرة",
+    "description": "التعبير الأسمى عن النجاح والإصرار الرجالي المطلق. انتعاش التفاح الأخضر والألدهيدات يلتقي بقوة اللافندر الفرنسي وخشب الأرز الأسود والبخور.",
+    "story": "صرح زجاجي أسود بالكامل يشقه حرف Y المعدني الأسود البراق بكل ثقة وجرأة.",
+    "concentration": "عطر مركز"
+   },
+   "carolina-herrera-chic-for-men": {
+    "badge": "أناقة بوهيمية",
+    "description": "الأناقة العفوية للرجل المبدع وصاحب الرؤية الحرة. يلتقي البطيخ المنعش والهيل مع دفء القرفة والفلفل الأسود وخشب الصندل والتونكا.",
+    "story": "ابتكره كارلوس بينيم وروسيندو ماتيو للرجل الذي يعيش حياته كلوحة فنية تنبض بالحيوية.",
+    "concentration": "ماء تواليت"
+   },
+   "givenchy-gentleman-society-extreme": {
+    "badge": "جرأة القهوة المثلجة",
+    "description": "ارتقاء جديد بمفهوم مجتمع جيفنشي نحو آفاق مثيرة. النعناع المثلج والميرمية يوقظان نفحات القهوة الباردة والآسرة مع النرجس البري وأخشاب الأرز.",
+    "story": "قارورة سوداء أنيقة تزدان بشعار جيفنشي الأسود الحريري تعبيراً عن الرقي المعاصر.",
+    "concentration": "ماء عطر"
+   },
+   "jean-paul-gaultier-le-beau-in-blue": {
+    "badge": "بحيرة فيروزية ساحرة",
+    "description": "غوص منعش في مياه الفيروز الصافية لجزيرة استوائية ساحرة. النعناع المائي والبرغموت يتعانقان مع خشب جوز الهند الشمسي وحبوب التونكا الدافئة.",
+    "story": "مجسم غوتييه الأيقوني بلون أزرق بحري جذاب مزين بورقة التين الذهبية الشهيرة.",
+    "concentration": "ماء عطر"
+   },
+   "jean-paul-gaultier-le-beau-paradise-garden": {
+    "badge": "جنة الفردوس",
+    "description": "حديقة المسرات الغناء حيث تتجلى كل الرغبات الساحرة. ماء جوز الهند المملح والتين الأخضر مع الزنجبيل الحار وخشب الصندل والتونكا اللذيذة.",
+    "story": "من إبداع كوانتان بيش في قارورة خضراء زمردية مطرزة بأوراق الشجر والزهور البرية البديعة.",
+    "concentration": "ماء عطر"
+   },
+   "jean-paul-gaultier-le-beau-narcisse": {
+    "badge": "فتنة زهرية",
+    "description": "جاذبية زهرة النرجس البرية الفاتنة من قلب الغابات الاستوائية. نرجس ساحر يلتقي بانتعاش البرغموت وجوز الهند المثلج فوق قاعدة عنبرية خشبية.",
+    "story": "إصدار استثنائي للمجسم الرجالي يعكس ألوان الزهور الفاتنة بأسلوب يكسر كل المألوف.",
+    "concentration": "ماء عطر"
+   },
+   "jean-paul-gaultier-le-male-elixir": {
+    "badge": "سبائك متوهجة",
+    "description": "البحار الأيقوني يتحول إلى شعلة متقدة تأسر القلوب. يتحد اللافندر النقي والنعناع مع العسل الذهبي والتبغ الأشقر وحبوب التونكا والفانيليا السوداء.",
+    "story": "إبداع كوانتان بيش، في مجسم رجالي مذهب كسبائك الذهب الخالص المخططة ببريق نحاسي جذاب.",
+    "concentration": "عطر مركز"
+   },
+   "jean-paul-gaultier-le-male-le-parfum": {
+    "badge": "القبطان المهيب",
+    "description": "هيبة القبطان الواثق الذي يقود الدفة بكل براعة. يفتتح الهيل الملكي العطر يليه السوسن البودري الفاخر واللافندر والفانيليا الشرقية الداكنة.",
+    "story": "يتألق المجسم بزي القبطان الأسود المطفأ المزين بخطوط ذهبية لامعة تفرض هيبتها.",
+    "concentration": "ماء عطر مكثف"
+   },
+   "jean-paul-gaultier-scandal-pour-homme-intense": {
+    "badge": "بطل الحلبة",
+    "description": "بطل الحلبة يستعد لضربة قاضية تأسر الحواس. الميرمية العطرية والمندرين يصطدمان بحلاوة الكراميل البني المحروق والتونكا ونجيل الهند القوي.",
+    "story": "قارورة مذهلة تتوجها سدادة ملكية ضخمة على شكل تاج الملاكمة الذهبي.",
+    "concentration": "ماء عطر"
+   },
+   "jean-paul-gaultier-scandal-absolu-pour-homme": {
+    "badge": "فضيحة مطلقة حجم عملاق",
+    "description": "قمة الجرأة والفخامة في حجم عملاق استثنائي 150 مل. برقوق ميرابيل اللذيذ والكستناء المدخنة يلتفان حول خشب الصندل الملكي والعنبر الداكن.",
+    "story": "قارورة مطلية بالكامل بذهب لامع كسبائك الذهب الخالص متوجة بتاج ملكي فخم.",
+    "concentration": "عطر مركز"
+   },
+   "jean-paul-gaultier-le-beau-flowers-edition": {
+    "badge": "أزهار استوائية",
+    "description": "انفجار من الانتعاش الزهري والجاذبية الاستوائية في فردوس غوتييه. زهور استوائية مشمسة تلتقي بالبرغموت وجوز الهند وحبوب التونكا وخشب البحر.",
+    "story": "يتزين المجسم الرجالي بنقوش أزهار استوائية مطرزة بدقة تعكس الحيوية والجمال.",
+    "concentration": "ماء عطر"
+   },
+   "jean-paul-gaultier-scandal-pour-homme-edt-150ml": {
+    "badge": "حجم عملاق 150 مل",
+    "description": "الانتعاش الخشبي الشرقي المثير لعطر سكاندال في حجم عملاق استثنائي 150 مل قابل لإعادة التعبئة. الميرمية والمندرين مع الكراميل المملح ونجيل الهند.",
+    "story": "قارورة ضخمة متوجة بتاج ذهبي صممت ليعاد تعبئتها باستمرار احتفاءً بالانتصارات المتتالية.",
+    "concentration": "ماء تواليت"
+   },
+   "burberry-hero-eau-de-toilette-150ml": {
+    "badge": "البطل المعاصر حجم كبير",
+    "description": "نداء الحرية والشجاعة في قارورة عملاقة فاخرة بحجم 150 مل. يلتقي البرغموت المشرق والفلفل الأسود وتوت العرعر مع ثلاثية أخشاب الأرز العريقة.",
+    "story": "من توقيع أوريليان غيشار، منحوتة بتصميم يجسد حافر حصان عربي أصيل ينطلق نحو الأفق.",
+    "concentration": "ماء تواليت"
    }
   },
   "notes": {
