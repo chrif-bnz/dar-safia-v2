@@ -868,6 +868,126 @@
     "description": "The heroic quest for freedom in a generous 150ml format. Radiant bergamot and black pepper ascend through fresh juniper into three magnificent cedarwoods.",
     "story": "Composed by Aurélien Guichard, sculptured to resemble the stylized hoof of a galloping stallion.",
     "concentration": "Eau de Toilette"
+   },
+   "burberry-hero-eau-de-parfum-150ml": {
+    "badge": "Triomphal Hero XXL",
+    "description": "The monumental presence of heroic transformation in an oversized 150ml decanter. Resinous pine needles and burning olibanum incense ignite three magnificent cedarwood origins.",
+    "story": "Mastercrafted by Aurélien Guichard in a deep smoked oak angular monolith resembling a galloping stallion.",
+    "concentration": "Eau de Parfum"
+   },
+   "azzaro-chrome": {
+    "badge": "Azure Freshness",
+    "description": "The pure radiance of unshakeable family bonds under the Mediterranean sun. Crisp lemon and aromatic rosemary crash into transparent aquatic petals over clean cedar.",
+    "story": "Crafted by Loris Azzaro celebrating the tender camaraderie between father and son beside the azure sea.",
+    "concentration": "Eau de Toilette"
+   },
+   "cerruti-1881-homme": {
+    "badge": "Italian Classic",
+    "description": "The effortless distinction and timeless poise of Italian masculinity. Fresh Tuscan cypress, juniper berries, and lavender rest upon noble pine and oakmoss.",
+    "story": "Crafted by Martin Gras in 1990 in a rugged frosted glass block reminiscent of raw carved Italian stone.",
+    "concentration": "Eau de Toilette"
+   },
+   "guerlain-l-homme-ideal-intense": {
+    "badge": "Mystic Flame",
+    "description": "The ideal man is a myth, but his fragrance is an incandescent blaze. Guerlain’s signature almond is ignited by fiery chili pepper and smoked leather over dark patchouli.",
+    "story": "Formulated by Thierry Wasser and Delphine Jelk in an assertive square matte-black silhouette highlighted with solar yellow.",
+    "concentration": "Eau de Parfum"
+   },
+   "guerlain-habit-rouge-eau-de-parfum": {
+    "badge": "Equestrian Legend",
+    "description": "The first oriental fragrance for gentlemen in perfumery history, radiating aristocratic passion. Bitter orange and neroli clash with warm spices, velvet leather and vanilla.",
+    "story": "Composed by Jean-Paul Guerlain in 1965, inspired by the scarlet riding habit worn by master equestrians.",
+    "concentration": "Eau de Parfum"
+   },
+   "guerlain-l-instant-de-guerlain-pour-homme": {
+    "badge": "Sensory Clash",
+    "description": "The electric tipping point where passions ignite between kindred spirits. Crisp star anise and luminous bergamot collide with bitter dark cocoa and smoky sandalwood.",
+    "story": "Crafted by Béatrice Piquet, housed in an architectural glass monolith with chiselled shoulders.",
+    "concentration": "Eau de Parfum"
+   },
+   "prada-paradigme": {
+    "badge": "Avant-Garde Future",
+    "description": "A cutting-edge olfactory milestone redefining modern masculine codes. Sparkling bergamot and pink pepper fuse with mineral iris concrete over high-tech ambers.",
+    "story": "A futuristic black and silver sculpture accented with Prada’s hallmark Saffiano leather label.",
+    "concentration": "Eau de Parfum"
+   },
+   "paco-rabanne-one-million-elixir-200ml": {
+    "badge": "Supreme Ingot XXL",
+    "description": "The monumental pinnacle of One Million opulence in a massive 200ml gold ingot. Rich davana liqueur and crisp apple melt into Damask rose and dark black vanilla.",
+    "story": "Orchestrated by Quentin Bisch and Christophe Raynaud in an immense gold bar stamped with the black power triangle.",
+    "concentration": "Parfum Intense"
+   },
+   "paco-rabanne-one-million-eau-de-toilette-200ml": {
+    "badge": "Iconic Ingot XXL",
+    "description": "The world’s most renowned gold ingot in an impressive 200ml collector format. Blood mandarin and frosted peppermint burst over spicy cinnamon and blond leather.",
+    "story": "The legendary gold bar sculpted by Noé Duchaufour-Lawrance in a generous two-hundred millilitre presentation.",
+    "concentration": "Eau de Toilette"
+   },
+   "moschino-toy-boy": {
+    "badge": "Chic Irony",
+    "description": "An audacious and charmingly subversive play on modern masculinity. Italian bergamot and pink pepper unlock a spicy clove-kissed rose over dark cashmeran.",
+    "story": "Designed by Yann Vasnier, encapsulated within Moschino’s iconic teddy bear lacquered in ultra-glossy raven black.",
+    "concentration": "Eau de Parfum"
+   },
+   "paco-rabanne-one-million-parfum-200ml": {
+    "badge": "Solar Leather XXL",
+    "description": "The intoxicating insolence of salty sun-drenched leather in a monumental 200ml ingot. Solar tuberose clashes with marine salt over opulent warm leather and ambergris.",
+    "story": "Conceived by Quentin Bisch and Christophe Raynaud, embossed with a radiant sun carved into mirror gold.",
+    "concentration": "Parfum"
+   },
+   "lacoste-l-12-12-blanc-eau-de-toilette": {
+    "badge": "Crisp White Polo",
+    "description": "The pristine elegance and effortless ease of Lacoste’s legendary white polo shirt. Zesty grapefruit and cardamom uplift crisp white floral notes over suede leather.",
+    "story": "Textured in petit piqué glass resembling polo fabric, stamped with the historic green embroidered crocodile.",
+    "concentration": "Eau de Toilette"
+   },
+   "lacoste-l-12-12-rose-eau-intense": {
+    "badge": "Floral Energy",
+    "description": "A vibrant surge of feminine sporting vitality. Invigorating white tea and Sichuan pepper illuminate radiant rose and aquatic lotus over creamy sandalwood.",
+    "story": "Dressed in a dynamic coral-pink dégradé bottle celebrating movement and spirited self-expression.",
+    "concentration": "Eau de Toilette Intense"
+   },
+   "lacoste-l-12-12-blanc-intense": {
+    "badge": "Electric Crispness",
+    "description": "A striking meeting of icy freshness and warming masculine depth. Juicy mandarin and turmeric leaf join aromatic lavender over vetiver and rich leather.",
+    "story": "Fading from frosted white to deep green, stamped with the metallic Lacoste crocodile badge.",
+    "concentration": "Eau de Toilette Intense"
+   },
+   "lacoste-l-12-12-blanc-eau-de-parfum": {
+    "badge": "Reinvented Polo",
+    "description": "Modern intensity injected into the iconic white polo shirt as an Eau de Parfum. Zesty finger lime and pine resin meet stimulating eucalyptus and cedarwood.",
+    "story": "Soft-touch matte white glass celebrating teamwork and the timeless passion of the court.",
+    "concentration": "Eau de Parfum"
+   },
+   "lacoste-silver-grey": {
+    "badge": "Metallic Sheen",
+    "description": "Futuristic sophistication inspired by high-tech materials and brushed chrome. Spicy ginger and grapefruit join lavender over crisp ambroxan and silver cedar.",
+    "story": "A brushed silver metallic monolith adorned with a chrome-embossed crocodile crest.",
+    "concentration": "Eau de Parfum"
+   },
+   "lacoste-original": {
+    "badge": "Heritage Croc",
+    "description": "The contemporary rebirth of René Lacoste’s foundational signature. Crisp bergamot and cardamom meet French lavender over warm sandalwood and patchouli.",
+    "story": "A direct salute to the timeless court style of 1933 in clear glass framed by iconic tennis green.",
+    "concentration": "Eau de Parfum"
+   },
+   "lacoste-original-aqua": {
+    "badge": "Ocean Wave",
+    "description": "An invigorating surge of oceanic vitality for the active sportsman. Salty sea spray and crushed mint unite with frosted citrus over mineral cedarwood.",
+    "story": "Translucent sea-green glass trapping the rejuvenating spray of breaking coastal waves.",
+    "concentration": "Eau de Parfum"
+   },
+   "hugo-boss-bottled-night": {
+    "badge": "Nocturnal Conquest",
+    "description": "The definitive weapon for the Boss man destined to command the evening. Fresh birch leaves and lavender meet African violet over Louro Amarelo wood.",
+    "story": "The classic Boss Bottled silhouette wrapped in a brooding midnight-blue gradient.",
+    "concentration": "Eau de Toilette"
+   },
+   "hugo-boss-bottled-unlimited": {
+    "badge": "Limitless Drive",
+    "description": "An unstoppable shot of pure adrenaline and ambition. Icy spearmint and tart grapefruit blend with juicy pineapple over warm labdanum and sandalwood.",
+    "story": "An all-white opaque bottle reflecting pristine clarity and relentless focus on victory.",
+    "concentration": "Eau de Toilette"
    }
   },
   "notes": {
@@ -1991,6 +2111,126 @@
     "badge": "البطل المعاصر حجم كبير",
     "description": "نداء الحرية والشجاعة في قارورة عملاقة فاخرة بحجم 150 مل. يلتقي البرغموت المشرق والفلفل الأسود وتوت العرعر مع ثلاثية أخشاب الأرز العريقة.",
     "story": "من توقيع أوريليان غيشار، منحوتة بتصميم يجسد حافر حصان عربي أصيل ينطلق نحو الأفق.",
+    "concentration": "ماء تواليت"
+   },
+   "burberry-hero-eau-de-parfum-150ml": {
+    "badge": "البطل الظافر 150 مل",
+    "description": "قوة التحول البطولي في قارورة عملاقة فاخرة بحجم 150 مل. تمتزج إبر الصنوبر الراتنجية وبخور اللبان مع ثلاثية أخشاب الأرز الدافئة من الأطلس والهيمالايا.",
+    "story": "من توقيع أوريليان غيشار في صرح زجاجي هندسي بلون خشب البلوط الداكن يعبر عن الشجاعة والعزم.",
+    "concentration": "ماء عطر"
+   },
+   "azzaro-chrome": {
+    "badge": "انتعاش أزرق صاف",
+    "description": "إشراقة الروابط الصادقة تحت شمس البحر الأبيض المتوسط الدافئة. الليمون المنعش وإكليل الجبل مع الياسمين الشفاف وخشب الأرز وطحلب السنديان.",
+    "story": "ابتكره لوريس أزارو تخليداً لمشاعر المودة العميقة بين الأب وابنه على شواطئ البحر الصافية.",
+    "concentration": "ماء تواليت"
+   },
+   "cerruti-1881-homme": {
+    "badge": "كلاسيكية إيطالية",
+    "description": "الأناقة الطبيعية والرقي الرجالي الإيطالي الخالد. يلتقي السرو التوسكاني وتوت العرعر واللافندر مع خشب الصنوبر وطحلب السنديان.",
+    "story": "ابتكره مارتن غراس عام 1990 في قالب زجاجي مصنفر يشبه حجر الرخام الإيطالي المنحوت.",
+    "concentration": "ماء تواليت"
+   },
+   "guerlain-l-homme-ideal-intense": {
+    "badge": "لهب ساحر",
+    "description": "الرجل المثالي أسطورة، لكن عطره شعلة نارية تأسر الألباب. يلتهب لوز غيرلان الأيقوني بالفلفل الحار والجلد الدخاني والباتشولي العميق.",
+    "story": "من إبداع تييري واسر ودلفين جيلك في قارورة مربعة سوداء مطفأة بملصق أصفر شمسي يفيض بالطاقة.",
+    "concentration": "ماء عطر"
+   },
+   "guerlain-habit-rouge-eau-de-parfum": {
+    "badge": "أسطورة الفروسية",
+    "description": "أول عطر شرقي للرجال في تاريخ العطور، رمز للشغف الأرستقراطي الفريد. البرتقال المر والنيرولي يلتقيان بالجلد المخملي والتوابل والباتشولي والفانيليا.",
+    "story": "تحفة جان بول غيرلان عام 1965، مستوحاة من المعطف الأحمر الزاهي لفرسان الخيول النبيلة.",
+    "concentration": "ماء عطر"
+   },
+   "guerlain-l-instant-de-guerlain-pour-homme": {
+    "badge": "لحظة الاشتعال",
+    "description": "اللحظة الساحرة التي تتغير فيها كل المقاييس بعاطفة جياشة. الينسون النجمي والبرغموت المنعش في مواجهة الكاكاو المر وخشب الصندل والباتشولي.",
+    "story": "من توقيع بياتريس بيكيه في قارورة معمارية متناسقة الزوايا تعكس النبل والأناقة.",
+    "concentration": "ماء عطر"
+   },
+   "prada-paradigme": {
+    "badge": "طليعة المستقبل",
+    "description": "بصمة عطرية متطورة تعيد صياغة مفاهيم الرجولة العصرية. البرغموت الإيطالي والفلفل الوردي مع السوسن المعدني والميرمية والعنبر الحديث.",
+    "story": "تصميم معماري فاخر باللونين الأسود والفضي يحمل شارة جلد سافيانو الأيقونية لدار برادا.",
+    "concentration": "ماء عطر"
+   },
+   "paco-rabanne-one-million-elixir-200ml": {
+    "badge": "سبيكة الذهب العملاقة",
+    "description": "قمة الثراء والجاذبية في سبيكة ذهبية عملاقة بحجم 200 مل. يتحد رحيق الدفانا والتفاح المقرمش مع الورد الدمشقي والفانيليا السوداء وأخشاب الأرز.",
+    "story": "من إبداع كوانتان بيش وكريستوف رينو في سبيكة ذهبية مهيبة تحمل المثلث الأسود رمز القوة والكمال.",
+    "concentration": "عطر مكثف"
+   },
+   "paco-rabanne-one-million-eau-de-toilette-200ml": {
+    "badge": "السبيكة الذهبية 200 مل",
+    "description": "السبيكة الذهبية الأكثر شهرة في العالم بحجم استثنائي 200 مل. اليوسفي الدموي والنعناع المثلج مع القرفة الدافئة والجلد الأشقر الجذاب.",
+    "story": "السبيكة الأيقونية التي صممها نويه دوشوفور لورانس في حجم عملاق لمزيد من التألق والثقة.",
+    "concentration": "ماء تواليت"
+   },
+   "moschino-toy-boy": {
+    "badge": "أناقة متمردة",
+    "description": "جرأة أنيقة تكسر القوالب التقليدية للرجولة. البرغموت الإيطالي والفلفل الوردي يوقظان وردة متبلة بقرنفل دافئ على خشب الكشميران ونجيل الهند.",
+    "story": "من ابتكار يان فاسنييه، في مجسم الدب الأيقوني الشهير لموسكينو بطلاء أسود براق يعكس روح المرح والتميز.",
+    "concentration": "ماء عطر"
+   },
+   "paco-rabanne-one-million-parfum-200ml": {
+    "badge": "شمس جلدية حجم عملاق",
+    "description": "الجرأة الشمسية لعطر جلدي مملح في سبيكة عملاقة بحجم 200 مل. يتألق مسك الروم الشمسي مع نسيم البحر والجلد الدافئ والعنبر الرمادي في حضور طاغ.",
+    "story": "من توقيع كوانتان بيش وكريستوف رينو، مرصع بقرص شمس ذهبي ساطع يعبر عن الثقة المطلقة.",
+    "concentration": "عطر مركز"
+   },
+   "lacoste-l-12-12-blanc-eau-de-toilette": {
+    "badge": "بولو أبيض ناصع",
+    "description": "الأناقة النقية والراحة الأسطورية لقميص بولو لاكوست الأبيض الشهير. الجريب فروت المنعش والهيل مع مسك الروم الرجالي وخشب الأرز وجلد الشامواه.",
+    "story": "قارورة بيضاء ناصعة بنقشة قماش البولو الشهيرة تتوسطها شارة التمساح الأخضر المطرزة.",
+    "concentration": "ماء تواليت"
+   },
+   "lacoste-l-12-12-rose-eau-intense": {
+    "badge": "طاقة زهرية",
+    "description": "شحنة متدفقة من الحيوية والأنوثة الرياضية المبهجة. الشاي الأبيض المنعش وفلفل سيتشوان مع الورد المشرق وزهر اللوتس وخشب الصندل.",
+    "story": "قارورة بتدرج وردي مرجاني مفعم بالحياة تشيد بالحرية والحركة الرياضية الرشيقة.",
+    "concentration": "ماء تواليت مكثف"
+   },
+   "lacoste-l-12-12-blanc-intense": {
+    "badge": "انتعاش متقد",
+    "description": "لقاء مدهش بين الانتعاش القطبي والدفء الخشبي الجذاب. المندرين العصيري وأوراق الكركم العطرية مع اللافندر وخشب الصندل والجلد الرجالي.",
+    "story": "تتدرج القارورة من الأبيض الثلجي إلى الأخضر العميق يعلوها تمساح لاكوست المعدني المميز.",
+    "concentration": "ماء تواليت مكثف"
+   },
+   "lacoste-l-12-12-blanc-eau-de-parfum": {
+    "badge": "البولو المبتكر",
+    "description": "كثافة عصرية متجددة لقميص البولو الأبيض الأيقوني بتركيز ماء عطر. ليمون الكافيار والراتنج الصنوبري يلتقيان بزهور الأوكالبتوس وخشب الأرز النقي.",
+    "story": "زجاج أبيض مطفأ ذو ملمس ناعم يشيد بروح الفريق والتنافس الرياضي النبيل.",
+    "concentration": "ماء عطر"
+   },
+   "lacoste-silver-grey": {
+    "badge": "بريق معدني",
+    "description": "أناقة مستقبلية مستوحاة من دقة المعادن المصقولة والتقنيات الحديثة. الزنجبيل الحار والجريب فروت مع اللافندر والأمبروكسان وخشب الأرز الفضي.",
+    "story": "قارورة مطلية باللون الفضي المصقول يتوسطها تمساح كرومي أنيق يعبر عن العصر الحديث.",
+    "concentration": "ماء عطر"
+   },
+   "lacoste-original": {
+    "badge": "إرث التمساح الأصيل",
+    "description": "الولادة المتجددة لأول عطور رينيه لاكوست الكلاسيكية. يلتقي البرغموت والهيل مع اللافندر الفرنسي وخشب الصندل الدافئ والباتشولي.",
+    "story": "تحية إجلال لأناقة ملاعب التنس الكلاسيكية لعام 1933 في قارورة شفافة مؤطرة باللون الأخضر المميز.",
+    "concentration": "ماء عطر"
+   },
+   "lacoste-original-aqua": {
+    "badge": "أمواج المحيط",
+    "description": "انتعاش بحري متدفق للرجل الرياضي والنشط. رذاذ البحر المالح والنعناع المطحون مع الحمضيات المثلجة وخشب الأرز والعنبر البحري.",
+    "story": "قارورة بلون مياه البحر الصافية تلتقط نسيم الأمواج الهادرة على السواحل.",
+    "concentration": "ماء عطر"
+   },
+   "hugo-boss-bottled-night": {
+    "badge": "سحر الليل الفاتن",
+    "description": "السلاح السري للرجل الأنيق لفرض حضوره في الأمسيات الفاخرة. أوراق البتولا واللافندر مع البنفسج الإفريقي والهيل وخشب اللورو أماريو النادر.",
+    "story": "تتألق قارورة بوس الأيقونية بتدرج لوني أزرق كحلي داكن يجسد غموض وجاذبية الليل.",
+    "concentration": "ماء تواليت"
+   },
+   "hugo-boss-bottled-unlimited": {
+    "badge": "طاقة لا حدود لها",
+    "description": "شحنة متدفقة من الحماس والإصرار نحو القمة. النعناع المثلج والجريب فروت مع الأناناس اللذيذ والقرفة وخشب الصندل واللابدانوم.",
+    "story": "قارورة بيضاء ناصعة بالكامل تعكس النقاء التام والتركيز المستمر على تحقيق النجاح.",
     "concentration": "ماء تواليت"
    }
   },
