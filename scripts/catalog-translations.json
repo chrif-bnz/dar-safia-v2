@@ -394,6 +394,126 @@
     "description": "The timeless purity of classic Italian elegance. Delicate flax flower harmonizes with powdery mimosa and iris over a tender woody base of sandalwood and cedar.",
     "story": "Created by Claire Cain in 1995 in a frosted pebble-shaped flacon mirroring the gentle drape of fine Cerruti fabrics.",
     "concentration": "Eau de Toilette"
+   },
+   "lanvin-eclat-d-arpege": {
+    "badge": "Celestial Harmony",
+    "description": "An eternal breath of spring whispering pure tenderness. Green lilac and fresh green tea leaves dance with delicate peach blossom on a silky bed of white cedar.",
+    "story": "Created by Karine Dubreuil in an iconic lilac sphere crowned with two gold rings, commemorating the eternal bond between Jeanne Lanvin and her daughter.",
+    "concentration": "Eau de Parfum"
+   },
+   "guerlain-mon-guerlain": {
+    "badge": "Royal Femininity",
+    "description": "A tribute to the multifaceted modern woman: powerful, free, and graceful. Aromatic Carla lavender elevates opulent sambac jasmine and rich Tahitian vanilla.",
+    "story": "Mastercrafted by Thierry Wasser and Delphine Jelk in the iconic quadrilobe bottle born in 1908, bound in gold ribbon.",
+    "concentration": "Eau de Parfum"
+   },
+   "elie-saab-le-parfum-essentiel": {
+    "badge": "Pure Radiance",
+    "description": "An invitation to reconnect with your true essence. Sparkling mandarin greets velvety white gardenia and refined cedarwood for a breath of luminous serenity.",
+    "story": "Crafted by Maïa Lernout, showcasing Elie Saab’s delicate calligraphic monogram embossed in gleaming gold.",
+    "concentration": "Eau de Parfum"
+   },
+   "nina-ricci-premier-jour": {
+    "badge": "Sensual Dawn",
+    "description": "The tender thrill of a brand new dawn. Dewy gardenia petals and yellow mandarin melt into creamy sugared almond over velvety Mysore sandalwood.",
+    "story": "Created by Sophie Labbé and Carlos Benaïm, housed in two stacked frosted glass cylinders glowing in nude peach.",
+    "concentration": "Eau de Parfum"
+   },
+   "roberto-cavalli-paradiso": {
+    "badge": "Mediterranean Eden",
+    "description": "A lavish escape to sunny Mediterranean shores. Sparkling coastal citrus unlocks sensual wild jasmine embraced by evergreen cypress and stone pine.",
+    "story": "Crafted by Louise Turner, encapsulated in a gemstone-faceted crystal reflecting turquoise sea waters.",
+    "concentration": "Eau de Parfum"
+   },
+   "givenchy-irresistible-nude-velvet": {
+    "badge": "Velvet Embrace",
+    "description": "The most intimate, tactile expression of Irrésistible. Tender velvety rose melts into powdery iris and the pure cocooning warmth of white patchouli.",
+    "story": "The signature prismatic flacon is coated in soft-touch velvet nude lacquer, echoing cashmere on skin.",
+    "concentration": "Eau de Parfum"
+   },
+   "jean-paul-gaultier-la-belle": {
+    "badge": "Supreme Temptation",
+    "description": "The forbidden fruit from Gaultier’s lush garden of Eden. Crisp succulent green pear meets intoxicating roasted black vanilla and earthy vetiver.",
+    "story": "Designed by Quentin Bisch and Sonia Constant, immortalized in an hourglass silhouette wearing a necklace of gilded roses.",
+    "concentration": "Eau de Parfum"
+   },
+   "chloe-rose-naturelle": {
+    "badge": "Eco-Luxury Rose",
+    "description": "The sheer beauty of hand-picked organic rose dancing in a crisp morning breeze. Vibrant citron and blackcurrant bud uplift a tender floral heart over cedarwood.",
+    "story": "Created by Michel Almairac, finished with an iconic moss-green hand-tied ribbon celebrating nature’s purity.",
+    "concentration": "Eau de Parfum"
+   },
+   "chloe-nomade": {
+    "badge": "Free Spirit",
+    "description": "The adventurous, untamed spirit of the nomadic explorer. Honeyed mirabelle plum and bright freesia rest upon mineral-rich oakmoss and earthy patchouli.",
+    "story": "Crafted by Quentin Bisch, evoking vast horizons with a suede leather ribbon inspired by Chloé’s iconic Drew bag.",
+    "concentration": "Eau de Parfum"
+   },
+   "elie-saab-le-parfum-royal": {
+    "badge": "Royal Majesty",
+    "description": "The regal fragrance crown for modern royalty. Shimmering mandarin illuminates a noble duo of Turkish and Bulgarian roses, grounded in rich patchouli and amber.",
+    "story": "Crafted by Maïa Lernout, inspired by the exquisite gold-embroidered capes of Elie Saab’s royal collections.",
+    "concentration": "Eau de Parfum"
+   },
+   "roberto-cavalli-florence": {
+    "badge": "Tuscan Splendor",
+    "description": "A radiant celebration of Italian art, heritage, and passion. Bright mandarin and cassis open into a blossoming orange flower heart anchored by warm chypre patchouli.",
+    "story": "Composed by Marie Salamagne, encased in heavy faceted crystal reminiscent of stained glass in Florentine palaces.",
+    "concentration": "Eau de Parfum"
+   },
+   "power-of-you-pour-femme": {
+    "badge": "Feminine Power",
+    "description": "A daring statement of inner strength and undeniable allure. Sparkling citrus and red berries unlock a majestic white flower bouquet over velvety amber woods and warm vanilla.",
+    "story": "Designed for the visionary woman who commands respect and captures hearts with effortless charisma.",
+    "concentration": "Eau de Parfum"
+   },
+   "versace-bright-crystal-absolu": {
+    "badge": "Shining Jewel",
+    "description": "The intense luxury of Versace’s iconic jewel perfume. Chilled yuzu and pomegranate awaken sweet raspberry, luscious peony and aquatic lotus over acajou wood.",
+    "story": "Orchestrated by Alberto Morillas, crowned with an oversized diamond-cut crystal jewel in blazing fuchsia pink.",
+    "concentration": "Eau de Parfum"
+   },
+   "hugo-boss-boss-ma-vie": {
+    "badge": "Serene Pause",
+    "description": "A celebration of life’s quiet, precious pauses. Crisp cactus blossom infuses refreshing green vitality into pink freesia and delicate rosebuds over cedarwood.",
+    "story": "Encased in a softly tinted pink architectural bottle crowned with a crystal cap mirroring inner tranquility.",
+    "concentration": "Eau de Parfum"
+   },
+   "hugo-boss-boss-femme": {
+    "badge": "Radiant Grace",
+    "description": "An alluring floral melody bursting with warm feminine charm. Sunny tangerine and blackcurrant embrace white freesia, Madagascar jasmine and oriental lily.",
+    "story": "A sleek clear glass prism cut by a diagonal beam of light, celebrating warm authentic elegance.",
+    "concentration": "Eau de Parfum"
+   },
+   "gucci-bamboo": {
+    "badge": "Grace & Strength",
+    "description": "A captivating fusion of feminine grace and unwavering resilience. Italian bergamot reveals lush Casablanca lily and exotic ylang-ylang over warm Tahitian vanilla and sandalwood.",
+    "story": "The diamond-faceted flacon is crowned by an iconic silver cap inspired by Gucci’s legendary bamboo bag handles.",
+    "concentration": "Eau de Parfum"
+   },
+   "gucci-bloom-eau-de-parfum-intense": {
+    "badge": "Nocturnal Spell",
+    "description": "A mesmerizing moonlit incantation awakening the garden’s darkest blossoms. Night-blooming jasmine and tuberose are ignited by ginger over hypnotic patchouli.",
+    "story": "Created by Alberto Morillas in a striking black lacquered flacon decorated with Gucci’s red herbarium print.",
+    "concentration": "Eau de Parfum Intense"
+   },
+   "gucci-flora-gorgeous-gardenia": {
+    "badge": "Joyful Blossom",
+    "description": "A delicious potion of pure optimism and joyful delight. Velvety white gardenia and solar sambac jasmine are sweetened by brown sugar and crisp pear blossom.",
+    "story": "The pink lacquered flacon bears the legendary botanical Flora print painted by Vittorio Accornero for Princess Grace of Monaco.",
+    "concentration": "Eau de Parfum"
+   },
+   "gucci-bloom": {
+    "badge": "Majestic Garden",
+    "description": "The majestic bloom of an untamed garden bursting with rare white petals. Natural Indian tuberose marries fresh jasmine bud and Rangoon creeper in timeless beauty.",
+    "story": "The foundational masterpiece by Alessandro Michele and Alberto Morillas in vintage powder-pink porcelain glass.",
+    "concentration": "Eau de Parfum"
+   },
+   "givenchy-l-interdit-parfum": {
+    "badge": "Forbidden Thrill",
+    "description": "The thrill of the forbidden at its deepest, most compelling concentration. Dazzling white flowers—orange blossom and tuberose—dive into dark, smoky patchouli and vetiver.",
+    "story": "The legendary fragrance crafted for Audrey Hepburn in 1957, reimagined by master perfumers as an ode to radical freedom.",
+    "concentration": "Parfum"
    }
   },
   "notes": {
@@ -1044,6 +1164,126 @@
     "description": "نقاء كلاسيكي خالد من عالم العطور الإيطالية الراقية. زهر الكتان الناعم يمتزج مع الميموزا والسوسن البودري على قاعدة خشبية دافئة.",
     "story": "ابتكرته كلير كين عام 1995 في قارورة مستديرة من الزجاج المصنفر تعكس انسيابية أقمشة شيروتي الفاخرة.",
     "concentration": "ماء تواليت"
+   },
+   "lanvin-eclat-d-arpege": {
+    "badge": "تناغم سماوي",
+    "description": "نفحة ربيعية أبدية تنضح بالرقة والنعومة. يمتزج الليلك الأخضر وأوراق الشاي الأخضر مع زهر الخوخ وخشب الأرز الأبيض الأنيق.",
+    "story": "ابتكرته كارين دوبروي في قارورة زجاجية ليلكية متوجة بحلقتين ذهبيتين ترمزان إلى الحب الأبدي النقي.",
+    "concentration": "ماء عطر"
+   },
+   "guerlain-mon-guerlain": {
+    "badge": "أنوثة ملكية",
+    "description": "تحية إجلال للمرأة العصرية الواثقة والحرة. يمتزج لافندر كارلا البروفنسي مع ياسمين السامباك وفانيليا تاهيتي الفاخرة وخشب الصندل.",
+    "story": "ابتكره تييري واسر ودلفين جيلك في قارورة غيرلان الرباعية التاريخية التي تعود لعام 1908 والمزينة بحزام ذهبي.",
+    "concentration": "ماء عطر"
+   },
+   "elie-saab-le-parfum-essentiel": {
+    "badge": "إشراقة نقية",
+    "description": "دعوة للتأمل والأناقة الصافية. يمتزج المندرين المنعش مع الغاردينيا البيضاء الناعمة وخشب الأرز النقي لإطلالة ناصعة الجمال.",
+    "story": "من توقيع مايا ليرنو، تزدان القارورة بشعار إيلي صعب الذهبي المحفور بدقة بالغة.",
+    "concentration": "ماء عطر"
+   },
+   "nina-ricci-premier-jour": {
+    "badge": "فجر رقيق",
+    "description": "إشراقة بداية جديدة تنبض بالرقة. تتناغم بتلات الغاردينيا الندية مع المندرين الأصفر وحلاوة اللوز السكرية على قاعدة من خشب الصندل العذب.",
+    "story": "ابتكار صوفي لابي وكارلوس بينيم، في قارورة مصنفرة بلون الخوخ تجسد أنوثة ناعمة وحميمية.",
+    "concentration": "ماء عطر"
+   },
+   "roberto-cavalli-paradiso": {
+    "badge": "فردوس البحر المتوسط",
+    "description": "رحلة ساحرة إلى شواطئ البحر الأبيض المتوسط المشمسة. حمضيات إيطالية متألقة مع الياسمين البري ونفحات أشجار السرو والصنوبر العطرية.",
+    "story": "من توقيع لويز تيرنر، في قارورة كريستالية منحوتة تعكس زرقة المياه الفيروزية المتلألئة.",
+    "concentration": "ماء عطر"
+   },
+   "givenchy-irresistible-nude-velvet": {
+    "badge": "لمسة مخملية",
+    "description": "اللمسة الأكثر رقة وجاذبية من عطر إيريزيستبل. وردة مخملية ناعمة تمتزج مع السوسن البودري ودفء الباتشولي الأبيض والمسك الحريري.",
+    "story": "تتألق القارورة المنشورية بطلاء مخملي ناعم الملمس بلون النيود الراقي.",
+    "concentration": "ماء عطر"
+   },
+   "jean-paul-gaultier-la-belle": {
+    "badge": "فتنة مطلقة",
+    "description": "ثمرة الإغواء الفاتنة من حديقة غوتييه الأسطورية. كمثرى خضراء عصيرية تلتقي بفانيليا سوداء مكرملة مع لمسات نجيل الهند الأنيقة.",
+    "story": "إبداع كوانتان بيش وسونيا كونستان، في قارورة تمثل قواماً أنثوياً فاتناً متوجاً بعقد من الورود الذهبية.",
+    "concentration": "ماء عطر"
+   },
+   "chloe-rose-naturelle": {
+    "badge": "وردة طبيعية فاخرة",
+    "description": "نقاء الورد العضوي المقطوف يدوياً مع نسيم الصباح العليل. يلتقي الليمون العطري والكرز الأسود مع الورد النقي وخشب الأرز الراقي.",
+    "story": "من توقيع ميشيل ألميراك، مزين برباط من قماش الأورجانزا بلون أخضر ناعم احتفاءً بجمال الطبيعة.",
+    "concentration": "ماء عطر"
+   },
+   "chloe-nomade": {
+    "badge": "روح حرة",
+    "description": "عطر يجسد شغف الحرية والانطلاق في رحاب الطبيعة الواسعة. برقوق ميرابيل الذهبي وزهر الفريزيا الأبيض على قاعدة عطرية من طحلب السنديان الأنيق.",
+    "story": "من ابتكار كوانتان بيش، مستوحى من حقيبة كلوي الشهيرة مع شريط جلدي رقيق يعكس روح الترحال.",
+    "concentration": "ماء عطر"
+   },
+   "elie-saab-le-parfum-royal": {
+    "badge": "هيبة ملكية",
+    "description": "تاج عطري ساحر لملكات العصر الحديث. يشرق المندرين الملكي فوق باقة من الورد التركي والبلغاري والنيرولي مع الباتشولي والعنبر الفاخر.",
+    "story": "من توقيع مايا ليرنو، مستوحى من خيوط الذهب المطرزة في فساتين إيلي صعب الملكية.",
+    "concentration": "ماء عطر"
+   },
+   "roberto-cavalli-florence": {
+    "badge": "فخامة توسكانية",
+    "description": "تحية إجلال لعاصمة الفن والجمال الإيطالي فلورنسا. تمتزج المندرين المشرقة والكشمش مع زهر البرتقال والباتشولي الدافئ في هالة أرستقراطية.",
+    "story": "من إبداع ماري سالامان، في قارورة زجاجية ثقيلة منحوتة بنقوش هندسية مستوحاة من قصور فلورنسا التاريخية.",
+    "concentration": "ماء عطر"
+   },
+   "power-of-you-pour-femme": {
+    "badge": "قوة الأنوثة",
+    "description": "إعلان ساحر عن الثقة والأناقة الطاغية. تلتقي الحمضيات المتلألئة والتوت الأحمر مع باقة من الزهور البيضاء على قاعدة من الأخشاب العنبرية والفانيليا.",
+    "story": "صمم للمرأة الواثقة التي تصنع قدرها وتفرض حضورها بجاذبية استثنائية وأناقة لا مثيل لها.",
+    "concentration": "ماء عطر"
+   },
+   "versace-bright-crystal-absolu": {
+    "badge": "جوهرة براقة",
+    "description": "النسخة الأكثر تركيزاً وتألقاً من عطر فرزاتشي الأيقوني. نغمات الرمان واليوزو المثلج تلتقي بحبات التوت وزهر اللوتس والفاوانيا على قاعدة خشب الماهوجني.",
+    "story": "تحفة من تصميم ألبرتو موريلاس، يتوجها غطاء ضخم كجوهرة ماسية بلون وردي فوشيا ساحر.",
+    "concentration": "ماء عطر"
+   },
+   "hugo-boss-boss-ma-vie": {
+    "badge": "لحظة صفاء",
+    "description": "احتفال بلحظات الحياة الهادئة والجميلة. يمنح زهر الصبار الأخضر انتعاشاً فريداً لباقة الورد الوردي والفريزيا مع دفء خشب الأرز الراقي.",
+    "story": "قارورة هندسية بلون وردي ناعم تعلوها سدادة بلورية تعكس السكينة والأناقة البسيطة.",
+    "concentration": "ماء عطر"
+   },
+   "hugo-boss-boss-femme": {
+    "badge": "أنوثة متألقة",
+    "description": "سيمفونية زهرية فاكهية تنبض بالجاذبية والإشراق. يتناغم المندرين والكشمش مع ياسمين مدغشقر والزنبق الشرقي ونعومة خشب الساتان.",
+    "story": "قارورة منشورية نقية ينفذ من خلالها النور لتعبر عن الجمال الطبيعي والرقي الهادئ.",
+    "concentration": "ماء عطر"
+   },
+   "gucci-bamboo": {
+    "badge": "قوة ورقة",
+    "description": "مزيج استثنائي يجمع بين الرقة الأنثوية والقوة الداخلية الصلبة. برغموت إيطاليا يلتقي بزنبق كازابلانكا الملكي ويلانغ يلانغ والفانيليا وخشب الصندل.",
+    "story": "تزدان القارورة المنحوتة كالألماس بسدادة فضية مبدعة مستوحاة من مقبض خيزران حقائب غوتشي الشهيرة.",
+    "concentration": "ماء عطر"
+   },
+   "gucci-bloom-eau-de-parfum-intense": {
+    "badge": "سحر ليلي",
+    "description": "تعويذة ليلية آسرة تحت ضوء القمر توقظ أعمق الزهور سحراً. ياسمين الليل ومسك الروم مع لمسات الزنجبيل الحار والباتشولي الداكن.",
+    "story": "ابتكره ألبرتو موريلاس في قارورة سوداء مطلية بنقوش عشبية حمراء تعكس عمق الجاذبية الليلية.",
+    "concentration": "ماء عطر مكثف"
+   },
+   "gucci-flora-gorgeous-gardenia": {
+    "badge": "بهجة الزهور",
+    "description": "جرعة ساحرة من البهجة والتفاؤل المطلق. تتفتح الغاردينيا البيضاء والياسمين مع لمسات السكر البني المكرمل وزهر الكمثرى الفواح.",
+    "story": "تتألق القارورة الوردية بنقوش فلورا التاريخية التي رسمها فيتوريو أكورنيرو للأميرة غريس كيلي.",
+    "concentration": "ماء عطر"
+   },
+   "gucci-bloom": {
+    "badge": "حديقة مهيبة",
+    "description": "تفتح حديقة غناء تنبض بآلاف الزهور النضرة. مسك الروم الهندي الطبيعي يلتقي ببراعم الياسمين وزهر رانغون النادر لتوليفة زهرية بيضاء خالدة.",
+    "story": "التحفة التأسيسية لأليساندرو ميكيلي وألبرتو موريلاس في قارورة بورسلينية وردية ذات طابع كلاسيكي فاخر.",
+    "concentration": "ماء عطر"
+   },
+   "givenchy-l-interdit-parfum": {
+    "badge": "إثارة المجهول",
+    "description": "جاذبية العطر المحرم في أعلى درجات التركيز والغموض. زهور بيضاء متألقة من مسك الروم وزهر البرتقال تغوص في أعماق الباتشولي ونجيل الهند الداكن.",
+    "story": "العطر الأسطوري الذي ابتكر في الأصل لأودري هيبورن عام 1957، أعيد ابتكاره ليكون نشيداً للحرية والجرأة.",
+    "concentration": "عطر مركز"
    }
   },
   "notes": {
