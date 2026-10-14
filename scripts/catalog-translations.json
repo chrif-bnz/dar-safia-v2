@@ -628,6 +628,126 @@
     "description": "The ultimate secret weapon for the daring player who takes all risks. Fiery Guatemalan cardamom melts into decadent gooey toffee over glowing amber woods.",
     "story": "Azzaro’s signature cylinder gun barrel coated in sleek matte black for uncompromising impact.",
     "concentration": "Eau de Parfum Intense"
+   },
+   "azzaro-the-most-wanted-parfum": {
+    "badge": "Fiery Intensity",
+    "description": "The definitive peak of unapologetic charisma. Blazing red ginger ignites glowing woods and rich Madagascan Bourbon vanilla in an irresistible trail.",
+    "story": "Azzaro’s legendary gun cylinder transformed into a gradient black metallic collector trophy.",
+    "concentration": "Parfum"
+   },
+   "azzaro-wanted-forever-elixir": {
+    "badge": "Eternal Elixir",
+    "description": "A masterly elixir concentration of pure warmth. Green cardamom and fiery cinnamon melt into ambered toffee over smoky Virginian red cedar.",
+    "story": "A chrome and dark gold talisman created for magnetic rulebreakers whose memory never fades.",
+    "concentration": "Elixir"
+   },
+   "cartier-declaration-parfum": {
+    "badge": "Passionate Vow",
+    "description": "The commanding intensity of a passionate declaration. Bitter orange and cardamom ascend into magnificent cedarwood, warmed by fine leather and golden benzoin.",
+    "story": "Composed by Mathilde Laurent in a substantial crystal flask cut with a stylized silhouette of a heart.",
+    "concentration": "Parfum"
+   },
+   "cartier-declaration-eau-de-parfum": {
+    "badge": "Noble Woodcraft",
+    "description": "A benchmark of spicy woody prestige and aristocratic poise. Bitter orange and birchwood meet fine cardamom over enduring cedar and oakmoss.",
+    "story": "A Cartier icon recognized instantly by its signature wristwatch deployment-clasp safety lock.",
+    "concentration": "Eau de Parfum"
+   },
+   "valentino-uomo-born-in-roma-extra-dose": {
+    "badge": "Couture Overdose",
+    "description": "A daring overdose of raw Roman charisma. Mineral salt and crisp violet leaves ignite under an amplified concentration of smoked Bourbon vanilla and vetiver.",
+    "story": "Armoured in Valentino’s iconic rockstud pyramids, channelling the rebellious architecture of grand Roman palazzos.",
+    "concentration": "Eau de Parfum"
+   },
+   "hermes-h24-eau-de-toilette": {
+    "badge": "Botanical Edge",
+    "description": "The contemporary man’s pulse through high-tech botanical energy. Clary sage and electric narcissus bond with warm rosewood and metallic sclarene.",
+    "story": "Crafted by Christine Nagel in an aerodynamic refillable flask capturing urban momentum and velocity.",
+    "concentration": "Eau de Toilette"
+   },
+   "hermes-h24-eau-de-parfum": {
+    "badge": "Mineral Energy",
+    "description": "A deeper, generous surge of green vitality. Aromatic sage deepens over textured oakmoss, energized by the metallic warmth of sclarene.",
+    "story": "Translucent glass kissed with deep moss-green lacquer celebrating the primal pulse of living nature.",
+    "concentration": "Eau de Parfum"
+   },
+   "hermes-h24-herbes-vives": {
+    "badge": "Botanical Wave",
+    "description": "The electric scent of urban flora after a sudden summer rain. Vibrant wild herbs meet frosty pear granita and high-tech Physcool freshness.",
+    "story": "Christine Nagel traps the smell of rain on warm stone in a vibrant translucent green silhouette.",
+    "concentration": "Eau de Parfum"
+   },
+   "montblanc-explorer": {
+    "badge": "Noble Adventure",
+    "description": "An open summons to explore uncharted landscapes across the globe. Italian bergamot reveals smoky Haitian vetiver and rich Indonesian patchouli with Akigalawood.",
+    "story": "Wrapped in textured Saffiano leather-like sheath crafted in Florence, adorned with Montblanc’s six-point star.",
+    "concentration": "Eau de Parfum"
+   },
+   "montblanc-explorer-ultra-blue": {
+    "badge": "Infinite Blue",
+    "description": "An aquatic journey inspired by endless skies and oceanic expanses. Sicilian bergamot and pink pepper crash into sea-spray accords over rich coastal patchouli.",
+    "story": "Dressed in textured cobalt blue leather-style casing echoing azure alpine lakes.",
+    "concentration": "Eau de Parfum"
+   },
+   "montblanc-explorer-extreme": {
+    "badge": "Extreme Journey",
+    "description": "The darkest, boldest chapter of the Explorer saga. Crushed black pepper and bergamot sink into brooding leather and dark Indonesian patchouli.",
+    "story": "Smoked black crystal glass crowned by Montblanc’s emblem, built for untamed wilderness.",
+    "concentration": "Parfum"
+   },
+   "paco-rabanne-invictus-elixir": {
+    "badge": "Trophy of Glory",
+    "description": "The ultimate symbol of heroics and victory. Aromatic lavender fuses with rich frankincense and dark roasted vanilla over thunderous ambery woods.",
+    "story": "The legendary champion trophy lacquered in glossy black dégradé reflecting absolute glory.",
+    "concentration": "Parfum Intense"
+   },
+   "paco-rabanne-invictus-victory-absolu": {
+    "badge": "Absolute Victory",
+    "description": "A magnetic clash between razor-sharp freshness and blazing sensuality. Pink pepper and lemon contrast against dark incense and sweet tonka bean.",
+    "story": "Draped in matte black with a striking golden V carved onto the champion cup.",
+    "concentration": "Eau de Parfum Extrême"
+   },
+   "boucheron-singulier": {
+    "badge": "Jewelled Elegance",
+    "description": "Parisian high jewellery reimagined as an ultra-modern woody aromatic signature. Zesty juniper and bergamot unfold over three magnificent cedarwood origins.",
+    "story": "Created by Olivier Cresp, inspired by Place Vendôme with an emerald-cut cap stamped with Boucheron’s historical hallmark.",
+    "concentration": "Eau de Parfum"
+   },
+   "versace-oud-noir": {
+    "badge": "Arabian Night",
+    "description": "The hypnotic allure of a desert sunset swept by warm spice. Bitter orange and precious saffron give way to royal agarwood and dark, smoky leather.",
+    "story": "Finished in a moody smoked dégradé bearing Versace’s gilded Medusa emblem.",
+    "concentration": "Eau de Parfum"
+   },
+   "versace-eros-parfum": {
+    "badge": "God of Passion",
+    "description": "Heroic Greek passion amplified to supreme parfum depth. Frosted spearmint and Italian lemon fuse with crisp apple, tonka bean, and enduring cedarwood.",
+    "story": "Sculpted in rich Mediterranean turquoise glass featuring the iconic Greek key and Medusa crest.",
+    "concentration": "Parfum"
+   },
+   "versace-eros-eau-de-parfum-200ml": {
+    "badge": "Colossal Collector",
+    "description": "The monumental scent of triumph in a colossal 200ml collector presentation. Crisp mint and zesty mandarin meet sensual ambroxan and Madagascan vanilla.",
+    "story": "A massive 200ml glass monolith embellished with the central Medusa motif for enduring signature presence.",
+    "concentration": "Eau de Parfum"
+   },
+   "yves-saint-laurent-la-nuit-de-l-homme-le-parfum": {
+    "badge": "Incandescent Night",
+    "description": "The supreme mystery of a nocturnal charmer at his most dangerous. Black cardamom and bergamot ignite with black pepper and lavender over shadowy vanilla.",
+    "story": "The legendary cylindrical monolith painted in pitch black lacquer with its industrial hexagonal bolt cap.",
+    "concentration": "Le Parfum"
+   },
+   "givenchy-gentleman-eau-de-toilette": {
+    "badge": "Timeless Gentleman",
+    "description": "A daring modern vision uniting strength with refined gentleness. Crisp juicy pear and cardamom greet noble powdery iris over sophisticated leather and patchouli.",
+    "story": "Composed by Olivier Cresp and Nathalie Lorson in a classic weighty glass flask with a black tuxedo ribbon band.",
+    "concentration": "Eau de Toilette"
+   },
+   "givenchy-gentleman-boisee": {
+    "badge": "Woody Cocoa Warmth",
+    "description": "A sensual encounter between smouldering woods and dark roasted cocoa. Fiery black pepper elevates refined powdery iris over rich sandalwood and patchouli.",
+    "story": "Encased in rich espresso wood-brown glass wrapped in an ebony tuxedo collar.",
+    "concentration": "Eau de Parfum"
    }
   },
   "notes": {
@@ -1512,6 +1632,126 @@
     "description": "السلاح السري للرجل الجريء الذي يلعب ليفوز دائماً. الهيل الغواتيمالي الحار يذوب في حلاوة الكراميل التوفي الشهي مع الأخشاب العنبرية المتوهجة.",
     "story": "أسطوانة أزارو الأيقونية بطلاء أسود مطفأ يجسد الأناقة والجاذبية القاتلة.",
     "concentration": "ماء عطر مكثف"
+   },
+   "azzaro-the-most-wanted-parfum": {
+    "badge": "كثافة نارية",
+    "description": "قمة الجرأة والكاريزما الذكورية الطاغية. ينفجر الزنجبيل الأحمر المتقد مع الأخشاب المتوهجة وفانيليا بوربون المدغشقرية الفاخرة.",
+    "story": "تتحول أسطوانة أزارو الأسطورية إلى تحفة معدنية بتدرج أسود فاحم تعكس القوة المطلقة.",
+    "concentration": "عطر مركز"
+   },
+   "azzaro-wanted-forever-elixir": {
+    "badge": "إكسير الخلود",
+    "description": "تركيز إكسير فائق القوة والجاذبية. يمتزج الهيل الأخضر والقرفة الدافئة مع كراميل التوفي العنبري وخشب الأرز الأحمر الأسطوري.",
+    "story": "تميمة مطلية بالكروم والذهب الداكن صممت للرجال الذين يتركون أثراً لا يمحى عبر الزمان.",
+    "concentration": "إكسير"
+   },
+   "cartier-declaration-parfum": {
+    "badge": "عهد الشغف",
+    "description": "الجرأة الملكية لعهد صادق ينبض بالشغف. البرتقال المر والهيل يعانقان خشب الأرز المهيب مع لمسات من الجلد الطبيعي الفاخر والراتنج العطري.",
+    "story": "من إبداع ماتيلد لوران، في زجاج بلوري ثقيل ينحت في باطنه قلباً منحنياً بأناقة بالغة.",
+    "concentration": "عطر مركز"
+   },
+   "cartier-declaration-eau-de-parfum": {
+    "badge": "نبالة خشبية",
+    "description": "كلاسيكية خشبية متبلة تنبض بالفخامة والتميز الأرستقراطي. البرتقال المر وخشب البتولا مع الهيل النقي وخشب الأرز وطحلب السنديان.",
+    "story": "تحفة من دار كارتييه العريقة تتميز بسدادة أمان مستوحاة من براعة صناعة الساعات الفاخرة.",
+    "concentration": "ماء عطر"
+   },
+   "valentino-uomo-born-in-roma-extra-dose": {
+    "badge": "جرعة كوتور مكثفة",
+    "description": "جرعة مفرطة من الجاذبية الرومانية الفاتنة. يلتقي الملح المعدني وأوراق البنفسج مع فيض من فانيليا بوربون المدخنة ونجيل الهند النبيل.",
+    "story": "مرصع بالكامل بمسامير الروكستد الهرمية الأيقونية لفالنتينو، المستوحاة من عمارة قصور روما التاريخية.",
+    "concentration": "ماء عطر"
+   },
+   "hermes-h24-eau-de-toilette": {
+    "badge": "نقاء نباتي معاصر",
+    "description": "التعبير العصري لرجل هيرميس المتطلع للمستقبل. الميرمية العطرية وزهر النرجس الحيوي مع خشب الورد ونفحات السكلارين المعدنية المبتكرة.",
+    "story": "من توقيع كريستين ناجل في قارورة انسيابية قابلة لإعادة التعبئة تجسد حركة المدينة المعاصرة.",
+    "concentration": "ماء تواليت"
+   },
+   "hermes-h24-eau-de-parfum": {
+    "badge": "طاقة معدنية",
+    "description": "كثافة عطرية خضراء مفعمة بالثقة والعمق. تتعزز الميرمية العطرية بطحلب السنديان الغني والنفحات المعدنية الدافئة لخشب الأرز.",
+    "story": "زجاج شفاف متألق بلمسات خضراء داكنة تعكس قوة الطبيعة ونبض الأرض الحيوي.",
+    "concentration": "ماء عطر"
+   },
+   "hermes-h24-herbes-vives": {
+    "badge": "نسيم نباتي حيوي",
+    "description": "الانتعاش المذهل للطبيعة بعد هطول أمطار الصيف المفاجئة. أعشاب برية نضرة تلتقي ببرودة الكمثرى المثلجة ونفحات قطرات المطر العذبة.",
+    "story": "ابتكار كريستين ناجل الذي يجسد رائحة الأرض المبتلة في قارورة زجاجية خضراء مضيئة.",
+    "concentration": "ماء عطر"
+   },
+   "montblanc-explorer": {
+    "badge": "مغامرة نبيلة",
+    "description": "دعوة ساحرة لاكتشاف آفاق العالم المجهولة. برغموت إيطاليا المنعش يلتقي بنجيل الهند الهايتي والباتشولي الإندونيسي وخشب الأكيغالاوود الفاخر.",
+    "story": "تلتف القارورة بغلاف أنيق من جلد سافيانو المصنوع في فلورنسا يتوسطه نجمة مون بلان الأيقونية.",
+    "concentration": "ماء عطر"
+   },
+   "montblanc-explorer-ultra-blue": {
+    "badge": "أزرق لا متناهي",
+    "description": "ملحمة مائية مستوحاة من زرقة السماء وأعماق البحار الشاسعة. البرغموت الصقلي يلتقي بنسيم البحر المنعش والعنبر والباتشولي الخشبي.",
+    "story": "غلاف بلون أزرق كوبالتي جذاب يشيد بسحر قمم جبال الألب والبحيرات الصافية.",
+    "concentration": "ماء عطر"
+   },
+   "montblanc-explorer-extreme": {
+    "badge": "مغامرة قصوى",
+    "description": "الفصل الأكثر عمقاً وجرأة من سلسلة إكسبلورر. الفلفل الأسود والبرغموت يتعمقان في قلب جلدي مكثف والباتشولي النقي لعشاق التحدي.",
+    "story": "زجاج أسود دخاني غامض يحمل نجمة مون بلان ليمنح حضوراً مغناطيسياً طاغياً.",
+    "concentration": "عطر مركز"
+   },
+   "paco-rabanne-invictus-elixir": {
+    "badge": "كأس المجد",
+    "description": "رمز النصر الأسطوري والبطولة الخالدة. اللافندر العطري يتحد مع البخور النقي والفانيليا السوداء المحمصة فوق قاعدة عنبرية خشبية جبارة.",
+    "story": "كأس البطولة الأيقوني بطلاء أسود براق يعكس نشوة الفوز المطلق.",
+    "concentration": "عطر مكثف"
+   },
+   "paco-rabanne-invictus-victory-absolu": {
+    "badge": "نصر مطلق",
+    "description": "صراع ساحر بين الانتعاش الحاد والجاذبية المتقدة. الفلفل الوردي والليمون الصقلي في مواجهة البخور الداكن وحبوب التونكا والفانيليا الدافئة.",
+    "story": "كأس أسود مطفأ يزينه حرف V ذهبي لامع يرمز إلى الانتصار الأبدي.",
+    "concentration": "ماء عطر مركز"
+   },
+   "boucheron-singulier": {
+    "badge": "أناقة المجوهرات",
+    "description": "فخامة المجوهرات الباريسية الراقية تتجسد في عطر خشبي عطري حديث. توت العرعر والبرغموت مع الميرمية وتوليفة ثلاثية من أخشاب الأرز النبيلة.",
+    "story": "من توقيع أوليفييه كريسب، مستوحى من ساحة فاندوم الشهيرة بغطاء منحوت كحجر الزمرد يحمل ختم بوشرون التاريخي.",
+    "concentration": "ماء عطر"
+   },
+   "versace-oud-noir": {
+    "badge": "ليالي الشرق",
+    "description": "سحر الغموض في ليلة صحراوية دافئة تهب فيها نسائم التوابل الفاخرة. البرتقال المر والزعفران الذهبي يعانقان خشب العود الملكي والجلد الداكن.",
+    "story": "قارورة بتدرج لوني داكن يبرز عليها شعار ميدوسا الذهبي الأسطوري لدار فرزاتشي.",
+    "concentration": "ماء عطر"
+   },
+   "versace-eros-parfum": {
+    "badge": "إله الشغف",
+    "description": "ذروة القوة والجاذبية الأسطورية للرجل الواثق. النعناع المثلج والليمون الإيطالي يمتزجان بالتفاح الأخضر وحبوب التونكا والأخشاب العنبرية.",
+    "story": "زجاج فيروزي ساحر منحوت بنقوش إغريقية كلاسيكية يتوسطه رأس ميدوسا الشهير.",
+    "concentration": "عطر مركز"
+   },
+   "versace-eros-eau-de-parfum-200ml": {
+    "badge": "حجم عملاق استثنائي",
+    "description": "العطر الأسطوري في قارورة عملاقة فاخرة بحجم 200 مل. انتعاش النعناع والمندرين مع دفء الأمبروكسان وفانيليا مدغشقر وخشب الأرز.",
+    "story": "صرح زجاجي ضخم مزين برمز ميدوسا الشهير ليمنحك حضوراً آسراً لأشهر طويلة.",
+    "concentration": "ماء عطر"
+   },
+   "yves-saint-laurent-la-nuit-de-l-homme-le-parfum": {
+    "badge": "ليل أسود متقد",
+    "description": "قمة الجاذبية والغموض الليلي للرجل الجذاب. الهيل الأسود الحار والبرغموت يلتقيان بالفلفل واللافندر مع الفانيليا الداكنة ونجيل الهند واللابدانوم.",
+    "story": "القارورة الأسطورية بطلاء أسود حالك وغطاء سداسي صناعي يعكس هيبة الليل وسحره.",
+    "concentration": "عطر مركز"
+   },
+   "givenchy-gentleman-eau-de-toilette": {
+    "badge": "رجل نبيل خالد",
+    "description": "رؤية معاصرة وجريئة تجمع بين القوة والشهامة النبيلة. الكمثرى المقرمشة والهيل يمهدان للسوسن البودري الفاخر والجلد الأنيق والباتشولي.",
+    "story": "من ابتكار أوليفييه كريسب وناتالي لورسون في قارورة كلاسيكية فاخرة بشريط أسود مستوحى من بدلات التوكسيدو.",
+    "concentration": "ماء تواليت"
+   },
+   "givenchy-gentleman-boisee": {
+    "badge": "دفء الخشب والكاكاو",
+    "description": "لقاء حميمي يجمع بين الأخشاب الدافئة وحبوب الكاكاو المحمصة. الفلفل الأسود والكزبرة مع السوسن البودري وخشب الصندل الكريمي والباتشولي.",
+    "story": "قارورة أنيقة بلون البن البني الداكن مزينة بطوق أسود يعكس الدفء والأناقة الرجالية.",
+    "concentration": "ماء عطر"
    }
   },
   "notes": {
