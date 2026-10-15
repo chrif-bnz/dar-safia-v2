@@ -314,6 +314,12 @@
       },
       "searchPlaceholder": "ابحث…"
     },
+    "pagination": {
+      "previous": "السابق",
+      "next": "التالي",
+      "label": "تنقل صفحات الكتالوج",
+      "page": "صفحة {page}"
+    },
     "shuffle": "ترتيب عشوائي"
   },
   "product": {

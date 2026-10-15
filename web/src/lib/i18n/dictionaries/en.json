@@ -314,6 +314,12 @@
       },
       "searchPlaceholder": "Search…"
     },
+    "pagination": {
+      "previous": "Previous",
+      "next": "Next",
+      "label": "Catalog pagination",
+      "page": "Page {page}"
+    },
     "shuffle": "Shuffle"
   },
   "product": {

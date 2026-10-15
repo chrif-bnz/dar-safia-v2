@@ -49,3 +49,12 @@ export type {
   OlfactoryFamilyTag,
   SeasonTag,
 } from './filter-taxonomy';
+export {
+  PERFUMES_PER_PAGE,
+  buildPageUrl,
+  getPaginationRange,
+  getTotalPages,
+  paginateItems,
+  parsePageParam,
+} from './pagination';
+export type { PaginationItem } from './pagination';

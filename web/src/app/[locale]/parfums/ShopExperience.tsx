@@ -1,14 +1,19 @@
 'use client';
 
-import { useMemo, useState, useSyncExternalStore } from 'react';
+import { useEffect, useMemo, useRef, useState, useSyncExternalStore } from 'react';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
-import type {
-  Gender,
-  IntensityTag,
-  MoodTag,
-  NoteTag,
-  OlfactoryFamilyTag,
-  SeasonTag,
+import {
+  getTotalPages,
+  paginateItems,
+  parsePageParam,
+  PERFUMES_PER_PAGE,
+  type Gender,
+  type IntensityTag,
+  type MoodTag,
+  type NoteTag,
+  type OlfactoryFamilyTag,
+  type SeasonTag,
 } from '@/lib/catalog';
 import type { Locale } from '@/lib/i18n/config';
 import type { Dictionary } from '@/lib/i18n/dictionary';
@@ -21,6 +26,7 @@ import {
   subscribeShuffle,
 } from '@/lib/shuffle';
 
+import { Pagination } from '@/components/Pagination';
 import { FilterSidebar } from './FilterSidebar';
 import { EMPTY_FILTERS, matchesFilters, toggleValue, type FilterCategory } from './filters';
 import { PerfumeGrid } from './PerfumeGrid';
@@ -28,13 +34,13 @@ import type { ShopProduct } from './shop-product';
 
 /**
  * ══════════════════════════════════════════════════════════════
- *   BOUTIQUE — FILTRAGE CLIENT
+ *   BOUTIQUE — FILTRAGE CLIENT & PAGINATION
  * ══════════════════════════════════════════════════════════════
  *
- * Les 45 produits (forme réduite, cf. `shop-product.ts`) arrivent une fois
- * du serveur ; cocher un filtre ne renavigue plus — la grille se recalcule
- * en mémoire (`useMemo`). Étant client-side, la page redevient statique
- * (plus de `searchParams` côté serveur à lire).
+ * Le catalogue arrive du serveur ; le filtrage s'exécute en mémoire
+ * puis la liste filtrée est découpée par page (12 par page).
+ * Le numéro de page est lu depuis l'URL (?page=...).
+ * Tout changement de filtre réinitialise la page à 1 dans le gestionnaire.
  */
 export function ShopExperience({
   products,
@@ -46,6 +52,11 @@ export function ShopExperience({
   dict: Dictionary;
 }) {
   const c = dict.catalog;
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  const gridTopRef = useRef<HTMLDivElement>(null);
   const [filters, setFilters] = useState(EMPTY_FILTERS);
 
   // Ordre d'affichage : liste d'origine au rendu serveur et à l'hydratation,
@@ -62,7 +73,32 @@ export function ShopExperience({
     [ordered, filters]
   );
 
+  const totalPages = useMemo(
+    () => getTotalPages(filtered.length, PERFUMES_PER_PAGE),
+    [filtered.length]
+  );
+
+  const currentPage = useMemo(
+    () => parsePageParam(searchParams.get('page'), totalPages),
+    [searchParams, totalPages]
+  );
+
+  const paginated = useMemo(
+    () => paginateItems(filtered, currentPage, PERFUMES_PER_PAGE),
+    [filtered, currentPage]
+  );
+
+  function resetPage() {
+    const pageParam = searchParams.get('page');
+    if (pageParam && pageParam !== '1') {
+      const params = new URLSearchParams(searchParams.toString());
+      params.set('page', '1');
+      router.push(`${pathname}?${params.toString()}`, { scroll: false });
+    }
+  }
+
   function handleToggle(category: FilterCategory, value: string) {
+    resetPage();
     setFilters((prev) => {
       switch (category) {
         case 'gender':
@@ -88,16 +124,34 @@ export function ShopExperience({
     });
   }
 
+  function handleClear() {
+    resetPage();
+    setFilters(EMPTY_FILTERS);
+  }
+
+  function scrollToGrid() {
+    gridTopRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  const prevPageRef = useRef(currentPage);
+  useEffect(() => {
+    if (prevPageRef.current !== currentPage) {
+      prevPageRef.current = currentPage;
+      scrollToGrid();
+    }
+  }, [currentPage]);
+
   return (
     <div className="mt-10 lg:grid lg:grid-cols-[240px_1fr] lg:items-start lg:gap-12">
       <FilterSidebar
         filters={filters}
         onToggle={handleToggle}
-        onClear={() => setFilters(EMPTY_FILTERS)}
+        onClear={handleClear}
         dict={dict}
       />
 
       <div>
+        <div ref={gridTopRef} className="scroll-mt-32" />
         <div className="mt-6 flex items-center justify-between gap-4 lg:mt-0">
           <p className="text-2xs text-ivory/58" aria-live="polite">
             {pluralize(c.count, filtered.length)}
@@ -116,7 +170,13 @@ export function ShopExperience({
 
         {filtered.length > 0 ? (
           <div className="mt-6">
-            <PerfumeGrid products={filtered} locale={locale} dict={dict} shuffleKey={seed} />
+            <PerfumeGrid products={paginated} locale={locale} dict={dict} shuffleKey={seed} />
+            <Pagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              dict={dict}
+              onPageChange={scrollToGrid}
+            />
           </div>
         ) : (
           <div className="mt-10 rounded-md border border-smoke-2 bg-noir-2 px-6 py-14 text-center">
@@ -124,7 +184,7 @@ export function ShopExperience({
             <p className="mt-2 text-2xs text-ivory/50">{c.emptyHint}</p>
             <button
               type="button"
-              onClick={() => setFilters(EMPTY_FILTERS)}
+              onClick={handleClear}
               className="ds-btn-ghost mt-6 inline-block rounded-sm border border-gold px-5 py-2.5 text-2xs font-semibold tracking-(--tracking-label) text-gold uppercase transition-colors hover:text-noir"
             >
               {c.emptyCta}
@@ -135,3 +195,4 @@ export function ShopExperience({
     </div>
   );
 }
+

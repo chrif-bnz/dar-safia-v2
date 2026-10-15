@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
@@ -50,7 +51,10 @@ export default async function CatalogPage({ params }: PageProps<'/[locale]/parfu
       </p>
       <h1 className="mt-4 font-serif text-display-md text-balance text-ivory">{c.title}</h1>
 
-      <ShopExperience products={products} locale={locale} dict={dict} />
+      <Suspense fallback={null}>
+        <ShopExperience products={products} locale={locale} dict={dict} />
+      </Suspense>
     </main>
   );
 }
+
