@@ -1348,6 +1348,60 @@
     "description": "A crisp, effervescent cocktail honoring the Roaring Twenties. Frosted juniper berries and angelica surge over black pepper, warm spices, cherry, and brown sugar.",
     "story": "Mastercrafted by Olivier Cresp to recreate the sparkling vitality of an ice-cold London Dry Gin sling.",
     "concentration": "Eau de Toilette"
+   },
+   "amouage-guidance": {
+    "badge": "Mystic Oriental Guidance",
+    "description": "The global phenomenon of modern Omani high perfumery. Crisp pear nectar and royal frankincense intertwine with roasted hazelnuts, radiant osmanthus, and creamy sandalwood.",
+    "story": "Mastercrafted by Quentin Bisch as a sanctuary of poetic strength, housed in an iconic matte dusty-rose flacon.",
+    "concentration": "Eau de Parfum"
+   },
+   "omanluxury-khanjar-eau-de-parfum": {
+    "badge": "Silver Khanjar & Royal Oud",
+    "description": "The olfactory coronation of the Khanjar, traditional dagger emblem of Omani dignity. Golden saffron, ancient Dhofar frankincense, and equestrian leather fuse over majestic oud.",
+    "story": "Orchestrated by Philippe Paparella-Paris honoring Omani silversmith heritage and chivalric valor.",
+    "concentration": "Eau de Parfum"
+   },
+   "amouage-lustre": {
+    "badge": "Solar Crystal Radiance",
+    "description": "A glowing masterpiece of light and amber from Amouage private reserves. Powdered white iris and cardamom glisten alongside purified silver frankincense and creamy sandalwood.",
+    "story": "Capturing the refraction of morning light breaking through an artisanal crystal prism over palace marble.",
+    "concentration": "Eau de Parfum"
+   },
+   "xerjoff-casamorati-1888-mefisto": {
+    "badge": "Regal Italian Freshness",
+    "description": "The supreme tribute to classic Belle Époque Italian colognes. Sparkling grapefruit, Amalfi lemon, and bergamot soften into Florentine iris, lavender, and royal sandalwood.",
+    "story": "Reviving the heritage of the Casamorati perfume house established in Bologna in 1888, clad in frosted sapphire blue.",
+    "concentration": "Eau de Parfum"
+   },
+   "xerjoff-erba-gold-eau-de-parfum": {
+    "badge": "Golden Fruit Basket & White Musk",
+    "description": "A warmer, spicier, and sun-drenched golden variation of the Xerjoff fruity icon. Amalfi lemon and Brazilian orange spark with fresh ginger, cinnamon, and radiant white musks.",
+    "story": "Dressed in golden yellow velvet, accompanied by a genuine silk scarf bespoke woven in Lake Como.",
+    "concentration": "Eau de Parfum"
+   },
+   "xerjoff-erba-pura-eau-de-parfum": {
+    "badge": "Cult Addictive Fruity Elixir",
+    "description": "The most globally acclaimed and intoxicating fruity phenomenon in niche perfumery. Sicilian citrus fruits explode over a sun-drenched Mediterranean orchard cushioned on sweet white musks.",
+    "story": "Composed by Christian Carbonnel and Laura Santander in an iconic royal turquoise velvet flacon.",
+    "concentration": "Eau de Parfum"
+   },
+   "penhaligon-s-the-coveted-duchess-rose": {
+    "badge": "Ingénue Fox & Powdered Rose",
+    "description": "The newlywed duchess of the Penhaligons aristocratic Portraits saga. A pure, dewy Centifolia rose subtly giving way to dark lecherous musky woods and teasing mandarin.",
+    "story": "Crowned with an exquisite polished brass fox head emblem of deceptive innocence.",
+    "concentration": "Eau de Parfum"
+   },
+   "yves-saint-laurent-ysl-exquisite-embroidery-accord-rose-ambre-gris-eau-de-parfum": {
+    "badge": "Gold Embroidery & Damask Rose",
+    "description": "The sumptuous textures of hand-sewn gold thread and beads in Saint Laurent couture. Opulent Damask rose embroidered with threads of genuine ambergris, nutmeg, and oud.",
+    "story": "Orchestrated by Hamid Merati-Kashani for Le Vestiaire des Parfums Oriental Collection.",
+    "concentration": "Eau de Parfum"
+   },
+   "yves-saint-laurent-ysl-wild-leather-accord-cuir-eau-de-parfum": {
+    "badge": "Wild Leather & Guaiac Wood",
+    "description": "The untamed, feline sensuality of black grain leather. Searing black pepper and red saffron crack across dark supple hide anchored in smoky guaiac wood.",
+    "story": "Inspired by the iconic Saint Laurent black leather motorcycle jacket as a symbol of rebel elegance.",
+    "concentration": "Eau de Parfum"
    }
   },
   "notes": {
@@ -2952,6 +3006,60 @@
     "description": "تحية منعشة لبريق العشرينات الصاخبة في لندن. تتلألأ حبات العرعر المثلجة مع القرفة والهيل والفلفل الأسود ولمسات الكرز الأسود والجلد الناعم.",
     "story": "من إبداع أوليفييه كريسب مستحضراً انتعاش الكوكتيلات الراقية في الصالونات اللندنية الكلاسيكية.",
     "concentration": "ماء تواليت"
+   },
+   "amouage-guidance": {
+    "badge": "الهداية العمانية الأسطورية",
+    "description": "الظاهرة العالمية في عالم العطور النيش الراقية. يلتقي رحيق الكمثرى والبخور العماني الملكي مع البندق المحمص وزهر العبقة والورد على قاعدة من خشب الصندل والعنبر.",
+    "story": "من إبداع كوينتين بيش كواحة أمان شاعري في قارورة زهرية فخمة تفيض بالأنوثة والهيبة.",
+    "concentration": "ماء عطر"
+   },
+   "omanluxury-khanjar-eau-de-parfum": {
+    "badge": "الخنجر العماني والعود الملكي",
+    "description": "التجسيد العطري المهيب للخنجر العماني رمز الأصالة والشرف في سلطنة عمان. يتألق الزعفران الذهبي ولبان ظفار المقدس مع الجلد الفاخر والعود الملكي العريق.",
+    "story": "من توقيع فيليب باباريلا-باريس احتفاءً ببراعة صائغي الفضة وبسالة فرسان الجزيرة العربية.",
+    "concentration": "ماء عطر"
+   },
+   "amouage-lustre": {
+    "badge": "البريق الكريستالي الساطع",
+    "description": "تحفة النور والعنبر من أسرار دار أمواج العمانية الفاخرة. يتلألأ السوسن الأبيض البودري والهيل الأخضر مع لبان الفضة النقي وخشب الصندل الكريمي والمسك الصافي.",
+    "story": "يجسد انعكاس أشعة الصباح المشرقة عبر موشور كريستالي على رخام القصور الملكية البيضاء.",
+    "concentration": "ماء عطر"
+   },
+   "xerjoff-casamorati-1888-mefisto": {
+    "badge": "الانتعاش الإيطالي الأرستقراطي",
+    "description": "التحفة الإيطالية الكلاسيكية التي تحاكي فخامة عصر النهضة. يتألق الغريب فروت وليمون أمالفي والبرغموت مع السوسن الفلورنسي البودري والخزامى وخشب الصندل العريق.",
+    "story": "مستوحى من تراث دار كازاموراتي العريقة المؤسسة في بولونيا عام 1888، في قارورة زرقاء ياقوتية ملكية.",
+    "concentration": "ماء عطر"
+   },
+   "xerjoff-erba-gold-eau-de-parfum": {
+    "badge": "سلة الفواكه الذهبية والمسك",
+    "description": "إصدار مشمس وفاخر يفيض بالحيوية والبهجة. يتعانق ليمون أمالفي والبرتقال البرازيلي مع الزنجبيل الحار والقرفة وسلة فواكه استوائية على قاعدة من المسك الأبيض الحريري.",
+    "story": "مكسوة بالمخمل الأصفر الذهبي الأيقوني مع وشاح حريري فاخر منسوج خصيصاً في بحيرة كومو الإيطالية.",
+    "concentration": "ماء عطر"
+   },
+   "xerjoff-erba-pura-eau-de-parfum": {
+    "badge": "إكسير الفواكه الساحر إربا بورا",
+    "description": "الأسطورة الأكثر شهرة وجاذبية في عالم العطور الفاكهية الحديثة. انفجار مشرق من حمضيات صقلية وسلة فواكه البحر الأبيض المتوسط مع المسك الأبيض النقي والفانيليا.",
+    "story": "من إبداع كريستيان كاربونيل ولورا سانتاندر في قارورة مخملية فيروزية ملكية تأسر القلوب.",
+    "concentration": "ماء عطر"
+   },
+   "penhaligon-s-the-coveted-duchess-rose": {
+    "badge": "الدوقة الفاتنة والورد النضر",
+    "description": "الدوقة الشابة في حكايات بورتريتس الإنجليزية الشهيرة من بنهاليغونز. وردة سينتيفوليا ندية مفعمة بالبراءة تكشف عن لمسات خشبية ومسكية آسرة والمندرين المنعش.",
+    "story": "تتوج القارورة برأس ثعلبة من البرونز الذهبي اللامع ترمز للذكاء والجاذبية اللعوب.",
+    "concentration": "ماء عطر"
+   },
+   "yves-saint-laurent-ysl-exquisite-embroidery-accord-rose-ambre-gris-eau-de-parfum": {
+    "badge": "تطريز الذهب والورد الدمشقي",
+    "description": "فخامة التطريزات الذهبية اليدوية في أزياء إيف سان لوران الراقية. يتعانق الورد الدمشقي الملكي مع خيوط العنبر الرمادي الثمين وجوزة الطيب والعود الفاخر.",
+    "story": "من توقيع حامد ميراتي كاشاني لمجموعة خزانة العطور الشرقية مستحضراً أرقى الأقمشة الملكية.",
+    "concentration": "ماء عطر"
+   },
+   "yves-saint-laurent-ysl-wild-leather-accord-cuir-eau-de-parfum": {
+    "badge": "الجلد البري وخشب الغاياك",
+    "description": "الجاذبية الجريئة للجلد الأسود الفاخر من إيف سان لوران. ينبض الفلفل الأسود والزعفران فوق جلد بري مروض بدخان خشب الغاياك والباتشولي والفانيليا.",
+    "story": "مستوحى من سترة الجلد السوداء الشهيرة التي أصبحت رمزاً للأناقة المتمردة والحرية المطلقة.",
+    "concentration": "ماء عطر"
    }
   },
   "notes": {
