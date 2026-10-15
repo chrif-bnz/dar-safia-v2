@@ -314,6 +314,12 @@
       },
       "searchPlaceholder": "Rechercher…"
     },
+    "pagination": {
+      "previous": "Précédent",
+      "next": "Suivant",
+      "label": "Pagination du catalogue",
+      "page": "Page {page}"
+    },
     "shuffle": "Mélanger"
   },
   "product": {
