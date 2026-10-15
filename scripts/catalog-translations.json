@@ -1108,6 +1108,126 @@
     "description": "The most concentrated and enigmatic iteration in the Dior Homme pantheon. Concentrated black iris surrenders to imperial leather and creamy sandalwood for unforgettable luxury.",
     "story": "François Demachy tailoring masterpiece, evoking a bespoke black-tie tuxedo preserved in a gilded midnight bottle.",
     "concentration": "Parfum"
+   },
+   "chanel-bleu-de-chanel-eau-de-parfum-150ml": {
+    "badge": "Blue Elegance XXL",
+    "description": "The supreme embodiment of masculine freedom in a monumental 150ml decanter. Zesty grapefruit and crisp aromatics harmonize with New Caledonian sandalwood and ambery cedarwood.",
+    "story": "Formulated by Jacques Polge, celebrating uncompromising self-determination in an unfathomable deep-navy glass block.",
+    "concentration": "Eau de Parfum"
+   },
+   "chanel-bleu-de-chanel-parfum-150ml": {
+    "badge": "Pure Quintessence XXL",
+    "description": "The purest and most prestigious concentration of Bleu de Chanel in an imposing 150ml volume. Velvety New Caledonian sandalwood blends with cedar and rich amberwood.",
+    "story": "Masterminded by Olivier Polge, adorned with gold lettering upon deep twilight blue lacquer.",
+    "concentration": "Parfum"
+   },
+   "christian-dior-dior-homme-edition-blanche-eau-de-parfum-150ml": {
+    "badge": "Solar Freshness XXL",
+    "description": "A brilliant harmony of icy citrus freshness and creamy oriental warmth in a 150ml statement format. Zesty sparkling lemon unites with velvety sandalwood and Madagascar vanilla.",
+    "story": "Evoking the dazzling pure radiance of bright white sunlight reflecting upon noble materials.",
+    "concentration": "Eau de Parfum"
+   },
+   "chanel-allure-homme-sport-superleggera": {
+    "badge": "Aerodynamic Precision",
+    "description": "The supreme tribute to elite speed and dynamic motion. Vivacious citrus notes and razor-sharp ambery woods surge with athletic grace and aerodynamic power.",
+    "story": "Inspired by the historic Italian Superleggera motorsport coachbuilding philosophy, encased in smoked meteorite glass.",
+    "concentration": "Eau de Parfum"
+   },
+   "chanel-allure-homme-sport-eau-de-toilette": {
+    "badge": "Pure Athletic Allure",
+    "description": "The exhilarating rush of open waters and athletic grace. Sparkling Italian mandarin meets breezy aquatic notes, spicy black pepper, and sensual tonka-musk skin warmth.",
+    "story": "Composed by Jacques Polge in an iconic silver metallic monolith banded with a tactile rubberized ring.",
+    "concentration": "Eau de Toilette"
+   },
+   "christian-dior-dior-homme-cologne": {
+    "badge": "Cotton Crispness XXL",
+    "description": "The pure, immaculate sensation of a crisp white cotton shirt in an oversized 200ml flask. Radiant Calabrian bergamot blends with frosted grapefruit blossom and white musks.",
+    "story": "Formulated by François Demachy to express an effortless, crystalline statement of haute horlogerie purity.",
+    "concentration": "Eau de Cologne"
+   },
+   "chanel-bleu-de-chanel-exclusive-parfum": {
+    "badge": "Supreme Prestigious Edition",
+    "description": "The rarest, highly coveted concentration of Bleu de Chanel. Supreme proportions of ancient New Caledonian sandalwood and purified cedarwood in an opulent golden presentation.",
+    "story": "A collector masterpiece reserved for bespoke connoisseurs of Chanel haute perfumery.",
+    "concentration": "Parfum"
+   },
+   "calvin-klein-ck-one-eau-de-toilette-200ml": {
+    "badge": "Universal Revolution XXL",
+    "description": "The epochal trail that transformed modern perfumery in a 200ml canteen. Luminous green tea, juicy pineapple, and frosted bergamot meet clean white musks and tender petals.",
+    "story": "Pioneered by Alberto Morillas and Harry Fremont in 1994, shattering gender divides in minimalist frosted glass.",
+    "concentration": "Eau de Toilette"
+   },
+   "carolina-herrera-212-men-mtv": {
+    "badge": "Electric Musical Vibe",
+    "description": "The euphoric pulse of music culture and street aesthetics. Fiery cardamom and zesty mandarin ignite smoky vetiver and dark tonka beans beneath the bright festival floodlights.",
+    "story": "A limited edition in collaboration with MTV, encasing the iconic magnetic capsule in reflective gold.",
+    "concentration": "Eau de Toilette"
+   },
+   "carolina-herrera-212-men-nyc": {
+    "badge": "Timeless Manhattan Spirit",
+    "description": "The electric pulse of Manhattan dynamism. Crisp freshly cut grass and citrus leaves pulse with zesty ginger and green pepper anchored in polished sandalwood and guaiac wood.",
+    "story": "Masterminded by Alberto Morillas, Rosendo Mateu, and Ann Gottlieb in a metallic magnetic cylinder.",
+    "concentration": "Eau de Toilette"
+   },
+   "guerlain-oud-essentiel-eau-de-parfum": {
+    "badge": "Imperial Oud & Dark Rose",
+    "description": "A lavish encounter between sacred oud wood and Bulgarian red rose in the Absolus d’Orient collection. Leathery facets and Omani frankincense craft an eternal, majestic trail.",
+    "story": "Crafted by Thierry Wasser, Guerlain Master Perfumer, housed in the royal Bee bottle lacquered in gloss black and gilded details.",
+    "concentration": "Eau de Parfum"
+   },
+   "guerlain-epices-exquises-eau-de-parfum": {
+    "badge": "Cardamom Coffee Elixir",
+    "description": "The intoxicating atmosphere of freshly brewed spiced coffee in ancient eastern bazaars. Green cardamom and angelica plunge into roasted dark coffee and comforting sandalwood.",
+    "story": "Thierry Wasser honors traditional Arabian hospitality through a spellbinding aromatic pilgrimage.",
+    "concentration": "Eau de Parfum"
+   },
+   "guerlain-patchouli-ardent-eau-de-parfum": {
+    "badge": "Luminous Leathery Patchouli",
+    "description": "A radiant, contemporary reinvention of patchouli. Thierry Wasser lifts the earthy leaf with pink peppercorns, succulent fig, and Turkish rose over supple soft leather.",
+    "story": "Adorned in an exquisite petroleum-blue lacquered flacon crowned with golden filigree.",
+    "concentration": "Eau de Parfum"
+   },
+   "guerlain-cuir-intense-eau-de-parfum": {
+    "badge": "Royal Leather & Sandalwood",
+    "description": "Raw virile leather sublimated by regal woods. Fruity osmanthus and exotic ylang-ylang reveal smoky dark tanned hide cushioned on creamy sandalwood and Virginian cedar.",
+    "story": "Thierry Wasser pays homage to ancestral leathercraft within deep chestnut-brown lacquered glass.",
+    "concentration": "Eau de Parfum"
+   },
+   "dolce-gabbana-d-g-the-one-for-men-eau-de-parfum-150ml": {
+    "badge": "Charismatic Magnetism XXL",
+    "description": "The hypnotic sophistication of an effortless charmer in an expansive 150ml decanter. Crisp coriander and basil yield to warm cardamom, glowing amber, and rich tobacco leaves.",
+    "story": "Composed by Olivier Polge in a heavy, sculptural deep-brown monolith reflecting understated elegance.",
+    "concentration": "Eau de Parfum"
+   },
+   "mancera-red-tobacco-eau-de-parfum": {
+    "badge": "Tobacco & Cinnamon Blaze",
+    "description": "A legendary high-voltage olfactory inferno. Searing Cuban tobacco and hot cinnamon collide with agarwood, saffron, crisp green apple, and intoxicating Madagascar vanilla.",
+    "story": "Engineered by Pierre Montale to project monumental persistence in heavy pressurized art-deco glass.",
+    "concentration": "Eau de Parfum"
+   },
+   "mancera-tobacco-intense-eau-de-parfum": {
+    "badge": "Dark Tobacco & Smoked Leather",
+    "description": "The monumental escalation of Mancera tobacco artistry. Aged fermented tobacco leaf intensifies alongside grainy smoked leather, dark boozy plum, and sacred amber resins.",
+    "story": "A collector masterpiece reserved for devoted enthusiasts of colossal, dark olfactory sillage.",
+    "concentration": "Eau de Parfum"
+   },
+   "kenzo-homme-eau-de-toilette": {
+    "badge": "Ocean Breeze & Bamboo",
+    "description": "The poetic symbiosis of open oceanic breezes and verdant bamboo shoots. Invigorating marine calone rushes into spicy nutmeg, cedarwood, and calming sandalwood.",
+    "story": "Originally orchestrated by Christian Matthieu, shaped as a wind-swept bamboo shoot connecting man to nature.",
+    "concentration": "Eau de Toilette"
+   },
+   "kenzo-homme-eau-de-parfum": {
+    "badge": "Leathery Marine Bamboo",
+    "description": "Sensual woody saline tension with magnetic power. An electrifying clash between surging marine accord, sun-drenched leather, and modern Akigalawood.",
+    "story": "Crafted by Quentin Bisch in a deep oceanic-blue bamboo stalk flexing with power beneath elements.",
+    "concentration": "Eau de Parfum"
+   },
+   "yves-saint-laurent-ysl-37-rue-de-bellechasse-oud-elemi": {
+    "badge": "Haute Parfumerie Rive Gauche",
+    "description": "The storied headquarters of Yves Saint Laurent immortalized in couture perfumery. Sacred elemi resin and black pepper illuminate mystical oud wood, powdered noble iris, and warm benzoin.",
+    "story": "Conceived by Cécile Matton and Julie Massé for Le Vestiaire des Parfums, capturing the cloistered mystery of the Penthemont abbey.",
+    "concentration": "Eau de Parfum"
    }
   },
   "notes": {
@@ -2472,6 +2592,126 @@
     "description": "أعمق وأفخم تعبير في تاريخ ديور هوم. سوسن أسود نقي بتركيز فائق يتعانق مع الجلد الإمبراطوري وخشب الصندل الكريمي ليمنحك حضوراً أسطورياً.",
     "story": "أبدعه فرنسوا ديماشي كبدلة سهرة ملكية مطرزة بأفخم الخيوط، في زجاجة سوداء محاطة بهالة ذهبية.",
     "concentration": "عطر مركز"
+   },
+   "chanel-bleu-de-chanel-eau-de-parfum-150ml": {
+    "badge": "الأناقة الزرقاء 150 مل",
+    "description": "التعبير السيادي عن حرية الرجل العصري في قارورة فاخرة بحجم 150 مل. يتناغم الغريب فروت المنعش والأعشاب العطرية مع خشب الصندل الكاليدوني الفاخر وخشب الأرز العنبري.",
+    "story": "من إبداع جاك بولج احتفاءً بالحرية المطلقة في صرح زجاجي بلون أزرق ليلي غامض.",
+    "concentration": "ماء عطر"
+   },
+   "chanel-bleu-de-chanel-parfum-150ml": {
+    "badge": "خلاصة الفخامة 150 مل",
+    "description": "أصفى وأفخم تركيز لعطر بلو دو شانيل في حجم استثنائي 150 مل. افتتاحية نقية تمهد لكثافة خشبية ملكية من خشب الصندل الكريمي وأخشاب الأرز والعنبر الراقي.",
+    "story": "من توقيع أوليفييه بولج بحروف ذهبية تسطع على زجاج أزرق كحلي داكن يفيض بالنبل والوقار.",
+    "concentration": "عطر مركز"
+   },
+   "christian-dior-dior-homme-edition-blanche-eau-de-parfum-150ml": {
+    "badge": "إشراقة شمسية ناصعة 150 مل",
+    "description": "تحفة متوازنة تجمع بين برودة الحمضيات المنعشة ودفء اللمسات الشرقية في حجم ضخم 150 مل. يتألق ليمون كالابريا مع خشب الصندل الكريمي وفانيليا مدغشقر الفاخرة.",
+    "story": "يحاكي الضوء الأبيض الساطع المنعكس على أنبل المكونات العطرية الخالدة.",
+    "concentration": "ماء عطر"
+   },
+   "chanel-allure-homme-sport-superleggera": {
+    "badge": "دقة فائقة وسرعة خاطفة",
+    "description": "تحية راقية للأداء الرياضي والسرعة الديناميكية. تتفجر الحمضيات الإيطالية المنعشة مع أخشاب الأرز والعنبر لتمنحك شعوراً بالانطلاق والرشاقة الاستثنائية.",
+    "story": "مستوحى من علامة سوبرليغيرا الإيطالية الشهيرة في هندسة سيارات السباق الخارقة، في زجاج دخاني رمادي أنيق.",
+    "concentration": "ماء عطر"
+   },
+   "chanel-allure-homme-sport-eau-de-toilette": {
+    "badge": "جاذبية رياضية أصيلة",
+    "description": "نفحة منعشة تحاكي رياح البحر المفتوح والانطلاق الرياضي. ينبض المندرين الإيطالي والألدهيدات البحرية مع الفلفل وحبوب التونكا والمسك الأبيض الحريري.",
+    "story": "من توقيع جاك بولج في قارورة فضية عصرية مع حلقة مطاطية سوداء ترمز للأناقة الحركية.",
+    "concentration": "ماء تواليت"
+   },
+   "christian-dior-dior-homme-cologne": {
+    "badge": "انتعاش القطن الأبيض 200 مل",
+    "description": "نقاء فائق يحاكي ملمس قميص قطني أبيض ناصع في قارورة ضخمة 200 مل. يمتزج برغموت كالابريا المشرق مع زهر الغريب فروت ولمسة قطنية ناعمة من المسك الأبيض.",
+    "story": "من إبداع فرنسوا ديماشي ليعكس الفخامة البسيطة الصافية في أبهى صورها الزجاجية الشفافة.",
+    "concentration": "كولونيا"
+   },
+   "chanel-bleu-de-chanel-exclusive-parfum": {
+    "badge": "الإصدار الحصري الفاخر",
+    "description": "أندر وأفخم إصدارات بلو دو شانيل لعشاق التميز. تركيز فائق النقاء يفيض بخشب الصندل الملكي وأخشاب الأرز العريقة والبخور المقدس في حضور لا يضاهى.",
+    "story": "تحفة عطرية حصرية مخصصة لخبراء العطور الراقية من دار شانيل العريقة.",
+    "concentration": "عطر مركز"
+   },
+   "calvin-klein-ck-one-eau-de-toilette-200ml": {
+    "badge": "ثورة العطور العالمية 200 مل",
+    "description": "الأيقونة الخالدة التي غيرت مفاهيم العطور العالمية بحجم سخي 200 مل. انتعاش نقي من الشاي الأخضر والبرغموت والأناناس مع لمسات الزهور الناعمة والمسك الأبيض الصافي.",
+    "story": "من ابتكار ألبيرتو مورياس وهاري فريمونت في قارورة زجاجية ثلجية كسرت كل القيود بين الجنسين.",
+    "concentration": "ماء تواليت"
+   },
+   "carolina-herrera-212-men-mtv": {
+    "badge": "نبض موسيقي كهربائي",
+    "description": "طاقة مبهجة مستوحاة من ثقافة الموسيقى الصاخبة والحياة الحضرية. يتألق الهيل والمندرين مع نجيل الهند المدخن وحبوب التونكا والعنبر الذهبي.",
+    "story": "إصدار استثنائي بالتعاون مع قناة MTV يكسو الكبسولة المغناطيسية الشهيرة بالذهب اللامع.",
+    "concentration": "ماء تواليت"
+   },
+   "carolina-herrera-212-men-nyc": {
+    "badge": "روح مانهاتن الخالدة",
+    "description": "طاقة نيويورك الحيوية والملهمة. تمتزج رائحة العشب الأخضر النضر وأوراق الحمضيات مع الزنجبيل الحار والفلفل وخشب الغاياك والصندل الأنيق.",
+    "story": "من إبداع ألبيرتو مورياس وروسيندو ماتيو في أسطوانة معدنية فضية ذات غطاء مغناطيسي مبتكر.",
+    "concentration": "ماء تواليت"
+   },
+   "guerlain-oud-essentiel-eau-de-parfum": {
+    "badge": "عود ملكي وورد دمشقي",
+    "description": "لقاء فاخر بين خشب العود النادر والورد الدمشقي ضمن مجموعة أصول الشرق الراقية. تكتمل التجربة بنفحات جلدية ساحرة وبخور عماني يعكس الفخامة الشرقية المطلقة.",
+    "story": "من توقيع تييري واسر، خبير عطور دار جيرلان، في زجاجة النحل الملكية السوداء المرصعة بالذهب.",
+    "concentration": "ماء عطر"
+   },
+   "guerlain-epices-exquises-eau-de-parfum": {
+    "badge": "قهوة بالهيل الفاخر",
+    "description": "استحضار ساحر لعبق القهوة العربية بالهيل في قلب الأسواق الشرقية. يتألق الهيل الأخضر مع القهوة السوداء المحمصة وخشب الصندل والباتشولي الدافئ.",
+    "story": "استوحاه تييري واسر من كرم الضيافة العربية الأصيلة في تجربة عطرية غنية تأسر الحواس.",
+    "concentration": "ماء عطر"
+   },
+   "guerlain-patchouli-ardent-eau-de-parfum": {
+    "badge": "باتشولي متألق وجلدي",
+    "description": "إعادة ابتكار مشرقة ومشرقة لنفحات الباتشولي الكلاسيكية. يضيء الباتشولي بالفلفل الوردي والتين الحلو والورد التركي على قاعدة جلدية ناعمة وفاخرة.",
+    "story": "تتألق زجاجة النحل الملكية بلون أزرق بترولي آسر وزخارف ذهبية ساحرة.",
+    "concentration": "ماء عطر"
+   },
+   "guerlain-cuir-intense-eau-de-parfum": {
+    "badge": "جلد ملكي وصندل أصيل",
+    "description": "قوة الجلود الخام مطعمة بأفخم الأخشاب النبيلة. يمهد زهر العبقة والإيلنغ لقلب جلدي داكن مدخن تلطفه نعومة خشب الصندل وأرز فرجينيا.",
+    "story": "تحية من تييري واسر لحرفيي دباغة الجلود في الشرق، في قارورة بنية دافئة مزدانة بالذهب.",
+    "concentration": "ماء عطر"
+   },
+   "dolce-gabbana-d-g-the-one-for-men-eau-de-parfum-150ml": {
+    "badge": "جاذبية ساحرة 150 مل",
+    "description": "الأناقة الجذابة للرجل الواثق في حجم عملاق 150 مل. يتألق الغريب فروت والكزبرة والريحان مع الهيل الحار وأوراق التبغ الغنية والعنبر الدافئ.",
+    "story": "من توقيع أوليفييه بولج في زجاجة بنية مصمتة تعكس هيبة الرجل وجاذبيته الطبيعية.",
+    "concentration": "ماء عطر"
+   },
+   "mancera-red-tobacco-eau-de-parfum": {
+    "badge": "لهيب التبغ والقرفة",
+    "description": "انفجار عطري أسطوري فائق القوة والثبات. يلتقي التبغ الكوبي الحارق والقرفة مع العود والزعفران والتفاح الأخضر على قاعدة من فانيليا مدغشقر والعنبر البركاني.",
+    "story": "من ابتكار بيير مونتال ليمنحك حضوراً قاهراً لا يمحى، في زجاجة مانسيرا الثقيلة والمحكمة.",
+    "concentration": "ماء عطر"
+   },
+   "mancera-tobacco-intense-eau-de-parfum": {
+    "badge": "تبغ مركز وجلد مدخن",
+    "description": "الارتقاء الأسمى بفخامة التبغ في دار مانسيرا. تركيز مكثف يجمع بين أوراق التبغ المعتقة والجلد المدخن والبرقوق الأسود اللذيذ مع الراتنجات العنبرية المهيبة.",
+    "story": "تحفة عطرية استثنائية لعشاق العطور القوية ذات الأثر الأسطوري الفتاك.",
+    "concentration": "ماء عطر"
+   },
+   "kenzo-homme-eau-de-toilette": {
+    "badge": "نسيم المحيط وقصب الخيزران",
+    "description": "الهروب الشاعري إلى زرقة المحيط وأعماق الطبيعة الخضراء. تمتزج النفحات البحرية المنعشة مع براعم الخيزران وجوزة الطيب وخشب الصندل المهدئ للأعصاب.",
+    "story": "من توقيع كريستيان ماتيو في قارورة منحنية كجذع خيزران ينحني أمام نسيم البحر العليل.",
+    "concentration": "ماء تواليت"
+   },
+   "kenzo-homme-eau-de-parfum": {
+    "badge": "خيزران جلدي وبحري",
+    "description": "جاذبية خشبية ومالحة مفعمة بالغموض والتميز. تباين ساحر بين الأمواج البحرية الهادرة والجلد الدافئ وخشب الأكيغالاوود العصري والباتشولي.",
+    "story": "أبدعه كوينتين بيش في قارورة خيزران زرقاء بحرية داكنة تنحني بقوة ومرونة أمام عواصف الطبيعة.",
+    "concentration": "ماء عطر"
+   },
+   "yves-saint-laurent-ysl-37-rue-de-bellechasse-oud-elemi": {
+    "badge": "عطور الهوت كوتور باريس",
+    "description": "العنوان الباريسي الأسطوري لدار إيف سان لوران متجسداً في تحفة عطرية نادرة. يضيء راتنج الإيليمي المقدس والفلفل الأسود خشب العود النادر والسوسن البودري والبنزوين الفاخر.",
+    "story": "من إبداع سيسيل ماتون وجودي ماسيه لمجموعة الخزانة الحصرية مستحضراً أروقة دير بونثيمون التاريخية.",
+    "concentration": "ماء عطر"
    }
   },
   "notes": {
