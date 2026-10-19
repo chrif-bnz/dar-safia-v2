@@ -131,7 +131,7 @@ export function Manifesto({ dict, houses }: { dict: Dictionary; houses: string[]
           background:
             'radial-gradient(60% 55% at 78% 28%, rgba(79,26,33,0.95) 0%, transparent 70%),' +
             'radial-gradient(45% 40% at 8% 92%, rgba(184,134,43,0.12) 0%, transparent 70%),' +
-            'linear-gradient(to bottom, rgba(36,25,21,0.55) 0%, transparent 28%, transparent 78%, rgba(36,25,21,0.5) 100%)',
+            'linear-gradient(to bottom, rgba(76,24,30,0.55) 0%, transparent 28%, transparent 78%, rgba(76,24,30,0.5) 100%)',
         }}
       />
       {/* Deux lueurs qui dérivent au défilement. */}

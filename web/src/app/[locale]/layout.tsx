@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import localFont from 'next/font/local';
 import { notFound } from 'next/navigation';
 
@@ -107,6 +107,10 @@ export function generateStaticParams() {
   return LOCALES.map((locale) => ({ locale }));
 }
 
+export const viewport: Viewport = {
+  themeColor: '#3D0F14',
+};
+
 /** Titre et description du site dans la langue de la page (et non toujours en français). */
 export async function generateMetadata({ params }: LayoutProps<'/[locale]'>): Promise<Metadata> {
   const { locale } = await params;
@@ -143,6 +147,7 @@ export default async function RootLayout({
     // l'hydratation. Il ne couvre QUE les attributs de cet élément.
     <html lang={locale} dir={dir} className={FONT_VARS} data-dir={dir} suppressHydrationWarning>
       <head>
+        <meta name="theme-color" content="#3D0F14" />
         {/* Exécuté pendant l'analyse du HTML, avant la première peinture :
             c'est le seul moment où l'en-tête peut être voilé sans flash. */}
         <InlineScript html={introGuardScript} />

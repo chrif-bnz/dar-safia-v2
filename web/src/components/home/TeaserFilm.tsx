@@ -272,7 +272,7 @@ export function TeaserFilm({ dict }: { dict: Dictionary }) {
             style={{
               background:
                 'radial-gradient(70% 60% at 72% 50%, rgba(184,134,43,0.14) 0%, transparent 70%),' +
-                'linear-gradient(to right, rgba(16,11,9,0.92) 0%, rgba(16,11,9,0.55) 55%, rgba(16,11,9,0.78) 100%)',
+                'linear-gradient(to right, rgba(61,15,20,0.92) 0%, rgba(61,15,20,0.55) 55%, rgba(61,15,20,0.78) 100%)',
             }}
           />
         </div>
@@ -316,7 +316,7 @@ export function TeaserFilm({ dict }: { dict: Dictionary }) {
                   className="pointer-events-none absolute inset-0 md:opacity-15"
                   style={{
                     background:
-                      'linear-gradient(to top, rgba(16,11,9,0.9) 0%, rgba(16,11,9,0.4) 36%, rgba(16,11,9,0) 64%)',
+                      'linear-gradient(to top, rgba(61,15,20,0.9) 0%, rgba(61,15,20,0.4) 36%, rgba(61,15,20,0) 64%)',
                   }}
                 />
               </div>

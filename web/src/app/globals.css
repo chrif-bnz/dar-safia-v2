@@ -10,17 +10,19 @@
    ══════════════════════════════════════════════════════════════ */
 @theme {
   /* ── Couleurs de marque (extraites à l'identique de style.css) ── */
-  /* Palette officielle : bordeaux #3D0F14 (primaire), espresso #241915,
-     or antique #B8862B, ivoire chaud #F2EDE3. Tout le reste en dérive :
-       noir      = espresso assombri (fond de page, le plus profond)
-       noir-3    = espresso éclairci (surfaces surélevées)
+  /* Palette officielle : bordeaux #3D0F14 (primaire, fond de page),
+     surfaces bordeaux #4C181E / #5D2028, or antique #B8862B, ivoire chaud #F2EDE3.
+     Tout le reste en dérive :
+       noir      = bordeaux sombre #3D0F14 (fond de page principal)
+       noir-2    = bordeaux intermédiaire #4C181E (surfaces, cartes, formulaires)
+       noir-3    = bordeaux surélevé #5D2028 (chips, cases à cocher)
        burgundy-deep / -2 = bordeaux assombri / éclairci
        gold-light = or éclairci : texte or sur fond sombre, survols
        gold-dark  = or assombri : filets, pouces de défilement
        ivory-2   = ivoire assombri : surfaces claires secondaires */
-  --color-noir: #1a120f;
-  --color-noir-2: #241915;
-  --color-noir-3: #2f221c;
+  --color-noir: #3d0f14;
+  --color-noir-2: #4c181e;
+  --color-noir-3: #5d2028;
   --color-burgundy-deep: #2a090d;
   --color-burgundy: #3d0f14;
   --color-burgundy-2: #4f1a21;
@@ -441,9 +443,9 @@ body {
   pointer-events: none;
   background: linear-gradient(
     to top,
-    rgba(16, 11, 9, 0.92) 0%,
-    rgba(16, 11, 9, 0.5) 30%,
-    rgba(16, 11, 9, 0) 62%
+    rgba(61, 15, 20, 0.92) 0%,
+    rgba(61, 15, 20, 0.5) 30%,
+    rgba(61, 15, 20, 0) 62%
   );
 }
 
@@ -470,9 +472,9 @@ body {
        ne doit pas être voilé. */
     background: linear-gradient(
       to top,
-      rgba(16, 11, 9, 0.9) 0%,
-      rgba(16, 11, 9, 0.45) 24%,
-      rgba(16, 11, 9, 0) 50%
+      rgba(61, 15, 20, 0.9) 0%,
+      rgba(61, 15, 20, 0.45) 24%,
+      rgba(61, 15, 20, 0) 50%
     );
   }
 }
@@ -971,7 +973,7 @@ html.has-custom-cursor [contenteditable] {
 .ds-menu-sheet {
   background:
     radial-gradient(80% 40% at 50% 100%, rgba(184, 134, 43, 0.12) 0%, transparent 70%),
-    linear-gradient(to bottom, rgba(36, 25, 21, 0.97) 0%, rgba(26, 18, 15, 0.985) 100%);
+    linear-gradient(to bottom, rgba(76, 24, 30, 0.97) 0%, rgba(61, 15, 20, 0.985) 100%);
   backdrop-filter: blur(18px);
 }
 .ds-menu-sheet:not([hidden]) .ds-menu-item {
@@ -1180,7 +1182,7 @@ html.has-custom-cursor [contenteditable] {
   height: 1.2rem;
   border-radius: 2px;
   border: 1px solid var(--color-smoke-2, rgba(242, 237, 227, 0.15));
-  background-color: var(--color-noir-3, #2f221c);
+  background-color: var(--color-noir-3, #5d2028);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -1342,7 +1344,7 @@ html.has-custom-cursor [contenteditable] {
   }
 
   .ds-btn-slide:hover {
-    color: var(--color-noir, #1a120f) !important;
+    color: var(--color-noir, #3d0f14) !important;
   }
 }
 
@@ -1536,7 +1538,7 @@ html.has-custom-cursor [contenteditable] {
   margin-inline: auto;
   border-radius: var(--radius-md, 12px);
   border: 1px solid rgba(201, 162, 75, 0.25);
-  background-color: var(--color-noir-2, #241915);
+  background-color: var(--color-noir-2, #4c181e);
   padding: 1.25rem 1.5rem;
   opacity: 0;
   transform: translateY(16px);
@@ -1632,7 +1634,7 @@ html.has-custom-cursor [contenteditable] {
   cursor: default;
   border-radius: var(--radius-xs, 4px);
   border: 1px solid var(--color-smoke-2, rgba(242, 237, 227, 0.12));
-  background-color: var(--color-noir-3, #2f221c);
+  background-color: var(--color-noir-3, #5d2028);
   padding: 0.35rem 0.75rem;
   font-family: var(--font-body);
   font-size: var(--text-md, 1rem);
@@ -1898,7 +1900,7 @@ html.has-custom-cursor [contenteditable] {
 .ds-thanks__card,
 .ds-thanks__steps {
   border: 1px solid rgba(184, 134, 43, 0.28);
-  background: rgba(36, 25, 21, 0.55);
+  background: rgba(76, 24, 30, 0.55);
   padding: clamp(1.5rem, 3vw, 2.25rem);
 }
 .ds-thanks__label {
@@ -2072,7 +2074,7 @@ html.has-custom-cursor [contenteditable] {
   overflow: hidden;
   padding: clamp(5rem, 9vw, 8.5rem) clamp(1.5rem, 5vw, 5rem);
   color: var(--color-ivory);
-  background: linear-gradient(180deg, #1a100e 0%, #2a1612 100%);
+  background: linear-gradient(180deg, #3d0f14 0%, #4c181e 100%);
 }
 .ds-figs__halo {
   position: absolute;
@@ -2397,7 +2399,7 @@ html.has-custom-cursor [contenteditable] {
   overflow: hidden;
   min-height: 100svh;
   padding: clamp(7rem, 12vw, 9rem) clamp(1.25rem, 4vw, 4rem) clamp(4rem, 8vw, 7rem);
-  background: linear-gradient(180deg, #1a100e 0%, #241512 55%, #1a100e 100%);
+  background: linear-gradient(180deg, #3d0f14 0%, #4c181e 55%, #3d0f14 100%);
   color: var(--color-ivory);
 }
 .ds-cartp__halo {
@@ -2621,7 +2623,7 @@ html.has-custom-cursor [contenteditable] {
   padding: clamp(1.5rem, 3vw, 2rem);
   border: 1px solid rgba(184, 134, 43, 0.35);
   border-radius: var(--radius-md);
-  background: rgba(36, 25, 21, 0.72);
+  background: rgba(76, 24, 30, 0.72);
   animation: ds-cartp-side 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.35s both;
 }
 @keyframes ds-cartp-side {

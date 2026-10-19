@@ -260,7 +260,7 @@ export function SignatureStage({
                   className="absolute inset-y-0 left-0 w-full lg:w-[58%] pointer-events-none"
                   style={{
                     background:
-                      'linear-gradient(to right, rgba(26, 18, 15, 0.95) 0%, rgba(26, 18, 15, 0.82) 48%, rgba(26, 18, 15, 0.3) 78%, transparent 100%)',
+                      'linear-gradient(to right, rgba(61, 15, 20, 0.95) 0%, rgba(61, 15, 20, 0.82) 48%, rgba(61, 15, 20, 0.3) 78%, transparent 100%)',
                   }}
                 />
               </div>
