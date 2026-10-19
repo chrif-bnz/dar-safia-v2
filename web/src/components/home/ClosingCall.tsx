@@ -41,7 +41,7 @@ export function ClosingCall({
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            'radial-gradient(55% 45% at 50% 78%, rgba(200,155,60,0.12) 0%, transparent 70%)',
+            'radial-gradient(55% 45% at 50% 78%, rgba(184,134,43,0.12) 0%, transparent 70%)',
         }}
       />
 

@@ -152,7 +152,7 @@ export function SiteHeader({ locale, dict }: { locale: Locale; dict: Dictionary 
     <header
       ref={headerRef}
       data-lifted={solidHeader || undefined}
-      className="ds-header fixed inset-x-0 top-0 z-40 data-lifted:border-b data-lifted:border-smoke-2 data-lifted:bg-noir/88 data-lifted:backdrop-blur-md"
+      className="ds-header fixed inset-x-0 top-0 z-40 data-lifted:border-b data-lifted:border-smoke-2 data-lifted:bg-wine/90 data-lifted:backdrop-blur-md"
     >
       <div className="mx-auto flex max-w-(--container-site) items-center gap-4 px-5 py-4 md:px-8">
         <Link
@@ -210,7 +210,7 @@ export function SiteHeader({ locale, dict }: { locale: Locale; dict: Dictionary 
         id="menu-principal"
         ref={panelRef}
         hidden={!menuOpen}
-        className="border-t border-smoke-2 bg-noir/97 backdrop-blur-md lg:hidden"
+        className="border-t border-smoke-2 bg-wine/97 backdrop-blur-md lg:hidden"
       >
         <nav aria-label={dict.nav.perfumes}>
           <ul className="flex flex-col px-5 py-4 md:px-8">

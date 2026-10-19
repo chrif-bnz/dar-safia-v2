@@ -378,7 +378,7 @@ export function ContactExperience({
                 tabIndex={0}
                 className="mt-10 focus-visible:outline-none"
               >
-                <div className="border border-gold/20 bg-noir-2/55 p-6 transition-colors duration-500 focus-within:border-gold/45 md:p-9">
+                <div className="border border-gold/20 bg-wine/55 p-6 transition-colors duration-500 focus-within:border-gold/45 md:p-9">
                   {tab === 'personal' ? (
                     <>
                       <label htmlFor="contact-message" className="sr-only">

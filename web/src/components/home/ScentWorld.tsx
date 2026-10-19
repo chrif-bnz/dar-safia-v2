@@ -51,7 +51,7 @@ export function ScentWorld({
     <section
       ref={ref}
       aria-labelledby="matieres"
-      className="relative overflow-hidden border-t border-smoke-2 bg-noir-2 px-6 py-28 md:px-12 md:py-36 lg:px-20"
+      className="relative overflow-hidden border-t border-smoke-2 bg-noir px-6 py-28 md:px-12 md:py-36 lg:px-20"
     >
       {/* Halo ambiant : une seule source lumineuse, très basse, qui rappelle
           la bougie du film sans imiter un effet. */}
@@ -60,7 +60,7 @@ export function ScentWorld({
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            'radial-gradient(60% 50% at 72% 18%, rgba(200,155,60,0.11) 0%, transparent 70%)',
+            'radial-gradient(60% 50% at 72% 18%, rgba(184,134,43,0.11) 0%, transparent 70%)',
         }}
       />
 

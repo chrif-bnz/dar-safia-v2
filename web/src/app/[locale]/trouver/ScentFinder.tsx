@@ -119,7 +119,7 @@ export function ScentFinder() {
               key={value}
               type="button"
               onClick={() => choose(step.key, value as never)}
-              className="ds-card group flex flex-col items-start rounded-md border border-smoke-2 bg-noir-2 p-5 text-start hover:border-gold/60"
+              className="ds-card group flex flex-col items-start rounded-md border border-smoke-2 bg-wine p-5 text-start hover:border-gold/60"
             >
               <span className="ds-text-lift font-serif text-lg text-ivory">
                 {options[value]?.label ?? value}
@@ -180,7 +180,7 @@ function ScentResultView({
       </p>
 
       <div className="mt-6 grid gap-8 sm:grid-cols-[minmax(0,3fr)_minmax(0,4fr)] sm:items-center">
-        <div className="overflow-hidden rounded-md border border-smoke-2 bg-noir-2">
+        <div className="overflow-hidden rounded-md border border-smoke-2 bg-wine">
           {match.imageUrl && (
             // eslint-disable-next-line @next/next/no-img-element
             <img
@@ -239,7 +239,7 @@ function ScentResultView({
               <li key={alt.slug}>
                 <Link
                   href={localePath(locale, `/parfums/${alt.slug}`)}
-                  className="ds-card flex gap-3 rounded-md border border-smoke-2 bg-noir-2 p-3 hover:border-gold/50"
+                  className="ds-card flex gap-3 rounded-md border border-smoke-2 bg-wine p-3 hover:border-gold/50"
                 >
                   {alt.imageUrl && (
                     // eslint-disable-next-line @next/next/no-img-element

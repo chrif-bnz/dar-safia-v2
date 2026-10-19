@@ -9,19 +9,36 @@
    ou une taille en dur dans un composant.
    ══════════════════════════════════════════════════════════════ */
 @theme {
-  /* ── Couleurs de marque (extraites à l'identique de style.css) ── */
-  --color-noir: #1a120f;
-  --color-noir-2: #241915;
-  --color-noir-3: #2d1f1a;
-  --color-burgundy: #340b10;
-  --color-burgundy-2: #480f17;
-  --color-gold: #c89b3c;
-  --color-gold-light: #e4bd68;
-  --color-gold-dark: #8e651d;
-  --color-ivory: #f9f6f0;
-  --color-ivory-2: #ece4d5;
-  --color-smoke: rgba(249, 246, 240, 0.07);
-  --color-smoke-2: rgba(249, 246, 240, 0.12);
+  /* ── PALETTE DE LA MAISON ──
+     Quatre couleurs fondatrices, chacune avec UN rôle. Tout le reste en dérive.
+
+       ESPRESSO  #241915  le fond de page (noir chaud, jamais noir pur)
+       BORDEAUX  #3D0F14  les surfaces « vivantes » : sections en alternance,
+                          cartes, tiroirs, pied de page, fond de la scène 3D
+       OR        #B8862B  l'accent, et seulement l'accent : filets, survols,
+                          surtitres, appels à l'action. Jamais en aplat de fond.
+       IVOIRE    #F2EDE3  le texte, et les filets à faible opacité
+
+     Rythme : espresso ↔ bordeaux en alternance d'une section à l'autre, jamais
+     deux fonds identiques qui se touchent (hors filet). L'or se pose sur les
+     deux fonds (contraste mesuré : 5,3:1 sur espresso, 5,1:1 sur bordeaux). */
+  --color-noir-deep: #170f0c;   /* ombres profondes, voiles */
+  --color-noir: #241915;        /* ESPRESSO — fond de page */
+  --color-noir-2: #2e211c;      /* espresso relevé : panneaux sur espresso */
+  --color-noir-3: #3a2a24;
+  --color-wine-deep: #2a0a0e;   /* bordeaux assombri : voiles, fonds d'image */
+  --color-wine: #3d0f14;        /* BORDEAUX */
+  --color-wine-2: #4d151c;      /* bordeaux relevé : survol, filets */
+  --color-gold: #b8862b;        /* OR */
+  --color-gold-light: #d3a54a;  /* or éclairé : survol, reflets */
+  --color-gold-dark: #8a6420;   /* or assombri : ombres de métal */
+  --color-ivory: #f2ede3;       /* IVOIRE */
+  --color-ivory-2: #e4dac6;
+  /* Anciens noms, conservés comme alias : un seul bordeaux dans la maison. */
+  --color-burgundy: var(--color-wine);
+  --color-burgundy-2: var(--color-wine-2);
+  --color-smoke: rgba(242, 237, 227, 0.07);
+  --color-smoke-2: rgba(242, 237, 227, 0.12);
 
   /* ── Polices ──
      Les variables --font-cinzel-* viennent de next/font (layout.tsx), qui
@@ -57,7 +74,7 @@
   --radius-md: 12px;
   --radius-lg: 24px;
 
-  --shadow-gold: 0 0 45px rgba(200, 155, 60, 0.25);
+  --shadow-gold: 0 0 45px rgba(184, 134, 43, 0.25);
   --shadow-dark: 0 25px 60px rgba(0, 0, 0, 0.6);
 
   --ease-lux: cubic-bezier(0.16, 1, 0.3, 1);
@@ -90,7 +107,7 @@
 :root {
   --universe-accent: var(--color-gold);
   --universe-light: var(--color-gold-light);
-  --universe-glow: rgba(200, 155, 60, 0.25);
+  --universe-glow: rgba(184, 134, 43, 0.25);
 }
 
 /* ══════════════════════════════════════════════════════════════
@@ -252,10 +269,10 @@ body {
    ══════════════════════════════════════════════════════════════ */
 @keyframes ds-glow-breathe {
   0%, 100% {
-    text-shadow: 0 0 16px rgba(228, 189, 104, 0.16), 0 0 2px rgba(228, 189, 104, 0.08);
+    text-shadow: 0 0 16px rgba(211, 165, 74, 0.16), 0 0 2px rgba(211, 165, 74, 0.08);
   }
   50% {
-    text-shadow: 0 0 26px rgba(228, 189, 104, 0.26), 0 0 4px rgba(228, 189, 104, 0.12);
+    text-shadow: 0 0 26px rgba(211, 165, 74, 0.26), 0 0 4px rgba(211, 165, 74, 0.12);
   }
 }
 .ds-text-glow {
@@ -265,7 +282,7 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .ds-text-glow {
     animation: none;
-    text-shadow: 0 0 16px rgba(228, 189, 104, 0.16);
+    text-shadow: 0 0 16px rgba(211, 165, 74, 0.16);
   }
 }
 
@@ -424,9 +441,9 @@ body {
   pointer-events: none;
   background: linear-gradient(
     to top,
-    rgba(16, 11, 9, 0.92) 0%,
-    rgba(16, 11, 9, 0.5) 30%,
-    rgba(16, 11, 9, 0) 62%
+    rgba(23, 15, 12, 0.92) 0%,
+    rgba(23, 15, 12, 0.5) 30%,
+    rgba(23, 15, 12, 0) 62%
   );
 }
 
@@ -453,9 +470,9 @@ body {
        ne doit pas être voilé. */
     background: linear-gradient(
       to top,
-      rgba(16, 11, 9, 0.9) 0%,
-      rgba(16, 11, 9, 0.45) 24%,
-      rgba(16, 11, 9, 0) 50%
+      rgba(23, 15, 12, 0.9) 0%,
+      rgba(23, 15, 12, 0.45) 24%,
+      rgba(23, 15, 12, 0) 50%
     );
   }
 }
@@ -597,7 +614,7 @@ body {
 .ds-text-lift:focus-visible,
 .group:hover .ds-text-lift {
   color: var(--color-gold-light);
-  text-shadow: 0 0 22px rgba(228, 189, 104, 0.32);
+  text-shadow: 0 0 22px rgba(211, 165, 74, 0.32);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -663,8 +680,8 @@ body {
 }
 .ds-ambient {
   background:
-    radial-gradient(42% 48% at 38% 52%, rgba(200, 155, 60, 0.16) 0%, transparent 70%),
-    radial-gradient(30% 36% at 70% 40%, rgba(72, 15, 23, 0.35) 0%, transparent 72%);
+    radial-gradient(42% 48% at 38% 52%, rgba(184, 134, 43, 0.16) 0%, transparent 70%),
+    radial-gradient(30% 36% at 70% 40%, rgba(77, 21, 28, 0.35) 0%, transparent 72%);
   filter: blur(8px);
   animation: ds-ambient-drift 22s ease-in-out infinite;
   will-change: transform;

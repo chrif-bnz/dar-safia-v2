@@ -25,7 +25,7 @@ export function Manifesto({ dict }: { dict: Dictionary }) {
     <section
       ref={ref}
       aria-labelledby="manifeste"
-      className="relative border-t border-smoke-2 bg-noir px-6 py-28 md:px-12 md:py-40 lg:px-20"
+      className="relative border-t border-smoke-2 bg-wine px-6 py-28 md:px-12 md:py-40 lg:px-20"
     >
       <div className="mx-auto max-w-(--container-site)">
         <h2 id="manifeste" className="font-body font-light text-ivory">

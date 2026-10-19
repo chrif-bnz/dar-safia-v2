@@ -49,7 +49,7 @@ export function CartDrawer() {
       onKeyDown={(event) => {
         if (event.key === 'Escape') closeCart();
       }}
-      className="m-0 ms-auto h-dvh max-h-dvh w-full max-w-md bg-noir-2 p-0 text-ivory backdrop:bg-black/70 backdrop:backdrop-blur-sm"
+      className="m-0 ms-auto h-dvh max-h-dvh w-full max-w-md bg-wine p-0 text-ivory backdrop:bg-black/70 backdrop:backdrop-blur-sm"
     >
       <div className="flex h-full flex-col">
         <header className="flex items-center justify-between border-b border-smoke-2 px-5 py-4">

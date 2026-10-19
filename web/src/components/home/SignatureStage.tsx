@@ -123,7 +123,7 @@ export function SignatureStage({
       <section
         ref={sectionRef}
         aria-labelledby="signatures"
-        className="border-t border-smoke-2 bg-noir px-6 py-24 md:px-12 md:py-28 lg:px-20"
+        className="border-t border-smoke-2 bg-wine px-6 py-24 md:px-12 md:py-28 lg:px-20"
       >
         <div className="mx-auto max-w-(--container-site)">
           {heading}
@@ -151,7 +151,7 @@ export function SignatureStage({
     <section
       ref={sectionRef}
       aria-labelledby="signatures"
-      className="relative border-t border-smoke-2 bg-noir"
+      className="relative border-t border-smoke-2 bg-wine"
     >
       <div ref={wrapRef} style={{ height: `${products.length * 100}vh` }}>
         <div className="sticky top-0 h-svh overflow-hidden">
@@ -184,7 +184,7 @@ export function SignatureStage({
                     'radial-gradient(65% 55% at 50% 32%, var(--universe-glow) 0%, transparent 72%)',
                 }}
               />
-              <div className="absolute inset-0 bg-noir/45" />
+              <div className="absolute inset-0 bg-wine/45" />
             </div>
           ))}
 

@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
-import { catalog } from '@/lib/catalog';
+import { catalog, lowestPrice } from '@/lib/catalog';
 import { LOCALES, isLocale } from '@/lib/i18n/config';
 import { getDictionary } from '@/lib/i18n/dictionaries';
 
@@ -34,11 +34,14 @@ export default async function AboutPage({
   const { locale } = await params;
   if (!isLocale(locale)) notFound();
 
-  const [dict, products, brands] = await Promise.all([
+  const [dict, products, brands, featured] = await Promise.all([
     getDictionary(locale),
     catalog.listProducts(),
     catalog.listBrands(),
+    // La pièce la plus rare parmi les parfums mis en avant : le chapitre final.
+    catalog.listProducts({ featured: true, sort: 'price-desc' }),
   ]);
+  const top = featured.items[0];
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -63,6 +66,19 @@ export default async function AboutPage({
       <AboutExperience
         locale={locale}
         dict={dict}
+        product={
+          top
+            ? {
+                slug: top.slug,
+                name: top.name,
+                brand: top.brand.name,
+                family: top.family,
+                priceFrom: lowestPrice(top),
+                description: top.description,
+                concentration: top.concentration,
+              }
+            : null
+        }
         figures={{
           creations: products.total,
           houses: brands.length,

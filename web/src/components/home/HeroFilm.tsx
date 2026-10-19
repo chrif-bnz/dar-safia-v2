@@ -340,7 +340,7 @@ export function HeroFilm({
             preload="auto"
             aria-label={videoLabel}
             // Le plan s'ouvre sur le noir : un fond noir EST le bon poster.
-            style={{ backgroundColor: '#1a120f' }}
+            style={{ backgroundColor: 'var(--color-noir)' }}
           />
         </div>
 
@@ -366,7 +366,7 @@ export function HeroFilm({
               className="absolute inset-0"
               style={{
                 background:
-                  'radial-gradient(55% 45% at 35% 82%, rgba(228,189,104,0.14) 0%, transparent 68%),' +
+                  'radial-gradient(55% 45% at 35% 82%, rgba(211,165,74,0.14) 0%, transparent 68%),' +
                   'radial-gradient(60% 50% at 70% 8%, rgba(0,0,0,0.4) 0%, transparent 70%)',
               }}
             />
@@ -380,7 +380,7 @@ export function HeroFilm({
               className="absolute inset-0"
               style={{
                 background:
-                  'radial-gradient(55% 45% at 65% 82%, rgba(228,189,104,0.12) 0%, transparent 68%),' +
+                  'radial-gradient(55% 45% at 65% 82%, rgba(211,165,74,0.12) 0%, transparent 68%),' +
                   'radial-gradient(60% 50% at 30% 8%, rgba(0,0,0,0.4) 0%, transparent 70%)',
               }}
             />
