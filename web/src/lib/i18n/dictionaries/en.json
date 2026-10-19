@@ -250,6 +250,8 @@
     "empty": "No perfume matches",
     "emptyHint": "Try another olfactory family.",
     "emptyCta": "See the whole collection",
+    "didYouMean": "Did you mean: {suggestion}?",
+    "closestMatches": "Suggested selection for you:",
     "filters": {
       "openButton": "Filters",
       "close": "Close filters",

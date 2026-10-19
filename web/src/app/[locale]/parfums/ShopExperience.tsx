@@ -27,8 +27,9 @@ import {
 } from '@/lib/shuffle';
 
 import { Pagination } from '@/components/Pagination';
+import { searchProducts } from '@/lib/search';
 import { FilterSidebar } from './FilterSidebar';
-import { EMPTY_FILTERS, matchesFilters, toggleValue, type FilterCategory } from './filters';
+import { EMPTY_FILTERS, matchesFacets, toggleValue, type FilterCategory } from './filters';
 import { PerfumeGrid } from './PerfumeGrid';
 import type { ShopProduct } from './shop-product';
 
@@ -68,10 +69,26 @@ export function ShopExperience({
     [products, seed]
   );
 
-  const filtered = useMemo(
-    () => ordered.filter((p) => matchesFilters(p, filters)),
+  const facetFiltered = useMemo(
+    () => ordered.filter((p) => matchesFacets(p, filters)),
     [ordered, filters]
   );
+
+  const searchOutput = useMemo(() => {
+    if (!filters.query.trim()) {
+      return {
+        results: facetFiltered,
+        suggestion: null,
+        fallbackResults: [] as ShopProduct[],
+        totalMatches: facetFiltered.length,
+      };
+    }
+    return searchProducts(facetFiltered, filters.query);
+  }, [facetFiltered, filters.query]);
+
+  const filtered = searchOutput.results;
+  const suggestion = searchOutput.suggestion;
+  const fallbackResults = searchOutput.fallbackResults;
 
   const totalPages = useMemo(
     () => getTotalPages(filtered.length, PERFUMES_PER_PAGE),
@@ -168,6 +185,24 @@ export function ShopExperience({
           </button>
         </div>
 
+        {suggestion && (
+          <div className="mt-3 text-xs text-ivory/70" role="status" aria-live="polite">
+            <span className="opacity-80">
+              {c.didYouMean.split('{suggestion}')[0]}
+            </span>
+            <button
+              type="button"
+              onClick={() => handleToggle('query', suggestion)}
+              className="cursor-pointer font-medium text-gold underline underline-offset-2 transition-colors hover:text-gold-light"
+            >
+              {suggestion}
+            </button>
+            <span className="opacity-80">
+              {c.didYouMean.split('{suggestion}')[1] || ''}
+            </span>
+          </div>
+        )}
+
         {filtered.length > 0 ? (
           <div className="mt-6">
             <PerfumeGrid products={paginated} locale={locale} dict={dict} shuffleKey={seed} />
@@ -179,13 +214,23 @@ export function ShopExperience({
             />
           </div>
         ) : (
-          <div className="mt-10 rounded-md border border-smoke-2 bg-noir-2 px-6 py-14 text-center">
+          <div className="mt-10 rounded-md border border-smoke-2 bg-noir-2 px-6 py-12 text-center">
             <p className="font-serif text-lg text-ivory">{c.empty}</p>
             <p className="mt-2 text-2xs text-ivory/50">{c.emptyHint}</p>
+
+            {fallbackResults.length > 0 && (
+              <div className="mt-8 text-left">
+                <p className="mb-4 font-ui text-2xs uppercase tracking-(--tracking-label) text-gold">
+                  {c.closestMatches}
+                </p>
+                <PerfumeGrid products={fallbackResults} locale={locale} dict={dict} shuffleKey={seed} />
+              </div>
+            )}
+
             <button
               type="button"
               onClick={handleClear}
-              className="ds-btn-ghost mt-6 inline-block rounded-sm border border-gold px-5 py-2.5 text-2xs font-semibold tracking-(--tracking-label) text-gold uppercase transition-colors hover:text-noir"
+              className="ds-btn-ghost mt-8 inline-block rounded-sm border border-gold px-5 py-2.5 text-2xs font-semibold tracking-(--tracking-label) text-gold uppercase transition-colors hover:text-noir"
             >
               {c.emptyCta}
             </button>

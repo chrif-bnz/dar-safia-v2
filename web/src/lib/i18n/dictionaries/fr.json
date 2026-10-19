@@ -250,6 +250,8 @@
     "empty": "Aucun parfum ne correspond",
     "emptyHint": "Essayez une autre famille olfactive.",
     "emptyCta": "Voir toute la collection",
+    "didYouMean": "Vous vouliez dire : {suggestion} ?",
+    "closestMatches": "Sélection suggérée pour vous :",
     "filters": {
       "openButton": "Filtres",
       "close": "Fermer les filtres",

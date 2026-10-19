@@ -33,6 +33,9 @@ export interface ShopProduct {
   brand: { name: string };
   gender: Gender;
   family: FragranceFamily;
+  concentration?: string;
+  description?: string;
+  notesAll?: string[];
   badge?: string;
   image: Media | undefined;
   headlineNote: string | undefined;
@@ -55,6 +58,9 @@ export function toShopProduct(product: Product): ShopProduct {
     brand: { name: product.brand.name },
     gender: product.gender,
     family: product.family,
+    concentration: product.concentration,
+    description: product.description,
+    notesAll: product.notes.map((n) => n.note.name),
     badge: product.badge,
     image: product.images[0],
     headlineNote: product.notes[0]?.note.name,

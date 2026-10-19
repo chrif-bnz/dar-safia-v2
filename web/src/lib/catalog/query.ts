@@ -12,6 +12,7 @@
  * écrits contre l'implémentation statique valident donc aussi celle de Strapi.
  */
 
+import { searchProducts } from '@/lib/search';
 import type { Paginated, Product, ProductQuery } from './types';
 
 /** Prix du format le moins cher — base de tri et d'affichage « à partir de ». */
@@ -19,30 +20,7 @@ export function lowestPrice(product: Product): number {
   return Math.min(...product.variants.map((v) => v.price.amount));
 }
 
-/** Normalise pour la recherche : minuscules, sans accents. */
-function normalize(value: string): string {
-  return value
-    .normalize('NFD')
-    .replace(/[̀-ͯ]/g, '')
-    .toLowerCase();
-}
 
-function matchesSearch(product: Product, term: string): boolean {
-  const haystack = normalize(
-    [
-      product.name,
-      product.brand.name,
-      product.description,
-      product.story ?? '',
-      ...product.notes.map((n) => n.note.name),
-    ].join(' ')
-  );
-  // Chaque mot doit apparaître : « dior bois » ne doit pas ramener tout Dior.
-  return normalize(term)
-    .split(/\s+/)
-    .filter(Boolean)
-    .every((word) => haystack.includes(word));
-}
 
 function applySort(products: Product[], sort: ProductQuery['sort']): Product[] {
   const sorted = [...products];
@@ -87,7 +65,17 @@ export function queryProducts(
   if (query.featured !== undefined) {
     items = items.filter((p) => p.featured === query.featured);
   }
-  if (query.search) items = items.filter((p) => matchesSearch(p, query.search!));
+  if (query.search) {
+    const searchRes = searchProducts(
+      items.map((p) => ({
+        ...p,
+        notesAll: p.notes.map((n) => n.note.name),
+      })),
+      query.search
+    );
+    const mapBySlug = new Map(items.map((p) => [p.slug, p]));
+    items = searchRes.results.map((r) => mapBySlug.get(r.slug)!).filter(Boolean);
+  }
 
   const total = items.length;
   items = applySort(items, query.sort);

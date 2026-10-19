@@ -250,6 +250,8 @@
     "empty": "لا يوجد عطر مطابق",
     "emptyHint": "جرّب عائلة عطرية أخرى.",
     "emptyCta": "عرض كامل المجموعة",
+    "didYouMean": "هل تقصد : {suggestion} ؟",
+    "closestMatches": "عطور مقترحة لك :",
     "filters": {
       "openButton": "التصفية",
       "close": "إغلاق التصفية",
