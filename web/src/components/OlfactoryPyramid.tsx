@@ -36,7 +36,7 @@ export function OlfactoryPyramid({
           if (layerNotes.length === 0) return null;
 
           return (
-            <div key={key} className="bg-wine p-5">
+            <div key={key} className="bg-noir p-5">
               <dt>
                 <span className="text-3xs font-semibold tracking-(--tracking-eyebrow) text-[var(--universe-light)] uppercase">
                   {label}
@@ -47,7 +47,7 @@ export function OlfactoryPyramid({
                 {layerNotes.map(({ note }) => (
                   <span
                     key={note.slug}
-                    className="rounded-xs border border-smoke-2 bg-wine-deep px-2.5 py-1 font-body text-md text-ivory/85"
+                    className="rounded-xs border border-smoke-2 bg-noir-2 px-2.5 py-1 font-body text-md text-ivory/85"
                   >
                     {note.name}
                   </span>

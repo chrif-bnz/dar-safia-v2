@@ -34,7 +34,7 @@ export function ClosingCall({
     <section
       ref={ref}
       aria-labelledby="cloture"
-      className="relative overflow-hidden border-t border-smoke-2 bg-noir px-6 py-32 md:px-12 md:py-44 lg:px-20"
+      className="relative overflow-hidden border-t border-smoke-2 bg-wine-deep px-6 py-32 md:px-12 md:py-44 lg:px-20"
     >
       <div
         aria-hidden="true"

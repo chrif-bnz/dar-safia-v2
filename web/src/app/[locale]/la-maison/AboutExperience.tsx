@@ -103,7 +103,7 @@ export function AboutExperience({
       {/* ── Clôture ── */}
       <section
         aria-labelledby="maison-cloture"
-        className="relative overflow-hidden bg-noir px-6 py-32 md:px-12 md:py-44 lg:px-20"
+        className="relative overflow-hidden bg-wine-deep px-6 py-32 md:px-12 md:py-44 lg:px-20"
       >
         <div
           aria-hidden="true"

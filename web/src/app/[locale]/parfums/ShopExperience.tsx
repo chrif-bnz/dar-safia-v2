@@ -89,7 +89,7 @@ export function ShopExperience({
             <PerfumeGrid products={filtered} locale={locale} dict={dict} />
           </div>
         ) : (
-          <div className="mt-10 rounded-md border border-smoke-2 bg-wine px-6 py-14 text-center">
+          <div className="mt-10 rounded-md border border-smoke-2 bg-noir px-6 py-14 text-center">
             <p className="font-serif text-lg text-ivory">{c.empty}</p>
             <p className="mt-2 text-2xs text-ivory/50">{c.emptyHint}</p>
             <button

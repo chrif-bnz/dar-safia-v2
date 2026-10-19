@@ -12,22 +12,24 @@
   /* ── PALETTE DE LA MAISON ──
      Quatre couleurs fondatrices, chacune avec UN rôle. Tout le reste en dérive.
 
-       ESPRESSO  #241915  le fond de page (noir chaud, jamais noir pur)
-       BORDEAUX  #3D0F14  les surfaces « vivantes » : sections en alternance,
-                          cartes, tiroirs, pied de page, fond de la scène 3D
+       BORDEAUX  #3D0F14  LA couleur de fond : page, sections, pied de page,
+                          tiroirs, scène 3D (alterné avec bordeaux profond)
+       ESPRESSO  #241915  les petites surfaces posées sur le bordeaux : cartes
+                          produit, panneaux, pyramide, formulaires
        OR        #B8862B  l'accent, et seulement l'accent : filets, survols,
                           surtitres, appels à l'action. Jamais en aplat de fond.
        IVOIRE    #F2EDE3  le texte, et les filets à faible opacité
 
-     Rythme : espresso ↔ bordeaux en alternance d'une section à l'autre, jamais
-     deux fonds identiques qui se touchent (hors filet). L'or se pose sur les
+     Rythme : bordeaux ↔ bordeaux profond (#2A0A0E) d'une section à l'autre,
+     jamais deux fonds identiques qui se touchent. L'espresso n'est jamais un
+     fond de section : il sert de contrepoint, en cartes et panneaux. L'or se pose sur les
      deux fonds (contraste mesuré : 5,3:1 sur espresso, 5,1:1 sur bordeaux). */
   --color-noir-deep: #170f0c;   /* ombres profondes, voiles */
-  --color-noir: #241915;        /* ESPRESSO — fond de page */
+  --color-noir: #241915;        /* ESPRESSO — cartes et panneaux */
   --color-noir-2: #2e211c;      /* espresso relevé : panneaux sur espresso */
   --color-noir-3: #3a2a24;
   --color-wine-deep: #2a0a0e;   /* bordeaux assombri : voiles, fonds d'image */
-  --color-wine: #3d0f14;        /* BORDEAUX */
+  --color-wine: #3d0f14;        /* BORDEAUX — fond de page */
   --color-wine-2: #4d151c;      /* bordeaux relevé : survol, filets */
   --color-gold: #b8862b;        /* OR */
   --color-gold-light: #d3a54a;  /* or éclairé : survol, reflets */
@@ -116,7 +118,7 @@
    sombre. Le fond et les couleurs sont donc peints explicitement.
    ══════════════════════════════════════════════════════════════ */
 body {
-  background: var(--color-noir);
+  background: var(--color-wine);
   color: var(--color-ivory);
   font-family: var(--font-ui);
   -webkit-font-smoothing: antialiased;

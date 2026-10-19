@@ -138,7 +138,7 @@ export default async function ProductPage({
           {/* ── Visuel ── */}
           <div>
             <div
-              className="overflow-hidden rounded-md border border-smoke-2 bg-wine"
+              className="overflow-hidden rounded-md border border-smoke-2 bg-noir"
               style={{ boxShadow: '0 24px 60px -24px var(--universe-glow)' }}
             >
               {image && (
@@ -160,7 +160,7 @@ export default async function ProductPage({
               style={{ gridTemplateColumns: `repeat(${metrics.length}, minmax(0, 1fr))` }}
             >
               {metrics.map(({ label, value }) => (
-                <div key={label} className="bg-wine px-3 py-4 text-center">
+                <div key={label} className="bg-noir px-3 py-4 text-center">
                   <dt className="text-3xs tracking-(--tracking-label) text-ivory/40 uppercase">
                     {label}
                   </dt>

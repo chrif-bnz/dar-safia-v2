@@ -45,9 +45,9 @@ export function ProductCard({
   return (
     <article
       data-universe={product.family}
-      className="ds-card group relative flex flex-col overflow-hidden rounded-md border border-smoke-2 bg-wine hover:border-[var(--universe-glow)]"
+      className="ds-card group relative flex flex-col overflow-hidden rounded-md border border-smoke-2 bg-noir hover:border-[var(--universe-glow)]"
     >
-      <div className="relative aspect-4/5 overflow-hidden bg-wine-deep">
+      <div className="relative aspect-4/5 overflow-hidden bg-noir-2">
         {image && (
           // eslint-disable-next-line @next/next/no-img-element
           <img

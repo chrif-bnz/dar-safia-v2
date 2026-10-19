@@ -48,7 +48,7 @@ export function HouseFigures({
     <section
       ref={ref}
       aria-labelledby="chiffres"
-      className="border-t border-smoke-2 bg-noir px-6 py-24 md:px-12 md:py-32 lg:px-20"
+      className="border-t border-smoke-2 bg-wine-deep px-6 py-24 md:px-12 md:py-32 lg:px-20"
     >
       <div className="mx-auto max-w-(--container-site)">
         <h2
