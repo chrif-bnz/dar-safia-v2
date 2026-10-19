@@ -1,5 +1,7 @@
 import Link from 'next/link';
 
+import { ProductImage } from '@/components/ProductImage';
+
 import type { Product } from '@/lib/catalog';
 import { formatFamily, formatGender, formatPrice, formatVolume } from '@/lib/format';
 import type { Locale } from '@/lib/i18n/config';
@@ -45,18 +47,16 @@ export function ProductCard({
   return (
     <article
       data-universe={product.family}
-      className="ds-card group relative flex flex-col overflow-hidden rounded-md border border-smoke-2 bg-noir hover:border-[var(--universe-glow)]"
+      className="ds-card group relative flex flex-col overflow-hidden rounded-md border border-smoke-2 bg-noir-2 hover:border-[var(--universe-glow)]"
     >
-      <div className="relative aspect-4/5 overflow-hidden bg-noir-2">
+      <div className="relative aspect-4/5 overflow-hidden bg-noir-3">
         {image && (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
+          <ProductImage
             src={image.url}
             srcSet={image.srcset ?? undefined}
             sizes="(max-width: 580px) 88vw, (max-width: 1024px) 44vw, 300px"
             alt={image.alt}
             loading="lazy"
-            decoding="async"
             className="h-full w-full object-cover transition-transform duration-700 ease-(--ease-lux) group-hover:scale-105"
           />
         )}
@@ -77,7 +77,7 @@ export function ProductCard({
           <span className="text-3xs font-semibold tracking-(--tracking-eyebrow) text-gold uppercase">
             {product.brand.name}
           </span>
-          <span className="text-3xs text-ivory/45">
+          <span className="shrink-0 text-3xs whitespace-nowrap text-ivory/58">
             {formatVolume(variant.volumeMl, locale, dict)}
           </span>
         </div>
@@ -104,7 +104,7 @@ export function ProductCard({
           {/* Sur une grille à 2 colonnes (mobile), le prix et ce label ne
               tiennent plus côte à côte sans se chevaucher — la mention
               reste lisible ailleurs sur le site (pied de page, fiche). */}
-          <span className="hidden shrink-0 text-3xs tracking-(--tracking-label) text-ivory/35 uppercase sm:inline">
+          <span className="hidden shrink-0 text-3xs tracking-(--tracking-label) text-ivory/58 uppercase sm:inline">
             {dict.common.authentic}
           </span>
         </div>

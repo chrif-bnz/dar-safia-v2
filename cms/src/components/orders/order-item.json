@@ -1,0 +1,41 @@
+{
+  "collectionName": "components_orders_order_items",
+  "info": {
+    "displayName": "Ligne de commande",
+    "icon": "shoppingCart",
+    "description": "Instantané d'une ligne : nom et prix relus côté serveur."
+  },
+  "options": {},
+  "attributes": {
+    "productSlug": {
+      "type": "string",
+      "required": true,
+      "maxLength": 160
+    },
+    "productName": {
+      "type": "string",
+      "required": true,
+      "maxLength": 200
+    },
+    "variantId": {
+      "type": "string",
+      "maxLength": 64
+    },
+    "volumeMl": {
+      "type": "integer",
+      "min": 0
+    },
+    "unitPrice": {
+      "type": "integer",
+      "required": true,
+      "min": 0
+    },
+    "quantity": {
+      "type": "integer",
+      "required": true,
+      "min": 1,
+      "max": 99,
+      "default": 1
+    }
+  }
+}

@@ -81,15 +81,17 @@ export function useReveal(ref: RefObject<HTMLElement | null>, deps: unknown[] = 
         };
 
         rise.forEach((el) => {
-          const from = { opacity: 0, y: 26, filter: 'blur(10px)' };
-          const to = { opacity: 1, y: 0, filter: 'blur(0px)' };
+          // La ligne se redresse en montant : un léger roulis depuis la base
+          // gauche, plus de volume qu'une simple translation.
+          const from = { opacity: 0, y: 44, rotate: 2.2, transformOrigin: '0% 100%', filter: 'blur(12px)' };
+          const to = { opacity: 1, y: 0, rotate: 0, filter: 'blur(0px)' };
           if (inView(el)) {
             gsap.fromTo(el, from, {
               ...to,
               duration: 1.9,
               delay: 0.15 + lineIndex(el) * 0.14,
               ease: 'power1.out',
-              clearProps: 'filter',
+              clearProps: 'filter,rotate,transformOrigin',
             });
           } else {
             gsap.fromTo(el, from, {
@@ -106,8 +108,8 @@ export function useReveal(ref: RefObject<HTMLElement | null>, deps: unknown[] = 
         });
 
         fade.forEach((el, i) => {
-          const from = { opacity: 0, y: 22 };
-          const to = { opacity: 1, y: 0 };
+          const from = { opacity: 0, y: 30, scale: 0.985 };
+          const to = { opacity: 1, y: 0, scale: 1 };
           if (inView(el)) {
             gsap.fromTo(el, from, {
               ...to,

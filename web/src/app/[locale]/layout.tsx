@@ -1,25 +1,20 @@
 import type { Metadata } from 'next';
-import {
-  Cairo,
-  Cinzel,
-  Cinzel_Decorative,
-  Cormorant_Garamond,
-  Montserrat,
-  Noto_Naskh_Arabic,
-} from 'next/font/google';
+import localFont from 'next/font/local';
 import { notFound } from 'next/navigation';
 
 import { PlaceholderPhoneBanner } from '@/components/PlaceholderPhoneBanner';
 import { SiteFooter } from '@/components/SiteFooter';
 import { SiteHeader } from '@/components/SiteHeader';
-import { CartDrawer } from '@/components/cart/CartDrawer';
 import { CartProvider } from '@/components/cart/CartProvider';
 import { I18nProvider } from '@/components/i18n/I18nProvider';
 import { InlineScript } from '@/components/InlineScript';
+import { Cursor } from '@/components/motion/Cursor';
+import { RouteProgress } from '@/components/motion/RouteProgress';
 import { SmoothScroll } from '@/components/motion/SmoothScroll';
 import { DIRECTION, LOCALES, isLocale } from '@/lib/i18n/config';
 import { introGuardScript } from '@/lib/intro-guard';
 import { getDictionary } from '@/lib/i18n/dictionaries';
+import { OG_LOCALE, siteUrl } from '@/lib/site';
 
 import '../globals.css';
 
@@ -31,41 +26,71 @@ import '../globals.css';
  * Arabe : Noto Naskh Arabic (titres, équivalent serif) et Cairo (interface).
  * Les deux jeux sont toujours chargés ; le CSS choisit selon `dir`.
  */
-const cinzelDecorative = Cinzel_Decorative({
-  subsets: ['latin'],
-  weight: ['400', '700', '900'],
+const cinzelDecorative = localFont({
+  src: [
+    { path: '../../fonts/cinzel-decorative-400-normal.woff2', weight: '400', style: 'normal' },
+    { path: '../../fonts/cinzel-decorative-700-normal.woff2', weight: '700', style: 'normal' }
+  ],
   variable: '--font-cinzel-decorative',
   display: 'swap',
 });
-const cinzel = Cinzel({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
+
+const cinzel = localFont({
+  src: [
+    { path: '../../fonts/cinzel-400-normal.woff2', weight: '400', style: 'normal' },
+    { path: '../../fonts/cinzel-500-normal.woff2', weight: '500', style: 'normal' },
+    { path: '../../fonts/cinzel-600-normal.woff2', weight: '600', style: 'normal' },
+    { path: '../../fonts/cinzel-700-normal.woff2', weight: '700', style: 'normal' }
+  ],
   variable: '--font-cinzel',
   display: 'swap',
 });
-const cormorant = Cormorant_Garamond({
-  subsets: ['latin'],
-  weight: ['300', '400', '500', '600'],
-  style: ['normal', 'italic'],
+
+const cormorant = localFont({
+  src: [
+    { path: '../../fonts/cormorant-garamond-300-normal.woff2', weight: '300', style: 'normal' },
+    { path: '../../fonts/cormorant-garamond-400-normal.woff2', weight: '400', style: 'normal' },
+    { path: '../../fonts/cormorant-garamond-400-italic.woff2', weight: '400', style: 'italic' },
+    { path: '../../fonts/cormorant-garamond-500-normal.woff2', weight: '500', style: 'normal' },
+    { path: '../../fonts/cormorant-garamond-600-normal.woff2', weight: '600', style: 'normal' }
+  ],
   variable: '--font-cormorant',
   display: 'swap',
 });
-const montserrat = Montserrat({
-  subsets: ['latin'],
-  weight: ['200', '300', '400', '500', '600', '700'],
+
+const montserrat = localFont({
+  src: [
+    { path: '../../fonts/montserrat-400-normal.woff2', weight: '400', style: 'normal' },
+    { path: '../../fonts/montserrat-500-normal.woff2', weight: '500', style: 'normal' },
+    { path: '../../fonts/montserrat-600-normal.woff2', weight: '600', style: 'normal' },
+    { path: '../../fonts/montserrat-700-normal.woff2', weight: '700', style: 'normal' }
+  ],
   variable: '--font-montserrat',
   display: 'swap',
 });
-const notoNaskh = Noto_Naskh_Arabic({
-  subsets: ['arabic'],
-  weight: ['400', '500', '600', '700'],
+
+const notoNaskh = localFont({
+  src: [
+    { path: '../../fonts/noto-naskh-arabic-400-normal.woff2', weight: '400', style: 'normal' },
+    { path: '../../fonts/noto-naskh-arabic-500-normal.woff2', weight: '500', style: 'normal' },
+    { path: '../../fonts/noto-naskh-arabic-600-normal.woff2', weight: '600', style: 'normal' },
+    { path: '../../fonts/noto-naskh-arabic-700-normal.woff2', weight: '700', style: 'normal' }
+  ],
   variable: '--font-arabic-serif',
+  preload: false, // arabe seulement : ne pèse pas sur les pages FR / EN
   display: 'swap',
 });
-const cairo = Cairo({
-  subsets: ['arabic'],
-  weight: ['300', '400', '500', '600', '700'],
+
+const cairo = localFont({
+  src: [
+    { path: '../../fonts/cairo-300-normal.woff2', weight: '300', style: 'normal' },
+    { path: '../../fonts/cairo-400-normal.woff2', weight: '400', style: 'normal' },
+    { path: '../../fonts/cairo-500-normal.woff2', weight: '500', style: 'normal' },
+    { path: '../../fonts/cairo-600-normal.woff2', weight: '600', style: 'normal' },
+    { path: '../../fonts/cairo-700-normal.woff2', weight: '700', style: 'normal' }
+  ],
   variable: '--font-arabic-sans',
+  preload: false, // arabe seulement : ne pèse pas sur les pages FR / EN
   display: 'swap',
 });
 
@@ -75,21 +100,33 @@ const FONT_VARS = [
   cormorant.variable,
   montserrat.variable,
   notoNaskh.variable,
-  cairo.variable,
+  cairo.variable
 ].join(' ');
 
 export function generateStaticParams() {
   return LOCALES.map((locale) => ({ locale }));
 }
 
-export const metadata: Metadata = {
-  title: {
-    default: 'Dar Safia — Maison de Haute Parfumerie',
-    template: '%s | Dar Safia',
-  },
-  description:
-    "Parfums niche et signatures d'exception, sélectionnés et livrés dans les 58 wilayas.",
-};
+/** Titre et description du site dans la langue de la page (et non toujours en français). */
+export async function generateMetadata({ params }: LayoutProps<'/[locale]'>): Promise<Metadata> {
+  const { locale } = await params;
+  if (!isLocale(locale)) return {};
+  const dict = await getDictionary(locale);
+  const house = dict.home.eyebrow.split('·')[0].trim();
+  return {
+    metadataBase: siteUrl(),
+    title: {
+      default: `${dict.common.brandName} — ${house}`,
+      template: `%s | ${dict.common.brandName}`,
+    },
+    description: dict.home.tagline,
+    openGraph: {
+      siteName: dict.common.brandName,
+      locale: OG_LOCALE[locale],
+      type: 'website',
+    },
+  };
+}
 
 export default async function RootLayout({
   children,
@@ -110,7 +147,7 @@ export default async function RootLayout({
             c'est le seul moment où l'en-tête peut être voilé sans flash. */}
         <InlineScript html={introGuardScript} />
       </head>
-      <body className="min-h-screen antialiased">
+      <body className="min-h-screen antialiased overflow-x-clip" suppressHydrationWarning>
         <a
           href="#contenu"
           className="sr-only focus:not-sr-only focus:absolute focus:top-0 focus:z-50 focus:bg-gold focus:px-5 focus:py-3 focus:text-sm focus:font-semibold focus:text-noir focus:start-0"
@@ -123,10 +160,11 @@ export default async function RootLayout({
               des composants serveur. */}
           <CartProvider>
             <SmoothScroll />
+            <Cursor />
+            <RouteProgress />
             <SiteHeader locale={locale} dict={dict} />
             {children}
             <SiteFooter locale={locale} dict={dict} />
-            <CartDrawer />
             <PlaceholderPhoneBanner dict={dict} />
           </CartProvider>
         </I18nProvider>

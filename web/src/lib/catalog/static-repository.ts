@@ -17,7 +17,11 @@
 import brandsJson from '@/data/brands.json';
 import notesJson from '@/data/notes.json';
 import productsJson from '@/data/products.json';
+import translationsJson from '@/data/translations.json';
 
+import type { Locale } from '@/lib/i18n/config';
+
+import { localizeProduct, SOURCE_LOCALE, type CatalogTranslations } from './localize';
 import { queryProducts, relatedProducts } from './query';
 import type {
   Brand,
@@ -83,7 +87,23 @@ function hydrate(wire: WireProduct): Product {
 }
 
 const allProducts: Product[] = wireProducts.map(hydrate);
-const productBySlug = new Map(allProducts.map((p) => [p.slug, p]));
+
+const translations = translationsJson as Partial<Record<Locale, CatalogTranslations>>;
+
+/** Catalogue dans une langue : français = les données d'origine, sinon la superposition. */
+const byLocale = new Map<Locale, { list: Product[]; bySlug: Map<string, Product> }>();
+function forLocale(locale: Locale = SOURCE_LOCALE) {
+  let entry = byLocale.get(locale);
+  if (!entry) {
+    const list =
+      locale === SOURCE_LOCALE
+        ? allProducts
+        : allProducts.map((p) => localizeProduct(p, translations[locale]));
+    entry = { list, bySlug: new Map(list.map((p) => [p.slug, p])) };
+    byLocale.set(locale, entry);
+  }
+  return entry;
+}
 
 // Ré-export : nombre d'appelants importent lowestPrice depuis le repository.
 export { lowestPrice } from './query';
@@ -97,15 +117,15 @@ export const staticCatalogRepository: CatalogRepository = {
     if (query.collectionSlug) {
       return { items: [], total: 0, offset: query.offset ?? 0, limit: query.limit ?? 0 };
     }
-    return queryProducts(allProducts, query);
+    return queryProducts(forLocale(query.locale).list, query);
   },
 
-  async getProductBySlug(slug: string): Promise<Product | null> {
-    return productBySlug.get(slug) ?? null;
+  async getProductBySlug(slug: string, locale?: Locale): Promise<Product | null> {
+    return forLocale(locale).bySlug.get(slug) ?? null;
   },
 
-  async getRelatedProducts(slug: string, limit = 3): Promise<Product[]> {
-    return relatedProducts(allProducts, slug, limit);
+  async getRelatedProducts(slug: string, limit = 3, locale?: Locale): Promise<Product[]> {
+    return relatedProducts(forLocale(locale).list, slug, limit);
   },
 
   async listBrands(): Promise<Brand[]> {

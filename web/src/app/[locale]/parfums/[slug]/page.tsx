@@ -4,19 +4,22 @@ import { notFound } from 'next/navigation';
 
 import { OlfactoryPyramid } from '@/components/OlfactoryPyramid';
 import { ProductCard } from '@/components/ProductCard';
-import { AddToCartButton } from '@/components/cart/AddToCartButton';
+import { ProductImage } from '@/components/ProductImage';
+import { ProductOrderForm } from '@/components/ProductOrderForm';
+import { ScrollReveal } from '@/components/motion/ScrollReveal';
 import { catalog, lowestPrice } from '@/lib/catalog';
 import {
   formatFamily,
   formatGender,
   formatLongevity,
-  formatPrice,
   formatSillage,
   formatVolume,
 } from '@/lib/format';
+import { encodeAssetPath } from '@/lib/asset-url';
 import { LOCALES, isLocale } from '@/lib/i18n/config';
 import { getDictionary, interpolate } from '@/lib/i18n/dictionaries';
 import { localePath } from '@/lib/i18n/routing';
+import { absoluteUrl, localeAlternates } from '@/lib/site';
 import { orderMessage, whatsappUrl } from '@/lib/whatsapp';
 
 /**
@@ -24,8 +27,8 @@ import { orderMessage, whatsappUrl } from '@/lib/whatsapp';
  * indexable — l'ancien site rendait la fiche en JavaScript depuis un fragment
  * d'URL, invisible au crawl.
  *
- * NB : le CONTENU du parfum (nom, description, notes) reste en français ; sa
- * traduction relèvera de l'i18n Strapi. Seule l'interface est multilingue.
+ * Le contenu du parfum (description, récit, badge, notes) suit la langue de la
+ * page ; un champ non traduit retombe sur le français (voir lib/catalog/localize).
  */
 export async function generateStaticParams() {
   const { items } = await catalog.listProducts();
@@ -37,19 +40,22 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: PageProps<'/[locale]/parfums/[slug]'>): Promise<Metadata> {
-  const { slug } = await params;
-  const product = await catalog.getProductBySlug(slug);
+  const { locale, slug } = await params;
+  const product = await catalog.getProductBySlug(slug, isLocale(locale) ? locale : undefined);
   if (!product) return {};
 
   const image = product.images[0];
+  const path = `/parfums/${product.slug}`;
   return {
     title: product.seo?.title ?? `${product.name} — ${product.brand.name}`,
     description: product.seo?.description ?? product.description.slice(0, 155),
+    alternates: localeAlternates(isLocale(locale) ? locale : 'fr', path),
     openGraph: {
       title: `${product.name} — ${product.brand.name}`,
       description: product.description.slice(0, 155),
       type: 'website',
-      images: image ? [{ url: image.url, alt: image.alt }] : undefined,
+      url: localePath(isLocale(locale) ? locale : 'fr', path),
+      images: image ? [{ url: encodeAssetPath(image.url), alt: image.alt }] : undefined,
     },
   };
 }
@@ -62,16 +68,19 @@ export default async function ProductPage({
 
   const [dict, product] = await Promise.all([
     getDictionary(locale),
-    catalog.getProductBySlug(slug),
+    catalog.getProductBySlug(slug, locale),
   ]);
   if (!product) notFound();
 
-  const related = await catalog.getRelatedProducts(slug, 4);
+  const related = await catalog.getRelatedProducts(slug, 4, locale);
   const p = dict.product;
   const image = product.images[0];
   const variant = product.variants[0];
   const price = { amount: lowestPrice(product), currency: 'DZD' as const };
+  const formattedPrice = `DZD ${new Intl.NumberFormat('en-US').format(price.amount)}`;
   const orderUrl = whatsappUrl(orderMessage(product, locale, dict));
+
+  const titleWords = product.name.split(' ');
 
   const metrics = [
     { label: p.metrics.longevity, value: formatLongevity(product.longevityHours, dict) },
@@ -85,7 +94,8 @@ export default async function ProductPage({
     name: product.name,
     brand: { '@type': 'Brand', name: product.brand.name },
     description: product.description,
-    image: image ? [image.url] : undefined,
+    image: image ? [absoluteUrl(encodeAssetPath(image.url))] : undefined,
+    url: absoluteUrl(localePath(locale, `/parfums/${product.slug}`)),
     offers: {
       '@type': 'Offer',
       price: price.amount,
@@ -114,16 +124,16 @@ export default async function ProductPage({
       />
 
       <div className="relative mx-auto max-w-(--container-site) px-5 pt-28 pb-10 md:px-8 md:pt-32 md:pb-14">
-        <nav aria-label="breadcrumb" className="text-2xs text-ivory/45">
+        <nav aria-label={p.breadcrumbLabel} className="text-2xs text-ivory/58">
           <ol className="flex flex-wrap items-center gap-2">
             <li>
-              <Link href={localePath(locale, '/')} className="ds-navlink hover:text-gold">
+              <Link href={localePath(locale, '/')} className="ds-gold-underline">
                 {p.breadcrumbHome}
               </Link>
             </li>
             <li aria-hidden="true">◆</li>
             <li>
-              <Link href={localePath(locale, '/parfums')} className="ds-navlink hover:text-gold">
+              <Link href={localePath(locale, '/parfums')} className="ds-gold-underline">
                 {p.breadcrumbCatalog}
               </Link>
             </li>
@@ -136,63 +146,101 @@ export default async function ProductPage({
 
         <div className="mt-8 grid gap-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] lg:gap-16">
           {/* ── Visuel ── */}
-          <div>
-            <div
-              className="overflow-hidden rounded-md border border-smoke-2 bg-noir"
-              style={{ boxShadow: '0 24px 60px -24px var(--universe-glow)' }}
-            >
-              {image && (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
-                  src={image.url}
-                  srcSet={image.srcset ?? undefined}
-                  sizes="(max-width: 1024px) 92vw, 520px"
-                  alt={image.alt}
-                  fetchPriority="high"
-                  decoding="async"
-                  className="aspect-4/5 w-full object-cover"
+          <div className="ds-product-sticky-col">
+            <div className="w-full">
+              <div
+                className="ds-product-photo-card group/photo relative overflow-hidden rounded-md border border-smoke-2 bg-noir-2 transition-[border-color,box-shadow] duration-500 hover:border-gold/50"
+                style={{ boxShadow: '0 24px 60px -24px var(--universe-glow)' }}
+              >
+                {/* Halo doré doux en arrière-plan au survol */}
+                <div
+                  aria-hidden="true"
+                  className="pointer-events-none absolute -inset-4 rounded-xl bg-gold/15 opacity-0 blur-2xl transition-opacity duration-500 group-hover/photo:opacity-100"
                 />
-              )}
-            </div>
+                {image && (
+                  <div className="overflow-hidden">
+                    <ProductImage
+                      src={image.url}
+                      srcSet={image.srcset ?? undefined}
+                      sizes="(max-width: 1024px) 92vw, 520px"
+                      alt={image.alt}
+                      fetchPriority="high"
+                      className="ds-product-photo-img aspect-4/5 w-full object-cover transition-transform duration-700 ease-(--ease-lux) group-hover/photo:scale-[1.03]"
+                    />
+                  </div>
+                )}
+              </div>
 
-            <dl
-              className="mt-4 grid gap-px overflow-hidden rounded-md border border-smoke-2 bg-smoke-2"
-              style={{ gridTemplateColumns: `repeat(${metrics.length}, minmax(0, 1fr))` }}
-            >
-              {metrics.map(({ label, value }) => (
-                <div key={label} className="bg-noir px-3 py-4 text-center">
-                  <dt className="text-3xs tracking-(--tracking-label) text-ivory/40 uppercase">
-                    {label}
-                  </dt>
-                  <dd className="mt-1.5 font-serif text-md text-[var(--universe-light)]">
-                    {value}
-                  </dd>
-                </div>
-              ))}
-            </dl>
+              <ScrollReveal delay={120}>
+                <dl
+                  className="mt-4 grid gap-2.5"
+                  style={{ gridTemplateColumns: `repeat(${metrics.length}, minmax(0, 1fr))` }}
+                >
+                  {metrics.map(({ label, value }) => (
+                    <div
+                      key={label}
+                      className="ds-metric-card cursor-default rounded-md border border-smoke-2 bg-noir-2 px-3 py-4 text-center"
+                    >
+                      <dt className="text-3xs tracking-(--tracking-label) text-ivory/58 uppercase">
+                        {label}
+                      </dt>
+                      <dd className="mt-1.5 font-serif text-md text-[var(--universe-light)]">
+                        {value}
+                      </dd>
+                    </div>
+                  ))}
+                </dl>
+              </ScrollReveal>
+            </div>
           </div>
 
           {/* ── Informations ── */}
           <div>
             <div className="flex flex-wrap items-center gap-2">
-              <span className="text-3xs font-semibold tracking-(--tracking-eyebrow) text-gold uppercase">
+              <span
+                className="ds-stagger-item text-3xs font-semibold tracking-(--tracking-eyebrow) text-gold uppercase"
+                style={{ animationDelay: '0ms' }}
+              >
                 {product.brand.name}
               </span>
-              <span className="rounded-xs border border-smoke-2 px-2 py-0.5 text-3xs tracking-(--tracking-label) text-ivory/60 uppercase">
+              <span
+                className="ds-stagger-item rounded-xs border border-smoke-2 px-2 py-0.5 text-3xs tracking-(--tracking-label) text-ivory/60 uppercase"
+                style={{ animationDelay: '80ms' }}
+              >
                 {formatGender(product.gender, dict)}
               </span>
               {product.concentration && (
-                <span className="text-3xs text-ivory/45">{product.concentration}</span>
+                <span
+                  className="ds-stagger-item text-3xs text-ivory/58"
+                  style={{ animationDelay: '160ms' }}
+                >
+                  {product.concentration}
+                </span>
               )}
             </div>
 
             <h1 className="mt-3 font-serif text-display-md leading-tight text-balance text-ivory">
-              {product.name}
+              {titleWords.map((word, i) => (
+                <span
+                  key={i}
+                  className="inline-block overflow-hidden align-top me-[0.28em] last:me-0"
+                >
+                  <span
+                    className="ds-word-reveal"
+                    style={{ animationDelay: `${240 + i * 80}ms` }}
+                  >
+                    {word}
+                  </span>
+                </span>
+              ))}
             </h1>
 
-            <div className="mt-6 flex flex-wrap items-baseline gap-x-4 gap-y-2 border-y border-smoke-2 py-5">
+            <div
+              className="ds-stagger-item mt-6 flex flex-wrap items-baseline gap-x-4 gap-y-2 border-y border-smoke-2 py-5"
+              style={{ animationDelay: `${240 + titleWords.length * 80}ms` }}
+            >
               <span className="font-serif text-2xl text-[var(--universe-light)] tabular-nums">
-                {formatPrice(price, locale)}
+                {formattedPrice}
               </span>
               <span className="text-2xs text-ivory/50">
                 {formatVolume(variant.volumeMl, locale, dict)}
@@ -204,69 +252,66 @@ export default async function ProductPage({
               </span>
             </div>
 
-            <p className="mt-6 font-body text-xl leading-relaxed text-ivory/80">
+            <p
+              className="ds-stagger-item mt-6 font-body text-xl leading-relaxed text-ivory/80"
+              style={{ animationDelay: `${320 + titleWords.length * 80}ms` }}
+            >
               {product.description}
             </p>
 
-            <div className="mt-8 flex flex-wrap gap-3">
-              {orderUrl ? (
-                <a
-                  href={orderUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="ds-btn inline-flex items-center gap-2.5 rounded-sm bg-gold px-7 py-3.5 text-sm font-semibold tracking-(--tracking-label) text-noir uppercase transition-colors duration-200 hover:bg-gold-light"
-                >
-                  {p.order}
-                </a>
-              ) : (
-                <p className="rounded-sm border border-smoke-2 px-5 py-3.5 text-sm text-ivory/50">
-                  {p.orderUnavailable}
-                </p>
-              )}
-
-              <AddToCartButton
-                line={{
-                  productSlug: product.slug,
-                  variantId: variant.id,
-                  name: product.name,
-                  brandName: product.brand.name,
-                  imageUrl: image?.url ?? '',
-                  volumeMl: variant.volumeMl,
-                  unitPrice: price.amount,
-                  currency: 'DZD',
-                }}
+            <ScrollReveal className="mt-[clamp(24px,4vh,48px)]">
+              <ProductOrderForm
+                product={product}
+                variant={variant}
+                priceAmount={price.amount}
+                image={image}
+                locale={locale}
+                dict={dict}
+                hasOrderUrl={!!orderUrl}
               />
-            </div>
+            </ScrollReveal>
 
-            <OlfactoryPyramid notes={product.notes} dict={dict} />
-
-            {product.story && (
-              <section aria-labelledby="histoire" className="mt-14">
-                <h2 id="histoire" className="font-serif text-xl text-ivory">
-                  {p.storyTitle}
-                </h2>
-                <p className="mt-4 font-body text-xl leading-relaxed text-ivory/70">
-                  {product.story}
-                </p>
-              </section>
-            )}
+            <ScrollReveal className="mt-[clamp(24px,4vh,48px)]">
+              <OlfactoryPyramid notes={product.notes} dict={dict} />
+            </ScrollReveal>
           </div>
         </div>
 
-        {related.length > 0 && (
-          <section aria-labelledby="similaires" className="mt-24">
-            <h2
-              id="similaires"
-              className="border-b border-smoke-2 pb-4 font-serif text-xl text-ivory"
-            >
-              {p.relatedTitle}
-            </h2>
-            <div className="mt-8 grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-6">
-              {related.map((item) => (
-                <ProductCard key={item.slug} product={item} locale={locale} dict={dict} />
-              ))}
+        {/* ── Histoire du flacon (hors conteneur sticky) ── */}
+        {product.story && (
+          <ScrollReveal className="mt-[clamp(24px,4vh,48px)]">
+            <div className="grid gap-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] lg:gap-16">
+              <div className="hidden lg:block"></div>
+              <div>
+                <section aria-labelledby="histoire">
+                  <h2 id="histoire" className="font-serif text-xl text-ivory">
+                    {p.storyTitle}
+                  </h2>
+                  <p className="mt-4 font-body text-xl leading-relaxed text-ivory/70">
+                    {product.story}
+                  </p>
+                </section>
+              </div>
             </div>
-          </section>
+          </ScrollReveal>
+        )}
+
+        {related.length > 0 && (
+          <ScrollReveal className="mt-[clamp(32px,5vh,64px)]">
+            <section aria-labelledby="similaires">
+              <h2
+                id="similaires"
+                className="border-b border-smoke-2 pb-4 font-serif text-xl text-ivory"
+              >
+                {p.relatedTitle}
+              </h2>
+              <div className="mt-8 grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-6">
+                {related.map((item) => (
+                  <ProductCard key={item.slug} product={item} locale={locale} dict={dict} />
+                ))}
+              </div>
+            </section>
+          </ScrollReveal>
         )}
       </div>
     </main>

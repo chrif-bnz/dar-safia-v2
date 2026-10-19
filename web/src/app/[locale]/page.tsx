@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
 import { ClosingCall } from '@/components/home/ClosingCall';
@@ -6,15 +7,23 @@ import { HouseFigures } from '@/components/home/HouseFigures';
 import { Manifesto } from '@/components/home/Manifesto';
 import { ScentWorld } from '@/components/home/ScentWorld';
 import { SignatureStage } from '@/components/home/SignatureStage';
+import { TeaserFilm } from '@/components/home/TeaserFilm';
 import { Voices } from '@/components/home/Voices';
 import { catalog } from '@/lib/catalog';
 import { getSignatureNotes, getSignatureProducts } from '@/lib/home/signatures';
 import { isLocale } from '@/lib/i18n/config';
 import { getDictionary } from '@/lib/i18n/dictionaries';
 import { localePath } from '@/lib/i18n/routing';
+import { localeAlternates } from '@/lib/site';
 
 /** Périmètre de livraison de la maison, affiché partout sur le site. */
 const WILAYAS_DESSERVIES = 58;
+
+export async function generateMetadata({ params }: PageProps<'/[locale]'>): Promise<Metadata> {
+  const { locale } = await params;
+  if (!isLocale(locale)) return {};
+  return { alternates: localeAlternates(locale, '/') };
+}
 
 /**
  * Accueil. Composant serveur : toutes les données passent par `catalog` et par
@@ -31,8 +40,8 @@ export default async function HomePage({ params }: PageProps<'/[locale]'>) {
 
   const [dict, notes, signatures, allProducts, brands] = await Promise.all([
     getDictionary(locale),
-    getSignatureNotes(11),
-    getSignatureProducts(),
+    getSignatureNotes(11, locale),
+    getSignatureProducts(locale),
     catalog.listProducts(),
     catalog.listBrands(),
   ]);
@@ -44,12 +53,15 @@ export default async function HomePage({ params }: PageProps<'/[locale]'>) {
         statement={dict.hero.statement}
         cta={dict.hero.cta}
         ctaHref={localePath(locale, '/parfums')}
-        scrollLabel={dict.hero.scroll}
+        scrollLabel={dict.hero.scrollHint}
         videoLabel={dict.hero.videoLabel}
         skipLabel={dict.hero.skipIntro}
+        brand={dict.common.brandName}
       />
 
-      <Manifesto dict={dict} />
+      <Manifesto dict={dict} houses={brands.map((b) => b.name)} />
+
+      <TeaserFilm dict={dict} />
 
       <ScentWorld
         notes={notes}

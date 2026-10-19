@@ -1,0 +1,72 @@
+{
+  "kind": "collectionType",
+  "collectionName": "contact_messages",
+  "info": {
+    "singularName": "contact-message",
+    "pluralName": "contact-messages",
+    "displayName": "Message de contact",
+    "description": "Message envoyé depuis la page Contact (écrire à la maison / collaboration)."
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "kind": {
+      "type": "enumeration",
+      "enum": [
+        "personal",
+        "collaboration"
+      ],
+      "required": true
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "new",
+        "read",
+        "answered",
+        "archived"
+      ],
+      "default": "new",
+      "required": true
+    },
+    "name": {
+      "type": "string",
+      "maxLength": 120
+    },
+    "city": {
+      "type": "string",
+      "maxLength": 120
+    },
+    "house": {
+      "type": "string",
+      "maxLength": 160
+    },
+    "role": {
+      "type": "string",
+      "maxLength": 160
+    },
+    "subject": {
+      "type": "string",
+      "maxLength": 200
+    },
+    "message": {
+      "type": "text",
+      "required": true,
+      "maxLength": 4000
+    },
+    "locale": {
+      "type": "enumeration",
+      "enum": [
+        "fr",
+        "ar",
+        "en"
+      ],
+      "default": "fr"
+    },
+    "internalNote": {
+      "type": "text"
+    }
+  }
+}

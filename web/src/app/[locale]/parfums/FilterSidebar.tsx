@@ -120,13 +120,29 @@ export function FilterSidebar({
     },
   ];
 
+  const search = (
+    <SearchField
+      value={filters.query}
+      onChange={(value) => onToggle('query', value)}
+      placeholder={f.searchPlaceholder}
+      clearLabel={f.searchClear}
+    />
+  );
+
+  // Le badge du déclencheur compte les filtres cochés ; la recherche, elle,
+  // reste visible hors du tiroir et n'a pas besoin d'être signalée.
+  const checkedCount = Object.values(filters).reduce(
+    (n, v) => (Array.isArray(v) ? n + v.length : n),
+    0
+  );
+
   const content = (
     <div className="flex flex-col">
       {hasActiveFilters(filters) && (
         <button
           type="button"
           onClick={onClear}
-          className="ds-navlink self-start pb-4 font-ui text-2xs tracking-(--tracking-label) text-gold uppercase transition-colors hover:text-gold-light"
+          className="ds-filter-hover-shift ds-navlink self-start pb-4 font-ui text-2xs tracking-(--tracking-label) text-gold uppercase transition-colors hover:text-gold-light"
         >
           {f.clear}
         </button>
@@ -140,7 +156,7 @@ export function FilterSidebar({
               type="button"
               onClick={() => toggleCategory(category.key)}
               aria-expanded={isOpen}
-              className="flex w-full items-center justify-between py-3.5 text-start font-ui text-2xs tracking-(--tracking-label) text-ivory uppercase"
+              className="ds-filter-accordion-btn flex w-full items-center justify-between py-3.5 text-start font-ui text-2xs tracking-(--tracking-label) text-ivory uppercase"
             >
               <span className="flex items-center gap-2">
                 {category.legend}
@@ -152,7 +168,7 @@ export function FilterSidebar({
               </span>
               <span
                 aria-hidden="true"
-                className="text-ivory/50 transition-transform duration-300 ease-(--ease-lux)"
+                className="ds-accordion-arrow text-ivory/50"
                 style={{ transform: isOpen ? 'rotate(180deg)' : undefined }}
               >
                 ⌄
@@ -167,14 +183,19 @@ export function FilterSidebar({
                 <ul className="flex flex-col gap-2.5 pb-4">
                   {category.options.map((option) => (
                     <li key={option.value}>
-                      <label className="flex items-center gap-2.5 font-body text-md text-ivory/75">
+                      <label className="ds-filter-hover-shift group flex min-h-10 cursor-pointer items-center gap-3 font-body text-md text-ivory/75">
                         <input
                           type="checkbox"
                           checked={selected.includes(option.value)}
                           onChange={() => onToggle(category.key, option.value)}
-                          className="h-4 w-4 shrink-0 accent-gold"
+                          className="ds-checkbox-input sr-only"
                         />
-                        {option.label}
+                        <span className="ds-checkbox-box" aria-hidden="true">
+                          <span className="ds-checkbox-fill" />
+                        </span>
+                        <span className="transition-colors duration-250 group-hover:text-gold">
+                          {option.label}
+                        </span>
                       </label>
                     </li>
                   ))}
@@ -191,20 +212,23 @@ export function FilterSidebar({
     <>
       {/* ── Colonne fixe, à partir de lg ── */}
       <aside aria-label={f.openButton} className="hidden lg:block">
+        <div className="mb-7">{search}</div>
         {content}
       </aside>
 
       {/* ── Déclencheur + tiroir, en dessous de lg ── */}
-      <div className="lg:hidden">
+      <div className="flex flex-col gap-4 lg:hidden">
+        {/* Sur mobile, la recherche est posée hors du tiroir : visible d'emblée. */}
+        {search}
         <button
           type="button"
           onClick={() => setDrawerOpen(true)}
-          className="inline-flex items-center gap-2 rounded-sm border border-smoke-2 px-4 py-2.5 font-ui text-2xs tracking-(--tracking-label) text-ivory uppercase transition-colors hover:border-gold/50"
+          className="inline-flex min-h-11 items-center gap-2 self-start rounded-sm border border-smoke-2 px-4 py-2.5 font-ui text-2xs tracking-(--tracking-label) text-ivory uppercase transition-colors hover:border-gold/50"
         >
           {f.openButton}
-          {hasActiveFilters(filters) && (
+          {checkedCount > 0 && (
             <span className="rounded-full bg-gold px-1.5 py-0.5 text-3xs font-semibold text-noir tabular-nums">
-              {Object.values(filters).reduce((n, v) => n + v.length, 0)}
+              {checkedCount}
             </span>
           )}
         </button>
@@ -239,10 +263,74 @@ export function FilterSidebar({
                 </svg>
               </button>
             </header>
-            <div className="flex-1 overflow-y-auto px-5 py-2">{content}</div>
+            <div data-lenis-prevent className="flex-1 overflow-y-auto px-5 py-2">{content}</div>
           </div>
         </dialog>
       </div>
     </>
+  );
+}
+
+/**
+ * Champ de recherche : loupe à gauche, bouton d'effacement à droite dès qu'une
+ * saisie existe. Hauteur tactile de 48 px, bordure or au focus.
+ */
+function SearchField({
+  value,
+  onChange,
+  placeholder,
+  clearLabel,
+}: {
+  value: string;
+  onChange: (value: string) => void;
+  placeholder: string;
+  clearLabel: string;
+}) {
+  return (
+    <div role="search" className="group relative">
+      <svg
+        aria-hidden="true"
+        width="18"
+        height="18"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.7"
+        strokeLinecap="round"
+        className="pointer-events-none absolute start-3.5 top-1/2 -translate-y-1/2 text-gold transition-colors group-focus-within:text-gold-light"
+      >
+        <circle cx="11" cy="11" r="6.5" />
+        <path d="m16 16 4.5 4.5" />
+      </svg>
+      <input
+        type="search"
+        placeholder={placeholder}
+        aria-label={placeholder}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        className="h-12 w-full rounded-sm border border-gold/35 bg-noir-2 ps-11 pe-11 font-body text-[1.05rem] text-ivory placeholder:text-ivory/45 transition-[border-color,box-shadow] duration-300 [&::-webkit-search-cancel-button]:hidden hover:border-gold/60 focus:border-gold focus:shadow-[0_0_0_3px_rgba(184,134,43,0.18)] focus:outline-none"
+      />
+      {value.length > 0 && (
+        <button
+          type="button"
+          onClick={() => onChange('')}
+          aria-label={clearLabel}
+          className="absolute end-1.5 top-1/2 flex size-9 -translate-y-1/2 items-center justify-center rounded-xs text-ivory/55 transition-colors hover:text-ivory"
+        >
+          <svg
+            aria-hidden="true"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.8"
+            strokeLinecap="round"
+          >
+            <path d="M18 6 6 18M6 6l12 12" />
+          </svg>
+        </button>
+      )}
+    </div>
   );
 }

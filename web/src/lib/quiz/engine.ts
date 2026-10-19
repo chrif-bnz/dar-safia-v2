@@ -28,6 +28,12 @@ export interface ScentMatch {
   score: number;
   /** Score rapporté au maximum atteignable, en pourcentage entier (0–100). */
   compatibility: number;
+  /** Critères qui ont bien matché (pour générer l'explication) */
+  matchedCriteria: {
+    family: boolean;
+    moment: boolean;
+    intensity: boolean;
+  };
 }
 
 /**
@@ -36,10 +42,10 @@ export interface ScentMatch {
  * calibré, ni qu'il atteigne 100 % en cochant la moitié.
  */
 const MAX_PER_QUESTION = {
-  recipient: 35,
-  moment: 30,
-  family: 40,
-  intensity: 30,
+  recipient: 15,
+  moment: 25,
+  family: 35,
+  intensity: 25,
 } as const;
 
 const MAX_TOTAL =
@@ -56,12 +62,12 @@ function scoreRecipient(product: Product, answer: QuizAnswers['recipient']): num
   if (answer === 'cadeau') {
     // Valeurs sûres : ce que la maison met en avant.
     if (product.bestseller) return MAX_PER_QUESTION.recipient;
-    if (product.featured) return 28;
-    return 12;
+    if (product.featured) return 12;
+    return 8;
   }
 
   if (product.gender === answer) return MAX_PER_QUESTION.recipient;
-  if (product.gender === 'unisexe') return 18;
+  if (product.gender === 'unisexe') return 10;
   // Un parfum du genre opposé n'est pas exclu, mais nettement moins bien placé.
   return 0;
 }
@@ -72,24 +78,24 @@ function scoreMoment(product: Product, answer: QuizAnswers['moment']): number {
   switch (answer) {
     case 'jour':
       if (product.occasions.includes('jour') || product.occasions.includes('bureau')) return max;
-      if (product.family === 'fresh' || product.family === 'floral') return 20;
+      if (product.family === 'fresh' || product.family === 'floral') return 15;
       return 0;
 
     case 'nuit':
       if (product.occasions.includes('soir')) return max;
-      if (product.family === 'amber' || product.family === 'woody') return 20;
+      if (product.family === 'amber' || product.family === 'woody') return 15;
       return 0;
 
     case 'prestige':
       if (product.occasions.includes('ceremonie')) return max;
       if (product.featured || /prestige|haute|l[ée]gende|chef|exception|signature/i.test(product.badge ?? '')) {
-        return 24;
+        return 20;
       }
       return 0;
 
     case 'fraicheur':
       if (product.family === 'fresh') return max;
-      if (product.secondaryFamilies.includes('fresh')) return 18;
+      if (product.secondaryFamilies.includes('fresh')) return 15;
       return 0;
   }
 }
@@ -98,7 +104,7 @@ function scoreFamily(product: Product, answer: QuizAnswers['family']): number {
   const max = MAX_PER_QUESTION.family;
 
   if (product.family === answer) return max;
-  if (product.secondaryFamilies.includes(answer)) return 22;
+  if (product.secondaryFamilies.includes(answer)) return 20;
   return 0;
 }
 
@@ -115,8 +121,8 @@ function scoreIntensity(product: Product, answer: QuizAnswers['intensity']): num
 
     case 'equilibre':
       if (hours >= 36 && hours < 48) return max;
-      if (/eau de parfum/i.test(conc) && !INTENSE_CONCENTRATION.test(conc)) return 22;
-      return 8;
+      if (/eau de parfum/i.test(conc) && !INTENSE_CONCENTRATION.test(conc)) return 20;
+      return 5;
 
     case 'subtil':
       if (hours > 0 && hours <= 30) return max;
@@ -138,16 +144,22 @@ export function rankScentMatches(
 ): ScentMatch[] {
   return products
     .map((product): ScentMatch => {
-      const score =
-        scoreRecipient(product, answers.recipient) +
-        scoreMoment(product, answers.moment) +
-        scoreFamily(product, answers.family) +
-        scoreIntensity(product, answers.intensity);
+      const sRecipient = scoreRecipient(product, answers.recipient);
+      const sMoment = scoreMoment(product, answers.moment);
+      const sFamily = scoreFamily(product, answers.family);
+      const sIntensity = scoreIntensity(product, answers.intensity);
+      
+      const score = sRecipient + sMoment + sFamily + sIntensity;
 
       return {
         product,
         score,
         compatibility: Math.round((score / MAX_TOTAL) * 100),
+        matchedCriteria: {
+          family: sFamily > 0,
+          moment: sMoment > 0,
+          intensity: sIntensity > 0,
+        }
       };
     })
     .sort((a, b) => {

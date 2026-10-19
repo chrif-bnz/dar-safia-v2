@@ -13,7 +13,8 @@
  * Sortie    : web/src/data/products.json  +  brands.json  +  notes.json
  */
 
-import { mkdir, writeFile } from 'node:fs/promises';
+import { existsSync } from 'node:fs';
+import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { perfumeCatalog } from '../catalog-data.js';
@@ -58,6 +59,42 @@ function uniqueSlug(base, taken) {
   while (taken.has(slug)) slug = `${base}-${n++}`;
   taken.add(slug);
   return slug;
+}
+
+/**
+ * Résout l'image d'un parfum vers des fichiers qui EXISTENT dans web/public.
+ * Ce script s'exécute APRÈS `optimize-images.mjs` (voir `prepare-assets`).
+ *
+ * - photo imbriquée (`Photos site web/…`) : le pipeline écrit `<chemin>-400.webp`
+ *   et `<chemin>-800.webp` ; on ne garde que les largeurs réellement présentes ;
+ * - visuel générique (`/img/perfumes/rose.webp`) : le fichier lui-même.
+ *
+ * Aucun fichier trouvé : `null`. La fiche n'a alors PAS d'image (le site
+ * montre la plaque de la maison) au lieu de demander une URL qui répondrait 404.
+ */
+const PUBLIC = path.join(ROOT, 'web', 'public');
+const PHOTOS_URL = '/img/perfumes/Photos site web/';
+const PHOTO_WIDTHS = [400, 800];
+let missingPhotos = 0;
+
+function resolveImage(url) {
+  if (url.startsWith(PHOTOS_URL)) {
+    const widths = PHOTO_WIDTHS.filter(w => existsSync(path.join(PUBLIC, `${url}-${w}.webp`)));
+    if (widths.length === 0) {
+      missingPhotos++;
+      return null;
+    }
+    const best = widths[widths.length - 1];
+    return {
+      url: `${url}-${best}.webp`,
+      srcset: widths.map(w => `${url}-${w}.webp ${w}w`).join(', ')
+    };
+  }
+  if (!existsSync(path.join(PUBLIC, url))) {
+    missingPhotos++;
+    return null;
+  }
+  return { url, srcset: buildSrcset(url) };
 }
 
 function buildSrcset(url) {
@@ -185,11 +222,10 @@ function migrate() {
         stock: 0
       }],
 
-      images: [{
-        url: old.img,
-        srcset: buildSrcset(old.img),
-        alt: `${old.name} — ${old.brand}`
-      }],
+      images: (() => {
+        const image = resolveImage(old.img);
+        return image ? [{ ...image, alt: `${old.name} — ${old.brand}` }] : [];
+      })(),
 
       concentration: old.concentration,
       longevityHours: parseLongevityHours(old.longevity),
@@ -235,6 +271,30 @@ await writeFile(path.join(OUT, 'products.json'), JSON.stringify(products, null, 
 await writeFile(path.join(OUT, 'brands.json'), JSON.stringify(brands, null, 2) + '\n', 'utf8');
 await writeFile(path.join(OUT, 'notes.json'), JSON.stringify(notes, null, 2) + '\n', 'utf8');
 
+// ── Traductions ────────────────────────────────────────────────
+// Source versionnée : scripts/catalog-translations.json (EN / AR). Le français
+// reste dans catalog-data.js. On ne copie que ce qui correspond à un parfum ou
+// une note existants, et on signale ce qui manque : un champ absent retombe sur
+// le français côté site.
+const raw = JSON.parse(await readFile(path.join(ROOT, 'scripts', 'catalog-translations.json'), 'utf8'));
+const translations = {};
+const translationGaps = [];
+for (const lang of ['en', 'ar']) {
+  const src = raw[lang] ?? { products: {}, notes: {} };
+  translations[lang] = { products: {}, notes: {} };
+  for (const p of products) {
+    const t = src.products?.[p.slug];
+    if (!t) { translationGaps.push(`${lang}:${p.slug}`); continue; }
+    translations[lang].products[p.slug] = t;
+  }
+  for (const n of notes) {
+    const name = src.notes?.[n.slug];
+    if (!name) { translationGaps.push(`${lang}:note:${n.slug}`); continue; }
+    translations[lang].notes[n.slug] = name;
+  }
+}
+await writeFile(path.join(OUT, 'translations.json'), JSON.stringify(translations) + '\n', 'utf8');
+
 // ── Rapport ────────────────────────────────────────────────────
 
 const noVolume = products.filter(p => p.variants[0].volumeMl === null);
@@ -247,5 +307,14 @@ if (noVolume.length) {
 }
 console.log('\n  À revoir manuellement dans le CMS (déduit, non factuel) :');
 console.log('  - stock : mis à 0 partout, le catalogue d\'origine ne le portait pas');
+if (missingPhotos > 0) {
+  console.log(`  - photos : ${missingPhotos} parfum(s) SANS photo trouvée (fichiers absents) — la fiche affiche la plaque de la maison`);
+  console.log('    Déposez les photos dans perfumes/Photos site web/ puis relancez `npm run prepare-assets`.');
+}
+if (translationGaps.length) {
+  console.log(`  - traductions : ${translationGaps.length} entrée(s) sans traduction (repli sur le français) : ${translationGaps.slice(0, 6).join(', ')}…`);
+} else {
+  console.log('  - traductions EN/AR : complètes (assistées, à faire relire par un natif)');
+}
 console.log('  - seasons / occasions : déduits des notes et de la concentration');
 console.log('  - rating : volontairement absent, les avis du site sont fictifs');

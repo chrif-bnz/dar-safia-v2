@@ -20,7 +20,8 @@
     "cta": "Discover the collection",
     "scroll": "Scroll",
     "videoLabel": "Dar Safia coffret and bottle, lit by candlelight",
-    "skipIntro": "Skip the introduction"
+    "skipIntro": "Skip the introduction",
+    "scrollHint": "Scroll to enter"
   },
   "home": {
     "eyebrow": "Fine perfumery house · Algeria",
@@ -61,7 +62,12 @@
       "A memory."
     ],
     "body": "A trail is not chosen in a display case. It is recognised — across a room, on a coat, years later. Dar Safia gathers the creations capable of that: the ones whose trace outlives the moment.",
-    "aside": "Every bottle is held to three demands: purity of accords, wear on the skin, and verified provenance."
+    "aside": "Every bottle is held to three demands: purity of accords, wear on the skin, and verified provenance.",
+    "pillars": [
+      "Purity of accords",
+      "Wear on the skin",
+      "Verified provenance"
+    ]
   },
   "scent": {
     "title": "The materials that recur",
@@ -84,7 +90,11 @@
   },
   "voices": {
     "title": "What our clients say",
-    "verified": "Verified client"
+    "verified": "Verified client",
+    "prev": "Previous testimonial",
+    "next": "Next testimonial",
+    "goTo": "Testimonial {n} of {total}",
+    "region": "Customer testimonials"
   },
   "closing": {
     "lines": [
@@ -138,8 +148,15 @@
     "messagePlaceholder": "Hello Dar Safia, I'm looking for a scent for…",
     "nameLabel": "First name",
     "cityLabel": "City",
-    "send": "Send on WhatsApp",
+    "send": "Send message",
+    "sendCollab": "Send proposal",
     "sendHint": "Your message opens WhatsApp: nothing is sent until you've reviewed it.",
+    "hint": "Your message will be sent to Dar Safia.",
+    "hintCollab": "Your proposal will be sent to Dar Safia.",
+    "sending": "Sending…",
+    "successMessage": "Your message has been sent to Dar Safia.",
+    "errorMessage": "An error occurred while sending your message.",
+    "fallbackWhatsApp": "Send on WhatsApp",
     "unavailable": "The concierge is unreachable right now. Try again in a moment.",
     "phoneLabel": "WhatsApp number",
     "facts": {
@@ -212,7 +229,16 @@
       }
     ],
     "faqFootnote": "A question that isn't here? The concierge replies on WhatsApp.",
-    "previewLabel": "Your message, as it will be sent"
+    "previewLabel": "Your message, as it will be sent",
+    "optional": "optional",
+    "messageRequired": "Write your message to send it.",
+    "successTitle": "Message received.",
+    "writeAnother": "Write another message",
+    "whatsappTitle": "Prefer WhatsApp?",
+    "whatsappBody": "A direct reply from the concierge, seven days a week.",
+    "whatsappCta": "Open WhatsApp",
+    "faqToggleHint": "Answers to the most common questions.",
+    "charsLeft": "{count} characters left"
   },
   "catalog": {
     "eyebrow": "Catalogue",
@@ -285,8 +311,17 @@
         "Très puissant": "Very powerful",
         "Séducteur": "Seductive",
         "Luxe / chic": "Luxe / chic"
-      }
-    }
+      },
+      "searchPlaceholder": "Search…",
+      "searchClear": "Clear search"
+    },
+    "pagination": {
+      "previous": "Previous",
+      "next": "Next",
+      "label": "Catalog pagination",
+      "page": "Page {page}"
+    },
+    "shuffle": "Shuffle"
   },
   "product": {
     "breadcrumbHome": "Home",
@@ -296,6 +331,10 @@
     "order": "Order on WhatsApp",
     "addToCart": "Add to cart",
     "orderUnavailable": "Ordering temporarily unavailable.",
+    "orderNow": "Order now",
+    "orderConfirmed": "Order confirmed",
+    "orderError": "We couldn't save your order. Check your details and try again.",
+    "orderServerError": "Server unavailable. Please try again shortly.",
     "metrics": {
       "longevity": "Longevity",
       "sillage": "Sillage",
@@ -311,7 +350,31 @@
       "baseCaption": "Sillage and persistence, several hours"
     },
     "storyTitle": "The story of the bottle",
-    "relatedTitle": "In the same family"
+    "relatedTitle": "In the same family",
+    "form": {
+      "title": "Your details",
+      "lastName": "Last name",
+      "lastNamePlaceholder": "Your last name",
+      "firstName": "First name",
+      "firstNamePlaceholder": "Your first name",
+      "phone": "Phone",
+      "wilaya": "Wilaya",
+      "selectWilaya": "Select a wilaya",
+      "commune": "Commune",
+      "selectCommune": "Select a commune",
+      "selectWilayaFirst": "Select a wilaya first",
+      "delivery": "Delivery",
+      "byHand": "Hand delivery",
+      "byCompany": "Delivery company",
+      "company": "Delivery company",
+      "optional": "Optional",
+      "selectCompany": "Select a company",
+      "address": "Delivery address",
+      "addressPlaceholder": "Address, neighbourhood, landmark…",
+      "required": "This field is required",
+      "phoneInvalid": "Invalid phone number"
+    },
+    "breadcrumbLabel": "Breadcrumb"
   },
   "cart": {
     "title": "Cart",
@@ -331,7 +394,15 @@
     "orderIntro": "I would like to finalise the following order:",
     "orderLine": "{name} ({brand}) — {volume} × {qty} : {total}",
     "orderSubtotal": "SUBTOTAL: {subtotal}",
-    "orderOutro": "Please confirm availability and delivery terms."
+    "orderOutro": "Please confirm availability and delivery terms.",
+    "yourCart": "Your cart",
+    "unitPrice": "Unit price",
+    "total": "Total",
+    "continueShopping": "Continue shopping",
+    "emptyCta": "Discover the perfumes",
+    "emptyLead": "Perfumes you add will appear here.",
+    "summary": "Summary",
+    "shipping": "Delivery"
   },
   "scentFinder": {
     "eyebrow": "Scent diagnosis",
@@ -425,6 +496,13 @@
         "label": "Bold",
         "hint": "A sillage that turns heads"
       }
+    },
+    "explanation": {
+      "base": "This fragrance stands out among the best matches thanks to",
+      "family": "its {family} accords",
+      "moment": "its profile suited for {moment}",
+      "intensity": "its {intensity} character",
+      "and": "and"
     }
   },
   "footer": {
@@ -484,5 +562,50 @@
     "ml": "{n} ml",
     "hours": "{n} h",
     "set": "Set"
+  },
+  "teaser": {
+    "eyebrow": "The teaser",
+    "title": "Step into the house.",
+    "body": "A few seconds of light, glass and silence — before the first bottle.",
+    "play": "Play the teaser",
+    "pause": "Pause",
+    "soundOn": "Turn sound on",
+    "soundOff": "Turn sound off",
+    "label": "Dar Safia teaser"
+  },
+  "loading": {
+    "label": "Loading"
+  },
+  "thanks": {
+    "metaTitle": "Thank you",
+    "eyebrow": "Order received",
+    "title": "Thank you.",
+    "titleNamed": "Thank you, {name}.",
+    "lead": "Your request is registered. The concierge is taking it from here.",
+    "leadGeneric": "If you have just placed an order, it is registered. The concierge is taking it from here.",
+    "reference": "Reference",
+    "summaryTitle": "Your selection",
+    "quantity": "Quantity",
+    "total": "Total",
+    "delivery": "Delivery",
+    "deliveredTo": "Delivery to {place}",
+    "stepsTitle": "What happens next",
+    "steps": [
+      {
+        "term": "Request received",
+        "detail": "Your order is registered with your details."
+      },
+      {
+        "term": "Confirmed by the concierge",
+        "detail": "Availability and delivery are confirmed to you by the concierge."
+      },
+      {
+        "term": "Payment on delivery",
+        "detail": "The order is paid on delivery, across all 58 wilayas."
+      }
+    ],
+    "whatsapp": "Write to the concierge",
+    "continue": "Keep exploring",
+    "home": "Back to home"
   }
 }

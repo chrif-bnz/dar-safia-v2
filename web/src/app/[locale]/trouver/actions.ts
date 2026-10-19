@@ -19,6 +19,11 @@ export interface ScentResult {
   priceLabel: string;
   family: string;
   compatibility: number;
+  matchedCriteria: {
+    family: boolean;
+    moment: boolean;
+    intensity: boolean;
+  };
 }
 
 export interface ScentDiagnosis {
@@ -62,6 +67,7 @@ function toResult(
     ),
     family: product.family,
     compatibility: match.compatibility,
+    matchedCriteria: match.matchedCriteria,
   };
 }
 
@@ -79,7 +85,7 @@ export async function diagnoseScent(
   if (!parsed) return null;
   const safeLocale: Locale = isLocale(locale) ? locale : 'fr';
 
-  const { items } = await catalog.listProducts();
+  const { items } = await catalog.listProducts({ locale: safeLocale });
   const ranked = rankScentMatches(items, parsed);
   if (ranked.length === 0) return null;
 

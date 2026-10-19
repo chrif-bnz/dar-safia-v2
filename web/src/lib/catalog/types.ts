@@ -38,6 +38,8 @@
 // ── Vocabulaire ────────────────────────────────────────────────
 
 /** Genre visé. `unisexe` est une valeur à part entière, pas un défaut. */
+import type { Locale } from '@/lib/i18n/config';
+
 export type Gender = 'femme' | 'homme' | 'unisexe';
 
 /**
@@ -196,6 +198,8 @@ export interface ProductQuery {
   sort?: 'price-asc' | 'price-desc' | 'newest' | 'rating' | 'name';
   limit?: number;
   offset?: number;
+  /** Langue des textes (description, récit, notes…). Défaut : français. */
+  locale?: Locale;
 }
 
 export interface Paginated<T> {
@@ -217,9 +221,9 @@ export interface Paginated<T> {
  */
 export interface CatalogRepository {
   listProducts(query?: ProductQuery): Promise<Paginated<Product>>;
-  getProductBySlug(slug: string): Promise<Product | null>;
+  getProductBySlug(slug: string, locale?: Locale): Promise<Product | null>;
   /** Parfums proches — même famille ou même marque. */
-  getRelatedProducts(slug: string, limit?: number): Promise<Product[]>;
+  getRelatedProducts(slug: string, limit?: number, locale?: Locale): Promise<Product[]>;
 
   listBrands(): Promise<Brand[]>;
   getBrandBySlug(slug: string): Promise<Brand | null>;

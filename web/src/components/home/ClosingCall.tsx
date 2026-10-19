@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useRef } from 'react';
+import { useRef, type CSSProperties } from 'react';
 
 import { useReveal } from '@/components/motion/useReveal';
 import type { Locale } from '@/lib/i18n/config';
@@ -34,7 +34,8 @@ export function ClosingCall({
     <section
       ref={ref}
       aria-labelledby="cloture"
-      className="relative overflow-hidden border-t border-smoke-2 bg-wine-deep px-6 py-32 md:px-12 md:py-44 lg:px-20"
+      style={{ '--seam-from': 'var(--color-burgundy-deep)' } as CSSProperties}
+      className="ds-seam ds-grain relative overflow-hidden bg-burgundy px-6 py-32 md:px-12 md:py-44 lg:px-20"
     >
       <div
         aria-hidden="true"
@@ -65,7 +66,7 @@ export function ClosingCall({
         >
           <Link
             href={localePath(locale, '/parfums')}
-            className="group relative inline-flex pb-1.5 font-ui text-2xs tracking-[0.22em] text-ivory uppercase"
+            className="ds-tap group relative inline-flex pb-1.5 font-ui text-2xs tracking-[0.22em] text-ivory uppercase"
           >
             {c.cta}
             <span
@@ -76,7 +77,7 @@ export function ClosingCall({
 
           <Link
             href={localePath(locale, '/trouver')}
-            className="ds-navlink font-ui text-2xs tracking-[0.14em] text-ivory/45 uppercase transition-colors hover:text-gold"
+            className="ds-navlink font-ui text-2xs tracking-[0.14em] text-ivory/75 uppercase transition-colors hover:text-gold"
           >
             {c.secondary}
           </Link>

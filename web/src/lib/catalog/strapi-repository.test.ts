@@ -120,3 +120,79 @@ describe('strapiCatalogRepository', () => {
     expect(await strapiCatalogRepository.getProductBySlug('absent')).toBeNull();
   });
 });
+
+describe('strapiCatalogRepository — langues', () => {
+  /** Strapi : 3 pages de notes de 100 (plafond de pageSize), puis les parfums localisés. */
+  function mockLocalized() {
+    const requested: string[] = [];
+    vi.stubGlobal(
+      'fetch',
+      vi.fn(async (url: string) => {
+        requested.push(url);
+        const u = new URL(url);
+        const locale = u.searchParams.get('locale');
+        if (u.pathname.endsWith('/api/fragrance-notes')) {
+          const page = Number(u.searchParams.get('pagination[page]') ?? 1);
+          // 250 notes au total : la note « rose » est sur la dernière page.
+          const all = Array.from({ length: 250 }, (_, i) => ({
+            slug: i === 249 ? 'rose' : `n${i}`,
+            name: i === 249 ? 'Rose (anglais)' : `Note ${i}`,
+          }));
+          const data = all.slice((page - 1) * 100, page * 100);
+          return new Response(
+            JSON.stringify({ data, meta: { pagination: { page, pageSize: 100, pageCount: 3, total: 250 } } }),
+            { status: 200 }
+          );
+        }
+        if (u.pathname.endsWith('/api/products') && locale === 'en') {
+          return new Response(
+            JSON.stringify({ data: [{ slug: 'un', description: 'English text', badge: 'Cult' }], meta: {} }),
+            { status: 200 }
+          );
+        }
+        if (u.pathname.endsWith('/api/products')) {
+          return new Response(
+            JSON.stringify({
+              data: [strapiProduct({ slug: 'un', description: 'Texte français', badge: 'Culte' })],
+              meta: {},
+            }),
+            { status: 200 }
+          );
+        }
+        return new Response('not found', { status: 404 });
+      })
+    );
+    return requested;
+  }
+
+  it('superpose les textes anglais, y compris les notes situées sur la dernière page', async () => {
+    mockLocalized();
+    const en = await strapiCatalogRepository.getProductBySlug('un', 'en');
+    expect(en?.description).toBe('English text');
+    expect(en?.badge).toBe('Cult');
+    expect(en?.notes[0].note.name).toBe('Rose (anglais)');
+  });
+
+  it('sert le français sans appel de traduction', async () => {
+    const requested = mockLocalized();
+    const fr = await strapiCatalogRepository.getProductBySlug('un');
+    expect(fr?.description).toBe('Texte français');
+    expect(requested.some((u) => u.includes('locale='))).toBe(false);
+  });
+
+  it('retombe sur le français si la langue est absente côté Strapi', async () => {
+    vi.stubGlobal(
+      'fetch',
+      vi.fn(async (url: string) =>
+        url.includes('locale=')
+          ? new Response('bad', { status: 400 })
+          : new Response(
+              JSON.stringify({ data: [strapiProduct({ slug: 'un', description: 'Texte français' })], meta: {} }),
+              { status: 200 }
+            )
+      )
+    );
+    const ar = await strapiCatalogRepository.getProductBySlug('un', 'ar');
+    expect(ar?.description).toBe('Texte français');
+  });
+});

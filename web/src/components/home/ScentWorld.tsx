@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useRef } from 'react';
+import { useRef, type CSSProperties } from 'react';
 
 import { useReveal } from '@/components/motion/useReveal';
 import type { SignatureNote } from '@/lib/home/signatures';
@@ -51,7 +51,8 @@ export function ScentWorld({
     <section
       ref={ref}
       aria-labelledby="matieres"
-      className="relative overflow-hidden border-t border-smoke-2 bg-wine-deep px-6 py-28 md:px-12 md:py-36 lg:px-20"
+      style={{ '--seam-from': 'var(--color-burgundy-deep)' } as CSSProperties}
+      className="ds-seam relative overflow-hidden bg-burgundy px-6 py-28 md:px-12 md:py-36 lg:px-20"
     >
       {/* Halo ambiant : une seule source lumineuse, très basse, qui rappelle
           la bougie du film sans imiter un effet. */}
@@ -60,7 +61,8 @@ export function ScentWorld({
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            'radial-gradient(60% 50% at 72% 18%, rgba(184,134,43,0.11) 0%, transparent 70%)',
+            'radial-gradient(60% 50% at 72% 18%, rgba(184,134,43,0.10) 0%, transparent 70%),' +
+            'radial-gradient(55% 45% at 6% 100%, rgba(61,15,20,0.55) 0%, transparent 70%)',
         }}
       />
 
@@ -108,7 +110,7 @@ export function ScentWorld({
         <div data-fade className="mt-16">
           <Link
             href={localePath(locale, '/parfums')}
-            className="group relative inline-flex pb-1 font-ui text-2xs tracking-[0.2em] text-ivory/80 uppercase transition-colors hover:text-gold"
+            className="ds-tap group relative inline-flex pb-1 font-ui text-2xs tracking-[0.2em] text-ivory/80 uppercase transition-colors hover:text-gold"
           >
             {s.explore}
             <span

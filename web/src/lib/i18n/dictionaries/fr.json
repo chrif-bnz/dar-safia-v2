@@ -20,7 +20,8 @@
     "cta": "Découvrir la collection",
     "scroll": "Faites défiler",
     "videoLabel": "Coffret et flacon Dar Safia, éclairés à la bougie",
-    "skipIntro": "Passer l'introduction"
+    "skipIntro": "Passer l'introduction",
+    "scrollHint": "Faites défiler pour entrer"
   },
   "home": {
     "eyebrow": "Maison de haute parfumerie · Algérie",
@@ -61,7 +62,12 @@
       "Une mémoire."
     ],
     "body": "Un sillage ne se choisit pas dans une vitrine. Il se reconnaît — au détour d'une pièce, sur un vêtement, des années plus tard. Dar Safia réunit les créations capables de cela : celles dont la trace survit à l'instant.",
-    "aside": "Chaque flacon est retenu sur trois exigences : la pureté des accords, la tenue sur la peau, et une provenance vérifiée."
+    "aside": "Chaque flacon est retenu sur trois exigences : la pureté des accords, la tenue sur la peau, et une provenance vérifiée.",
+    "pillars": [
+      "Pureté des accords",
+      "Tenue sur la peau",
+      "Provenance vérifiée"
+    ]
   },
   "scent": {
     "title": "Les matières qui reviennent",
@@ -84,7 +90,11 @@
   },
   "voices": {
     "title": "Ce qu'en disent nos clients",
-    "verified": "Client vérifié"
+    "verified": "Client vérifié",
+    "prev": "Témoignage précédent",
+    "next": "Témoignage suivant",
+    "goTo": "Témoignage {n} sur {total}",
+    "region": "Témoignages de clients"
   },
   "closing": {
     "lines": [
@@ -138,8 +148,15 @@
     "messagePlaceholder": "Bonjour Dar Safia, je cherche un parfum pour…",
     "nameLabel": "Prénom",
     "cityLabel": "Ville",
-    "send": "Envoyer sur WhatsApp",
+    "send": "Envoyer le message",
+    "sendCollab": "Envoyer la proposition",
     "sendHint": "Votre message ouvre WhatsApp : rien n'est envoyé tant que vous ne l'avez pas relu.",
+    "hint": "Votre message sera envoyé à Dar Safia.",
+    "hintCollab": "Votre proposition sera envoyée à Dar Safia.",
+    "sending": "Envoi en cours…",
+    "successMessage": "Votre message a bien été envoyé à Dar Safia.",
+    "errorMessage": "Une erreur est survenue lors de l'envoi de votre message.",
+    "fallbackWhatsApp": "Envoyer sur WhatsApp",
     "unavailable": "La conciergerie est momentanément injoignable. Réessayez dans un moment.",
     "phoneLabel": "Numéro WhatsApp",
     "facts": {
@@ -212,7 +229,16 @@
       }
     ],
     "faqFootnote": "Une question qui n'est pas là ? La conciergerie répond sur WhatsApp.",
-    "previewLabel": "Le message tel qu’il partira"
+    "previewLabel": "Le message tel qu’il partira",
+    "optional": "facultatif",
+    "messageRequired": "Écrivez votre message pour l'envoyer.",
+    "successTitle": "Message reçu.",
+    "writeAnother": "Écrire un autre message",
+    "whatsappTitle": "Plutôt WhatsApp ?",
+    "whatsappBody": "Une réponse directe de la conciergerie, sept jours sur sept.",
+    "whatsappCta": "Ouvrir WhatsApp",
+    "faqToggleHint": "Les réponses aux questions les plus fréquentes.",
+    "charsLeft": "{count} caractères restants"
   },
   "catalog": {
     "eyebrow": "Catalogue",
@@ -285,8 +311,17 @@
         "Très puissant": "Très puissant",
         "Séducteur": "Séducteur",
         "Luxe / chic": "Luxe / chic"
-      }
-    }
+      },
+      "searchPlaceholder": "Rechercher…",
+      "searchClear": "Effacer la recherche"
+    },
+    "pagination": {
+      "previous": "Précédent",
+      "next": "Suivant",
+      "label": "Pagination du catalogue",
+      "page": "Page {page}"
+    },
+    "shuffle": "Mélanger"
   },
   "product": {
     "breadcrumbHome": "Accueil",
@@ -296,6 +331,10 @@
     "order": "Commander sur WhatsApp",
     "addToCart": "Ajouter au panier",
     "orderUnavailable": "Commande momentanément indisponible.",
+    "orderNow": "Commander",
+    "orderConfirmed": "Commande confirmée",
+    "orderError": "Impossible d'enregistrer la commande. Vérifiez vos informations et réessayez.",
+    "orderServerError": "Serveur indisponible. Réessayez dans un instant.",
     "metrics": {
       "longevity": "Tenue",
       "sillage": "Sillage",
@@ -311,7 +350,31 @@
       "baseCaption": "Sillage et persistance, plusieurs heures"
     },
     "storyTitle": "L'histoire du flacon",
-    "relatedTitle": "Dans la même famille"
+    "relatedTitle": "Dans la même famille",
+    "form": {
+      "title": "Vos informations",
+      "lastName": "Nom",
+      "lastNamePlaceholder": "Votre nom",
+      "firstName": "Prénom",
+      "firstNamePlaceholder": "Votre prénom",
+      "phone": "Téléphone",
+      "wilaya": "Wilaya",
+      "selectWilaya": "Sélectionner une wilaya",
+      "commune": "Commune",
+      "selectCommune": "Sélectionner une commune",
+      "selectWilayaFirst": "Sélectionnez d'abord une wilaya",
+      "delivery": "Livraison",
+      "byHand": "Main à main",
+      "byCompany": "Livraison par société",
+      "company": "Société de livraison",
+      "optional": "Optionnel",
+      "selectCompany": "Sélectionner une société",
+      "address": "Adresse / lieu de livraison",
+      "addressPlaceholder": "Adresse, quartier, repère…",
+      "required": "Ce champ est obligatoire",
+      "phoneInvalid": "Numéro de téléphone invalide"
+    },
+    "breadcrumbLabel": "Fil d'Ariane"
   },
   "cart": {
     "title": "Panier",
@@ -331,7 +394,15 @@
     "orderIntro": "Je souhaite finaliser la commande suivante :",
     "orderLine": "{name} ({brand}) — {volume} × {qty} : {total}",
     "orderSubtotal": "SOUS-TOTAL : {subtotal}",
-    "orderOutro": "Merci de me confirmer la disponibilité et les modalités de livraison."
+    "orderOutro": "Merci de me confirmer la disponibilité et les modalités de livraison.",
+    "yourCart": "Votre panier",
+    "unitPrice": "Prix unitaire",
+    "total": "Total",
+    "continueShopping": "Continuer mes achats",
+    "emptyCta": "Découvrir les parfums",
+    "emptyLead": "Les parfums que vous ajouterez apparaîtront ici.",
+    "summary": "Récapitulatif",
+    "shipping": "Livraison"
   },
   "scentFinder": {
     "eyebrow": "Diagnostic olfactif",
@@ -425,6 +496,13 @@
         "label": "Affirmée",
         "hint": "Un sillage qui ne passe pas inaperçu"
       }
+    },
+    "explanation": {
+      "base": "Ce parfum ressort parmi les meilleures correspondances grâce à",
+      "family": "ses accords de la famille {family}",
+      "moment": "son profil adapté pour {moment}",
+      "intensity": "son caractère {intensity}",
+      "and": "et"
     }
   },
   "footer": {
@@ -484,5 +562,50 @@
     "ml": "{n} ml",
     "hours": "{n} h",
     "set": "Coffret"
+  },
+  "teaser": {
+    "eyebrow": "Le teaser",
+    "title": "Entrez dans la maison.",
+    "body": "Quelques secondes de lumière, de verre et de silence — avant le premier flacon.",
+    "play": "Lancer le teaser",
+    "pause": "Mettre en pause",
+    "soundOn": "Activer le son",
+    "soundOff": "Couper le son",
+    "label": "Teaser Dar Safia"
+  },
+  "loading": {
+    "label": "Chargement"
+  },
+  "thanks": {
+    "metaTitle": "Merci",
+    "eyebrow": "Commande reçue",
+    "title": "Merci.",
+    "titleNamed": "Merci, {name}.",
+    "lead": "Votre demande est bien enregistrée. La conciergerie la prend en charge.",
+    "leadGeneric": "Si vous venez de passer commande, elle est bien enregistrée. La conciergerie la prend en charge.",
+    "reference": "Référence",
+    "summaryTitle": "Votre sélection",
+    "quantity": "Quantité",
+    "total": "Total",
+    "delivery": "Livraison",
+    "deliveredTo": "Livraison à {place}",
+    "stepsTitle": "La suite",
+    "steps": [
+      {
+        "term": "Demande reçue",
+        "detail": "Votre commande est enregistrée avec vos coordonnées."
+      },
+      {
+        "term": "Confirmation par la conciergerie",
+        "detail": "La disponibilité et la livraison vous sont confirmées par la conciergerie."
+      },
+      {
+        "term": "Règlement à la livraison",
+        "detail": "La commande se règle à la livraison, dans les 58 wilayas."
+      }
+    ],
+    "whatsapp": "Écrire à la conciergerie",
+    "continue": "Continuer la découverte",
+    "home": "Retour à l'accueil"
   }
 }

@@ -1,0 +1,12 @@
+# Déploiement Netlify du site Next.js (web/).
+# Netlify détecte Next.js et installe son runtime automatiquement.
+# Les variables d'environnement (NEXT_PUBLIC_WHATSAPP_PHONE, STRAPI_*, …) se
+# règlent dans Netlify > Site configuration > Environment variables, jamais ici.
+
+[build]
+  base = "web"
+  command = "npm run build"
+  publish = ".next"
+
+[build.environment]
+  NODE_VERSION = "22"

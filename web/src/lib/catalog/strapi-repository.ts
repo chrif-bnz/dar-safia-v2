@@ -17,10 +17,14 @@
 
 import qs from 'qs';
 
+import type { Locale } from '@/lib/i18n/config';
+
+import { localizeProduct, SOURCE_LOCALE, type CatalogTranslations } from './localize';
 import { queryProducts, relatedProducts } from './query';
 import { mapCollection, mapProduct } from './strapi-mapper';
 import type {
   StrapiCollection,
+  StrapiNote,
   StrapiProduct,
   StrapiResponse,
 } from './strapi-types';
@@ -76,33 +80,94 @@ async function strapiFetch<T>(path: string): Promise<T | null> {
   }
 }
 
+/**
+ * Toutes les pages d'une collection. Strapi plafonne `pageSize` à 100 : sans
+ * boucle, un catalogue plus gros (les 254 notes, demain 100+ parfums) serait
+ * tronqué en silence.
+ */
+async function fetchAllPages<T>(path: string, params: Record<string, unknown>): Promise<T[]> {
+  const out: T[] = [];
+  let page = 1;
+  let pageCount = 1;
+  do {
+    const query = buildQuery({ ...params, pagination: { page, pageSize: 100 } });
+    const response = await strapiFetch<StrapiResponse<T[]>>(`${path}?${query}`);
+    if (!response?.data) break;
+    out.push(...response.data);
+    pageCount = response.meta?.pagination?.pageCount ?? 1;
+    page += 1;
+  } while (page <= pageCount);
+  return out;
+}
+
 // ── Cache mémoire par rendu ────────────────────────────────────
 // Next met déjà `fetch` en cache ; ce cache-ci évite en plus de re-mapper les
 // 45 produits à chaque méthode appelée dans un même rendu.
 
-let productsPromise: Promise<Product[]> | null = null;
+const productsPromise = new Map<Locale, Promise<Product[]>>();
 
-function loadProducts(): Promise<Product[]> {
-  if (!productsPromise) {
-    const query = buildQuery({
-      pagination: { pageSize: 100 },
-      populate: PRODUCT_POPULATE,
-    });
-    productsPromise = strapiFetch<StrapiResponse<StrapiProduct[]>>(
-      `products?${query}`
-    ).then((response) => {
-      if (!response?.data) return [];
-      return response.data
+/** Contenu français : l'entrée par défaut de Strapi (la langue source du site). */
+function loadSourceProducts(): Promise<Product[]> {
+  let promise = productsPromise.get(SOURCE_LOCALE);
+  if (!promise) {
+    promise = fetchAllPages<StrapiProduct>('products', { populate: PRODUCT_POPULATE }).then((entries) =>
+      entries
         .map((entry) => mapProduct(entry, STRAPI_URL))
-        .filter((p): p is Product => p !== null);
-    });
+        .filter((p): p is Product => p !== null)
+    );
+    productsPromise.set(SOURCE_LOCALE, promise);
   }
-  return productsPromise;
+  return promise;
+}
+
+/**
+ * Textes d'une autre langue, lus sur les entrées localisées de Strapi
+ * (`?locale=en`). Seuls les champs traduisibles sont demandés. Si la langue
+ * n'existe pas côté Strapi, ou si l'appel échoue, on renvoie une table vide :
+ * le site retombe sur le français, il ne casse pas.
+ */
+async function loadTranslations(locale: Locale): Promise<CatalogTranslations> {
+  const [products, notes] = await Promise.all([
+    fetchAllPages<StrapiProduct>('products', {
+      locale,
+      fields: ['slug', 'description', 'story', 'badge', 'concentration'],
+    }),
+    fetchAllPages<StrapiNote>('fragrance-notes', { locale, fields: ['slug', 'name'] }),
+  ]);
+
+  const out: CatalogTranslations = { products: {}, notes: {} };
+  for (const entry of products) {
+    if (typeof entry.slug !== 'string') continue;
+    out.products[entry.slug] = {
+      description: entry.description ?? undefined,
+      story: entry.story ?? undefined,
+      badge: entry.badge ?? undefined,
+      concentration: entry.concentration ?? undefined,
+    };
+  }
+  for (const entry of notes) {
+    if (typeof entry.slug === 'string' && typeof entry.name === 'string') {
+      out.notes[entry.slug] = entry.name;
+    }
+  }
+  return out;
+}
+
+function loadProducts(locale: Locale = SOURCE_LOCALE): Promise<Product[]> {
+  if (locale === SOURCE_LOCALE) return loadSourceProducts();
+  let promise = productsPromise.get(locale);
+  if (!promise) {
+    promise = Promise.all([loadSourceProducts(), loadTranslations(locale)]).then(([base, t]) =>
+      base.map((p) => localizeProduct(p, t))
+    );
+    productsPromise.set(locale, promise);
+  }
+  return promise;
 }
 
 /** À appeler après une revalidation pour forcer un rechargement. */
 export function resetStrapiCache(): void {
-  productsPromise = null;
+  productsPromise.clear();
 }
 
 /** Slugs des parfums membres d'une collection donnée. */
@@ -124,7 +189,7 @@ async function collectionProductSlugs(slug: string): Promise<Set<string>> {
 
 export const strapiCatalogRepository: CatalogRepository = {
   async listProducts(query: ProductQuery = {}): Promise<Paginated<Product>> {
-    const all = await loadProducts();
+    const all = await loadProducts(query.locale);
 
     if (query.collectionSlug) {
       const slugs = await collectionProductSlugs(query.collectionSlug);
@@ -136,13 +201,13 @@ export const strapiCatalogRepository: CatalogRepository = {
     return queryProducts(all, query);
   },
 
-  async getProductBySlug(slug: string): Promise<Product | null> {
-    const all = await loadProducts();
+  async getProductBySlug(slug: string, locale?: Locale): Promise<Product | null> {
+    const all = await loadProducts(locale);
     return all.find((p) => p.slug === slug) ?? null;
   },
 
-  async getRelatedProducts(slug: string, limit = 3): Promise<Product[]> {
-    const all = await loadProducts();
+  async getRelatedProducts(slug: string, limit = 3, locale?: Locale): Promise<Product[]> {
+    const all = await loadProducts(locale);
     return relatedProducts(all, slug, limit);
   },
 
