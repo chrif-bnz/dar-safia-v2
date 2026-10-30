@@ -96,10 +96,10 @@
     "concentration": "Eau de Parfum"
    },
    "christian-dior-dior-j-adore-intense": {
-    "badge": "Imperial Allure",
-    "description": "An infinite floral symphony of breathtaking power and sensuality. Intoxicating Grasse tuberose marries lush sambac jasmine and centifolia rose over creamy precious sandalwood.",
-    "story": "Dior’s definitive icon captured in an intense parfum concentration designed to leave an unforgettable trail.",
-    "concentration": "Parfum"
+    "badge": "Haute Parfumerie",
+    "description": "The liquid gold of the House of Dior. A masterful floral bouquet of orange blossom, Grasse jasmine and centifolia rose absolutes.",
+    "story": "Dior's perfumery masterpiece, composed as an ode to majestic femininity.",
+    "concentration": "Eau de Parfum Intense"
    },
    "jean-paul-gaultier-divine-couture": {
     "badge": "Divine Couture",
@@ -1402,6 +1402,12 @@
     "description": "The untamed, feline sensuality of black grain leather. Searing black pepper and red saffron crack across dark supple hide anchored in smoky guaiac wood.",
     "story": "Inspired by the iconic Saint Laurent black leather motorcycle jacket as a symbol of rebel elegance.",
     "concentration": "Eau de Parfum"
+   },
+   "christian-dior-dior-j-adore-intense-2": {
+    "badge": "Imperial Allure",
+    "concentration": "Parfum",
+    "description": "An infinite floral symphony of captivating sensuality and power. The heady Grasse tuberose melts into the opulence of sambac jasmine and centifolia rose over a precious woody base.",
+    "story": "The absolute icon of the house of Dior in an intense parfum concentration of exceptional wear."
    }
   },
   "notes": {
@@ -1754,10 +1760,10 @@
     "concentration": "ماء عطر"
    },
    "christian-dior-dior-j-adore-intense": {
-    "badge": "سحر إمبراطوري",
-    "description": "سيمفونية زهرية ساحرة بفيض من القوة والجاذبية. يذوب مسك الروم النادر في غمار الياسمين والورد الجوري مع لمسات خشب الصندل الدافئة.",
-    "story": "أيقونة ديور الخالدة في تركيز بارفان مكثف يمنح ثباتاً أسطورياً وحضوراً يأسر القلوب.",
-    "concentration": "عطر مركز"
+    "badge": "عطور راقية",
+    "description": "الذهب السائل لدار ديور. باقة زهرية متقنة من مطلق زهر البرتقال وياسمين غراس وورد سنتيفوليا.",
+    "story": "تحفة ديور العطرية، مؤلَّفة كنشيد للأنوثة المهيبة.",
+    "concentration": "ماء عطر مكثّف"
    },
    "jean-paul-gaultier-divine-couture": {
     "badge": "أزياء إلهية",
@@ -3060,6 +3066,12 @@
     "description": "الجاذبية الجريئة للجلد الأسود الفاخر من إيف سان لوران. ينبض الفلفل الأسود والزعفران فوق جلد بري مروض بدخان خشب الغاياك والباتشولي والفانيليا.",
     "story": "مستوحى من سترة الجلد السوداء الشهيرة التي أصبحت رمزاً للأناقة المتمردة والحرية المطلقة.",
     "concentration": "ماء عطر"
+   },
+   "christian-dior-dior-j-adore-intense-2": {
+    "badge": "سحر إمبراطوري",
+    "concentration": "عطر مركز",
+    "description": "سيمفونية زهرية ذات حسّية لا متناهية وقوة آسرة. يذوب التيوبروز المسكر من غراس في باذخ ياسمين السمباك والورد السنتيفوليا على قاعدة خشبية نفيسة.",
+    "story": "أيقونة دار ديور المطلقة في تركيز بارفان مكثّف بثبات استثنائي."
    }
   },
   "notes": {

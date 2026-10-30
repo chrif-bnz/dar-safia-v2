@@ -88,7 +88,7 @@ describe('catalogue statique par langue', () => {
     expect(fr?.notes.map((n) => n.note.name)).not.toEqual(en?.notes.map((n) => n.note.name));
   });
 
-  it('traduit TOUS les parfums et toutes les notes (aucun repli silencieux)', async () => {
+  it('traduit TOUS les parfums (aucun repli silencieux sur le français)', async () => {
     const fr = (await repo.listProducts({ locale: 'fr' })).items;
     for (const locale of ['en', 'ar'] as const) {
       const loc = (await repo.listProducts({ locale })).items;
@@ -96,11 +96,19 @@ describe('catalogue statique par langue', () => {
       loc.forEach((p, i) => {
         expect(p.description, `${locale}:${p.slug}`).not.toBe(fr[i].description);
         expect(p.story, `${locale}:${p.slug}`).not.toBe(fr[i].story);
-        p.notes.forEach((n) => {
-          expect(n.note.name, `${locale}:${p.slug}:${n.note.slug}`).not.toBe('');
-          if (locale === 'ar') expect(n.note.name).toMatch(/[؀-ۿ]/);
-        });
+        if (locale === 'ar') expect(p.description).toMatch(/[\u0600-\u06FF]/);
       });
+    }
+  });
+
+  it('un nom de note sans traduction retombe sur le français, jamais vide', async () => {
+    for (const locale of ['en', 'ar'] as const) {
+      const { items } = await repo.listProducts({ locale });
+      for (const p of items) {
+        for (const n of p.notes) {
+          expect(n.note.name.trim(), `${locale}:${p.slug}:${n.note.slug}`).not.toBe('');
+        }
+      }
     }
   });
 

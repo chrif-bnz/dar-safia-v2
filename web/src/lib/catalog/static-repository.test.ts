@@ -1,6 +1,11 @@
 import { describe, expect, it } from 'vitest';
 
+import productsJson from '@/data/products.json';
+
 import { catalog, lowestPrice } from './index';
+
+/** Taille réelle du catalogue migré : le catalogue grossit (imports), les tests ne figent pas un nombre. */
+const COUNT = productsJson.length;
 
 /**
  * Teste l'implémentation statique contre les données réellement migrées
@@ -10,10 +15,10 @@ import { catalog, lowestPrice } from './index';
  */
 
 describe('listProducts', () => {
-  it('renvoie les 45 parfums du catalogue', async () => {
+  it('renvoie tous les parfums du catalogue', async () => {
     const { items, total } = await catalog.listProducts();
-    expect(total).toBe(45);
-    expect(items).toHaveLength(45);
+    expect(total).toBe(COUNT);
+    expect(items).toHaveLength(COUNT);
   });
 
   it('hydrate chaque produit : marque résolue, au moins une note, un format', async () => {
@@ -53,11 +58,18 @@ describe('listProducts', () => {
   it('la recherche exige tous les mots', async () => {
     const { items } = await catalog.listProducts({ search: 'dior sauvage' });
     expect(items.length).toBeGreaterThan(0);
-    expect(
-      items.every((p) =>
-        `${p.name} ${p.brand.name}`.toLowerCase().includes('sauvage')
-      )
-    ).toBe(true);
+    // La recherche porte sur nom, marque, description et notes : chaque mot doit
+    // se trouver quelque part dans ces champs (le catalogue grossit, un mot
+    // peut apparaître dans une description sans être dans le nom).
+    const haystack = (p: (typeof items)[number]) =>
+      `${p.name} ${p.brand.name} ${p.description} ${p.notes.map((n) => n.note.name).join(' ')}`
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .toLowerCase();
+    expect(items.every((p) => ['dior', 'sauvage'].every((w) => haystack(p).includes(w)))).toBe(true);
+    // et la requête restreint réellement : moins de résultats qu'un seul mot
+    const dior = await catalog.listProducts({ search: 'dior' });
+    expect(items.length).toBeLessThanOrEqual(dior.total);
   });
 
   it('tri par prix croissant', async () => {
@@ -69,7 +81,7 @@ describe('listProducts', () => {
   it('pagine via offset / limit sans changer le total', async () => {
     const page = await catalog.listProducts({ offset: 10, limit: 5 });
     expect(page.items).toHaveLength(5);
-    expect(page.total).toBe(45);
+    expect(page.total).toBe(COUNT);
   });
 
   it('aucun produit ne porte de note agrégée (aucun avis réel)', async () => {
