@@ -256,7 +256,7 @@ export function AboutExperience({
       {/* ── La conciergerie ── */}
       <section
         aria-labelledby="conciergerie"
-        className="border-t border-smoke-2 bg-noir px-6 py-28 md:px-12 md:py-36 lg:px-20"
+        className="border-t border-smoke-2 bg-burgundy-deep px-6 py-28 md:px-12 md:py-36 lg:px-20"
       >
         <div className="mx-auto max-w-(--container-site) md:grid md:grid-cols-12 md:gap-10">
           <h2 id="conciergerie" className="font-body font-light text-ivory md:col-span-5">

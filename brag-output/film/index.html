@@ -1,0 +1,468 @@
+<!doctype html>
+<html lang="fr" data-resolution="landscape">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <title>Dar Safia — film de marque</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "Cinzel Decorative"; font-weight: 700; src: url("assets/fonts/cinzel-decorative-700-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Cinzel"; font-weight: 500; src: url("assets/fonts/cinzel-500-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Cormorant Garamond"; font-weight: 400; font-style: normal; src: url("assets/fonts/cormorant-garamond-400-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Cormorant Garamond"; font-weight: 400; font-style: italic; src: url("assets/fonts/cormorant-garamond-400-italic.woff2") format("woff2"); }
+      @font-face { font-family: "Montserrat"; font-weight: 500; src: url("assets/fonts/montserrat-500-normal.woff2") format("woff2"); }
+
+      :root {
+        --noir: #1a120f; --noir-deep: #0b0807;
+        --burgundy: #3d0f14; --burgundy-deep: #2a090d;
+        --gold: #b8862b; --gold-light: #d6ab5a; --gold-dark: #85601d;
+        --ivory: #f2ede3;
+      }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1920px; height: 1080px; overflow: hidden; background: var(--noir-deep); }
+      #root { position: relative; width: 1920px; height: 1080px; background: var(--noir-deep); color: var(--ivory); overflow: hidden; }
+      .scene { position: absolute; inset: 0; overflow: hidden; opacity: 0; }
+      .abs { position: absolute; }
+      .serif { font-family: "Cormorant Garamond", Georgia, serif; }
+      .cinzel { font-family: "Cinzel", Georgia, serif; font-weight: 500; }
+      .deco { font-family: "Cinzel Decorative", Georgia, serif; font-weight: 700; }
+      .ui { font-family: "Montserrat", sans-serif; font-weight: 500; }
+
+      /* Texture + vignette globales (statiques, déterministes) */
+      #grain { position: absolute; inset: 0; z-index: 50; pointer-events: none; opacity: .07; mix-blend-mode: overlay;
+        background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"); }
+      #vignette { position: absolute; inset: 0; z-index: 49; pointer-events: none;
+        background: radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0) 55%, rgba(0,0,0,.55) 100%); }
+
+      /* ── S1 ── */
+      #s1 { background: radial-gradient(ellipse at 60% 45%, #1b1209 0%, #070504 70%); }
+      #s1 .dust { position: absolute; inset: 0; }
+      #s1 .dust i { position: absolute; border-radius: 50%; background: var(--gold-light); filter: blur(1px); opacity: 0; }
+      #s1 .beam { position: absolute; left: 1060px; top: -120px; width: 380px; height: 1400px; transform: rotate(14deg); opacity: 0;
+        background: linear-gradient(90deg, rgba(214,171,90,0) 0%, rgba(214,171,90,.16) 50%, rgba(214,171,90,0) 100%); filter: blur(18px); }
+      #heroVid { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; }
+      #s1 .l1, #s1 .l2 { position: absolute; left: 150px; right: 150px; white-space: nowrap; }
+      #s1 .l1 { top: 400px; font-size: 138px; line-height: 1.1; }
+      #s1 .l1 span { display: inline-block; opacity: 0; margin-right: .28em; }
+      #s1 .l2 { top: 372px; font-size: 200px; line-height: 1.05; opacity: 0; }
+      #s1 .l2 em { color: var(--gold-light); font-style: italic; }
+      #s1 .rule { position: absolute; left: 150px; top: 640px; height: 2px; width: 0; background: linear-gradient(90deg, var(--gold), rgba(184,134,43,0)); }
+
+      /* ── S2 ── */
+      #s2 { background: #0d0b0a; }
+      #mosaic { position: absolute; inset: -60px; display: grid; grid-template-columns: repeat(6, 1fr); grid-template-rows: repeat(4, 1fr); gap: 6px; transform-origin: 50% 50%; }
+      #mosaic .tile { position: relative; overflow: hidden; opacity: 0; background: #1a1613; }
+      #mosaic .tile b, #mosaic .tile u { position: absolute; inset: 0; background-size: cover; background-position: center; }
+      #mosaic .tile b { filter: grayscale(1) contrast(1.05) brightness(.62); }
+      #mosaic .tile u { opacity: 0; filter: grayscale(1) contrast(1.05) brightness(.62); }
+      #s2 .shade { position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 50%, rgba(8,6,5,.88) 20%, rgba(8,6,5,.35) 80%); opacity: 0; }
+      #s2 .t1, #s2 .t2 { position: absolute; left: 0; right: 0; text-align: center; opacity: 0; }
+      #s2 .t1 { top: 410px; font-size: 92px; line-height: 1.15; }
+      #s2 .t2 { top: 430px; font-size: 104px; }
+      #s2 .words { position: absolute; left: 0; right: 0; top: 330px; display: flex; justify-content: center; align-items: baseline; gap: 70px; }
+      #s2 .words span { font-size: 190px; font-style: italic; opacity: 0; display: inline-block; }
+      #s2 .words .dot { color: var(--gold); font-style: normal; }
+      #s2 .t3 { position: absolute; left: 0; right: 0; top: 700px; text-align: center; font-size: 56px; letter-spacing: .04em; opacity: 0; }
+      #s2 .t3 em { color: var(--gold-light); }
+      #s2 .line3 { position: absolute; left: 50%; top: 668px; height: 2px; width: 0; transform: translateX(-50%); background: var(--gold); }
+
+      /* ── S3 ── */
+      #s3 { background: radial-gradient(ellipse at 40% 40%, var(--burgundy) 0%, var(--burgundy-deep) 55%, var(--noir-deep) 100%); }
+      #s3 .arch { position: absolute; left: 1160px; top: 150px; width: 560px; height: 790px; border-radius: 280px 280px 0 0; overflow: hidden; border: 1px solid rgba(214,171,90,.55); opacity: 0; box-shadow: 0 30px 90px rgba(0,0,0,.55); }
+      #s3 .arch img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transform-origin: 50% 45%; }
+      #s3 .wordmark { position: absolute; left: 0; right: 0; top: 380px; text-align: center; transform-origin: 50% 50%; opacity: 0; }
+      #s3 .wordmark img { display: block; width: 190px; margin: 0 auto 22px; }
+      #s3 .wordmark .name { font-size: 150px; letter-spacing: .16em; padding-left: .16em; color: var(--gold-light); white-space: nowrap; }
+      #s3 .wordmark .name span { display: inline-block; opacity: 0; }
+      #s3 .wordmark .sub { margin-top: 10px; font-size: 26px; letter-spacing: .3em; text-transform: uppercase; color: var(--gold); opacity: 0; }
+      #s3 .copy { position: absolute; left: 150px; top: 340px; width: 980px; }
+      #s3 .copy .a { font-size: 64px; white-space: nowrap; line-height: 1.22; opacity: 0; position: relative; }
+      #s3 .copy .a s { text-decoration: none; position: relative; color: rgba(242,237,227,.55); }
+      #s3 .copy .a s::after { content: ""; position: absolute; left: 0; right: 0; top: 52%; height: 3px; background: var(--gold-light); transform: scaleX(var(--k, 0)); transform-origin: 0 50%; }
+      #s3 .copy .b { margin-top: 36px; font-size: 128px; color: var(--gold-light); opacity: 0; line-height: 1.05; }
+      #s3 .tag { position: absolute; left: 150px; top: 812px; font-size: 26px; letter-spacing: .3em; text-transform: uppercase; color: var(--gold); opacity: 0; }
+      #s3 .site { position: absolute; left: 280px; top: 120px; width: 1360px; height: 765px; opacity: 0; transform-origin: 50% 50%; border: 1px solid rgba(214,171,90,.5); box-shadow: 0 40px 100px rgba(0,0,0,.65); background: #000; }
+      #s3 .site img { width: 100%; height: 100%; object-fit: cover; display: block; }
+      #s3 .site .bar { position: absolute; left: 0; right: 0; top: -34px; height: 34px; background: #14100e; border: 1px solid rgba(214,171,90,.5); border-bottom: 0; }
+      .dots i { position: absolute; top: 12px; width: 10px; height: 10px; border-radius: 50%; background: var(--gold-dark); }
+      .dots i:nth-child(1) { left: 16px; } .dots i:nth-child(2) { left: 34px; } .dots i:nth-child(3) { left: 52px; }
+
+      /* ── S4 ── */
+      #s4 { background: radial-gradient(ellipse at 30% 20%, #3a1216 0%, #1a0b0c 50%, #0b0807 100%); }
+      #s4 .back { position: absolute; inset: -80px; background: url("assets/prod/prada-paradoxe.jpg") center / cover; filter: blur(50px) saturate(1.2); opacity: .18; transform-origin: 50% 50%; }
+      #s4 .device { position: absolute; left: 240px; top: 58px; width: 1440px; height: 844px; transform-origin: 50% 50%; opacity: 0; }
+      #s4 .device .bar { position: absolute; left: 0; right: 0; top: 0; height: 34px; background: #14100e; border: 1px solid rgba(214,171,90,.5); border-bottom: 0; }
+      #s4 .screen { position: absolute; left: 0; top: 34px; width: 1440px; height: 810px; overflow: hidden; border: 1px solid rgba(214,171,90,.5); box-shadow: 0 50px 120px rgba(0,0,0,.7); background: #0b0807; }
+      #s4 .cam { position: absolute; left: 0; top: 0; width: 1440px; height: 810px; transform-origin: 0 0; }
+      #s4 .cam img { position: absolute; left: 0; top: 0; width: 1440px; height: 810px; opacity: 0; }
+      #s4 .hl { position: absolute; border: 3px solid var(--gold-light); box-shadow: 0 0 0 9999px rgba(8,5,4,0), 0 0 30px rgba(214,171,90,.55); border-radius: 4px; opacity: 0; transform-origin: 0 0; }
+      #s4 .cap { position: absolute; left: 240px; top: 925px; opacity: 0; }
+      #s4 .cap .e { font-size: 22px; letter-spacing: .28em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 8px; }
+      #s4 .cap .t { font-size: 60px; color: var(--ivory); white-space: nowrap; }
+      #s4 .chips { position: absolute; right: 70px; top: 330px; width: 160px; display: flex; flex-direction: column; gap: 18px; }
+      #s4 .chips span { opacity: 0; font-size: 20px; letter-spacing: .14em; text-transform: uppercase; color: var(--ivory); border: 1px solid var(--gold); background: rgba(26,18,15,.8); padding: 12px 14px; text-align: center; }
+
+      /* ── S5 ── */
+      #s5 { background: #0b0807; }
+      #strip { position: absolute; left: 0; top: 130px; display: flex; gap: 46px; padding-left: 120px; }
+      #strip .card { position: relative; width: 520px; height: 760px; flex: none; overflow: hidden; border: 1px solid rgba(214,171,90,.45); }
+      #strip .card img { position: absolute; left: -40px; top: 0; width: calc(100% + 80px); height: 100%; object-fit: cover; }
+      #strip .card .lab { position: absolute; left: 0; right: 0; bottom: 0; padding: 70px 22px 20px; background: linear-gradient(to top, rgba(8,5,4,.92), rgba(8,5,4,0)); font-size: 24px; letter-spacing: .3em; text-transform: uppercase; color: var(--gold-light); }
+      #s5 .over { position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 50%, rgba(8,5,4,.86) 0%, rgba(8,5,4,.55) 70%); opacity: 0; }
+      #s5 .head { position: absolute; left: 0; right: 0; top: 190px; text-align: center; font-size: 50px; letter-spacing: .24em; text-transform: uppercase; color: var(--gold-light); opacity: 0; }
+      #s5 .req { position: absolute; left: 0; right: 0; text-align: center; font-size: 104px; opacity: 0; }
+      #s5 .num { position: absolute; left: 0; right: 0; top: 280px; text-align: center; font-size: 300px; line-height: 1; color: var(--ivory); opacity: 0; }
+      #s5 .numlab { position: absolute; left: 0; right: 0; top: 640px; text-align: center; font-size: 34px; letter-spacing: .36em; text-transform: uppercase; color: var(--gold-light); opacity: 0; }
+      #ring { position: absolute; left: 960px; top: 500px; }
+      #ring i { position: absolute; width: 12px; height: 12px; margin: -6px 0 0 -6px; border-radius: 50%; background: var(--gold); opacity: 0; }
+
+      /* ── S6 ── */
+      #s6 { background: radial-gradient(ellipse at 50% 38%, #3a1216 0%, #1a0b0c 45%, #0b0807 90%); }
+      #s6 .stack { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+      #s6 .mono { width: 210px; opacity: 0; clip-path: inset(0 100% 0 0); }
+      #s6 .claim { margin-top: 26px; font-size: 92px; text-align: center; line-height: 1.12; opacity: 0; }
+      #s6 .claim em { color: var(--gold-light); }
+      #s6 .brand { position: absolute; left: 0; right: 0; top: 430px; text-align: center; font-size: 150px; letter-spacing: .16em; padding-left: .16em; color: var(--gold-light); opacity: 0; }
+      #s6 .rule { position: absolute; left: 50%; top: 640px; width: 0; height: 1px; background: var(--gold); transform: translateX(-50%); }
+      #s6 .tag { position: absolute; left: 0; right: 0; top: 676px; text-align: center; font-size: 64px; letter-spacing: .05em; opacity: 0; }
+      #fade { position: absolute; inset: 0; background: #000; opacity: 0; z-index: 60; pointer-events: none; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="75" data-width="1920" data-height="1080">
+
+      <!-- S1 · Accroche -->
+      <section id="s1" class="scene">
+        <video id="heroVid" src="assets/video/hero.mp4" muted playsinline data-start="4.6" data-duration="2.2" data-media-start="0.3" data-track-index="0"></video>
+        <div class="dust" id="dust"></div>
+        <div class="beam" id="beam"></div>
+        <div class="l1 serif" id="l1"><span>Un</span><span>parfum</span><span>ne</span><span>se</span><span>décrit</span><span>pas.</span></div>
+        <div class="l2 serif" id="l2">Il se <em>reconnaît.</em></div>
+        <div class="rule" id="rule1"></div>
+      </section>
+
+      <!-- S2 · Le problème -->
+      <section id="s2" class="scene">
+        <div id="mosaic"></div>
+        <div class="shade" id="shade2"></div>
+        <div class="t1 serif" id="t2a">Plus de fragrances<br />qu'une vie n'en peut porter.</div>
+        <div class="t2 serif" id="t2b">La plupart se ressemblent.</div>
+        <div class="words serif" id="words"><span>lire<i class="dot">,</i></span><span>sentir<i class="dot">,</i></span><span>comparer<i class="dot">.</i></span></div>
+        <div class="line3" id="line3"></div>
+        <div class="t3 cinzel" id="t2c">Ne garder que ce qui <em>tient sur la durée</em></div>
+      </section>
+
+      <!-- S3 · La maison -->
+      <section id="s3" class="scene">
+        <div class="arch" id="arch"><img src="assets/prod/prada-paradoxe.jpg" alt="" /></div>
+        <div class="wordmark" id="wm">
+          <img src="assets/img/monogram.png" alt="" />
+          <div class="name deco" id="wmName"></div>
+          <div class="sub ui" id="wmSub">Maison de haute parfumerie · Algérie</div>
+        </div>
+        <div class="copy">
+          <div class="a serif" id="c3a">Dar Safia ne <s id="vend">vend</s> pas des parfums.</div>
+          <div class="b serif" id="c3b"><em>Elle en retient.</em></div>
+        </div>
+        <div class="site" id="site"><div class="bar dots"><i></i><i></i><i></i></div><img src="assets/img/home.jpg" alt="" /></div>
+      </section>
+
+      <!-- S4 · Le produit -->
+      <section id="s4" class="scene">
+        <div class="back" id="back4"></div>
+        <div class="device" id="device">
+          <div class="bar dots"><i></i><i></i><i></i></div>
+          <div class="screen">
+            <div class="cam" id="cam">
+              <img id="m-catalog" src="assets/img/catalog.jpg" alt="" />
+              <img id="m-pyr" src="assets/img/pyr.jpg" alt="" />
+              <img id="m-q2" src="assets/img/q2.jpg" alt="" />
+              <img id="m-q4" src="assets/img/q4.jpg" alt="" />
+              <img id="m-result" src="assets/img/result.jpg" alt="" />
+              <img id="m-form" src="assets/img/form.jpg" alt="" />
+              <img id="m-thanks" src="assets/img/thanks.jpg" alt="" />
+              <div class="hl" id="hl-side" style="left:84px;top:236px;width:262px;height:560px"></div>
+              <div class="hl" id="hl-t1" style="left:698px;top:214px;width:650px;height:131px"></div>
+              <div class="hl" id="hl-t2" style="left:698px;top:345px;width:650px;height:131px"></div>
+              <div class="hl" id="hl-t3" style="left:698px;top:476px;width:650px;height:132px"></div>
+              <div class="hl" id="hl-opt" style="left:360px;top:408px;width:730px;height:250px"></div>
+              <div class="hl" id="hl-fields" style="left:690px;top:186px;width:680px;height:296px"></div>
+              <div class="hl" id="hl-btn" style="left:766px;top:618px;width:250px;height:64px"></div>
+            </div>
+          </div>
+        </div>
+        <div class="cap serif" id="cap1"><div class="e ui">Le catalogue</div><div class="t cinzel">Quarante-cinq créations</div></div>
+        <div class="cap serif" id="cap2"><div class="e ui">La fiche</div><div class="t cinzel">Pyramide olfactive</div></div>
+        <div class="cap serif" id="cap3"><div class="e ui">Le diagnostic</div><div class="t cinzel">Quatre questions, une signature</div></div>
+        <div class="cap serif" id="cap4"><div class="e ui">La commande</div><div class="t cinzel">En quelques champs</div></div>
+        <div class="cap serif" id="cap5"><div class="e ui">La suite</div><div class="t cinzel">Confirmée par la conciergerie</div></div>
+        <div class="cap serif" id="cap6"><div class="e ui">Règlement</div><div class="t cinzel">À la livraison</div></div>
+        <div class="chips ui" id="chips"><span>Famille</span><span>Notes</span><span>Intensité</span></div>
+      </section>
+
+      <!-- S5 · Vue d'ensemble -->
+      <section id="s5" class="scene">
+        <div id="strip"></div>
+        <div class="over" id="over5"></div>
+        <div class="head cinzel" id="h5">Trois exigences, à chaque flacon</div>
+        <div class="req serif" id="r1" style="top:380px">La pureté des accords</div>
+        <div class="req serif" id="r2" style="top:540px">La tenue sur la peau</div>
+        <div class="req serif" id="r3" style="top:700px">Une provenance <em style="color:var(--gold-light)">vérifiée</em></div>
+        <div id="ring"></div>
+        <div class="num cinzel" id="num">0</div>
+        <div class="numlab ui" id="numlab">Wilayas livrées</div>
+      </section>
+
+      <!-- S6 · Final -->
+      <section id="s6" class="scene">
+        <div class="stack">
+          <img class="mono" id="mono6" src="assets/img/monogram.png" alt="" style="margin-top:-420px" />
+        </div>
+        <div class="claim serif" id="claim6" style="position:absolute;left:0;right:0;top:350px">Votre signature<br /><em>vous attend.</em></div>
+        <div class="brand deco" id="brand6">DAR SAFIA</div>
+        <div class="rule" id="rule6"></div>
+        <div class="tag serif" id="tag6"><em>L'Élégance pour Tous</em></div>
+      </section>
+
+      <div id="vignette"></div>
+      <div id="grain"></div>
+      <div id="fade"></div>
+
+      <!-- Audio -->
+      <audio id="music" src="assets/music/score.wav" data-start="0" data-duration="75" data-track-index="10" data-volume="0.5"></audio>
+      <audio id="vo-s1a" src="assets/vo/s1a.wav" data-start="1.8" data-duration="2.2" data-track-index="11" data-volume="1"></audio>
+      <audio id="vo-s1b" src="assets/vo/s1b.wav" data-start="4.45" data-duration="1.65" data-track-index="11" data-volume="1"></audio>
+      <audio id="vo-s2a" src="assets/vo/s2a.wav" data-start="7.0" data-duration="3.9" data-track-index="11" data-volume="1"></audio>
+      <audio id="vo-s2b" src="assets/vo/s2b.wav" data-start="11.35" data-duration="2.17" data-track-index="11" data-volume="1"></audio>
+      <audio id="vo-s2c" src="assets/vo/s2c.wav" data-start="13.97" data-duration="6.13" data-track-index="11" data-volume="1"></audio>
+      <audio id="vo-s3a" src="assets/vo/s3a.wav" data-start="21.1" data-duration="2.58" data-track-index="11" data-volume="1"></audio>
+      <audio id="vo-s3b" src="assets/vo/s3b.wav" data-start="24.13" data-duration="1.55" data-track-index="11" data-volume="1"></audio>
+      <audio id="vo-s3c" src="assets/vo/s3c.wav" data-start="26.13" data-duration="5.3" data-track-index="11" data-volume="1"></audio>
+      <audio id="vo-s4a" src="assets/vo/s4a.wav" data-start="32.43" data-duration="4.78" data-track-index="11" data-volume="1"></audio>
+      <audio id="vo-s4b" src="assets/vo/s4b.wav" data-start="37.66" data-duration="5.22" data-track-index="11" data-volume="1"></audio>
+      <audio id="vo-s4c" src="assets/vo/s4c.wav" data-start="43.33" data-duration="4.58" data-track-index="11" data-volume="1"></audio>
+      <audio id="vo-s4d" src="assets/vo/s4d.wav" data-start="48.36" data-duration="5.45" data-track-index="11" data-volume="1"></audio>
+      <audio id="vo-s5a" src="assets/vo/s5a.wav" data-start="54.81" data-duration="6.53" data-track-index="11" data-volume="1"></audio>
+      <audio id="vo-s5b" src="assets/vo/s5b.wav" data-start="61.79" data-duration="4.0" data-track-index="11" data-volume="1"></audio>
+      <audio id="vo-s6a" src="assets/vo/s6a.wav" data-start="66.79" data-duration="2.23" data-track-index="11" data-volume="1"></audio>
+      <audio id="vo-s6b" src="assets/vo/s6b.wav" data-start="69.47" data-duration="2.88" data-track-index="11" data-volume="1"></audio>
+      <audio id="x-hit1" src="assets/sfx/impactSoft_heavy_003.wav" data-start="20.8" data-duration="0.6" data-track-index="12" data-volume="0.35"></audio>
+      <audio id="x-roll1" src="assets/sfx/rollover2.wav" data-start="33.0" data-duration="0.2" data-track-index="13" data-volume="0.4"></audio>
+      <audio id="x-roll2" src="assets/sfx/rollover2.wav" data-start="37.7" data-duration="0.2" data-track-index="13" data-volume="0.4"></audio>
+      <audio id="x-b1" src="assets/sfx/bong_001.wav" data-start="40.3" data-duration="0.2" data-track-index="14" data-volume="0.45"></audio>
+      <audio id="x-b2" src="assets/sfx/bong_001.wav" data-start="41.5" data-duration="0.2" data-track-index="14" data-volume="0.45"></audio>
+      <audio id="x-b3" src="assets/sfx/bong_001.wav" data-start="42.4" data-duration="0.2" data-track-index="14" data-volume="0.45"></audio>
+      <audio id="x-c1" src="assets/sfx/click_003.wav" data-start="45.0" data-duration="0.1" data-track-index="15" data-volume="0.8"></audio>
+      <audio id="x-c2" src="assets/sfx/click_003.wav" data-start="46.6" data-duration="0.1" data-track-index="15" data-volume="0.8"></audio>
+      <audio id="x-c3" src="assets/sfx/click_003.wav" data-start="50.4" data-duration="0.1" data-track-index="15" data-volume="0.8"></audio>
+      <audio id="x-r1" src="assets/sfx/bong_001.wav" data-start="57.3" data-duration="0.2" data-track-index="16" data-volume="0.45"></audio>
+      <audio id="x-r2" src="assets/sfx/bong_001.wav" data-start="58.9" data-duration="0.2" data-track-index="16" data-volume="0.45"></audio>
+      <audio id="x-r3" src="assets/sfx/bong_001.wav" data-start="60.4" data-duration="0.2" data-track-index="16" data-volume="0.45"></audio>
+      <audio id="x-end" src="assets/sfx/impactSoft_heavy_001.wav" data-start="66.7" data-duration="0.6" data-track-index="17" data-volume="0.4"></audio>
+    </div>
+
+    <script>
+      // PRNG déterministe (aucun Math.random : le rendu doit être reproductible)
+      function rng(seed) { let a = seed >>> 0; return () => { a |= 0; a = (a + 0x6D2B79F5) | 0; let t = Math.imul(a ^ (a >>> 15), 1 | a); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
+      const $ = (s) => document.querySelector(s);
+      const E = "power2.out", EI = "power2.inOut";
+
+      /* ── Construction des éléments générés ── */
+      const R = rng(11);
+      // Poussière dorée (S1)
+      const dust = $("#dust");
+      const dustEls = [];
+      for (let i = 0; i < 64; i++) {
+        const d = document.createElement("i");
+        const s = 2 + R() * 4;
+        d.style.cssText = `left:${R() * 1920}px;top:${300 + R() * 900}px;width:${s}px;height:${s}px;`;
+        dust.appendChild(d); dustEls.push(d);
+      }
+      // Mosaïque (S2)
+      const names = ["burberry-my-burberry-blush","burberry-my-burberry-eau-de-parfum","chloe-le-parfum","christian-dior-dior-j-adore-intense","dolce-gabbana-devotion-femme","dolce-gabbana-l-imperatrice","giorgio-armani-acqua-di-gio-eau-de-parfum","givenchy-gentleman-eau-de-parfum","givenchy-irresistible","givenchy-l-interdit-rouge","givenchy-l-interdit-rouge-ultime","guerlain-l-instant-de-guerlain-femme","hermes-terre-d-hermes-intense","jean-paul-gaultier-divine-couture","jean-paul-gaultier-le-beau-narcisse-le-parfum","lacoste-l-12-12-original-aqua","lancome-idole-peach-rose","montblanc-explorer-platinum-extreme","paco-rabanne-invictus-victory-elixir","paco-rabanne-rabanne-fame-in-love","prada-paradigme-l-homme","prada-paradoxe-intense","rochas-audace","valentino-donna-born-in-roma-intense"];
+      const mosaic = $("#mosaic");
+      const tiles = names.map((n) => {
+        const t = document.createElement("div"); t.className = "tile";
+        t.innerHTML = `<b style="background-image:url(assets/prod/${n}.jpg)"></b><u style="background-image:url(assets/prod/prada-paradoxe.jpg)"></u>`;
+        mosaic.appendChild(t); return t;
+      });
+      // Nom DAR SAFIA (S3)
+      const wmName = $("#wmName");
+      "DAR SAFIA".split("").forEach((c) => { const s = document.createElement("span"); s.textContent = c === " " ? " " : c; wmName.appendChild(s); });
+      // Bande de photos (S5)
+      const fam = [["prada-paradoxe", "Floral"], ["givenchy-l-interdit-rouge", "Ambré"], ["dolce-gabbana-devotion-femme", "Gourmand"], ["lacoste-l-12-12-original-aqua", "Frais"], ["hermes-terre-d-hermes-intense", "Boisé"], ["prada-paradoxe-intense", "Floral"], ["valentino-donna-born-in-roma-intense", "Ambré"]];
+      const strip = $("#strip");
+      fam.forEach(([n, l]) => { const c = document.createElement("div"); c.className = "card"; c.innerHTML = `<img src="assets/prod/${n}.jpg" alt=""/><div class="lab ui">${l}</div>`; strip.appendChild(c); });
+      // Anneau de 58 points (S5)
+      const ring = $("#ring"); const dots = [];
+      for (let i = 0; i < 58; i++) {
+        const a = (i / 58) * Math.PI * 2 - Math.PI / 2;
+        const d = document.createElement("i"); d.style.left = Math.cos(a) * 330 + "px"; d.style.top = Math.sin(a) * 330 + "px";
+        ring.appendChild(d); dots.push(d);
+      }
+
+      const tl = gsap.timeline({ paused: true });
+
+      /* ═════════ S1 · 0 → 6.8 ═════════ */
+      tl.set("#s1", { opacity: 1 }, 0);
+      tl.to("#beam", { opacity: 1, duration: 2.4, ease: "power1.inOut" }, 0.2);
+      tl.fromTo("#beam", { x: -90 }, { x: 60, duration: 6.5, ease: "none" }, 0);
+      dustEls.forEach((d, i) => {
+        const t0 = 0.2 + (i % 16) * 0.09;
+        tl.fromTo(d, { opacity: 0, y: 0 }, { opacity: 0.25 + (i % 5) * 0.12, y: -(160 + (i % 7) * 70), duration: 5.5, ease: "none" }, t0);
+        tl.to(d, { opacity: 0, duration: 1.2 }, t0 + 4.6);
+      });
+      // « Un parfum ne se décrit pas. »
+      tl.fromTo("#l1 span", { opacity: 0, y: 34, filter: "blur(14px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.7, ease: E, stagger: 0.16 }, 1.85);
+      tl.to("#l1", { opacity: 0, y: -50, filter: "blur(10px)", duration: 0.6, ease: "power2.in" }, 4.1);
+      // « Il se reconnaît. » + filet or
+      tl.fromTo("#l2", { opacity: 0, y: 40, filter: "blur(16px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.9, ease: E }, 4.5);
+      tl.to("#rule1", { width: 760, duration: 1.2, ease: E }, 4.9);
+      // Le film du site se lève derrière
+      tl.fromTo("#heroVid", { opacity: 0, scale: 1.0 }, { opacity: 0.55, scale: 1.12, duration: 2.2, ease: "none" }, 4.6);
+      tl.to("#s1", { opacity: 0, duration: 0.5, ease: "power1.inOut" }, 6.3);
+
+      /* ═════════ S2 · 6.5 → 21.1 ═════════ */
+      tl.fromTo("#s2", { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "power1.inOut" }, 6.5);
+      tl.fromTo("#mosaic", { scale: 1.0, rotate: 0 }, { scale: 1.16, rotate: -1.5, duration: 14, ease: "none" }, 6.5);
+      const order = tiles.map((_, i) => i).sort((a, b) => ((a * 7) % 24) - ((b * 7) % 24));
+      order.forEach((idx, k) => {
+        tl.fromTo(tiles[idx], { opacity: 0, scale: 1.12 }, { opacity: 1, scale: 1, duration: 0.5, ease: E }, 7.0 + k * 0.1);
+      });
+      tl.to("#shade2", { opacity: 1, duration: 1.0 }, 7.1);
+      tl.fromTo("#t2a", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.9, ease: E }, 7.4);
+      tl.to("#t2a", { opacity: 0, y: -30, duration: 0.5 }, 10.9);
+      // « se ressemblent » : toutes les tuiles deviennent la même image
+      tiles.forEach((t, i) => { tl.to(t.querySelector("u"), { opacity: 1, duration: 0.6, ease: "power1.inOut" }, 11.4 + (i % 12) * 0.08); });
+      tl.fromTo("#t2b", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.8, ease: E }, 11.5);
+      tl.to("#t2b", { opacity: 0, duration: 0.5 }, 13.5);
+      // lire, sentir, comparer.
+      tl.to("#mosaic", { opacity: 0.14, duration: 1.2 }, 13.9);
+      ["#words span:nth-child(1)", "#words span:nth-child(2)", "#words span:nth-child(3)"].forEach((s, i) => {
+        tl.fromTo(s, { opacity: 0, y: 50, filter: "blur(16px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.7, ease: E }, 16.0 + i * 0.8);
+      });
+      tl.to("#line3", { width: 520, duration: 0.9, ease: E }, 18.6);
+      tl.fromTo("#t2c", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.8, ease: E }, 18.8);
+      tl.to(["#words", "#t2c", "#line3"], { opacity: 0, duration: 0.6 }, 20.0);
+      tl.to("#s2", { opacity: 0, duration: 0.5, ease: "power1.inOut" }, 20.6);
+
+      /* ═════════ S3 · 20.6 → 32.4 ═════════ */
+      tl.fromTo("#s3", { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "power1.inOut" }, 20.6);
+      // Révélation du nom, grand, au centre
+      tl.set("#wm", { opacity: 1 }, 20.9);
+      tl.fromTo("#wm img", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.9, ease: E }, 20.9);
+      tl.fromTo("#wmName span", { opacity: 0, y: 24, filter: "blur(10px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.7, ease: E, stagger: 0.07 }, 21.1);
+      tl.fromTo("#wmSub", { opacity: 0 }, { opacity: 1, duration: 0.8 }, 22.0);
+      // Le nom se range en haut à gauche
+      tl.to("#wm", { x: -640, y: -420, scale: 0.4, duration: 1.1, ease: EI }, 23.2);
+      // Phrase + biffure du mot « vend »
+      tl.fromTo("#c3a", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.8, ease: E }, 23.9);
+      tl.to("#vend", { "--k": 1, duration: 0.5, ease: "power2.inOut" }, 24.9);
+      tl.fromTo("#c3b", { opacity: 0, y: 30, filter: "blur(12px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.9, ease: E }, 24.3);
+      // Le flacon retenu (arche)
+      tl.fromTo("#arch", { opacity: 0, y: 70, clipPath: "inset(100% 0 0 0)" }, { opacity: 1, y: 0, clipPath: "inset(0% 0 0 0)", duration: 1.3, ease: E }, 24.2);
+      tl.fromTo("#arch img", { scale: 1.25 }, { scale: 1.02, duration: 4.5, ease: "none" }, 24.2);
+      // Le site s'élève
+      tl.to(["#c3a", "#c3b", "#arch", "#wm"], { opacity: 0, duration: 0.6, ease: "power2.in" }, 28.2);
+      tl.fromTo("#site", { opacity: 0, y: 260, rotateX: 14, scale: 0.92 }, { opacity: 1, y: 0, rotateX: 0, scale: 1, duration: 1.4, ease: E }, 28.4);
+      tl.fromTo("#site img", { scale: 1.0 }, { scale: 1.1, duration: 3.5, ease: "none", transformOrigin: "30% 60%" }, 28.4);
+      tl.to("#site", { scale: 1.06, duration: 1.2, ease: "power2.in" }, 31.0);
+      tl.to("#s3", { opacity: 0, duration: 0.5, ease: "power1.inOut" }, 31.9);
+
+      /* ═════════ S4 · 31.9 → 54.8 ═════════ */
+      tl.fromTo("#s4", { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "power1.inOut" }, 31.9);
+      tl.fromTo("#back4", { scale: 1.0 }, { scale: 1.25, duration: 23, ease: "none" }, 31.9);
+      tl.fromTo("#device", { opacity: 0, y: 40, rotateY: -6, scale: 0.96 }, { opacity: 1, y: 0, rotateY: 0, scale: 1, duration: 1.0, ease: E }, 32.0);
+      tl.to("#device", { rotateY: 3, duration: 22, ease: "none" }, 33.0);
+      const clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
+      const cam = (x, y, s, t, d = 1.1) => tl.to("#cam", {
+        x: clamp(720 - x * s, 1440 * (1 - s), 0),
+        y: clamp(405 - y * s, 810 * (1 - s), 0),
+        scale: s, duration: d, ease: EI }, t);
+      const img = (id, on, off, fadeIn = 0.5) => {
+        tl.fromTo(id, { opacity: 0 }, { opacity: 1, duration: fadeIn, ease: "power1.inOut" }, on);
+        if (off) tl.to(id, { opacity: 0, duration: 0.5, ease: "power1.inOut" }, off);
+      };
+      const hl = (id, on, off) => {
+        tl.fromTo(id, { opacity: 0, scale: 1.08 }, { opacity: 1, scale: 1, duration: 0.45, ease: E }, on);
+        tl.to(id, { opacity: 0, duration: 0.35 }, off);
+      };
+      const cap = (id, on, off) => {
+        tl.fromTo(id, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6, ease: E }, on);
+        tl.to(id, { opacity: 0, y: -14, duration: 0.4 }, off);
+      };
+      // a · le catalogue
+      img("#m-catalog", 32.2, 37.7);
+      cap("#cap1", 32.6, 37.3);
+      cam(720, 405, 1.0, 32.2, 0.01);
+      cam(220, 500, 1.85, 34.0, 1.2);
+      hl("#hl-side", 34.5, 37.2);
+      [["Famille", 0], ["Notes", 1], ["Intensité", 2]].forEach(([_, i]) => {
+        tl.fromTo(`#chips span:nth-child(${i + 1})`, { opacity: 0, x: 24 }, { opacity: 1, x: 0, duration: 0.5, ease: E }, 34.6 + i * 0.8);
+        tl.to(`#chips span:nth-child(${i + 1})`, { opacity: 0, duration: 0.4 }, 37.3);
+      });
+      cam(860, 560, 1.3, 36.7, 1.0);
+      // b · la pyramide
+      img("#m-pyr", 37.6, 43.4);
+      cap("#cap2", 38.0, 43.0);
+      cam(1023, 410, 1.0, 37.6, 0.01);
+      cam(1023, 410, 1.5, 38.4, 1.4);
+      hl("#hl-t1", 40.2, 41.4); hl("#hl-t2", 41.4, 42.3); hl("#hl-t3", 42.3, 43.2);
+      // c · le diagnostic
+      img("#m-q2", 43.2, 45.4);
+      img("#m-q4", 44.9, 47.0);
+      img("#m-result", 46.5, 48.6);
+      cap("#cap3", 43.6, 48.2);
+      cam(720, 470, 1.35, 43.2, 0.01);
+      hl("#hl-opt", 43.9, 45.2);
+      cam(720, 430, 1.35, 46.4, 0.9);
+      // d · commande -> remerciement
+      img("#m-form", 48.2, 51.6);
+      img("#m-thanks", 51.2, 54.6);
+      cap("#cap4", 48.6, 50.9);
+      cam(1010, 430, 1.5, 48.2, 0.01);
+      hl("#hl-fields", 49.0, 50.4);
+      hl("#hl-btn", 50.4, 51.4);
+      cap("#cap5", 51.5, 52.9);
+      cam(720, 330, 1.25, 51.2, 1.0);
+      cap("#cap6", 53.0, 54.3);
+      cam(720, 600, 1.45, 52.4, 1.4);
+      tl.to("#device", { opacity: 0, y: -20, duration: 0.5, ease: "power1.in" }, 54.1);
+      tl.to("#s4", { opacity: 0, duration: 0.5, ease: "power1.inOut" }, 54.3);
+
+      /* ═════════ S5 · 54.3 → 66.8 ═════════ */
+      tl.fromTo("#s5", { opacity: 0 }, { opacity: 1, duration: 0.6, ease: "power1.inOut" }, 54.3);
+      tl.fromTo("#strip", { x: 40 }, { x: -2380, duration: 12.5, ease: "none" }, 54.3);
+      tl.fromTo("#strip .card img", { x: 0 }, { x: -30, duration: 12.5, ease: "none" }, 54.3);
+      tl.to("#over5", { opacity: 1, duration: 0.9 }, 56.2);
+      tl.fromTo("#h5", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.8, ease: E }, 56.0);
+      [["#r1", 57.0], ["#r2", 58.6], ["#r3", 60.1]].forEach(([s, t]) => {
+        tl.fromTo(s, { opacity: 0, x: -40, filter: "blur(12px)" }, { opacity: 1, x: 0, filter: "blur(0px)", duration: 0.7, ease: E }, t);
+      });
+      tl.to(["#h5", "#r1", "#r2", "#r3"], { opacity: 0, y: -24, duration: 0.6, ease: "power2.in", stagger: 0.05 }, 61.3);
+      // 58 wilayas
+      tl.set("#num", { opacity: 1 }, 62.0);
+      const counter = { v: 0 };
+      tl.fromTo("#num", { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.7, ease: E }, 62.0);
+      tl.to(counter, { v: 58, duration: 2.6, ease: "power2.out", onUpdate: () => { $("#num").textContent = String(Math.round(counter.v)); } }, 62.3);
+      dots.forEach((d, i) => { tl.fromTo(d, { opacity: 0, scale: 0.2 }, { opacity: 1, scale: 1, duration: 0.3, ease: E }, 62.3 + (i / 58) * 2.5); });
+      tl.fromTo("#numlab", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.7, ease: E }, 63.2);
+      tl.to("#s5", { opacity: 0, duration: 0.5, ease: "power1.inOut" }, 66.0);
+
+      /* ═════════ S6 · 66.3 → 75 ═════════ */
+      tl.fromTo("#s6", { opacity: 0 }, { opacity: 1, duration: 0.6, ease: "power1.inOut" }, 66.3);
+      tl.to("#mono6", { opacity: 1, clipPath: "inset(0 0% 0 0)", duration: 1.1, ease: "power2.inOut" }, 66.5);
+      tl.fromTo("#claim6", { opacity: 0, y: 26, filter: "blur(10px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.9, ease: E }, 66.9);
+      tl.to(["#claim6", "#mono6"], { opacity: 0, y: -30, duration: 0.7, ease: "power2.in" }, 69.0);
+      tl.fromTo("#brand6", { opacity: 0, y: 20, filter: "blur(10px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 1.1, ease: E }, 69.5);
+      tl.to("#rule6", { width: 520, duration: 1.0, ease: E }, 70.4);
+      tl.fromTo("#tag6", { opacity: 0 }, { opacity: 1, duration: 1.0, ease: E }, 70.8);
+      tl.to("#s6", { scale: 1.035, duration: 4.5, ease: "none" }, 70.3);
+      tl.to("#fade", { opacity: 1, duration: 1.0, ease: "power1.in" }, 74.0);
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>

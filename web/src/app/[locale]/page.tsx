@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
 import { ClosingCall } from '@/components/home/ClosingCall';
@@ -13,9 +14,16 @@ import { getSignatureNotes, getSignatureProducts } from '@/lib/home/signatures';
 import { isLocale } from '@/lib/i18n/config';
 import { getDictionary } from '@/lib/i18n/dictionaries';
 import { localePath } from '@/lib/i18n/routing';
+import { localeAlternates } from '@/lib/site';
 
 /** Périmètre de livraison de la maison, affiché partout sur le site. */
 const WILAYAS_DESSERVIES = 58;
+
+export async function generateMetadata({ params }: PageProps<'/[locale]'>): Promise<Metadata> {
+  const { locale } = await params;
+  if (!isLocale(locale)) return {};
+  return { alternates: localeAlternates(locale, '/') };
+}
 
 /**
  * Accueil. Composant serveur : toutes les données passent par `catalog` et par

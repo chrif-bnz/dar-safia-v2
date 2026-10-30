@@ -5,7 +5,6 @@ import { notFound } from 'next/navigation';
 import { PlaceholderPhoneBanner } from '@/components/PlaceholderPhoneBanner';
 import { SiteFooter } from '@/components/SiteFooter';
 import { SiteHeader } from '@/components/SiteHeader';
-import { CartDrawer } from '@/components/cart/CartDrawer';
 import { CartProvider } from '@/components/cart/CartProvider';
 import { I18nProvider } from '@/components/i18n/I18nProvider';
 import { InlineScript } from '@/components/InlineScript';
@@ -15,6 +14,7 @@ import { SmoothScroll } from '@/components/motion/SmoothScroll';
 import { DIRECTION, LOCALES, isLocale } from '@/lib/i18n/config';
 import { introGuardScript } from '@/lib/intro-guard';
 import { getDictionary } from '@/lib/i18n/dictionaries';
+import { OG_LOCALE, siteUrl } from '@/lib/site';
 
 import '../globals.css';
 
@@ -114,11 +114,17 @@ export async function generateMetadata({ params }: LayoutProps<'/[locale]'>): Pr
   const dict = await getDictionary(locale);
   const house = dict.home.eyebrow.split('·')[0].trim();
   return {
+    metadataBase: siteUrl(),
     title: {
       default: `${dict.common.brandName} — ${house}`,
       template: `%s | ${dict.common.brandName}`,
     },
     description: dict.home.tagline,
+    openGraph: {
+      siteName: dict.common.brandName,
+      locale: OG_LOCALE[locale],
+      type: 'website',
+    },
   };
 }
 
@@ -141,7 +147,7 @@ export default async function RootLayout({
             c'est le seul moment où l'en-tête peut être voilé sans flash. */}
         <InlineScript html={introGuardScript} />
       </head>
-      <body className="min-h-screen antialiased overflow-x-clip">
+      <body className="min-h-screen antialiased overflow-x-clip" suppressHydrationWarning>
         <a
           href="#contenu"
           className="sr-only focus:not-sr-only focus:absolute focus:top-0 focus:z-50 focus:bg-gold focus:px-5 focus:py-3 focus:text-sm focus:font-semibold focus:text-noir focus:start-0"
@@ -159,7 +165,6 @@ export default async function RootLayout({
             <SiteHeader locale={locale} dict={dict} />
             {children}
             <SiteFooter locale={locale} dict={dict} />
-            <CartDrawer />
             <PlaceholderPhoneBanner dict={dict} />
           </CartProvider>
         </I18nProvider>

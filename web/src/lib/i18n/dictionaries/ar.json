@@ -312,8 +312,16 @@
         "Séducteur": "آسر",
         "Luxe / chic": "فخم وأنيق"
       },
-      "searchPlaceholder": "ابحث…"
-    }
+      "searchPlaceholder": "ابحث…",
+      "searchClear": "مسح البحث"
+    },
+    "pagination": {
+      "previous": "السابق",
+      "next": "التالي",
+      "label": "تنقل صفحات الكتالوج",
+      "page": "صفحة {page}"
+    },
+    "shuffle": "ترتيب عشوائي"
   },
   "product": {
     "breadcrumbHome": "الرئيسية",
@@ -386,7 +394,15 @@
     "orderIntro": "أرغب في إتمام الطلب التالي:",
     "orderLine": "{name} ({brand}) — {volume} × {qty} : {total}",
     "orderSubtotal": "المجموع الفرعي: {subtotal}",
-    "orderOutro": "يرجى تأكيد التوفّر وشروط التوصيل."
+    "orderOutro": "يرجى تأكيد التوفّر وشروط التوصيل.",
+    "yourCart": "سلتك",
+    "unitPrice": "سعر الوحدة",
+    "total": "المجموع",
+    "continueShopping": "متابعة التسوق",
+    "emptyCta": "اكتشف العطور",
+    "emptyLead": "ستظهر هنا العطور التي تضيفها.",
+    "summary": "الملخّص",
+    "shipping": "التوصيل"
   },
   "scentFinder": {
     "eyebrow": "تشخيص عطري",
@@ -559,5 +575,37 @@
   },
   "loading": {
     "label": "جارٍ التحميل"
+  },
+  "thanks": {
+    "metaTitle": "شكرًا",
+    "eyebrow": "تم استلام الطلب",
+    "title": "شكرًا.",
+    "titleNamed": "شكرًا، {name}.",
+    "lead": "تم تسجيل طلبك. تتكفّل به الخدمة الآن.",
+    "leadGeneric": "إن كنت قد أرسلت طلبًا للتو، فقد تم تسجيله. تتكفّل به الخدمة الآن.",
+    "reference": "المرجع",
+    "summaryTitle": "اختيارك",
+    "quantity": "الكمية",
+    "total": "المجموع",
+    "delivery": "التوصيل",
+    "deliveredTo": "التوصيل إلى {place}",
+    "stepsTitle": "ما يلي",
+    "steps": [
+      {
+        "term": "تم استلام الطلب",
+        "detail": "تم تسجيل طلبك مع بياناتك."
+      },
+      {
+        "term": "تأكيد من الخدمة",
+        "detail": "تؤكّد لك الخدمة التوفّر والتوصيل."
+      },
+      {
+        "term": "الدفع عند الاستلام",
+        "detail": "يُسدَّد الطلب عند الاستلام، في 58 ولاية."
+      }
+    ],
+    "whatsapp": "راسل الخدمة",
+    "continue": "تابع الاكتشاف",
+    "home": "العودة إلى الرئيسية"
   }
 }

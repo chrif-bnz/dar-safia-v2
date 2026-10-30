@@ -1,9 +1,11 @@
+import { Suspense } from 'react';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
 import { catalog } from '@/lib/catalog';
 import { isLocale, LOCALES } from '@/lib/i18n/config';
 import { getDictionary } from '@/lib/i18n/dictionaries';
+import { localeAlternates } from '@/lib/site';
 
 import { ShopExperience } from './ShopExperience';
 import { toShopProduct } from './shop-product';
@@ -27,7 +29,7 @@ export async function generateMetadata({
   const { locale } = await params;
   if (!isLocale(locale)) return {};
   const dict = await getDictionary(locale);
-  return { title: dict.catalog.title };
+  return { title: dict.catalog.title, alternates: localeAlternates(locale, '/parfums') };
 }
 
 export default async function CatalogPage({ params }: PageProps<'/[locale]/parfums'>) {
@@ -49,7 +51,10 @@ export default async function CatalogPage({ params }: PageProps<'/[locale]/parfu
       </p>
       <h1 className="mt-4 font-serif text-display-md text-balance text-ivory">{c.title}</h1>
 
-      <ShopExperience products={products} locale={locale} dict={dict} />
+      <Suspense fallback={null}>
+        <ShopExperience products={products} locale={locale} dict={dict} />
+      </Suspense>
     </main>
   );
 }
+

@@ -145,7 +145,7 @@ export function SignatureStage({
       <section
         ref={sectionRef}
         aria-labelledby="signatures"
-        className="border-t border-smoke-2 bg-noir px-6 py-24 md:px-12 md:py-28 lg:px-20"
+        className="border-t border-smoke-2 bg-burgundy-deep px-6 py-24 md:px-12 md:py-28 lg:px-20"
       >
         <div className="mx-auto max-w-(--container-site)">
           {heading}
@@ -173,7 +173,7 @@ export function SignatureStage({
     <section
       ref={sectionRef}
       aria-labelledby="signatures"
-      className="relative border-t border-smoke-2 bg-noir"
+      className="relative border-t border-smoke-2 bg-burgundy-deep"
     >
       <div ref={wrapRef} style={{ height: `${products.length * 100}vh` }}>
         <div className="sticky top-0 h-svh min-h-[clamp(750px,100svh,980px)] overflow-hidden">

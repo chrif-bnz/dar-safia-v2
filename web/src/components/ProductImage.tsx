@@ -2,6 +2,8 @@
 
 import { useEffect, useRef, useState } from 'react';
 
+import { encodeAssetPath } from '@/lib/asset-url';
+
 /**
  * Image de parfum avec repli de marque.
  *
@@ -20,7 +22,9 @@ const encodeSrcset = (srcset: string) =>
     .split(/,\s*(?=\/|https?:)/)
     .map((candidate) => {
       const i = candidate.lastIndexOf(' ');
-      return i === -1 ? encodeURI(candidate) : `${encodeURI(candidate.slice(0, i))}${candidate.slice(i)}`;
+      return i === -1
+        ? encodeAssetPath(candidate)
+        : `${encodeAssetPath(candidate.slice(0, i))}${candidate.slice(i)}`;
     })
     .join(', ');
 
@@ -64,7 +68,7 @@ export function ProductImage({
     // eslint-disable-next-line @next/next/no-img-element -- pipeline d'images maison (srcset responsive)
     <img
       ref={ref}
-      src={encodeURI(src)}
+      src={encodeAssetPath(src)}
       srcSet={srcSet ? encodeSrcset(srcSet) : undefined}
       sizes={sizes}
       alt={alt}

@@ -16,8 +16,17 @@ export async function guard(
   request: NextRequest
 ): Promise<{ response: NextResponse } | { body: Record<string, unknown> }> {
   const origin = request.headers.get('origin');
-  if (origin && origin !== request.nextUrl.origin) {
-    return { response: NextResponse.json({ ok: false }, { status: 403 }) };
+  if (origin) {
+    const host = request.headers.get('x-forwarded-host') ?? request.headers.get('host');
+    let originHost = '';
+    try {
+      originHost = new URL(origin).host;
+    } catch {
+      originHost = '';
+    }
+    if (originHost !== host && origin !== request.nextUrl.origin) {
+      return { response: NextResponse.json({ ok: false }, { status: 403 }) };
+    }
   }
 
   const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'local';

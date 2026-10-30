@@ -30,6 +30,21 @@ export async function POST(request: NextRequest) {
   }
 
   const reference = (result.data as { data?: { reference?: unknown } }).data?.reference;
+  const sheetUrl = process.env.GOOGLE_SHEET_WEBHOOK_URL;
+  if (sheetUrl) {
+    try {
+      await fetch(sheetUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ reference, ...body }),
+        cache: 'no-store',
+        signal: AbortSignal.timeout(5000),
+      });
+    } catch (error) {
+      // The order is already saved in Strapi; a sheet failure must not fail the customer.
+      console.error('[orders] échec de l’envoi vers Google Sheet', error);
+    }
+  }
   return NextResponse.json(
     { ok: true, stored: true, reference: typeof reference === 'string' ? reference : null },
     { status: 201 }

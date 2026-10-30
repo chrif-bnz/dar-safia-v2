@@ -119,7 +119,7 @@ export function Manifesto({ dict, houses }: { dict: Dictionary; houses: string[]
     <section
       ref={ref}
       aria-labelledby="manifeste"
-      style={{ '--seam-from': 'var(--color-noir)' } as CSSProperties}
+      style={{ '--seam-from': 'var(--color-burgundy-deep)' } as CSSProperties}
       className="ds-seam ds-grain relative overflow-hidden bg-burgundy px-6 pt-28 pb-0 md:px-12 md:pt-40 lg:px-20"
     >
       {/* Le bordeaux n'est pas un aplat : une lumière chaude le traverse en

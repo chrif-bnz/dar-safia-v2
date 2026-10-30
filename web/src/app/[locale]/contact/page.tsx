@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 
 import { LOCALES, isLocale } from '@/lib/i18n/config';
 import { getDictionary } from '@/lib/i18n/dictionaries';
+import { localeAlternates } from '@/lib/site';
 import { formatWhatsappPhone, whatsappPhone } from '@/lib/whatsapp';
 
 import { ContactExperience } from './ContactExperience';
@@ -25,7 +26,11 @@ export async function generateMetadata({
   const { locale } = await params;
   if (!isLocale(locale)) return {};
   const dict = await getDictionary(locale);
-  return { title: dict.nav.contact, description: dict.contact.lead };
+  return {
+    title: dict.nav.contact,
+    description: dict.contact.lead,
+    alternates: localeAlternates(locale, '/contact'),
+  };
 }
 
 export default async function ContactPage({

@@ -44,6 +44,8 @@ interface CartContextValue {
 
 const CartContext = createContext<CartContextValue | null>(null);
 
+const subscribeNever = () => () => {};
+
 export function CartProvider({ children }: { children: ReactNode }) {
   const lines = useSyncExternalStore(
     store.subscribe,
@@ -51,10 +53,10 @@ export function CartProvider({ children }: { children: ReactNode }) {
     store.getServerSnapshot
   );
 
-  // Même mécanisme pour savoir si l'on est hydraté : renvoie false au rendu
-  // serveur, true côté client, sans setState dans un effet.
+  // false au rendu serveur et à l'hydratation, true ensuite : sans setState
+  // dans un effet (le magasin externe fournit les deux instantanés).
   const hydrated = useSyncExternalStore(
-    store.subscribe,
+    subscribeNever,
     () => true,
     () => false
   );
@@ -67,7 +69,6 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const addLine = useCallback(
     (line: Omit<CartLine, 'quantity'>, quantity = 1) => {
       store.addLine(line, quantity);
-      setIsOpen(true);
     },
     []
   );

@@ -34,7 +34,7 @@ export function ClosingCall({
     <section
       ref={ref}
       aria-labelledby="cloture"
-      style={{ '--seam-from': 'var(--color-noir)' } as CSSProperties}
+      style={{ '--seam-from': 'var(--color-burgundy-deep)' } as CSSProperties}
       className="ds-seam ds-grain relative overflow-hidden bg-burgundy px-6 py-32 md:px-12 md:py-44 lg:px-20"
     >
       <div

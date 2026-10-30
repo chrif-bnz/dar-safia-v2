@@ -48,7 +48,7 @@ function VoicesStatic({ dict }: { dict: Dictionary }) {
     <section
       ref={ref}
       aria-label={v.region}
-      className="border-t border-gold/20 bg-noir px-6 py-24 md:px-12 md:py-32 lg:px-20"
+      className="border-t border-gold/20 bg-burgundy-deep px-6 py-24 md:px-12 md:py-32 lg:px-20"
     >
       <div className="mx-auto max-w-(--container-site)">
         <h2 className="font-body text-[clamp(1.5rem,2.8vw,2.2rem)] leading-[1.15] font-light text-ivory/80">
@@ -318,7 +318,7 @@ function VoicesStage({ dict }: { dict: Dictionary }) {
       aria-roledescription="carousel"
       aria-label={v.region}
       onKeyDown={onKey}
-      className="relative overflow-hidden border-t border-gold/20 bg-noir px-6 py-28 md:px-12 md:py-40 lg:px-20"
+      className="relative overflow-hidden border-t border-gold/20 bg-burgundy-deep px-6 py-28 md:px-12 md:py-40 lg:px-20"
     >
       {/* Lumière bordeaux, très lente : elle se déplace derrière la citation. */}
       <div

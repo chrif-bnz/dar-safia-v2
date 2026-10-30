@@ -312,8 +312,16 @@
         "Séducteur": "Seductive",
         "Luxe / chic": "Luxe / chic"
       },
-      "searchPlaceholder": "Search…"
-    }
+      "searchPlaceholder": "Search…",
+      "searchClear": "Clear search"
+    },
+    "pagination": {
+      "previous": "Previous",
+      "next": "Next",
+      "label": "Catalog pagination",
+      "page": "Page {page}"
+    },
+    "shuffle": "Shuffle"
   },
   "product": {
     "breadcrumbHome": "Home",
@@ -386,7 +394,15 @@
     "orderIntro": "I would like to finalise the following order:",
     "orderLine": "{name} ({brand}) — {volume} × {qty} : {total}",
     "orderSubtotal": "SUBTOTAL: {subtotal}",
-    "orderOutro": "Please confirm availability and delivery terms."
+    "orderOutro": "Please confirm availability and delivery terms.",
+    "yourCart": "Your cart",
+    "unitPrice": "Unit price",
+    "total": "Total",
+    "continueShopping": "Continue shopping",
+    "emptyCta": "Discover the perfumes",
+    "emptyLead": "Perfumes you add will appear here.",
+    "summary": "Summary",
+    "shipping": "Delivery"
   },
   "scentFinder": {
     "eyebrow": "Scent diagnosis",
@@ -559,5 +575,37 @@
   },
   "loading": {
     "label": "Loading"
+  },
+  "thanks": {
+    "metaTitle": "Thank you",
+    "eyebrow": "Order received",
+    "title": "Thank you.",
+    "titleNamed": "Thank you, {name}.",
+    "lead": "Your request is registered. The concierge is taking it from here.",
+    "leadGeneric": "If you have just placed an order, it is registered. The concierge is taking it from here.",
+    "reference": "Reference",
+    "summaryTitle": "Your selection",
+    "quantity": "Quantity",
+    "total": "Total",
+    "delivery": "Delivery",
+    "deliveredTo": "Delivery to {place}",
+    "stepsTitle": "What happens next",
+    "steps": [
+      {
+        "term": "Request received",
+        "detail": "Your order is registered with your details."
+      },
+      {
+        "term": "Confirmed by the concierge",
+        "detail": "Availability and delivery are confirmed to you by the concierge."
+      },
+      {
+        "term": "Payment on delivery",
+        "detail": "The order is paid on delivery, across all 58 wilayas."
+      }
+    ],
+    "whatsapp": "Write to the concierge",
+    "continue": "Keep exploring",
+    "home": "Back to home"
   }
 }

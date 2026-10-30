@@ -152,7 +152,7 @@ export function SiteHeader({ locale, dict }: { locale: Locale; dict: Dictionary 
     <header
       ref={headerRef}
       data-lifted={solidHeader || undefined}
-      className="ds-header fixed inset-x-0 top-0 z-40 data-lifted:border-b data-lifted:border-gold/15 data-lifted:bg-noir/72 data-lifted:backdrop-blur-xl data-lifted:backdrop-saturate-150"
+      className="ds-header fixed inset-x-0 top-0 z-40 data-lifted:border-b data-lifted:border-gold/15 data-lifted:bg-burgundy/80 data-lifted:backdrop-blur-xl data-lifted:backdrop-saturate-150"
     >
       <div className="mx-auto flex max-w-(--container-site) items-center gap-4 px-5 py-3 md:px-8">
         <Link
@@ -160,11 +160,12 @@ export function SiteHeader({ locale, dict }: { locale: Locale; dict: Dictionary 
           aria-label={`${dict.common.brandName} — ${dict.notFound.backHome}`}
           className="ds-tap flex shrink-0 items-center gap-3 font-serif text-lg whitespace-nowrap tracking-[0.08em] text-ivory transition-colors hover:text-gold"
         >
+          {/* eslint-disable-next-line @next/next/no-img-element -- monogramme statique, dimensions fixes */}
           <img
             src="/img/logo/logo-dr/logo-navbar-monogramme.png"
             alt=""
-            width={1377}
-            height={1142}
+            width={460}
+            height={381}
             className="ds-navbar-logo shrink-0"
             style={{
               height: 'var(--logo-navbar-height, 56px)',

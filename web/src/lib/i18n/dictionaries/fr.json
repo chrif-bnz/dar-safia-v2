@@ -312,8 +312,16 @@
         "Séducteur": "Séducteur",
         "Luxe / chic": "Luxe / chic"
       },
-      "searchPlaceholder": "Rechercher…"
-    }
+      "searchPlaceholder": "Rechercher…",
+      "searchClear": "Effacer la recherche"
+    },
+    "pagination": {
+      "previous": "Précédent",
+      "next": "Suivant",
+      "label": "Pagination du catalogue",
+      "page": "Page {page}"
+    },
+    "shuffle": "Mélanger"
   },
   "product": {
     "breadcrumbHome": "Accueil",
@@ -386,7 +394,15 @@
     "orderIntro": "Je souhaite finaliser la commande suivante :",
     "orderLine": "{name} ({brand}) — {volume} × {qty} : {total}",
     "orderSubtotal": "SOUS-TOTAL : {subtotal}",
-    "orderOutro": "Merci de me confirmer la disponibilité et les modalités de livraison."
+    "orderOutro": "Merci de me confirmer la disponibilité et les modalités de livraison.",
+    "yourCart": "Votre panier",
+    "unitPrice": "Prix unitaire",
+    "total": "Total",
+    "continueShopping": "Continuer mes achats",
+    "emptyCta": "Découvrir les parfums",
+    "emptyLead": "Les parfums que vous ajouterez apparaîtront ici.",
+    "summary": "Récapitulatif",
+    "shipping": "Livraison"
   },
   "scentFinder": {
     "eyebrow": "Diagnostic olfactif",
@@ -559,5 +575,37 @@
   },
   "loading": {
     "label": "Chargement"
+  },
+  "thanks": {
+    "metaTitle": "Merci",
+    "eyebrow": "Commande reçue",
+    "title": "Merci.",
+    "titleNamed": "Merci, {name}.",
+    "lead": "Votre demande est bien enregistrée. La conciergerie la prend en charge.",
+    "leadGeneric": "Si vous venez de passer commande, elle est bien enregistrée. La conciergerie la prend en charge.",
+    "reference": "Référence",
+    "summaryTitle": "Votre sélection",
+    "quantity": "Quantité",
+    "total": "Total",
+    "delivery": "Livraison",
+    "deliveredTo": "Livraison à {place}",
+    "stepsTitle": "La suite",
+    "steps": [
+      {
+        "term": "Demande reçue",
+        "detail": "Votre commande est enregistrée avec vos coordonnées."
+      },
+      {
+        "term": "Confirmation par la conciergerie",
+        "detail": "La disponibilité et la livraison vous sont confirmées par la conciergerie."
+      },
+      {
+        "term": "Règlement à la livraison",
+        "detail": "La commande se règle à la livraison, dans les 58 wilayas."
+      }
+    ],
+    "whatsapp": "Écrire à la conciergerie",
+    "continue": "Continuer la découverte",
+    "home": "Retour à l'accueil"
   }
 }

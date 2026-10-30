@@ -7,7 +7,7 @@ import { LoadingMark } from '@/components/LoadingMark';
  */
 export default function Loading() {
   return (
-    <main id="contenu" className="flex min-h-svh items-center justify-center bg-noir">
+    <main id="contenu" className="flex min-h-svh items-center justify-center bg-burgundy">
       <LoadingMark />
     </main>
   );

@@ -51,8 +51,8 @@ export function ScentWorld({
     <section
       ref={ref}
       aria-labelledby="matieres"
-      style={{ '--seam-from': 'var(--color-burgundy)' } as CSSProperties}
-      className="ds-seam relative overflow-hidden bg-noir-2 px-6 py-28 md:px-12 md:py-36 lg:px-20"
+      style={{ '--seam-from': 'var(--color-burgundy-deep)' } as CSSProperties}
+      className="ds-seam relative overflow-hidden bg-burgundy px-6 py-28 md:px-12 md:py-36 lg:px-20"
     >
       {/* Halo ambiant : une seule source lumineuse, très basse, qui rappelle
           la bougie du film sans imiter un effet. */}

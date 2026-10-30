@@ -392,7 +392,7 @@ export function HeroFilm({
   const [first, second] = statement.split('\n');
 
   return (
-    <section ref={rootRef} className="hero-film relative w-full overflow-hidden bg-noir">
+    <section ref={rootRef} className="hero-film relative w-full overflow-hidden bg-burgundy-deep">
       {/* ── La plaque : le film dans son cadrage ── */}
       <div className="hero-film__plate">
         <div data-film className="absolute inset-0 will-change-transform">
@@ -406,7 +406,7 @@ export function HeroFilm({
             preload="metadata"
             aria-label={videoLabel}
             // Le plan s'ouvre sur le noir : un fond noir EST le bon poster.
-            style={{ backgroundColor: 'var(--color-noir)' }}
+            style={{ backgroundColor: 'var(--color-burgundy-deep)' }}
           />
         </div>
 
@@ -428,7 +428,7 @@ export function HeroFilm({
               rideau de théâtre plutôt qu'un split-screen. */}
           <div
             data-curtain-left
-            className="absolute inset-y-0 left-0 w-1/2 origin-left overflow-hidden bg-noir"
+            className="absolute inset-y-0 left-0 w-1/2 origin-left overflow-hidden bg-burgundy-deep"
           >
             {/* Une lumière basse, comme une rampe de scène, et une ombre en
                 haut à l'opposé : le pan cesse d'être un aplat. */}
