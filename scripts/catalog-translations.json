@@ -1474,6 +1474,30 @@
         "description": "A striking contrast of hot and cold in an authentic 100ml flacon. An explosion of iced Italian lemon meets smooth Madagascan vanilla over a warm bed of cedar and white leather.",
         "story": "An immaculate, sun-drenched bottle reflecting the blinding radiance of high Mediterranean light.",
         "concentration": "Eau de Parfum"
+      },
+      "paco-rabanne-olympea-flora-eau-de-parfum-intense-80ml": {
+        "badge": "Floral Goddess",
+        "description": "The incarnation of a conquering and radiant goddess in an 80ml flacon. An incandescent floral bouquet of fresh rose and velvety peony, illuminated by sparkling blackcurrant and wrapped in addictive salted vanilla on cashmere wood.",
+        "story": "The iconic Olympéa trophy bottle adorned with black lacquered laurels, framing a flamboyant pink elixir with wild orchid motifs.",
+        "concentration": "Eau de Parfum Intense"
+      },
+      "givenchy-pour-homme-blue-label-eau-de-toilette-100ml": {
+        "badge": "Blue Elegance",
+        "description": "The relaxed and invigorating charm of the Givenchy gentleman in 100ml. A luminous citrus freshness of Italian grapefruit and bergamot, energized by vibrant spices and anchored by the distinction of blue cedar.",
+        "story": "The aerodynamic Givenchy pour Homme silhouette dressed in an electric blue and brushed silver, evoking an ocean breeze and endless freedom.",
+        "concentration": "Eau de Toilette"
+      },
+      "christian-louboutin-hiristan-eau-de-parfum-100ml": {
+        "badge": "Supreme Opulence",
+        "description": "The most enchanting oriental elixir of Christian Louboutin haute perfumery in 100ml. An imperial creation where noble cardamom and purple rose embrace an opulent trail of red leather and precious amber.",
+        "story": "A sculpted ruby red bottle crowned with a dramatic gilded totem cap inspired by Christian Louboutin's theatrical universe.",
+        "concentration": "Eau de Parfum"
+      },
+      "xerjoff-casamorati-1888-italica-eau-de-parfum-100ml": {
+        "badge": "Imperial Gourmand",
+        "description": "The gourmand masterpiece of the Casamorati 1888 collection in 100ml. A luscious blend of sweet almond, precious saffron, and melting toffee, magnified by bourbon vanilla and creamy sandalwood.",
+        "story": "The iconic Casamorati bottle draped in carmine red velvet, adorned with a silk tassel and crowned with an Art Nouveau gilded cap.",
+        "concentration": "Eau de Parfum"
       }
     },
     "notes": {
@@ -1771,7 +1795,24 @@
       "bois-de-santal-de-nouvelle-caledonie": "New Caledonian Sandalwood",
       "citron-givre-d-italie": "Iced Italian Lemon",
       "cuir-blanc": "White Leather",
-      "vanille-de-madagascar-onctueuse": "Creamy Madagascar Vanilla"
+      "vanille-de-madagascar-onctueuse": "Creamy Madagascar Vanilla",
+      "cassis-petillant": "Sparkling Blackcurrant",
+      "poivre-rose-givre": "Frosted Pink Pepper",
+      "rose-damascena": "Damask Rose",
+      "pivoine-veloutee": "Velvety Peony",
+      "vanille-salee-de-madagascar": "Salted Madagascar Vanilla",
+      "bois-de-cachemire": "Cashmere Wood",
+      "cardamome-sauvage": "Wild Cardamom",
+      "cedre-bleu": "Blue Cedar",
+      "vetiver-noble": "Noble Vetiver",
+      "cardamome-royale": "Royal Cardamom",
+      "rose-pourpre": "Purple Rose",
+      "encens-precieux": "Precious Incense",
+      "cuir-rouge": "Red Leather",
+      "ambre-mystique": "Mystic Amber",
+      "amande-douce": "Sweet Almond",
+      "safran-precieux": "Precious Saffron",
+      "toffee-onctueux": "Creamy Toffee"
     }
   },
   "ar": {
@@ -3245,6 +3286,30 @@
         "description": "تناقض مذهل يجمع بين البرودة المنعشة والدفء الفاخر في قارورة 100 مل. نفحات ليمون إيطالي مثلج تلتقي مع فانيليا مدغشقر الكريمية وخشب الأرز الدافئ.",
         "story": "قارورة بيضاء نقية بخطوط مشمسة ساحرة، تعكس ضوء البحر الأبيض المتوسط الساطع.",
         "concentration": "ماء عطر"
+      },
+      "paco-rabanne-olympea-flora-eau-de-parfum-intense-80ml": {
+        "badge": "إلهة الأزهار",
+        "description": "تجسيد للإلهة الآسرة والمشرقة بسعة 80 مل. نفحات زهرية متقدة من الورد الطازج والفاوانيا المخملية، تضيئها حبات الكشمش الأسود الفوار وتحتضنها فانيليا مدغشقر المملحة على خشب الكشمير.",
+        "story": "زجاجة أولمبيا الأيقونية المستوحاة من كؤوس النصر ومزينة بأكاليل غار سوداء مصقولة، تبرز سائلاً وردياً متألقاً بزخارف الأوركيد البرية.",
+        "concentration": "ماء عطر مكثف"
+      },
+      "givenchy-pour-homme-blue-label-eau-de-toilette-100ml": {
+        "badge": "أناقة زرقاء",
+        "description": "السحر المريح والمفعم بالحيوية لرجل جيفنشي بسعة 100 مل. انتعاش حمضي مشرق من الجريب فروت الإيطالي والبرغموت، معزز بنفحات التوابل النبيلة وأناقة الأرز الأزرق.",
+        "story": "تصميم زجاجة جيفنشي بور أوم الانسيابي يتألق باللون الأزرق الحيوي واللمسات الفضية، معبراً عن نسيم البحر والحرية المطلقة.",
+        "concentration": "ماء تواليت"
+      },
+      "christian-louboutin-hiristan-eau-de-parfum-100ml": {
+        "badge": "فخامة مطلقة",
+        "description": "إكسير شرقي ساحر من إبداعات كريستيان لوبوتان للعطور الراقية بسعة 100 مل. توليفة ملكية يتعانق فيها الهيل النبيل والورد الأرجواني مع أثر فاخر من الجلد الأحمر والعنبر الثمين.",
+        "story": "زجاجة منحوتة بلون الياقوت الأحمر المتقد، يتوجها غطاء مهيب بزخارف ذهبية مستوحاة من عالم كريستيان لوبوتان المسرحي.",
+        "concentration": "ماء عطر"
+      },
+      "xerjoff-casamorati-1888-italica-eau-de-parfum-100ml": {
+        "badge": "غورماند إمبراطوري",
+        "description": "تحفة عطرية شهية من مجموعة كازاموراتي 1888 بسعة 100 مل. مزيج لذيذ من اللوز الحلو والزعفران الثمين والتوفي الذائب، يتألق مع فانيليا البوربون وخشب الصندل الكريمي.",
+        "story": "زجاجة كازاموراتي الأيقونية المغلفة بالمخمل الأحمر القاني، مزدانة بشرابة حريرية وغطاء مذهب مستوحى من فن الآرت نوفو الإيطالي.",
+        "concentration": "ماء عطر"
       }
     },
     "notes": {
@@ -3542,7 +3607,24 @@
       "bois-de-santal-de-nouvelle-caledonie": "خشب صندل كاليدوني",
       "citron-givre-d-italie": "ليمون إيطالي مثلج",
       "cuir-blanc": "جلد أبيض",
-      "vanille-de-madagascar-onctueuse": "فانيليا مدغشقر الكريمية"
+      "vanille-de-madagascar-onctueuse": "فانيليا مدغشقر الكريمية",
+      "cassis-petillant": "كشمش أسود فوار",
+      "poivre-rose-givre": "فلفل وردي مثلج",
+      "rose-damascena": "ورد جوري",
+      "pivoine-veloutee": "فاوانيا مخملية",
+      "vanille-salee-de-madagascar": "فانيليا مدغشقر المملحة",
+      "bois-de-cachemire": "خشب الكشمير",
+      "cardamome-sauvage": "هيل بري",
+      "cedre-bleu": "أرز أزرق",
+      "vetiver-noble": "نجيل الهند النبيل",
+      "cardamome-royale": "هيل ملكي",
+      "rose-pourpre": "ورد أرجواني",
+      "encens-precieux": "بخور ثمين",
+      "cuir-rouge": "جلد أحمر",
+      "ambre-mystique": "عنبر صوفي",
+      "amande-douce": "لوز حلو",
+      "safran-precieux": "زعفران ثمين",
+      "toffee-onctueux": "توفي كريمي"
     }
   }
 }
