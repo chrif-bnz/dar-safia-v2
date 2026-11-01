@@ -1426,6 +1426,30 @@
         "description": "The ultimate magnetism of the Dolce & Gabbana man in an iconic 100ml flacon. A vibrant spicy opening of coriander and grapefruit leads into warm cardamom and a rich drydown of precious blond tobacco.",
         "story": "A bottle of architectural clean lines topped with a sleek dark metal cap, embodying timeless masculine charisma.",
         "concentration": "Eau de Parfum"
+      },
+      "burberry-hero-eau-de-toilette-100ml": {
+        "badge": "Instinctive Strength",
+        "description": "The vibrant, liberating energy of Burberry Hero in an authentic 100ml flacon. Sparkling bergamot meets crisp juniper berries, anchored by a majestic trio of cedarwoods.",
+        "story": "Designed under Riccardo Tisci's creative vision, the angular bottle subtly echoes a horse's hoof, embossed with the Thomas Burberry monogram.",
+        "concentration": "Eau de Toilette"
+      },
+      "burberry-hero-eau-de-parfum-100ml": {
+        "badge": "Heroic Depth",
+        "description": "A deeper, warmer woody intensity in a 100ml edition. Resinous pine needles unfold into burning frankincense before grounding into an intoxicating trilogy of warm cedarwood oils.",
+        "story": "The sculptural silhouette is cloaked in deep amber-brown gradients, capturing the golden twilight of open wilderness.",
+        "concentration": "Eau de Parfum"
+      },
+      "paco-rabanne-one-million-parfum-100ml": {
+        "badge": "Pure Gold Bar",
+        "description": "The sun-drenched boldness of the gold bar in a 100ml edition. An intoxicating tuberose with salty facets and warm amber, wrapped in opulent leather and resinous pine.",
+        "story": "Paco Rabanne's legendary gold ingot shines with flamboyant radiance, the ultimate token of supreme confidence and charisma.",
+        "concentration": "Parfum"
+      },
+      "hugo-boss-hugo-man-eau-de-toilette-125ml": {
+        "badge": "Urban Energy",
+        "description": "The signature aromatic freshness of Hugo Man in its classic 125ml canteen. Crisp green apple and aromatic botanicals resting upon an honest, woody base of balsam fir.",
+        "story": "Shaped like an explorer's field canteen, the iconic flacon features a distinctive green glass body with a red fabric cap strap.",
+        "concentration": "Eau de Toilette"
       }
     },
     "notes": {
@@ -1695,7 +1719,23 @@
       "coriandre-aromatique": "Aromatic Coriander",
       "gingembre-chaud": "Warm Ginger",
       "cardamome-verte": "Green Cardamom",
-      "tabac-blond-precieux": "Precious Blond Tobacco"
+      "tabac-blond-precieux": "Precious Blond Tobacco",
+      "bergamote-petillante": "Sparkling Bergamot",
+      "genievre-croquant": "Crisp Juniper",
+      "poivre-vert": "Green Pepper",
+      "trio-de-cedres-atlas-virginie-himalaya": "Trio of Cedars",
+      "aiguilles-de-pin-chaudes": "Warm Pine Needles",
+      "bois-de-cedre-chaud": "Warm Cedarwood",
+      "trio-d-huiles-de-cedre-precieuses": "Precious Cedar Oil Trio",
+      "tubereuse-salee": "Salty Tuberose",
+      "iode-solaire": "Solar Iodine",
+      "cuir-ambre": "Amber Leather",
+      "huile-de-monoi": "Monoi Oil",
+      "pin-resineux": "Resinous Pine",
+      "ciste-labdanum": "Cistus Labdanum",
+      "pamplemousse-d-italie": "Italian Grapefruit",
+      "geranium-d-egypte": "Egyptian Geranium",
+      "sapin-baumier": "Balsam Fir"
     }
   },
   "ar": {
@@ -3121,6 +3161,30 @@
         "description": "الجاذبية المطلقة لرجل دولتشي آند غابانا في قارورة أيقونية سعة 100 مل. افتتاحية حيوية من الكزبرة والجريب فروت تقود لقلب دافئ من الهيل وأثر شرقي من التبغ الثمين.",
         "story": "تصميم هندسي راقٍ تعلوه سدادة معدنية داكنة تعكس الكاريزما الذكورية الخالدة.",
         "concentration": "ماء عطر"
+      },
+      "burberry-hero-eau-de-toilette-100ml": {
+        "badge": "قوة فطرية",
+        "description": "طاقة حرة ومفعمة بالحيوية من باربري هيرو في قارورة 100 مل. انتعاش البرغموت يلتقي بحبوب العرعر وقاعدة ثلاثية من خشب الأرز المهيب.",
+        "story": "تصميم أنيق من ريكاردو تيشي يستحضر حافر الحصان الأسطوري منقوشاً بشعار توماس باربري.",
+        "concentration": "ماء تواليت"
+      },
+      "burberry-hero-eau-de-parfum-100ml": {
+        "badge": "عمق بطولي",
+        "description": "كثافة خشبية دافئة وجذابة في قارورة 100 مل. تمتزج إبر الصنوبر الراتنجية مع البخور الدافئ وثلاثية ساحرة من زيوت خشب الأرز النادرة.",
+        "story": "تتألق القارورة المعمارية بتدرجات بنية عنبرية داكنة تحاكي ضوء الغسق الذهبي في الطبيعة البكر.",
+        "concentration": "ماء عطر"
+      },
+      "paco-rabanne-one-million-parfum-100ml": {
+        "badge": "سبيكة ذهب خالص",
+        "description": "جرأة شمسية مشعة تحاكي سبيكة الذهب في سعة 100 مل. يتناغم مسك الروم المشبع بلمسات مالحة مع العنبر الدافئ والجلد الفاخر وصمغ الصنوبر.",
+        "story": "تسحر سبيكة الذهب الأيقونية من باكو رابان بلمعانها الأخاذ، رمز النجاح المطلق والجاذبية الواثقة.",
+        "concentration": "عطر مركز"
+      },
+      "hugo-boss-hugo-man-eau-de-toilette-125ml": {
+        "badge": "طاقة مدنية",
+        "description": "الانتعاش العطري الأيقوني لهوغو مان في حجمه الأصلي سعة 125 مل. تفاح أخضر مقرمش مع لمسات عشبية عطرية وقاعدة رجولية من بلسم التنوب وخشب الأرز.",
+        "story": "مستوحاة من مطارة المغامر الميدانية، تتميز القارورة الزجاجية الشهيرة بحزام قماشي أحمر يربط السدادة بإحكام.",
+        "concentration": "ماء تواليت"
       }
     },
     "notes": {
@@ -3390,7 +3454,23 @@
       "coriandre-aromatique": "كزبرة عطرية",
       "gingembre-chaud": "زنجبيل دافئ",
       "cardamome-verte": "هيل أخضر",
-      "tabac-blond-precieux": "تبغ أشقر ثمين"
+      "tabac-blond-precieux": "تبغ أشقر ثمين",
+      "bergamote-petillante": "برغموت فوار",
+      "genievre-croquant": "عرعر مقرمش",
+      "poivre-vert": "فلفل أخضر",
+      "trio-de-cedres-atlas-virginie-himalaya": "ثلاثية خشب الأرز",
+      "aiguilles-de-pin-chaudes": "إبر صنوبر دافئة",
+      "bois-de-cedre-chaud": "خشب أرز دافئ",
+      "trio-d-huiles-de-cedre-precieuses": "ثلاثية زيوت الأرز الثمينة",
+      "tubereuse-salee": "مسك الروم المالح",
+      "iode-solaire": "يود شمسي",
+      "cuir-ambre": "جلد عنبري",
+      "huile-de-monoi": "زيت المونوي",
+      "pin-resineux": "صنوبر راتنجي",
+      "ciste-labdanum": "قريض لادن",
+      "pamplemousse-d-italie": "جريب فروت إيطالي",
+      "geranium-d-egypte": "إبرة الراعي المصرية",
+      "sapin-baumier": "بلسم التنوب"
     }
   }
 }
