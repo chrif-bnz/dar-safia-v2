@@ -1450,6 +1450,30 @@
         "description": "The signature aromatic freshness of Hugo Man in its classic 125ml canteen. Crisp green apple and aromatic botanicals resting upon an honest, woody base of balsam fir.",
         "story": "Shaped like an explorer's field canteen, the iconic flacon features a distinctive green glass body with a red fabric cap strap.",
         "concentration": "Eau de Toilette"
+      },
+      "christian-dior-dior-homme-intense-eau-de-parfum-100ml": {
+        "badge": "Absolute Refinement",
+        "description": "The pinnacle of masculine sophistication by Dior in a 100ml presentation. Powdery, noble Tuscan iris warmed by ambrette seeds and grounded in majestic Virginian cedar.",
+        "story": "A pure monolithic glass block traversed by a sleek black stem, echoing the sharp lines of a bespoke Dior tuxedo tie.",
+        "concentration": "Eau de Parfum"
+      },
+      "chanel-bleu-de-chanel-eau-de-parfum-100ml": {
+        "badge": "Exceptional Signature",
+        "description": "The world's most acclaimed aromatic-woody statement in its classic 100ml bottle. A burst of citrus and peppermint delving into deep amber frankincense and cedar.",
+        "story": "A twilight blue bottle so intense it rivals pure black, crowned with a magnetic cap stamped with the iconic interlocking double C.",
+        "concentration": "Eau de Parfum"
+      },
+      "chanel-bleu-de-chanel-parfum-100ml": {
+        "badge": "Absolute Quintessence",
+        "description": "The most concentrated and precious formulation of Bleu de Chanel in a 100ml edition. Creamy New Caledonian sandalwood unfurls unparalleled richness alongside warm cedar and noble citrus.",
+        "story": "Golden lettering etched upon midnight blue glass announces this pure Parfum concentration of royal distinction.",
+        "concentration": "Parfum"
+      },
+      "christian-dior-dior-homme-edition-blanche-eau-de-parfum-100ml": {
+        "badge": "Crystalline Freshness",
+        "description": "A striking contrast of hot and cold in an authentic 100ml flacon. An explosion of iced Italian lemon meets smooth Madagascan vanilla over a warm bed of cedar and white leather.",
+        "story": "An immaculate, sun-drenched bottle reflecting the blinding radiance of high Mediterranean light.",
+        "concentration": "Eau de Parfum"
       }
     },
     "notes": {
@@ -1735,7 +1759,19 @@
       "ciste-labdanum": "Cistus Labdanum",
       "pamplemousse-d-italie": "Italian Grapefruit",
       "geranium-d-egypte": "Egyptian Geranium",
-      "sapin-baumier": "Balsam Fir"
+      "sapin-baumier": "Balsam Fir",
+      "lavande-noble-de-grasse": "Noble Grasse Lavender",
+      "iris-de-toscane-somptueux": "Sumptuous Tuscan Iris",
+      "graines-d-ambrette": "Ambrette Seeds",
+      "zeste-de-pamplemousse": "Grapefruit Zest",
+      "gingembre-frais": "Fresh Ginger",
+      "bois-de-cedre-sombre": "Dark Cedarwood",
+      "zeste-de-citron-frais": "Fresh Lemon Zest",
+      "lavande-noble": "Noble Lavender",
+      "bois-de-santal-de-nouvelle-caledonie": "New Caledonian Sandalwood",
+      "citron-givre-d-italie": "Iced Italian Lemon",
+      "cuir-blanc": "White Leather",
+      "vanille-de-madagascar-onctueuse": "Creamy Madagascar Vanilla"
     }
   },
   "ar": {
@@ -3185,6 +3221,30 @@
         "description": "الانتعاش العطري الأيقوني لهوغو مان في حجمه الأصلي سعة 125 مل. تفاح أخضر مقرمش مع لمسات عشبية عطرية وقاعدة رجولية من بلسم التنوب وخشب الأرز.",
         "story": "مستوحاة من مطارة المغامر الميدانية، تتميز القارورة الزجاجية الشهيرة بحزام قماشي أحمر يربط السدادة بإحكام.",
         "concentration": "ماء تواليت"
+      },
+      "christian-dior-dior-homme-intense-eau-de-parfum-100ml": {
+        "badge": "رقي مطلق",
+        "description": "قمة الأناقة الرجالية من دار ديور في قارورة سعة 100 مل. سوسن توسكاني نبيل وبودري يدفئه حب المسك وتثبته قوة خشب الأرز الفيرجيني المهيب.",
+        "story": "كتلة زجاجية نقية مصقولة بدقة، يتوسطها أنبوب أسود أنيق يحاكي ربطة بدلة التوكسيدو الراقية.",
+        "concentration": "ماء عطر"
+      },
+      "chanel-bleu-de-chanel-eau-de-parfum-100ml": {
+        "badge": "بصمة استثنائية",
+        "description": "التعبير العطري الخشبي الأكثر شهرة في العالم في قارورة كلاسيكية سعة 100 مل. انتعاش مباغت من الحمضيات والنعناع يغوص في قلب عنبري من البخور وخشب الأرز.",
+        "story": "زجاجة زرقاء بلون الشفق الداكن تكاد تلامس سواد الليل، تُغلق بغطاء مغناطيسي يحمل شعار شانيل المزدوج.",
+        "concentration": "ماء عطر"
+      },
+      "chanel-bleu-de-chanel-parfum-100ml": {
+        "badge": "خلاصة مطلقة",
+        "description": "التركيز الأثمن والأعلى نقاءً من بلو دو شانيل في سعة 100 مل. يتألق خشب الصندل النيوقاليدوني الكريمي بفيض من الفخامة إلى جانب خشب الأرز والحمضيات النقية.",
+        "story": "تتألق الحروف الذهبية البارزة على الزجاج الأزرق الليلي لتعلن عن هذا العطر الخالص بأعلى درجات الرفعة والكمال.",
+        "concentration": "عطر مركز"
+      },
+      "christian-dior-dior-homme-edition-blanche-eau-de-parfum-100ml": {
+        "badge": "انتعاش بلوري",
+        "description": "تناقض مذهل يجمع بين البرودة المنعشة والدفء الفاخر في قارورة 100 مل. نفحات ليمون إيطالي مثلج تلتقي مع فانيليا مدغشقر الكريمية وخشب الأرز الدافئ.",
+        "story": "قارورة بيضاء نقية بخطوط مشمسة ساحرة، تعكس ضوء البحر الأبيض المتوسط الساطع.",
+        "concentration": "ماء عطر"
       }
     },
     "notes": {
@@ -3470,7 +3530,19 @@
       "ciste-labdanum": "قريض لادن",
       "pamplemousse-d-italie": "جريب فروت إيطالي",
       "geranium-d-egypte": "إبرة الراعي المصرية",
-      "sapin-baumier": "بلسم التنوب"
+      "sapin-baumier": "بلسم التنوب",
+      "lavande-noble-de-grasse": "خزامى غراس النبيلة",
+      "iris-de-toscane-somptueux": "سوسن توسكاني فاخر",
+      "graines-d-ambrette": "بذور حب المسك",
+      "zeste-de-pamplemousse": "بشر الجريب فروت",
+      "gingembre-frais": "زنجبيل طازج",
+      "bois-de-cedre-sombre": "خشب أرز داكن",
+      "zeste-de-citron-frais": "بشر الليمون الطازج",
+      "lavande-noble": "خزامى نبيلة",
+      "bois-de-santal-de-nouvelle-caledonie": "خشب صندل كاليدوني",
+      "citron-givre-d-italie": "ليمون إيطالي مثلج",
+      "cuir-blanc": "جلد أبيض",
+      "vanille-de-madagascar-onctueuse": "فانيليا مدغشقر الكريمية"
     }
   }
 }
