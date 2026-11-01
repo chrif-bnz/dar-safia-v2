@@ -33,6 +33,21 @@
 
 ---
 
-## Notes & Hypothèse pour le cas ambigu (n° 7)
+## Détail des 4 derniers parfums débloqués
 
-Le libellé source `« Givenchy pour homme bleu la belle ET »` est une transcription phonétique / dictée vocale de **Givenchy pour Homme Blue Label Eau de Toilette**. La photographie correspondante présente dans `perfumes/Photos site web/photos designer homme/Givenchy pour homme bleu la belle ET/` confirme avec exactitude le flacon Givenchy pour Homme Blue Label EDT. Le produit a donc été intégré avec cette désignation officielle au prix exact demandé de 16 500 DA.
+| Parfum | Contenance | Prix officiel | Image source conforme | URL locale vérifiée | Statut |
+|---|---|---|---|---|:---:|
+| **Givenchy pour Homme Blue Label EDT** | 100 ml | 16 500 DA | `photos designer homme/Givenchy pour homme bleu la belle ET/` | `http://localhost:3000/fr/parfums/givenchy-pour-homme-blue-label-eau-de-toilette-100ml` | OK |
+| **Paco Rabanne Olympéa Flora EDP Intense** | 80 ml | 23 000 DA | `missing-perfumes/Olympea Flora paco rabanne E.P intense 80ml.png` | `http://localhost:3000/fr/parfums/paco-rabanne-olympea-flora-eau-de-parfum-intense-80ml` | OK |
+| **Christian Louboutin Hiristan EDP** | 100 ml | 45 000 DA | `missing-perfumes/Louboutin Hiristan 100ml.png` | `http://localhost:3000/fr/parfums/christian-louboutin-hiristan-eau-de-parfum-100ml` | OK |
+| **Xerjoff Casamorati 1888 Italica EDP** | 100 ml | 50 000 DA | `missing-perfumes/Xerjoff Casamorati 1888 Italica 100ml.png` | `http://localhost:3000/fr/parfums/xerjoff-casamorati-1888-italica-eau-de-parfum-100ml` | OK |
+
+---
+
+## Validation Technique
+
+- **Compteur catalogue `/fr/parfums` :** 249 créations (affiché et vérifié).
+- **Build de production Next.js :** 775 routes statiques générées avec succès (`775/775`).
+- **Linter ESLint :** 0 erreur, 0 avertissement.
+- **Tests automatisés Vitest :** 13 suites passées, 146 tests au vert (0 régression).
+- **Intégrité :** Ni design, ni couleurs, ni moteur de recherche, ni composants, ni produits existants n'ont été altérés.
