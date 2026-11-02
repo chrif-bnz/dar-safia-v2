@@ -30,13 +30,14 @@ export async function POST(request: NextRequest) {
   }
 
   const reference = (result.data as { data?: { reference?: unknown } }).data?.reference;
+  const subtotal = (result.data as { data?: { subtotal?: unknown } }).data?.subtotal;
   const sheetUrl = process.env.GOOGLE_SHEET_WEBHOOK_URL;
   if (sheetUrl) {
     try {
       await fetch(sheetUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ reference, ...body }),
+        body: JSON.stringify({ reference, subtotal, ...body }),
         cache: 'no-store',
         signal: AbortSignal.timeout(5000),
       });
