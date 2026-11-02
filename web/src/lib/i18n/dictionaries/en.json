@@ -321,7 +321,9 @@
       "label": "Catalog pagination",
       "page": "Page {page}"
     },
-    "shuffle": "Shuffle"
+    "shuffle": "Shuffle",
+    "didYouMean": "Did you mean: {suggestion}?",
+    "fallbackTitle": "No exact match found. Here are our closest creations:"
   },
   "product": {
     "breadcrumbHome": "Home",
