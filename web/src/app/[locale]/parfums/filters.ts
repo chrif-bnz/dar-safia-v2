@@ -37,23 +37,11 @@ export function hasActiveFilters(filters: ShopFilters): boolean {
   return Object.values(filters).some((values) => Array.isArray(values) && values.length > 0);
 }
 
-function normalizeStr(str: string) {
-  return str.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-}
-
 /**
- * ET entre les axes, OU à l'intérieur d'un axe : cocher « Boisé » et
- * « Ambré » élargit, cocher Genre ET Famille restreint.
+ * Filtre par facettes d'attributs (hors recherche textuelle)
  */
-export function matchesFilters(product: ShopProduct, filters: ShopFilters): boolean {
-  const { query, gender, family, notes, intensity, season, mood } = filters;
-
-  if (query.trim().length > 0) {
-    const q = normalizeStr(query);
-    const n = normalizeStr(product.name);
-    const b = normalizeStr(product.brand.name);
-    if (!n.includes(q) && !b.includes(q)) return false;
-  }
+export function matchesFacets(product: ShopProduct, filters: ShopFilters): boolean {
+  const { gender, family, notes, intensity, season, mood } = filters;
 
   if (gender.length > 0 && !gender.includes(product.gender)) return false;
   if (family.length > 0 && !family.some((f) => product.olfactoryFamilies.includes(f))) {
@@ -70,6 +58,13 @@ export function matchesFilters(product: ShopProduct, filters: ShopFilters): bool
   if (mood.length > 0 && !mood.some((m) => product.moods.includes(m))) return false;
 
   return true;
+}
+
+/**
+ * Rétrocompatibilité : teste l'ensemble des critères sur un produit
+ */
+export function matchesFilters(product: ShopProduct, filters: ShopFilters): boolean {
+  return matchesFacets(product, filters);
 }
 
 export function toggleValue<T>(values: T[], value: T): T[] {

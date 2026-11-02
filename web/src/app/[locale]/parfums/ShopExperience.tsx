@@ -18,6 +18,7 @@ import {
 import type { Locale } from '@/lib/i18n/config';
 import type { Dictionary } from '@/lib/i18n/dictionary';
 import { pluralize } from '@/lib/i18n/dictionary';
+import { searchProducts } from '@/lib/search';
 import {
   getServerShuffleSeed,
   getShuffleSeed,
@@ -28,7 +29,7 @@ import {
 
 import { Pagination } from '@/components/Pagination';
 import { FilterSidebar } from './FilterSidebar';
-import { EMPTY_FILTERS, matchesFilters, toggleValue, type FilterCategory } from './filters';
+import { EMPTY_FILTERS, matchesFacets, toggleValue, type FilterCategory } from './filters';
 import { PerfumeGrid } from './PerfumeGrid';
 import type { ShopProduct } from './shop-product';
 
@@ -68,10 +69,26 @@ export function ShopExperience({
     [products, seed]
   );
 
-  const filtered = useMemo(
-    () => ordered.filter((p) => matchesFilters(p, filters)),
+  // Filtrage par facettes (genre, famille, notes, intensité, saison, humeur)
+  const facetFiltered = useMemo(
+    () => ordered.filter((p) => matchesFacets(p, filters)),
     [ordered, filters]
   );
+
+  // Recherche intelligente avec pondération, fautes, phonétique, alias
+  const searchResult = useMemo(() => {
+    if (!filters.query.trim()) {
+      return {
+        items: facetFiltered,
+        total: facetFiltered.length,
+        didYouMean: undefined,
+        fallbackRecommendations: undefined,
+      };
+    }
+    return searchProducts(facetFiltered, filters.query);
+  }, [facetFiltered, filters.query]);
+
+  const filtered = searchResult.items;
 
   const totalPages = useMemo(
     () => getTotalPages(filtered.length, PERFUMES_PER_PAGE),
@@ -141,6 +158,15 @@ export function ShopExperience({
     }
   }, [currentPage]);
 
+  const suggestionParts = useMemo(() => {
+    if (!searchResult.didYouMean || !c.didYouMean) return null;
+    const parts = c.didYouMean.split('{suggestion}');
+    return {
+      prefix: parts[0] ?? '',
+      suffix: parts[1] ?? '',
+    };
+  }, [searchResult.didYouMean, c.didYouMean]);
+
   return (
     <div className="mt-10 lg:grid lg:grid-cols-[240px_1fr] lg:items-start lg:gap-12">
       <FilterSidebar
@@ -168,6 +194,22 @@ export function ShopExperience({
           </button>
         </div>
 
+        {suggestionParts && searchResult.didYouMean && (
+          <div role="status" aria-live="polite" className="mt-4">
+            <button
+              type="button"
+              onClick={() => handleToggle('query', searchResult.didYouMean!)}
+              className="text-start font-body text-xs text-ivory/70 transition-colors hover:text-ivory"
+            >
+              <span>{suggestionParts.prefix}</span>
+              <span className="font-semibold text-gold underline underline-offset-4 hover:text-gold-light">
+                {searchResult.didYouMean}
+              </span>
+              <span>{suggestionParts.suffix}</span>
+            </button>
+          </div>
+        )}
+
         {filtered.length > 0 ? (
           <div className="mt-6">
             <PerfumeGrid products={paginated} locale={locale} dict={dict} shuffleKey={seed} />
@@ -177,6 +219,21 @@ export function ShopExperience({
               dict={dict}
               onPageChange={scrollToGrid}
             />
+          </div>
+        ) : searchResult.fallbackRecommendations && searchResult.fallbackRecommendations.length > 0 ? (
+          <div className="mt-8">
+            <div className="rounded-md border border-smoke-2 bg-noir-2 px-6 py-8 text-center">
+              <p className="font-serif text-lg text-ivory">{c.empty}</p>
+              <p className="mt-2 text-2xs text-ivory/60">{c.fallbackTitle}</p>
+            </div>
+            <div className="mt-8">
+              <PerfumeGrid
+                products={searchResult.fallbackRecommendations}
+                locale={locale}
+                dict={dict}
+                shuffleKey={seed}
+              />
+            </div>
           </div>
         ) : (
           <div className="mt-10 rounded-md border border-smoke-2 bg-noir-2 px-6 py-14 text-center">
@@ -195,4 +252,3 @@ export function ShopExperience({
     </div>
   );
 }
-

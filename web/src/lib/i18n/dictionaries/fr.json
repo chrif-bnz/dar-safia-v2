@@ -321,7 +321,9 @@
       "label": "Pagination du catalogue",
       "page": "Page {page}"
     },
-    "shuffle": "Mélanger"
+    "shuffle": "Mélanger",
+    "didYouMean": "Vous vouliez dire : {suggestion} ?",
+    "fallbackTitle": "Aucun résultat exact. Voici nos créations les plus proches :"
   },
   "product": {
     "breadcrumbHome": "Accueil",
