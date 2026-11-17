@@ -182,6 +182,13 @@ export function trackPurchase(params: PurchaseParams): boolean {
 
   markPurchaseTracked(eventId);
 
+  const numericValue =
+    typeof params.value === 'number' && !isNaN(params.value)
+      ? params.value
+      : parseFloat(String(params.value)) || 0;
+
+  const currency = (params.currency || 'DZD').toUpperCase();
+
   if (typeof window.fbq === 'function') {
     window.fbq(
       'track',
@@ -190,13 +197,24 @@ export function trackPurchase(params: PurchaseParams): boolean {
         content_ids: params.content_ids,
         content_name: params.content_name,
         content_type: params.content_type,
-        value: params.value,
-        currency: params.currency,
+        value: numericValue,
+        currency: currency,
         num_items: params.num_items ?? 1,
         order_id: eventId,
       },
       { eventID: eventId }
     );
+
+    if (process.env.NODE_ENV !== 'production') {
+      console.log('[Meta Pixel] Purchase triggered:', {
+        value: numericValue,
+        currency,
+        content_name: params.content_name,
+        content_ids: params.content_ids,
+        eventID: eventId,
+      });
+    }
+
     return true;
   }
 

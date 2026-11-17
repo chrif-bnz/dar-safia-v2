@@ -9,7 +9,7 @@ import type { Locale } from '@/lib/i18n/config';
 import type { Dictionary } from '@/lib/i18n/dictionary';
 import { localePath } from '@/lib/i18n/routing';
 import { saveOrderReceipt } from '@/lib/order-receipt';
-import { trackInitiateCheckout } from '@/lib/pixel';
+import { trackInitiateCheckout, trackPurchase } from '@/lib/pixel';
 
 /**
  * Formulaire de commande du panier : mêmes champs, mêmes règles et même
@@ -46,11 +46,30 @@ export function CartCheckout({
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitting, setSubmitting] = useState(false);
   const hasInitiatedCheckout = useRef(false);
+  const currentOrderRef = useRef<string | null>(null);
 
   const handleInitiateCheckout = () => {
     if (hasInitiatedCheckout.current || lines.length === 0) return;
     hasInitiatedCheckout.current = true;
     trackInitiateCheckout({
+      content_ids: lines.map((l) => l.productSlug),
+      content_name: lines.map((l) => l.name).join(', '),
+      content_type: 'product',
+      value: subtotal,
+      currency: 'DZD',
+      num_items: lines.reduce((n, l) => n + l.quantity, 0),
+    });
+  };
+
+  const handleCommanderClick = () => {
+    if (lines.length === 0) return;
+    if (!currentOrderRef.current) {
+      currentOrderRef.current = `DS-${Date.now().toString(36).toUpperCase()}-${Math.random().toString(36).slice(2, 6).toUpperCase()}`;
+    }
+    const orderRef = currentOrderRef.current;
+
+    trackPurchase({
+      event_id: orderRef,
       content_ids: lines.map((l) => l.productSlug),
       content_name: lines.map((l) => l.name).join(', '),
       content_type: 'product',
@@ -94,6 +113,9 @@ export function CartCheckout({
     if (!hasInitiatedCheckout.current) {
       handleInitiateCheckout();
     }
+    if (!currentOrderRef.current) {
+      handleCommanderClick();
+    }
     if (submitting || lines.length === 0 || !validate()) return;
     setSubmitting(true);
     const communeName = communes.find((c) => c.id === data.commune)?.name ?? '';
@@ -132,9 +154,9 @@ export function CartCheckout({
       const payload = (await res.json().catch(() => null)) as { reference?: unknown } | null;
       const first = lines[0];
       const orderRef =
-        typeof payload?.reference === 'string' && payload.reference
-          ? payload.reference
-          : `DS-${Date.now().toString(36).toUpperCase()}-${Math.random().toString(36).slice(2, 6).toUpperCase()}`;
+        currentOrderRef.current ||
+        (typeof payload?.reference === 'string' && payload.reference) ||
+        `DS-${Date.now().toString(36).toUpperCase()}-${Math.random().toString(36).slice(2, 6).toUpperCase()}`;
 
       saveOrderReceipt({
         firstName: data.firstName.trim(),

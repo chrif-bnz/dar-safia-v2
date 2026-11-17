@@ -9,7 +9,7 @@ import { AddToCartButton } from '@/components/cart/AddToCartButton';
 import wilayasData from '@/data/wilayas.json';
 import { localePath } from '@/lib/i18n/routing';
 import { saveOrderReceipt } from '@/lib/order-receipt';
-import { trackInitiateCheckout } from '@/lib/pixel';
+import { trackInitiateCheckout, trackPurchase } from '@/lib/pixel';
 
 interface ProductOrderFormProps {
   product: Product;
@@ -46,6 +46,7 @@ export function ProductOrderForm({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const hasInitiatedCheckout = useRef(false);
+  const currentOrderRef = useRef<string | null>(null);
 
   const handleInitiateCheckout = () => {
     if (hasInitiatedCheckout.current) return;
@@ -56,6 +57,23 @@ export function ProductOrderForm({
       content_type: 'product',
       value: priceAmount,
       currency: 'DZD',
+    });
+  };
+
+  const handleCommanderClick = () => {
+    if (!currentOrderRef.current) {
+      currentOrderRef.current = `DS-${Date.now().toString(36).toUpperCase()}-${Math.random().toString(36).slice(2, 6).toUpperCase()}`;
+    }
+    const orderRef = currentOrderRef.current;
+
+    trackPurchase({
+      event_id: orderRef,
+      content_ids: [product.id || product.slug],
+      content_name: product.name,
+      content_type: 'product',
+      value: priceAmount,
+      currency: 'DZD',
+      num_items: 1,
     });
   };
 
@@ -107,6 +125,9 @@ export function ProductOrderForm({
     if (!hasInitiatedCheckout.current) {
       handleInitiateCheckout();
     }
+    if (!currentOrderRef.current) {
+      handleCommanderClick();
+    }
     if (validate()) {
       setIsSubmitting(true);
       
@@ -138,9 +159,9 @@ export function ProductOrderForm({
 
         const payload = (await res.json().catch(() => null)) as { reference?: unknown } | null;
         const orderRef =
-          typeof payload?.reference === 'string' && payload.reference
-            ? payload.reference
-            : `DS-${Date.now().toString(36).toUpperCase()}-${Math.random().toString(36).slice(2, 6).toUpperCase()}`;
+          currentOrderRef.current ||
+          (typeof payload?.reference === 'string' && payload.reference) ||
+          `DS-${Date.now().toString(36).toUpperCase()}-${Math.random().toString(36).slice(2, 6).toUpperCase()}`;
 
         saveOrderReceipt({
           firstName: formData.firstName.trim(),
@@ -353,6 +374,7 @@ export function ProductOrderForm({
           <button
             type="submit"
             disabled={isSubmitting}
+            onClick={handleCommanderClick}
             className="ds-btn-buy ds-btn-buy-order disabled:opacity-70"
           >
             <span className="relative z-10">{dict.product.orderNow}</span>
