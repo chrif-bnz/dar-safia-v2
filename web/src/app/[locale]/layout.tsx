@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
+import Script from 'next/script';
 import { notFound } from 'next/navigation';
 
 import { PlaceholderPhoneBanner } from '@/components/PlaceholderPhoneBanner';
@@ -120,6 +121,10 @@ export async function generateMetadata({ params }: LayoutProps<'/[locale]'>): Pr
       template: `%s | ${dict.common.brandName}`,
     },
     description: dict.home.tagline,
+    icons: {
+      icon: '/favicon.ico',
+      apple: '/favicon.ico',
+    },
     openGraph: {
       siteName: dict.common.brandName,
       locale: OG_LOCALE[locale],
@@ -146,8 +151,38 @@ export default async function RootLayout({
         {/* Exécuté pendant l'analyse du HTML, avant la première peinture :
             c'est le seul moment où l'en-tête peut être voilé sans flash. */}
         <InlineScript html={introGuardScript} />
+        {/* Meta Pixel Code */}
+        <Script
+          id="meta-pixel"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1452399837109404');
+fbq('track', 'PageView');
+            `,
+          }}
+        />
       </head>
       <body className="min-h-screen antialiased overflow-x-clip" suppressHydrationWarning>
+        {/* Meta Pixel noscript fallback */}
+        <noscript>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            height="1"
+            width="1"
+            style={{ display: 'none' }}
+            src="https://www.facebook.com/tr?id=1452399837109404&ev=PageView&noscript=1"
+            alt=""
+          />
+        </noscript>
         <a
           href="#contenu"
           className="sr-only focus:not-sr-only focus:absolute focus:top-0 focus:z-50 focus:bg-gold focus:px-5 focus:py-3 focus:text-sm focus:font-semibold focus:text-noir focus:start-0"
