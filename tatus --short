@@ -1,0 +1,20 @@
+*   [33m09d90c5[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m Merge pull request #17 from chrif-bnz/maj-prix-44
+[31m|[m[32m\[m  
+[31m|[m * [33mecec00c[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaj-prix-44[m[33m, [m[1;31morigin/maj-prix-44[m[33m)[m fix(catalog): mise à jour des prix (44 parfums) et ajout des parfums manquants
+[31m|[m * [33m1f05e30[m fix(catalog): mise à jour de 44 prix
+[31m|[m * [33mfc90e62[m[33m ([m[1;32majout-19-parfums[m[33m)[m feat(catalog): ajout des 4 derniers parfums
+[31m|[m [32m|[m * [33mdf2ba9b[m[33m ([m[1;32mrecherche-intelligente[m[33m)[m chore: formatting
+[31m|[m [32m|[m * [33mc787679[m feat: recherche intelligente (fautes, phonétique, alias, arabe)
+[31m|[m [32m|[m[32m/[m  
+[31m|[m * [33mfd140b0[m feat(catalog): ajout des 19 parfums manquants
+[31m|[m * [33m697f27a[m docs(import): rapports de validation et synthese finale des 19 parfums
+[31m|[m * [33m05ce2fb[m feat(catalog): lot 3 - ajout de 4 parfums (Dior Intense, Bleu EDP/Parfum, Dior Blanche)
+[31m|[m * [33mb387c4e[m feat(catalog): lot 2 - ajout de 4 parfums (Hero EDT/EDP, 1 Million, Hugo Man)
+[31m|[m * [33mdf2d7fd[m feat(catalog): lot 1 - ajout de 3 parfums et mise a jour de prix Scandal Absolu
+[31m|[m[31m/[m  
+* [33m70108ce[m[33m ([m[1;31morigin/claude/awesome-johnson-uqwxpe[m[33m, [m[1;32mnidal-prices[m[33m)[m fix: restore J'adore Intense translations, translate its -2 variant; data-driven catalogue tests
+*   [33m62d888c[m Merge main
+[34m|[m[35m\[m  
+[34m|[m *   [33m3ff29ee[m Fusion de origin/main : catalogue, CMS et refonte de l'équipe + bordeaux et recherche
+[34m|[m [36m|[m[1;31m\[m  
+[34m|[m * [1;31m|[m [33mcb6d940[m Palette : le bordeaux devient la couleur de fond principale

@@ -16,7 +16,7 @@ import { formatPrice, formatVolume } from './format';
 import type { Locale } from './i18n/config';
 import { interpolate, type Dictionary } from './i18n/dictionary';
 
-const DEFAULT_PHONE = '213554276642';
+const DEFAULT_PHONE = '213541211169';
 const PHONE = process.env.NEXT_PUBLIC_WHATSAPP_PHONE || DEFAULT_PHONE;
 
 /** Numéros fictifs utilisés en développement. */
@@ -35,7 +35,7 @@ export function whatsappUrl(message: string): string | null {
 }
 
 /**
- * Forme lisible du numéro : « +213 554 27 66 42 ». Regroupe l'indicatif (3
+ * Forme lisible du numéro : « +213 541 21 11 69 ». Regroupe l'indicatif (3
  * chiffres) puis le reste en 3-2-2-2. Retombe sur « +<chiffres> » si le
  * découpage ne s'applique pas.
  */

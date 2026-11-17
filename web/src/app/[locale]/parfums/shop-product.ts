@@ -44,6 +44,11 @@ export interface ShopProduct {
   intensity: IntensityTag | undefined;
   seasons: SeasonTag[];
   moods: MoodTag[];
+
+  // Champs de recherche enrichis
+  concentration?: string;
+  description?: string;
+  notes?: string[];
 }
 
 export const GENDERS: Gender[] = ['femme', 'homme', 'unisexe'];
@@ -66,5 +71,9 @@ export function toShopProduct(product: Product): ShopProduct {
     intensity: deriveIntensity(product),
     seasons: deriveSeasons(product),
     moods: deriveMoods(product),
+
+    concentration: product.concentration,
+    description: product.description,
+    notes: product.notes.map((n) => n.note.name),
   };
 }
