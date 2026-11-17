@@ -2,6 +2,9 @@ import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import Script from 'next/script';
 import { notFound } from 'next/navigation';
+import { Suspense } from 'react';
+
+import { MetaPixelTracker } from '@/components/pixel/MetaPixelTracker';
 
 import { PlaceholderPhoneBanner } from '@/components/PlaceholderPhoneBanner';
 import { SiteFooter } from '@/components/SiteFooter';
@@ -194,6 +197,9 @@ fbq('track', 'PageView');
           {/* Le provider n'englobe que du contexte : les pages restent
               des composants serveur. */}
           <CartProvider>
+            <Suspense fallback={null}>
+              <MetaPixelTracker />
+            </Suspense>
             <SmoothScroll />
             <Cursor />
             <RouteProgress />

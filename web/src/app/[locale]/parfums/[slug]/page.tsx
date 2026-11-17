@@ -6,6 +6,7 @@ import { OlfactoryPyramid } from '@/components/OlfactoryPyramid';
 import { ProductCard } from '@/components/ProductCard';
 import { ProductImage } from '@/components/ProductImage';
 import { ProductOrderForm } from '@/components/ProductOrderForm';
+import { TrackViewContent } from '@/components/pixel/TrackViewContent';
 import { ScrollReveal } from '@/components/motion/ScrollReveal';
 import { catalog, lowestPrice } from '@/lib/catalog';
 import {
@@ -109,6 +110,12 @@ export default async function ProductPage({
 
   return (
     <main id="contenu" tabIndex={-1} data-universe={product.family}>
+      <TrackViewContent
+        id={product.id || product.slug}
+        name={product.name}
+        price={price.amount}
+        currency={price.currency}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

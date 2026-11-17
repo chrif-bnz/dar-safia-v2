@@ -16,12 +16,16 @@ export interface OrderReceiptLine {
   brandName: string;
   quantity: number;
   total: number;
+  productSlug?: string;
+  variantId?: string;
 }
 
 export interface OrderReceipt {
   firstName: string;
   productName: string;
   brandName: string;
+  productSlug?: string;
+  productId?: string;
   imageUrl: string;
   imageSrcset: string | null;
   volumeMl: number;
@@ -79,7 +83,14 @@ export function parseOrderReceipt(raw: string | null): OrderReceipt | null {
           ) {
             return [];
           }
-          return [{ name: e.name, brandName: e.brandName, quantity: e.quantity, total: e.total }];
+          return [{
+            name: e.name,
+            brandName: e.brandName,
+            quantity: e.quantity,
+            total: e.total,
+            productSlug: typeof e.productSlug === 'string' ? e.productSlug : undefined,
+            variantId: typeof e.variantId === 'string' ? e.variantId : undefined,
+          }];
         })
       : [];
     return {
@@ -87,6 +98,8 @@ export function parseOrderReceipt(raw: string | null): OrderReceipt | null {
       firstName: typeof r.firstName === 'string' ? r.firstName : '',
       productName: r.productName,
       brandName: r.brandName,
+      productSlug: typeof r.productSlug === 'string' ? r.productSlug : undefined,
+      productId: typeof r.productId === 'string' ? r.productId : undefined,
       imageUrl: typeof r.imageUrl === 'string' ? r.imageUrl : '',
       imageSrcset: typeof r.imageSrcset === 'string' ? r.imageSrcset : null,
       volumeMl: typeof r.volumeMl === 'number' ? r.volumeMl : 0,

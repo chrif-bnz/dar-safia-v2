@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useMemo, useSyncExternalStore } from 'react';
+import { useEffect, useMemo, useSyncExternalStore } from 'react';
 
 import { ProductImage } from '@/components/ProductImage';
 import { formatPrice, formatVolume } from '@/lib/format';
@@ -9,6 +9,7 @@ import type { Locale } from '@/lib/i18n/config';
 import { interpolate, type Dictionary } from '@/lib/i18n/dictionary';
 import { localePath } from '@/lib/i18n/routing';
 import { parseOrderReceipt, readOrderReceiptRaw } from '@/lib/order-receipt';
+import { trackPurchase } from '@/lib/pixel';
 import { whatsappUrl } from '@/lib/whatsapp';
 
 const subscribe = () => () => {};
@@ -27,6 +28,25 @@ export function OrderThanks({ locale, dict }: { locale: Locale; dict: Dictionary
   const chat = whatsappUrl(
     receipt?.reference ? `${t.reference} ${receipt.reference}` : (receipt?.productName ?? '')
   );
+
+  useEffect(() => {
+    if (!receipt || !receipt.reference) return;
+
+    const contentIds =
+      receipt.lines && receipt.lines.length > 0
+        ? receipt.lines.map((l) => l.productSlug || l.name)
+        : [receipt.productSlug || receipt.productId || receipt.productName];
+
+    trackPurchase({
+      event_id: receipt.reference,
+      content_ids: contentIds,
+      content_name: receipt.productName,
+      content_type: 'product',
+      value: receipt.total,
+      currency: receipt.currency || 'DZD',
+      num_items: receipt.quantity,
+    });
+  }, [receipt]);
 
   return (
     <main

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import type { Media, Product, ProductVariant } from '@/lib/catalog';
 import type { Dictionary } from '@/lib/i18n/dictionaries';
@@ -9,6 +9,7 @@ import { AddToCartButton } from '@/components/cart/AddToCartButton';
 import wilayasData from '@/data/wilayas.json';
 import { localePath } from '@/lib/i18n/routing';
 import { saveOrderReceipt } from '@/lib/order-receipt';
+import { trackInitiateCheckout } from '@/lib/pixel';
 
 interface ProductOrderFormProps {
   product: Product;
@@ -44,6 +45,19 @@ export function ProductOrderForm({
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
+  const hasInitiatedCheckout = useRef(false);
+
+  const handleInitiateCheckout = () => {
+    if (hasInitiatedCheckout.current) return;
+    hasInitiatedCheckout.current = true;
+    trackInitiateCheckout({
+      content_ids: [product.id || product.slug],
+      content_name: product.name,
+      content_type: 'product',
+      value: priceAmount,
+      currency: 'DZD',
+    });
+  };
 
   const f = dict.product.form;
   const selectedWilayaData = wilayasData.find((w) => w.id === formData.wilaya);
@@ -90,6 +104,9 @@ export function ProductOrderForm({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!hasInitiatedCheckout.current) {
+      handleInitiateCheckout();
+    }
     if (validate()) {
       setIsSubmitting(true);
       
@@ -120,10 +137,17 @@ export function ProductOrderForm({
         }
 
         const payload = (await res.json().catch(() => null)) as { reference?: unknown } | null;
+        const orderRef =
+          typeof payload?.reference === 'string' && payload.reference
+            ? payload.reference
+            : `DS-${Date.now().toString(36).toUpperCase()}-${Math.random().toString(36).slice(2, 6).toUpperCase()}`;
+
         saveOrderReceipt({
           firstName: formData.firstName.trim(),
           productName: product.name,
           brandName: product.brand.name,
+          productSlug: product.slug,
+          productId: product.id || product.slug,
           imageUrl: image?.url ?? '',
           imageSrcset: image?.srcset ?? null,
           volumeMl: variant.volumeMl,
@@ -133,7 +157,7 @@ export function ProductOrderForm({
           wilaya: selectedWilayaData?.name ?? '',
           commune: communes.find((c) => c.id === formData.commune)?.name ?? '',
           deliveryMethod: formData.deliveryMethod === 'societe' ? 'societe' : 'main',
-          reference: typeof payload?.reference === 'string' ? payload.reference : null,
+          reference: orderRef,
         });
 
         setSubmitSuccess(true);
@@ -150,7 +174,11 @@ export function ProductOrderForm({
   const errorClass = "mt-1.5 text-xs text-danger";
 
   return (
-    <form onSubmit={handleSubmit} className="mt-12 border-t border-smoke-2 pt-10">
+    <form
+      onSubmit={handleSubmit}
+      onFocusCapture={handleInitiateCheckout}
+      className="mt-12 border-t border-smoke-2 pt-10"
+    >
       <div className="mb-6">
         <h3 className="text-sm font-semibold tracking-(--tracking-eyebrow) text-gold uppercase">{f.title}</h3>
       </div>

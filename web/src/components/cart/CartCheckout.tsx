@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { useState, type ChangeEvent, type FormEvent } from 'react';
+import { useRef, useState, type ChangeEvent, type FormEvent } from 'react';
 
 import wilayasData from '@/data/wilayas.json';
 import type { CartLine } from '@/lib/cart/types';
@@ -9,6 +9,7 @@ import type { Locale } from '@/lib/i18n/config';
 import type { Dictionary } from '@/lib/i18n/dictionary';
 import { localePath } from '@/lib/i18n/routing';
 import { saveOrderReceipt } from '@/lib/order-receipt';
+import { trackInitiateCheckout } from '@/lib/pixel';
 
 /**
  * Formulaire de commande du panier : mêmes champs, mêmes règles et même
@@ -44,6 +45,20 @@ export function CartCheckout({
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitting, setSubmitting] = useState(false);
+  const hasInitiatedCheckout = useRef(false);
+
+  const handleInitiateCheckout = () => {
+    if (hasInitiatedCheckout.current || lines.length === 0) return;
+    hasInitiatedCheckout.current = true;
+    trackInitiateCheckout({
+      content_ids: lines.map((l) => l.productSlug),
+      content_name: lines.map((l) => l.name).join(', '),
+      content_type: 'product',
+      value: subtotal,
+      currency: 'DZD',
+      num_items: lines.reduce((n, l) => n + l.quantity, 0),
+    });
+  };
 
   const wilaya = wilayasData.find((w) => w.id === data.wilaya);
   const communes = wilaya ? wilaya.communes : [];
@@ -76,6 +91,9 @@ export function CartCheckout({
 
   const submit = async (e: FormEvent) => {
     e.preventDefault();
+    if (!hasInitiatedCheckout.current) {
+      handleInitiateCheckout();
+    }
     if (submitting || lines.length === 0 || !validate()) return;
     setSubmitting(true);
     const communeName = communes.find((c) => c.id === data.commune)?.name ?? '';
@@ -113,10 +131,17 @@ export function CartCheckout({
 
       const payload = (await res.json().catch(() => null)) as { reference?: unknown } | null;
       const first = lines[0];
+      const orderRef =
+        typeof payload?.reference === 'string' && payload.reference
+          ? payload.reference
+          : `DS-${Date.now().toString(36).toUpperCase()}-${Math.random().toString(36).slice(2, 6).toUpperCase()}`;
+
       saveOrderReceipt({
         firstName: data.firstName.trim(),
         productName: first.name,
         brandName: first.brandName,
+        productSlug: first.productSlug,
+        productId: first.productSlug,
         imageUrl: first.imageUrl,
         imageSrcset: null,
         volumeMl: first.volumeMl,
@@ -126,12 +151,14 @@ export function CartCheckout({
         wilaya: wilaya?.name ?? '',
         commune: communeName,
         deliveryMethod: data.deliveryMethod === 'societe' ? 'societe' : 'main',
-        reference: typeof payload?.reference === 'string' ? payload.reference : null,
+        reference: orderRef,
         lines: lines.map((l) => ({
           name: l.name,
           brandName: l.brandName,
           quantity: l.quantity,
           total: l.unitPrice * l.quantity,
+          productSlug: l.productSlug,
+          variantId: l.variantId,
         })),
       });
 
@@ -151,7 +178,13 @@ export function CartCheckout({
   const err = 'mt-1.5 text-xs text-danger';
 
   return (
-    <form id="cart-checkout" onSubmit={submit} noValidate className="ds-cartp__form">
+    <form
+      id="cart-checkout"
+      onSubmit={submit}
+      onFocusCapture={handleInitiateCheckout}
+      noValidate
+      className="ds-cartp__form"
+    >
       <h2 id="commande" className="ds-cartp__formtitle">
         {f.title}
       </h2>
